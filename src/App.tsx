@@ -5,8 +5,8 @@ import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
 const App: React.FC = () => {
     return (
         <div>
-            <Button color="primary">pointing-poker</Button>
-            <  ThreeDRotation   />
+            <Button>pointing-poker</Button>
+            <ThreeDRotation />
         </div>
     );
 };
