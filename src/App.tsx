@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
+import MainPage from './MainPage/MainPage';
+import './App.css';
 
 const App: React.FC = () => {
     return (
         <div>
-            <Button>pointing-poker</Button>
-            <ThreeDRotation />
+            <MainPage />
         </div>
     );
 };
