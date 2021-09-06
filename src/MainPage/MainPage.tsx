@@ -1,26 +1,32 @@
 import React from 'react';
 import './MainPage.css';
+// import classNames from 'classnames';
 import pokerPlanning from '../assets/images/poker-planning.svg';
+import styles from './MainPage.module.css';
 
 function MainPage(): JSX.Element {
     return (
-        <div className="main-page">
-            <header className="header">header</header>
+        <div className={styles.main_page}>
+            <header className={styles.header}>header</header>
             <main>
-                <div className="container">
-                    <img className="poker-planning" src={pokerPlanning} alt="poker-planning" />
-                    <section className="content">
-                        <h3 className="start">Start your planning:</h3>
-                        <div className="new-session light-text">
+                <div className={styles.container}>
+                    <img
+                        className={styles.poker_planning}
+                        src={pokerPlanning}
+                        alt="poker-planning"
+                    />
+                    <section className={styles.content}>
+                        <h3 className={styles.start}>Start your planning:</h3>
+                        <div className={styles.new_session}>
                             <p>Create session:</p>
                             <button type="button">start new game</button>
                         </div>
-                        <h3 className="center">OR:</h3>
-                        <form className="connect">
+                        <h3 className={styles.center}>OR:</h3>
+                        <form className={styles.connect}>
                             <p>
-                                Connect to lobby by <span>URL</span>:
+                                Connect to lobby by <span className={styles.highlight}>URL</span>:
                             </p>
-                            <div className="connect__control">
+                            <div className={styles.connect__control}>
                                 <input type="text" id="connect" />
                                 <button type="submit">Connect</button>
                             </div>
@@ -28,7 +34,7 @@ function MainPage(): JSX.Element {
                     </section>
                 </div>
             </main>
-            <footer className="footer">footer</footer>
+            <footer className={styles.footer}>footer</footer>
         </div>
     );
 }

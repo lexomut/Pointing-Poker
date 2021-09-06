@@ -1,10 +1,14 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 .header {
   width: 100%;
   height: 70px;
   background-color: blue;
 }
 
-.main-page {
+.main_page {
   width: 100%;
   height: 100vh;
   margin: 0 auto;
@@ -35,7 +39,7 @@
   padding: 102px 26px 0;
 }
 
-.new-session {
+.new_session {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -49,7 +53,7 @@
           align-items: center;
 }
 
-.poker-planning {
+.poker_planning {
   display: block;
   margin: 0 auto;
 }
@@ -131,4 +135,8 @@
   font-weight: 700;
   color: #66999B;
 }
-/*# sourceMappingURL=MainPage.css.map */
+
+.red {
+  background-color: red;
+}
+/*# sourceMappingURL=MainPage.module.css.map */
