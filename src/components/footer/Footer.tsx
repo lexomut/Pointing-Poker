@@ -1,13 +1,13 @@
 import React from 'react';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import './footer.scss';
+import styles from './footer.module.scss';
 
 const Footer: React.FC = () => {
     return (
-        <footer className="footer">
-            <div className="footer-container">
+        <footer className={styles.footer}>
+            <div className={styles.footerContainer}>
                 <a
-                    className="github"
+                    className={styles.github}
                     href="https://github.com/lexomut"
                     target="_blank"
                     rel="noreferrer"
@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
                     <span>Alexey Pirozerskiy</span>
                 </a>
                 <a
-                    className="github"
+                    className={styles.github}
                     href="https://github.com/LenarFF"
                     target="_blank"
                     rel="noreferrer"
@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
                     <span>LenarFF</span>
                 </a>
                 <a
-                    className="github"
+                    className={styles.github}
                     href="https://github.com/OKitel"
                     target="_blank"
                     rel="noreferrer"
@@ -33,8 +33,13 @@ const Footer: React.FC = () => {
                     <GitHubIcon />
                     <span>Olga Kitel</span>
                 </a>
-                <a className="rss" href="https://rs.school/" target="_blank" rel="noreferrer">
-                    <span className="rss-year">&apos;21</span>
+                <a
+                    className={styles.rss}
+                    href="https://rs.school/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <span className={styles.rssYear}>&apos;21</span>
                 </a>
             </div>
         </footer>

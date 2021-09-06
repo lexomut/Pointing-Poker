@@ -8,7 +8,7 @@
   bottom: 0;
   background: $primaryColor;
 
-  &-container {
+  &Container {
     margin-top: 5px;
     display: flex;
     justify-content: space-around;
@@ -43,7 +43,7 @@
   background-repeat: no-repeat;
   background-position: left center;
 
-  &-year {
+  &Year {
     position: absolute;
     top: 15px;
     left: 90px;
@@ -54,7 +54,7 @@
     transition: 0.3s;
   }
 
-  &:hover .rss-year {
+  &:hover .rssYear {
     right: -5px;
     letter-spacing: 0;
   }
