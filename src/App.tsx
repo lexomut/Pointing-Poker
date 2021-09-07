@@ -10,7 +10,7 @@ const App: React.FC = () => {
             <Button>pointing-poker</Button>
             <ThreeDRotation />
             <Switch
-                label="Scram master as player:"
+                label="Scrum master as player:"
                 checked={switchOne}
                 onChange={() => setSwitchOne(!switchOne)}
             />
