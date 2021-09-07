@@ -1,11 +1,17 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
+import { Button, IssueButton } from './components/buttons';
 
 const App: React.FC = () => {
     return (
         <div>
-            <Button>pointing-poker</Button>
+            <Button variant="contained" onClick={() => alert('Put logic here')}>
+                start game
+            </Button>
+            <Button variant="outlined" onClick={() => alert('Put logic here')}>
+                cancel game
+            </Button>
+            <IssueButton onClick={() => alert('Put logic here')} />
             <ThreeDRotation />
         </div>
     );
