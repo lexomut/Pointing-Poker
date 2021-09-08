@@ -37,7 +37,7 @@ function GithubLink(props: { author: Author }) {
     );
 }
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
     return (
         <footer className={styles.footer}>
             <div className={styles.footerContainer}>
@@ -56,5 +56,3 @@ const Footer: React.FC = () => {
         </footer>
     );
 };
-
-export default Footer;
