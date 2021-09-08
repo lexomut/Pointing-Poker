@@ -45,7 +45,7 @@ type Props = {
     onDelete?: () => void;
 };
 
-const IssueCard: React.FC<Props> = (props: Props) => {
+export const IssueCard: React.FC<Props> = (props: Props) => {
     const { name, current, priority, dealer, onDelete } = props;
     const classes = useStyles();
 
@@ -79,5 +79,3 @@ IssueCard.defaultProps = {
     dealer: false,
     onDelete: () => {},
 };
-
-export default IssueCard;
