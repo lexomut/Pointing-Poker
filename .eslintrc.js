@@ -1,4 +1,3 @@
-
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
@@ -32,5 +31,10 @@ module.exports = {
         'react/prop-types': 'off',
         // We don't want unused vars
         '@typescript-eslint/no-unused-vars': ['error'],
+    },
+    settings: {
+        'import/resolver': {
+            node: {},
+        },
     },
 };
