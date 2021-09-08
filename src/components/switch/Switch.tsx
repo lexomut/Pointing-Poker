@@ -6,7 +6,7 @@ type Props = {
     onChange: () => void;
     label: string;
 };
-const Switch: React.FC<Props> = (props: Props) => {
+export const Switch: React.FC<Props> = (props: Props) => {
     const { checked, onChange, label } = props;
     return (
         <FormGroup>
@@ -25,5 +25,3 @@ const Switch: React.FC<Props> = (props: Props) => {
         </FormGroup>
     );
 };
-
-export default Switch;
