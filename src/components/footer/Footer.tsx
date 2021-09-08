@@ -1,41 +1,7 @@
 import React from 'react';
-import GitHubIcon from '@material-ui/icons/GitHub';
 import styles from './footer.module.scss';
-
-interface Author {
-    id: number;
-    name: string;
-    link: string;
-}
-const authors: Author[] = [
-    {
-        id: 1,
-        name: 'Alexey Pirozerskiy',
-        link: 'https://github.com/lexomut',
-    },
-    {
-        id: 2,
-        name: 'LenarFF',
-        link: 'https://github.com/LenarFF',
-    },
-    {
-        id: 3,
-        name: 'Olga Kitel',
-        link: 'https://github.com/OKitel',
-    },
-];
-
-function GithubLink(props: { author: Author }) {
-    const {
-        author: { name, link },
-    } = props;
-    return (
-        <a className={styles.github} href={link} target="_blank" rel="noreferrer">
-            <GitHubIcon />
-            <span>{name}</span>
-        </a>
-    );
-}
+import { authors } from '../../shared/data';
+import { GithubLink } from './GithubLink';
 
 export const Footer: React.FC = () => {
     return (
