@@ -6,7 +6,7 @@ interface Props {
     onClick: () => void;
 }
 
-const IssueButton: React.FC<Props> = (props: Props): JSX.Element => {
+export const IssueButton: React.FC<Props> = (props: Props): JSX.Element => {
     const { onClick } = props;
     return (
         <MaterialButton
@@ -19,5 +19,3 @@ const IssueButton: React.FC<Props> = (props: Props): JSX.Element => {
         </MaterialButton>
     );
 };
-
-export default IssueButton;

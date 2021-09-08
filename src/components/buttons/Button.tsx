@@ -7,7 +7,7 @@ interface Props {
     onClick: () => void;
 }
 
-const Button: React.FC<Props> = (props: Props): JSX.Element => {
+export const Button: React.FC<Props> = (props: Props): JSX.Element => {
     const { variant, children, onClick } = props;
     return (
         <MaterialButton color="primary" variant={variant} onClick={onClick}>
@@ -19,4 +19,3 @@ const Button: React.FC<Props> = (props: Props): JSX.Element => {
 Button.defaultProps = {
     variant: 'contained',
 };
-export default Button;
