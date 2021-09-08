@@ -13,6 +13,8 @@ const useStyles = makeStyles({
         minWidth: 250,
         width: 250,
         height: 60,
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        marginBottom: 10,
     },
     cardContainer: {
         position: 'relative',
@@ -32,7 +34,6 @@ const useStyles = makeStyles({
     },
     current: {
         background: 'rgba(96, 218, 191, 0.33)',
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     },
 });
 
