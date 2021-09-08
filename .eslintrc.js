@@ -24,6 +24,7 @@ module.exports = {
         project: './tsconfig.json',
     },
     rules: {
+        'import/prefer-default-export': 'off',
         // Include .prettierrc.js rules
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
