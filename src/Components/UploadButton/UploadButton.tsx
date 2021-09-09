@@ -17,17 +17,28 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function UploadButton() {
+interface IUploadButton {
+    setImage: (value: React.SetStateAction<File | undefined>) => void;
+}
+
+const UploadButton: React.FC<IUploadButton> = ({ setImage }) => {
     const classes = useStyles();
+
+    const imageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            setImage(e.target.files[0]);
+        }
+    };
+
     return (
         <div className={classNames(classes.root, styles.input)}>
             <label htmlFor="contained-button-file">
                 <input
                     accept="image/*"
                     id="contained-button-file"
-                    multiple
                     type="file"
                     className={classes.input}
+                    onChange={(e) => imageHandler(e)}
                 />
                 <Button variant="contained" color="primary" component="span">
                     Upload
@@ -35,4 +46,6 @@ export default function UploadButton() {
             </label>
         </div>
     );
-}
+};
+
+export default UploadButton;

@@ -1,13 +1,27 @@
-import React from 'react';
-// import classNames from 'classnames';
+import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button/Button';
 import styles from './MainPage.module.css';
 import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
+// import { AxiosResponse } from 'axios';
 
 function MainPage(): JSX.Element {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [url, setUrl] = useState('');
+    // const [serverResponse, setServerResponse] = useState('');
+    // const [isLoad, setIsLoad] = useState(false)
+
+    const handleConnect = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        fetch(url)
+            .then((res) => {
+                res.json();
+                console.log(res.status);
+            })
+            .then((result) => console.log(result))
+            .catch((error) => console.log(error));
+    };
 
     return (
         <div className={styles.main_page}>
@@ -28,12 +42,18 @@ function MainPage(): JSX.Element {
                             </button>
                         </div>
                         <h3 className={styles.center}>OR:</h3>
-                        <form className={styles.connect}>
+                        <form onSubmit={handleConnect} className={styles.connect}>
                             <p>
                                 Connect to lobby by <span className={styles.highlight}>URL</span>:
                             </p>
                             <div className={styles.connect__control}>
-                                <input type="text" id="connect" />
+                                <input
+                                    required
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
+                                    type="text"
+                                    id="connect"
+                                />
                                 <Button color="primary" variant="outlined" type="submit">
                                     Connect
                                 </Button>
@@ -43,7 +63,7 @@ function MainPage(): JSX.Element {
                                     aria-labelledby="simple-modal-title"
                                     aria-describedby="simple-modal-description"
                                 >
-                                    <RegistrationForm />
+                                    <RegistrationForm setOpen={setOpen} />
                                 </Modal>
                             </div>
                         </form>

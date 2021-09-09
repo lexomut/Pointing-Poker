@@ -39,6 +39,19 @@
   padding: 102px 26px 0;
 }
 
+@media screen and (max-width: 1050px) {
+  .container {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .container {
+    width: 470px;
+    padding: 20px 10px 0;
+  }
+}
+
 .new_session {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -53,9 +66,23 @@
           align-items: center;
 }
 
+@media screen and (max-width: 750px) {
+  .new_session {
+    width: 440px;
+  }
+}
+
 .poker_planning {
   display: block;
   margin: 0 auto;
+  width: 551px;
+  height: auto;
+}
+
+@media screen and (max-width: 750px) {
+  .poker_planning {
+    width: 300px;
+  }
 }
 
 .content {
@@ -72,6 +99,12 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   height: 382px;
+}
+
+@media screen and (max-width: 750px) {
+  .content {
+    width: 450px;
+  }
 }
 
 .content h3 {
@@ -108,10 +141,17 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 515px;
+}
+
+@media screen and (max-width: 750px) {
+  .connect__control {
+    width: 450px;
+  }
 }
 
 .connect input {
-  width: 275px;
+  width: 60%;
   height: 47px;
   border-radius: 0 0 0 10px;
   outline: none;
@@ -123,7 +163,7 @@
 }
 
 .connect button {
-  width: 240px;
+  width: 40%;
   height: 47px;
 }
 
@@ -134,5 +174,9 @@
 .highlight {
   font-weight: 700;
   color: #66999b;
+}
+
+.blue {
+  background-color: blue;
 }
 /*# sourceMappingURL=MainPage.module.css.map */
