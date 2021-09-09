@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
-import { Footer } from './components';
+import { UserCard, Footer } from './components';
 import styles from './style.module.scss';
 
 const App: React.FC = () => {
@@ -9,6 +9,27 @@ const App: React.FC = () => {
         <div className={styles.container}>
             <Button>pointing-poker</Button>
             <ThreeDRotation />
+            <UserCard
+                name="Mark"
+                initials="MZ"
+                position="junior front-end developer"
+                onKick={() => {
+                    alert('kick off');
+                }}
+            />
+            <UserCard name="Linda Atkins" initials="LA" position="senior" currentUser />
+            <UserCard
+                name="Barsik"
+                initials="JL"
+                position="junior lion"
+                imgSrc="https://placekitten.com/200/200"
+            />
+            <UserCard
+                name="Max "
+                initials="MM"
+                position="middle"
+                imgSrc="https://image.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg"
+            />
             <Footer />
         </div>
     );
