@@ -10,6 +10,7 @@
         "lobby",
         "outlined",
         "planning",
-        "poker"
+        "poker",
+        "Popover"
     ]
 }

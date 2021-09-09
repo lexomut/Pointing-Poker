@@ -1,27 +1,48 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button/Button';
+import Popover from '@material-ui/core/Popover';
 import styles from './MainPage.module.css';
 import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
-// import { AxiosResponse } from 'axios';
+import { connectGame } from '../../api/server';
+// import { connectGame } from '../../api/server';
 
 function MainPage(): JSX.Element {
     const [open, setOpen] = useState(false);
     const [url, setUrl] = useState('');
-    // const [serverResponse, setServerResponse] = useState('');
-    // const [isLoad, setIsLoad] = useState(false)
+    const [urlError, setUrlError] = useState(false);
 
-    const handleConnect = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        fetch(url)
-            .then((res) => {
-                res.json();
-                console.log(res.status);
-            })
-            .then((result) => console.log(result))
-            .catch((error) => console.log(error));
+        const isConnect = await connectGame(url);
+        if (isConnect) {
+            console.log(e.target);
+        } else {
+            setUrlError(true);
+            setTimeout(() => {
+                setUrlError(false);
+            }, 2000);
+        }
     };
+
+    const startGame = () => {
+        setOpen(true);
+        // createGame();
+    };
+
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const openPop = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     return (
         <div className={styles.main_page}>
@@ -37,7 +58,7 @@ function MainPage(): JSX.Element {
                         <h3 className={styles.start}>Start your planning:</h3>
                         <div className={styles.new_session}>
                             <p>Create session:</p>
-                            <button type="button" onClick={() => setOpen(true)}>
+                            <button type="button" onClick={startGame}>
                                 start new game
                             </button>
                         </div>
@@ -54,9 +75,33 @@ function MainPage(): JSX.Element {
                                     type="text"
                                     id="connect"
                                 />
-                                <Button color="primary" variant="outlined" type="submit">
+                                <Button
+                                    aria-describedby={id}
+                                    color="primary"
+                                    variant="outlined"
+                                    type="submit"
+                                    onClick={handleClick}
+                                >
                                     Connect
                                 </Button>
+                                {urlError && (
+                                    <Popover
+                                        id={id}
+                                        open={openPop}
+                                        anchorEl={anchorEl}
+                                        onClose={handleClose}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'left',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                    >
+                                        <p className={styles.error}>invalid url!</p>
+                                    </Popover>
+                                )}
                                 <Modal
                                     open={open}
                                     onClose={() => setOpen(false)}

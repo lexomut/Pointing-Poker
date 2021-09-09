@@ -1,9 +1,10 @@
 import { Avatar, Button, Switch } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import UploadButton from '../UploadButton';
 import styles from './RegistrationForm.module.css';
 import { IFormData } from '../../types';
-import createUser from '../../serverConnect/server';
+import { createUser } from '../../api/server';
 
 interface IRegistrationForm {
     setOpen: (value: React.SetStateAction<boolean>) => void;
@@ -16,17 +17,18 @@ const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
     const [observer, setObserver] = useState(false);
     const [data, setData] = useState<IFormData>();
     const [image, setImage] = useState<File>();
+    const history = useHistory();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (firstName.trim() !== '') {
             setData({ firstName, lastName, job, observer, image });
+            history.push('/lobby');
         }
     };
     useEffect(() => {
-        if (image) console.log(URL.createObjectURL(image));
         if (data) createUser(data);
-    }, [data, image]);
+    }, [data]);
 
     return (
         <form onSubmit={handleSubmit} className={styles.modal}>
