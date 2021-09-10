@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button as MaterialButton } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-interface Props {
-    onClick: () => void;
-}
-
-export const IssueButton: React.FC<Props> = (props: Props): JSX.Element => {
-    const { onClick } = props;
+export const IssueButton: React.FC = (): JSX.Element => {
+    const handlerClick = useCallback(() => {
+        alert('Put logic here');
+    }, []);
     return (
         <MaterialButton
             color="secondary"
             variant="outlined"
-            onClick={onClick}
+            onClick={handlerClick}
             endIcon={<AddIcon />}
         >
             create new issue
