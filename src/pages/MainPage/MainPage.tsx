@@ -5,7 +5,7 @@ import Popover from '@material-ui/core/Popover';
 import styles from './MainPage.module.css';
 import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
-import { connectGame } from '../../api/server';
+import { connectGame, createGame } from '../../api/server';
 // import { connectGame } from '../../api/server';
 
 function MainPage(): JSX.Element {
@@ -17,7 +17,7 @@ function MainPage(): JSX.Element {
         e.preventDefault();
         const isConnect = await connectGame(url);
         if (isConnect) {
-            console.log(e.target);
+            setOpen(true);
         } else {
             setUrlError(true);
             setTimeout(() => {
@@ -28,7 +28,7 @@ function MainPage(): JSX.Element {
 
     const startGame = () => {
         setOpen(true);
-        // createGame();
+        createGame();
     };
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);

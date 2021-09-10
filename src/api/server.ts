@@ -14,25 +14,24 @@ export async function connectGame(url: string): Promise<boolean> {
     }
 }
 
-export const createUser = async (userData: IFormData): Promise<void> => {
-    (
-        await fetch(baseURL, {
-            method: 'POST',
-            body: JSON.stringify(userData),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-    ).json();
+export const createUser = async (userData: IFormData): Promise<boolean> => {
+    try {
+        const response = await axios.post(`${baseURL}/user`, userData);
+        if (response.status === 200) return true;
+        return false;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
 };
 
 export const createGame = async () => {
-    (
-        await fetch(`${baseURL}/game`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-    ).json();
+    try {
+        const response = await axios.post(`${baseURL}/game`);
+        if (response.status === 200) return true;
+        return false;
+    } catch (e) {
+        console.log(e);
+        return false;
+    }
 };
