@@ -1,0 +1,39 @@
+.card {
+  width: 100px;
+  height: 160px;
+  margin: 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .header{
+      display: flex;
+      justify-content: space-between;
+      margin: 5px;
+      .menuBtn{
+        padding: 0;
+      }
+    }
+
+    .right {
+      margin: 5px;
+      display: flex;
+      transform: rotate(-180deg);
+    }
+    .center{
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+.coffee {
+  transform: scale(3);
+}
+
