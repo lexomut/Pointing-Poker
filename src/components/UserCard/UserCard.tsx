@@ -19,8 +19,7 @@ const useStyles = makeStyles({
     },
     cardContainer: {
         position: 'relative',
-        padding: 0,
-        paddingLeft: 5,
+        padding: '0 0 0 5px',
         display: 'flex',
         alignItems: 'center',
         marginTop: 10,
@@ -67,8 +66,11 @@ export const UserCard: React.FC<Props> = (props: Props) => {
             variant="outlined"
         >
             <CardContent className={classes.cardContainer}>
-                {imgSrc && <Avatar className={classes.avatar} src={imgSrc} alt={name} />}
-                {!imgSrc && <Avatar className={classes.avatar}>{initials}</Avatar>}
+                {imgSrc ? (
+                    <Avatar className={classes.avatar} src={imgSrc} alt={name} />
+                ) : (
+                    <Avatar className={classes.avatar}>{initials}</Avatar>
+                )}
                 <div>
                     <Typography variant="h6" className={classes.title}>
                         {name}

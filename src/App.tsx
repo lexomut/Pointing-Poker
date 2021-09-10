@@ -23,12 +23,18 @@ const App: React.FC = () => {
                 initials="JL"
                 position="junior lion"
                 imgSrc="https://placekitten.com/200/200"
+                onKick={() => {
+                    alert('kick off');
+                }}
             />
             <UserCard
                 name="Max "
                 initials="MM"
                 position="middle"
                 imgSrc="https://image.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg"
+                onKick={() => {
+                    alert('kick off');
+                }}
             />
             <Footer />
         </div>
