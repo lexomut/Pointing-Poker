@@ -10,16 +10,8 @@ const App: React.FC = () => {
         <div className={styles.container}>
             <Button>pointing-poker</Button>
             <ThreeDRotation />
-            <IssueCard
-                name="Issue 234"
-                priority="High"
-                current
-                dealer
-                onDelete={() => {
-                    alert('DELETED');
-                }}
-            />
-            <IssueCard name="Issue 235" priority="Low" />
+            <IssueCard name="Issue 234" priority="High" dealer />
+            <IssueCard current name="Issue 235" priority="Low" />
             <Footer />
         </div>
     );

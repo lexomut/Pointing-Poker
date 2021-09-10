@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -42,13 +42,14 @@ type Props = {
     name: string;
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
     dealer?: boolean;
-    onDelete?: () => void;
 };
 
 export const IssueCard: React.FC<Props> = (props: Props) => {
-    const { name, current, priority, dealer, onDelete } = props;
+    const { name, current, priority, dealer } = props;
     const classes = useStyles();
-
+    const handlerClick = useCallback(() => {
+        alert('add logic');
+    }, []);
     return (
         <Card className={clsx(classes.root, { [classes.current]: current })} variant="outlined">
             <CardContent className={classes.cardContainer}>
@@ -64,7 +65,7 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
                 </Typography>
                 {dealer && (
                     <CardActions className={classes.button}>
-                        <Button onClick={onDelete}>
+                        <Button onClick={handlerClick}>
                             <CloseIcon />
                         </Button>
                     </CardActions>
@@ -77,5 +78,4 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
 IssueCard.defaultProps = {
     current: false,
     dealer: false,
-    onDelete: () => {},
 };
