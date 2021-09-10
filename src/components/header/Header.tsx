@@ -6,14 +6,11 @@ const useStyles = makeStyles({
     img: {
         width: 50,
         height: 50,
-        position: 'absolute',
-        top: 3,
-        right: '7%',
     },
     fab: {
-        position: 'absolute',
+        position: 'relative',
+        left: '50%',
         top: 30,
-        right: '50%',
         background: '#a7ffeb',
     },
 });
