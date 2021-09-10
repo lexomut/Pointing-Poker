@@ -1,17 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MainPage from './pages/MainPage';
-import './App.css';
+import styles from './App.module.css';
 import Lobby from './pages/Lobby/Lobby';
+import Header from './Header/Header';
+import Footer from './Components/Footer/Footer';
 
 const App: React.FC = () => {
     return (
         <Router>
-            <div>
+            <div className={styles.container}>
+                <Header />
                 <Switch>
                     <Route exact path="/" component={MainPage} />
                     <Route path="/lobby" component={Lobby} />
                 </Switch>
+                <Footer />
             </div>
         </Router>
     );

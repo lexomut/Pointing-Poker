@@ -6,7 +6,6 @@ import styles from './MainPage.module.css';
 import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
 import { connectGame, createGame } from '../../api/server';
-// import { connectGame } from '../../api/server';
 
 function MainPage(): JSX.Element {
     const [open, setOpen] = useState(false);
@@ -46,7 +45,7 @@ function MainPage(): JSX.Element {
 
     return (
         <div className={styles.main_page}>
-            <header className={styles.header}>header</header>
+            {/* <header className={styles.header}>header</header> */}
             <main>
                 <div className={styles.container}>
                     <img
@@ -115,7 +114,7 @@ function MainPage(): JSX.Element {
                     </section>
                 </div>
             </main>
-            <footer className={styles.footer}>footer</footer>
+            {/* <footer className={styles.footer}>footer</footer> */}
         </div>
     );
 }

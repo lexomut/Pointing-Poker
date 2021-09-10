@@ -2,24 +2,15 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.header {
-    width: 100%;
-    height: 70px;
-    background-color: blue;
-}
 .main_page {
     width: 100%;
-    height: 100vh;
+    flex-grow: 1;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.footer {
-    width: 100%;
-    height: 70px;
-    background-color: green;
-}
+
 .container {
     width: 1000px;
     height: 762px;
