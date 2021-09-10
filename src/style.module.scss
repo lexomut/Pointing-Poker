@@ -7,6 +7,14 @@ body {
   color: $secondaryColor;
 }
 .container {
-  position: relative;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.fakeHeader {
+  flex-grow: 1;
+}
+
+.fakeContent {
+  flex-grow: 3;
 }
