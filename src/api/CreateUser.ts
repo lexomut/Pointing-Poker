@@ -5,7 +5,7 @@ import SERVER_URL from './url';
 export interface CreateUser {
     firstName: string;
     lastNme?: string;
-    jobPosition?: string;
+    jobPosition?: "observer"|"player"| "dealer";
     avatar?: File | undefined;
 }
 export async function createUser({
