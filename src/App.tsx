@@ -12,7 +12,13 @@ const App: React.FC = () => {
             <CoffeeCard />
             <GameCard value={1} scoreType="SP" isEditable={false} />
             <GameCard value={13} scoreType="SP" isEditable />
-            <CardBack />
+            <div>
+                DEMO CARD BACK
+                <CardBack back="bgMountains" />
+                <CardBack back="bgMoon" />
+                <CardBack back="bgEagle" />
+                <CardBack back="bgLeaf" />
+            </div>
             <Footer />
         </div>
     );
