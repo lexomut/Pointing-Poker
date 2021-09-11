@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   .container {
     width: 100%;
     height: 100%;
@@ -33,6 +34,22 @@
   }
 }
 
+.bgMountains{
+  background: url('assets/mountains.jpg') no-repeat center;
+  background-size: cover;
+}
+.bgLeaf{
+  background: url('assets/leaf.jpg') no-repeat center;
+  background-size: cover;
+}
+.bgMoon{
+  background: url('assets/moon.jpg') no-repeat center;
+  background-size: cover;
+}
+.bgEagle{
+  background: url('assets/eagle.jpg') no-repeat center;
+  background-size: cover;
+}
 .coffee {
   transform: scale(3);
 }

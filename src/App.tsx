@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
-import { CoffeeCard, Footer, GameCard } from './components';
+import { CardBack, CoffeeCard, Footer, GameCard } from './components';
 import styles from './style.module.scss';
 
 const App: React.FC = () => {
@@ -12,7 +12,7 @@ const App: React.FC = () => {
             <CoffeeCard />
             <GameCard value={1} scoreType="SP" isEditable={false} />
             <GameCard value={13} scoreType="SP" isEditable />
-
+            <CardBack />
             <Footer />
         </div>
     );

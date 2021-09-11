@@ -17,3 +17,10 @@ export const authors: Author[] = [
         link: 'https://github.com/OKitel',
     },
 ];
+
+export const cardsBackgrounds = [
+    { id: 1, imgClass: 'bgMountains' },
+    { id: 2, imgClass: 'bgMoon' },
+    { id: 3, imgClass: 'bgLeaf' },
+    { id: 4, imgClass: 'bgEagle' },
+];
