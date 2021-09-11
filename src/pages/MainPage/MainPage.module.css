@@ -113,78 +113,7 @@
   height: 47px;
 }
 
-.connect {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 91px;
-}
-
-.connect__control {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 515px;
-}
-
-@media screen and (max-width: 750px) {
-  .connect__control {
-    width: 450px;
-  }
-}
-
-.connect input {
-  width: 60%;
-  height: 47px;
-  border-radius: 0 0 0 10px;
-  outline: none;
-  font-weight: 300;
-  font-size: 24px;
-  border: 1px solid #2b3a67;
-  -webkit-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-          box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.connect button {
-  width: 40%;
-  height: 47px;
-}
-
 .center {
   text-align: center;
-}
-
-.highlight {
-  font-weight: 700;
-  color: #66999b;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.error {
-  width: 300px;
-  height: 50px;
-  font-weight: 700;
-  font-size: 26px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  letter-spacing: 1px;
-  color: #9f5800;
 }
 /*# sourceMappingURL=MainPage.module.css.map */
