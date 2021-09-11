@@ -7,7 +7,6 @@ import styles from './gameCard.module.scss';
 export const CardBack = (): JSX.Element => {
     return (
         <>
-            {' '}
             {cardsBackgrounds.map((el) => {
                 const background = el.imgClass;
                 return (
