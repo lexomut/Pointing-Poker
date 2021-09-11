@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 import React, { useState } from 'react';
 import { connectGame } from '../../api/server';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 import RegistrationForm from '../RegistrationForm';
 import styles from './ConnectForm.module.css';
 

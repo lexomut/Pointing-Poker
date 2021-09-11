@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './MainPage.module.css';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
-import ConnectForm from '../../Components/ConnectForm/ConnectForm';
-import NewSession from '../../Components/NewSession/NewSession';
+import ConnectForm from '../../Components/ConnectForm';
+import NewSession from '../../Components/NewSession';
 
 function MainPage(): JSX.Element {
     const [open, setOpen] = useState(false);
