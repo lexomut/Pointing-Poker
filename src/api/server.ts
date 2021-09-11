@@ -9,7 +9,6 @@ export async function connectGame(url: string): Promise<boolean> {
         if (response.status === 200) return true;
         return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 }
@@ -20,18 +19,16 @@ export const createUser = async (userData: IFormData): Promise<boolean> => {
         if (response.status === 200) return true;
         return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 };
 
-export const createGame = async () => {
+export const createGame = async (): Promise<boolean> => {
     try {
         const response = await axios.post(`${baseURL}/game`);
         if (response.status === 200) return true;
         return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 };

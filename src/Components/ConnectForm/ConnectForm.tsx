@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 import React, { useState } from 'react';
 import { connectGame } from '../../api/server';
@@ -14,10 +15,13 @@ interface IConnectForm {
 const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
     const [url, setUrl] = useState('');
     const [urlError, setUrlError] = useState(false);
+    const [isConnecting, setIsConnecting] = useState(false);
 
     const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsConnecting(true);
         const isConnect = await connectGame(url);
+        setIsConnecting(false);
         if (isConnect) {
             setOpen(true);
         } else {
@@ -60,8 +64,9 @@ const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
                     variant="outlined"
                     type="submit"
                     onClick={handleClick}
+                    disabled={isConnecting}
                 >
-                    Connect
+                    {isConnecting ? <CircularProgress /> : 'Connect'}
                 </Button>
                 {urlError && (
                     <ErrorMessage
@@ -72,6 +77,7 @@ const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
                         message="Invalid url!"
                     />
                 )}
+
                 <Modal
                     open={open}
                     onClose={() => setOpen(false)}
