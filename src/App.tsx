@@ -17,6 +17,9 @@ const App: React.FC = () => {
                 <Route exact path="/lobby">
                     Lobby
                 </Route>
+                <Route exact path="/connect/:id">
+                    Popup connect to lobby
+                </Route>
                 <Route exact path="/settings">
                     Settings for dealer
                 </Route>
