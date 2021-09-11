@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button/Button';
-import Popover from '@material-ui/core/Popover';
 import styles from './MainPage.module.css';
 import RegistrationForm from '../../Components/RegistrationForm/RegistrationForm';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
 import { connectGame, createGame } from '../../api/server';
+import ErrorMessage from '../../Components/ErrorMessage/ErrorMessage';
 
 function MainPage(): JSX.Element {
     const [open, setOpen] = useState(false);
@@ -45,7 +45,6 @@ function MainPage(): JSX.Element {
 
     return (
         <div className={styles.main_page}>
-            {/* <header className={styles.header}>header</header> */}
             <main>
                 <div className={styles.container}>
                     <img
@@ -84,22 +83,13 @@ function MainPage(): JSX.Element {
                                     Connect
                                 </Button>
                                 {urlError && (
-                                    <Popover
+                                    <ErrorMessage
                                         id={id}
                                         open={openPop}
                                         anchorEl={anchorEl}
                                         onClose={handleClose}
-                                        anchorOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'left',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                    >
-                                        <p className={styles.error}>invalid url!</p>
-                                    </Popover>
+                                        message="Invalid url!"
+                                    />
                                 )}
                                 <Modal
                                     open={open}
@@ -114,7 +104,6 @@ function MainPage(): JSX.Element {
                     </section>
                 </div>
             </main>
-            {/* <footer className={styles.footer}>footer</footer> */}
         </div>
     );
 }
