@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.lobby {
+    flex-grow: 1;
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    h4 {
+        font-family: 'Ruda', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: center;
+    }
+}
+
+.container {
+    width: 926px;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+
+    &__buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        button {
+            width: 189px;
+            height: 47px;
+        }
+    }
+}
+
+.scramMaster {
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Ruda;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0em;
+}
+
+.memberCard {
+    width: 298px;
+    height: 69px;
+    border: 2px solid black;    
+}
+
+.linkToLobby {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 94px;
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        font-style: italic;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    &__controls {
+        display: flex;
+        input {
+            height: 47px;
+            width: 276px;
+        }
+        button {
+            height: 47px;
+            width: 189px;
+            cursor: pointer;
+        }
+    }
+}
+
+.members,
+.issues,
+.cards {
+    width: 100%;
+    &__cardField {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+.settings {
+    height: 400px;
+    width: 100%;
+    &__wrap {
+        width: 100%;
+        height: 358px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    label {
+        font-family: Ruda;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+.playCard {
+    flex: 0 0 100px;
+    // width: 100px;
+    height: 161px;
+    border: 1px solid black;
+}
