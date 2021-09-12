@@ -1,6 +1,7 @@
 import { WSMessageBody } from '../types/WSMessageBody';
 import { SERVER_URL } from './url';
-import { wsMessageHandler } from './WSMessageHendler';
+import { HandlerMessageWS } from './HandlerMessageWS';
+import { Action } from '../state/reduser';
 
 const dummy: WSMessageBody = {
     userID: '',
@@ -12,11 +13,14 @@ const dummy: WSMessageBody = {
 class Connect {
     private socket: WebSocket | undefined;
 
-    connect(messageBody: WSMessageBody) {
+    async connect(
+        messageBody: WSMessageBody,
+        dispatch: (arg: Action) => unknown,
+    ): Promise<WebSocket> {
         const url = `ws://${SERVER_URL.split('://')[1]}/ws`;
         this.socket = new WebSocket(url);
-        this.socket.onopen = () => {
-            this.socket?.send(JSON.stringify({ ...messageBody, event: 'userConnection' }));
+        this.socket.onopen = async () => {
+            await this.socket?.send(JSON.stringify({ ...messageBody, event: 'userConnection' }));
             // console.log('подключение c сервером установлено');
         };
         this.socket.onmessage = (event) => {
@@ -26,8 +30,9 @@ class Connect {
             } catch (e) {
                 console.log(event.data, '  ', e);
             }
-            wsMessageHandler(message);
+            HandlerMessageWS(message, dispatch);
         };
+        return this.socket;
     }
 
     send(messObj: WSMessageBody): void {

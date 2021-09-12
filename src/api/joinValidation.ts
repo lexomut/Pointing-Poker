@@ -1,5 +1,5 @@
 import axios from 'axios';
-import SERVER_URL from './url';
+import { SERVER_URL } from './url';
 
 async function joinValidation(id: string): Promise<boolean> {
     try {
