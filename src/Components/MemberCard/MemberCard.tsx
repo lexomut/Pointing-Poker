@@ -1,18 +1,13 @@
 import React from 'react';
 import styles from './MemberCard.module.css';
-import { IMember } from '../../types';
+import { IMemberCard } from '../../types';
 
-const MemberCard: React.FC<IMember> = ({
+const MemberCard: React.FC<IMemberCard> = ({
     firstName = 'Vova',
     lastName = 'Lukin',
     job = 'ppp',
-    id = '',
 }) => {
-    return (
-        <div className={styles.memberCard} key={id}>
-            {`${firstName} ${lastName} ${job}`}
-        </div>
-    );
+    return <div className={styles.memberCard}>{`${firstName} ${lastName} ${job}`}</div>;
 };
 
 export default MemberCard;

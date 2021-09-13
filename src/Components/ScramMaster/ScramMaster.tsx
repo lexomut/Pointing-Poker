@@ -3,15 +3,15 @@ import { AxiosResponse } from 'axios';
 import axiosInstance from '../../api/memberInfo';
 import styles from './ScramMaster.module.css';
 import MemberCard from '../MemberCard';
-import { IMember } from '../../types';
+import { IMemberCard } from '../../types';
 
 const ScramMaster: () => JSX.Element = () => {
-    const [data, setData] = useState<IMember>();
+    const [data, setData] = useState<IMemberCard>();
 
     useEffect(() => {
         const getMember = async (): Promise<void> => {
             try {
-                const response: AxiosResponse<IMember> = await axiosInstance.get(``);
+                const response: AxiosResponse<IMemberCard> = await axiosInstance.get(``);
 
                 setData(response.data);
             } catch (error) {

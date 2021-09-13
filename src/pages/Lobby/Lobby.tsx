@@ -1,61 +1,11 @@
 import React from 'react';
 import LinkToLobby from '../../Components/LinkToLobby';
 import ScramMaster from '../../Components/ScramMaster';
-import { IMember } from '../../types';
 import styles from './Lobby.module.css';
 import StartButton from '../../Components/StartButton';
 import CancelButton from '../../Components/CancelButton';
-
-interface IIssues {
-    issueNumber: string;
-    priority: 'low' | 'high';
-    id: string;
-}
-
-interface ICard {
-    image?: File;
-    rating: string;
-    id: string;
-}
-
-interface IMessage {
-    firstName: string;
-    lastName?: string;
-    image?: File;
-    job?: string;
-    id: string;
-    text: string;
-}
-
-const members: IMember[] = [
-    { firstName: 'nick', lastName: 'kave', job: 'dev', id: '1' },
-    { firstName: 'mike', lastName: 'bzhezinsky', job: 'design', id: '2' },
-    { firstName: 'john', lastName: 'smith', job: 'batman', id: '3' },
-    { firstName: 'miranda', lastName: 'harris', job: 'cleaner', id: '4' },
-    { firstName: 'miranda', lastName: 'harris', job: 'cleaner', id: '8' },
-    { firstName: 'miranda', lastName: 'harris', job: 'cleaner', id: '88' },
-];
-
-const issues: IIssues[] = [
-    { issueNumber: '445', priority: 'low', id: '55' },
-    { issueNumber: '211', priority: 'low', id: '444' },
-    { issueNumber: '44445', priority: 'low', id: '33' },
-    { issueNumber: '44545', priority: 'low', id: '222' },
-    { issueNumber: '12', priority: 'high', id: '144' },
-];
-
-const cards: ICard[] = [
-    { rating: '1', id: 'asd' },
-    { rating: '2', id: 'accsd' },
-    { rating: '3', id: 'asxd' },
-    { rating: '5', id: 'aswsd' },
-];
-
-const message: IMessage[] = [
-    { firstName: 'nick', lastName: 'kave', job: 'dev', id: 'f1', text: 'fsdfsdf' },
-    { firstName: 'mike', lastName: 'bzhezinsky', job: 'design', id: 'f2', text: 'fsdfsdf' },
-    { firstName: 'john', lastName: 'smith', job: 'batman', id: 'f3', text: 'fsdfsdf' },
-];
+import MembersField from '../../Components/MembersField/MembersField';
+import { cards, issues, message } from '../../data';
 
 const Lobby: () => JSX.Element = () => {
     return (
@@ -72,15 +22,7 @@ const Lobby: () => JSX.Element = () => {
                 </section>
                 <section className={styles.members}>
                     <h4>Members</h4>
-                    <div className={styles.members__cardField}>
-                        {members.map(({ firstName, lastName, job, id }) => {
-                            return (
-                                <div className={styles.memberCard} key={id}>
-                                    {`${firstName} ${lastName} ${job}`}
-                                </div>
-                            );
-                        })}
-                    </div>
+                    <MembersField classNames={styles.members__cardField} />
                 </section>
                 <section className={styles.issues}>
                     <h4>Issues:</h4>
