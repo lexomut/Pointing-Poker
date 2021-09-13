@@ -2,6 +2,7 @@ import React from 'react';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
 import { Button } from '@material-ui/core';
 import { IssueButton } from './components/buttons';
+import { Switch } from './components/switch';
 import { Header, Footer } from './components';
 import styles from './style.module.scss';
 
@@ -17,6 +18,7 @@ const App: React.FC = () => {
             </Button>
             <IssueButton />
             <ThreeDRotation />
+            <Switch label="Scrum master as player:" />
             <Footer />
         </div>
     );
