@@ -1,6 +1,6 @@
 import React from 'react';
 import { issues } from '../../data';
-import IssueCard from './../IssueCard/IssueCard';
+import IssueCard from '../IssueCard/IssueCard';
 
 interface IIssueField {
     classNames: string;

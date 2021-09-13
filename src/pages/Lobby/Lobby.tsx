@@ -5,7 +5,8 @@ import styles from './Lobby.module.css';
 import StartButton from '../../Components/StartButton';
 import CancelButton from '../../Components/CancelButton';
 import MembersField from '../../Components/MembersField/MembersField';
-import { cards, issues, message } from '../../data';
+import { cards, message } from '../../data';
+import IssueField from '../../Components/IssueField/IssueField';
 
 const Lobby: () => JSX.Element = () => {
     return (
@@ -26,15 +27,7 @@ const Lobby: () => JSX.Element = () => {
                 </section>
                 <section className={styles.issues}>
                     <h4>Issues:</h4>
-                    <div className={styles.issues__cardField}>
-                        {issues.map(({ issueNumber, priority, id }) => {
-                            return (
-                                <div className={styles.memberCard} key={id}>
-                                    {`Issue ${issueNumber} <br/> ${priority} priority`}
-                                </div>
-                            );
-                        })}
-                    </div>
+                    <IssueField classNames={styles.issues__cardField} />
                 </section>
                 <section className={styles.settings}>
                     <h4>Game settings:</h4>
