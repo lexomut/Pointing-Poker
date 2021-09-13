@@ -45,13 +45,16 @@ type Props = {
     position: string;
     initials: string;
     imgSrc?: string;
-    onKick?: () => void;
+    kickID: number;
 };
 
 export const UserCard: React.FC<Props> = (props: Props) => {
-    const { name, currentUser, position, onKick, initials, imgSrc } = props;
+    const { name, currentUser, position, initials, imgSrc, kickID } = props;
     const classes = useStyles();
 
+    const clickHandler = (id: number) => {
+        return alert(`kick off ${id}`);
+    };
     return (
         <Card
             className={clsx(classes.root, { [classes.currentUser]: currentUser })}
@@ -87,7 +90,7 @@ export const UserCard: React.FC<Props> = (props: Props) => {
                     <Grid item container xs={3}>
                         {!currentUser && (
                             <CardActions>
-                                <Button onClick={onKick}>
+                                <Button onClick={() => clickHandler(kickID)}>
                                     <BlockIcon />
                                 </Button>
                             </CardActions>
@@ -102,5 +105,4 @@ export const UserCard: React.FC<Props> = (props: Props) => {
 UserCard.defaultProps = {
     currentUser: false,
     imgSrc: undefined,
-    onKick: () => {},
 };
