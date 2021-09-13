@@ -3,7 +3,8 @@ export interface IMemberCard {
     lastName?: string;
     image?: File;
     job?: string;
-    id?: string
+    id?: string;
+    classNames?: string;
 }
 
 
@@ -17,7 +18,7 @@ export interface IIssues {
 export interface ICard {
     image?: File;
     rating: string;
-    id: string;
+    id?: string;
 }
 
 export interface IMessage {

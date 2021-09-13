@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Game = () => {
+const Game: () => JSX.Element = () => {
     return <div>Game</div>;
 };
 

@@ -5,8 +5,10 @@ import styles from './Lobby.module.css';
 import StartButton from '../../Components/StartButton';
 import CancelButton from '../../Components/CancelButton';
 import MembersField from '../../Components/MembersField/MembersField';
-import { cards, message } from '../../data';
 import IssueField from '../../Components/IssueField/IssueField';
+import GameSettings from '../../Components/GameSettings';
+import CardField from '../../Components/CardField';
+import Chat from '../../Components/Chat';
 
 const Lobby: () => JSX.Element = () => {
     return (
@@ -31,58 +33,14 @@ const Lobby: () => JSX.Element = () => {
                 </section>
                 <section className={styles.settings}>
                     <h4>Game settings:</h4>
-                    <div className={styles.settings__wrap}>
-                        <label htmlFor="masterRole">
-                            Scram master as player:
-                            <input id="masterRole" type="checkbox" />
-                        </label>
-                        <label htmlFor="changeCard">
-                            Changing card in round end:
-                            <input id="changeCard" type="checkbox" />
-                        </label>
-                        <label htmlFor="isTimer">
-                            Is timer needed:
-                            <input id="isTimer" type="checkbox" />
-                        </label>
-                        <label htmlFor="scoreType">
-                            Score type:
-                            <input id="scoreType" type="text" />
-                        </label>
-                        <label htmlFor="scoreTypeShort">
-                            Score type (Short):
-                            <input id="scoreTypeShort" type="text" />
-                        </label>
-                        <label htmlFor="time">
-                            Round time:
-                            <input id="time" type="text" />
-                        </label>
-                    </div>
+                    <GameSettings />
                 </section>
                 <section className={styles.cards}>
                     <h4>Add card values:</h4>
-                    <div className={styles.cards__cardField}>
-                        {cards.map(({ rating, id }) => {
-                            return (
-                                <div key={id} className={styles.playCard}>
-                                    {rating}
-                                </div>
-                            );
-                        })}
-                    </div>
+                    <CardField classNames={styles.cards__cardField} />
                 </section>
             </div>
-            <aside className={styles.chat}>
-                {message.map(({ text, firstName, lastName, job, id }) => {
-                    return (
-                        <div key={id} className={styles.chat__message}>
-                            <div className={styles.chat__message__text}>{text}</div>
-                            <div className={styles.memberCard_small}>
-                                {`${firstName} ${lastName} ${job}`}
-                            </div>
-                        </div>
-                    );
-                })}
-            </aside>
+            <Chat />
         </div>
     );
 };

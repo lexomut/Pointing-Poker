@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StartButton = () => {
+const StartButton: () => JSX.Element = () => {
     const history = useHistory();
 
     const buttonHandler = () => {

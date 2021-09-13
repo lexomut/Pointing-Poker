@@ -1,0 +1,13 @@
+.chat {
+    width: 399px;
+    &__message {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        &__text {
+            width: 250px;
+            border: 1px solid black;
+            border-radius: 5px 0 0 5px;
+        }
+    }
+}
