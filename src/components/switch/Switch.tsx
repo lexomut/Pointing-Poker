@@ -4,6 +4,7 @@ import { FormControlLabel, FormGroup, Switch as MaterialSwitch } from '@material
 type Props = {
     label: string;
 };
+
 export const Switch: React.FC<Props> = (props: Props) => {
     const [checked, setChecked] = useState(true);
     const { label } = props;
