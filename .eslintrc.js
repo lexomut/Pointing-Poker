@@ -33,4 +33,9 @@ module.exports = {
         // We don't want unused vars
         '@typescript-eslint/no-unused-vars': ['error'],
     },
+    settings: {
+        'import/resolver': {
+            node: {},
+        },
+    },
 };

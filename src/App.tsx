@@ -1,5 +1,6 @@
 import React from 'react';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
+import { IssueCard } from './components/IssueCard';
 import { Button } from '@material-ui/core';
 import { IssueButton } from './components/buttons';
 import { Switch } from './components/switch';
@@ -18,6 +19,8 @@ const App: React.FC = () => {
             </Button>
             <IssueButton />
             <ThreeDRotation />
+            <IssueCard name="Issue 234" priority="High" dealer />
+            <IssueCard current name="Issue 235" priority="Low" />
             <Switch label="Scrum master as player:" />
             <Footer />
         </div>
