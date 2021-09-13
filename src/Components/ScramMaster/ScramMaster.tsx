@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
-import axiosInstance from '../../pages/Lobby/api/memberInfo';
+import axiosInstance from '../../api/memberInfo';
 import styles from './ScramMaster.module.css';
 import MemberCard from '../MemberCard';
 import { IMember } from '../../types';

@@ -9,7 +9,7 @@
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  width: 1378px;
+  width: 1418px;
   height: 100%;
   margin: 0 auto;
   display: -webkit-box;
@@ -18,7 +18,7 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 17px 17px 17px 43px;
+  padding-top: 23px;
 }
 
 .lobby h4 {
@@ -31,7 +31,10 @@
 }
 
 .container {
-  width: 926px;
+  width: 1000px;
+  padding: 35px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .top {
@@ -119,7 +122,7 @@
 }
 
 .chat {
-  width: 407px;
+  width: 399px;
 }
 
 .chat__message {

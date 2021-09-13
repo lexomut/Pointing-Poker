@@ -1,8 +1,10 @@
 import React from 'react';
-import LinkToLobby from '../../Components/LinkToLobby/LinkToLobby';
+import LinkToLobby from '../../Components/LinkToLobby';
 import ScramMaster from '../../Components/ScramMaster';
 import { IMember } from '../../types';
 import styles from './Lobby.module.css';
+import StartButton from '../../Components/StartButton';
+import CancelButton from '../../Components/CancelButton';
 
 interface IIssues {
     issueNumber: string;
@@ -64,8 +66,8 @@ const Lobby: () => JSX.Element = () => {
                     <ScramMaster />
                     <LinkToLobby />
                     <div className={styles.top__buttons}>
-                        <button type="button">Start Game</button>
-                        <button type="button">Cancel Game</button>
+                        <StartButton />
+                        <CancelButton />
                     </div>
                 </section>
                 <section className={styles.members}>
