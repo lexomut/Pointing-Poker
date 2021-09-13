@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
-import { Avatar } from '@material-ui/core';
+import { Avatar, Grid } from '@material-ui/core';
 import BlockIcon from '@material-ui/icons/Block';
 
 const useStyles = makeStyles({
@@ -18,19 +18,22 @@ const useStyles = makeStyles({
         marginBottom: 10,
     },
     cardContainer: {
-        position: 'relative',
-        padding: '0 0 0 5px',
-        display: 'flex',
-        alignItems: 'center',
-        marginTop: 10,
+        width: '100%',
+        padding: 0,
+        // position: 'relative',
+        // padding: '0 0 0 5px',
+        // display: 'flex',
+        // alignItems: 'center',
+        // justifyContent: 'space-between',
     },
     button: {
-        position: 'absolute',
-        bottom: 20,
-        right: 0,
+        // position: 'absolute',
+        // bottom: 20,
+        // right: 0,
     },
     title: {
         lineHeight: 1,
+        // marginTop: 10,
     },
     caption: {
         fontSize: '0.6rem',
@@ -40,9 +43,10 @@ const useStyles = makeStyles({
         boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
         textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         fontWeight: 'bold',
-        marginRight: 10,
+        // marginRight: 10,
     },
     currentUser: {
+        paddingTop: 10,
         background: 'rgba(96, 218, 191, 0.33)',
     },
 });
@@ -66,26 +70,42 @@ export const UserCard: React.FC<Props> = (props: Props) => {
             variant="outlined"
         >
             <CardContent className={classes.cardContainer}>
-                {imgSrc ? (
-                    <Avatar className={classes.avatar} src={imgSrc} alt={name} />
-                ) : (
-                    <Avatar className={classes.avatar}>{initials}</Avatar>
-                )}
-                <div>
-                    <Typography variant="h6" className={classes.title}>
-                        {name}
-                    </Typography>
-                    <Typography color="textSecondary" variant="caption" className={classes.caption}>
-                        {position}
-                    </Typography>
-                </div>
-                {!currentUser && (
-                    <CardActions className={classes.button}>
-                        <Button onClick={onKick}>
-                            <BlockIcon />
-                        </Button>
-                    </CardActions>
-                )}
+                <Grid
+                    container
+                    alignItems="center"
+                    alignContent="center"
+                    justifyContent="space-around"
+                >
+                    <Grid item xs={2}>
+                        {' '}
+                        {imgSrc ? (
+                            <Avatar className={classes.avatar} src={imgSrc} alt={name} />
+                        ) : (
+                            <Avatar className={classes.avatar}>{initials}</Avatar>
+                        )}
+                    </Grid>
+                    <Grid item xs={5}>
+                        <Typography variant="h6" className={classes.title}>
+                            {name}
+                        </Typography>
+                        <Typography
+                            color="textSecondary"
+                            variant="caption"
+                            className={classes.caption}
+                        >
+                            {position}
+                        </Typography>
+                    </Grid>
+                    <Grid item container xs={3}>
+                        {!currentUser && (
+                            <CardActions className={classes.button}>
+                                <Button onClick={onKick}>
+                                    <BlockIcon />
+                                </Button>
+                            </CardActions>
+                        )}
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
     );
