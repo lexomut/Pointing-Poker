@@ -8,6 +8,7 @@ type Props = {
     scoreType: string;
     isEditable: boolean;
 };
+
 export const GameCard: React.FC<Props> = (props: Props) => {
     const { value, scoreType, isEditable } = props;
     return (

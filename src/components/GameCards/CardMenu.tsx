@@ -4,10 +4,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styles from './gameCard.module.scss';
+import { ITEM_HEIGHT } from './constants';
 
 const options = ['Edit', 'Delete'];
-
-const ITEM_HEIGHT = 48;
 
 export const CardMenu = (): JSX.Element => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
