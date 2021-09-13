@@ -20,20 +20,9 @@ const useStyles = makeStyles({
     cardContainer: {
         width: '100%',
         padding: 0,
-        // position: 'relative',
-        // padding: '0 0 0 5px',
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'space-between',
-    },
-    button: {
-        // position: 'absolute',
-        // bottom: 20,
-        // right: 0,
     },
     title: {
         lineHeight: 1,
-        // marginTop: 10,
     },
     caption: {
         fontSize: '0.6rem',
@@ -43,7 +32,6 @@ const useStyles = makeStyles({
         boxShadow: 'inset 0px 4px 4px rgba(0, 0, 0, 0.25)',
         textShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
         fontWeight: 'bold',
-        // marginRight: 10,
     },
     currentUser: {
         paddingTop: 10,
@@ -98,7 +86,7 @@ export const UserCard: React.FC<Props> = (props: Props) => {
                     </Grid>
                     <Grid item container xs={3}>
                         {!currentUser && (
-                            <CardActions className={classes.button}>
+                            <CardActions>
                                 <Button onClick={onKick}>
                                     <BlockIcon />
                                 </Button>
