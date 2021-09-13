@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -47,9 +47,10 @@ type Props = {
 export const IssueCard: React.FC<Props> = (props: Props) => {
     const { name, current, priority, dealer } = props;
     const classes = useStyles();
-    const handlerClick = useCallback(() => {
+    const handlerClick = () => {
         alert('add logic');
-    }, []);
+    };
+
     return (
         <Card className={clsx(classes.root, { [classes.current]: current })} variant="outlined">
             <CardContent className={classes.cardContainer}>
