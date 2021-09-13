@@ -1,13 +1,8 @@
 import React from 'react';
+import LinkToLobby from '../../Components/LinkToLobby/LinkToLobby';
+import ScramMaster from '../../Components/ScramMaster';
+import { IMember } from '../../types';
 import styles from './Lobby.module.css';
-
-interface IMembers {
-    firstName: string;
-    lastName?: string;
-    image?: File;
-    job?: string;
-    id: string;
-}
 
 interface IIssues {
     issueNumber: string;
@@ -21,7 +16,16 @@ interface ICard {
     id: string;
 }
 
-const members: IMembers[] = [
+interface IMessage {
+    firstName: string;
+    lastName?: string;
+    image?: File;
+    job?: string;
+    id: string;
+    text: string;
+}
+
+const members: IMember[] = [
     { firstName: 'nick', lastName: 'kave', job: 'dev', id: '1' },
     { firstName: 'mike', lastName: 'bzhezinsky', job: 'design', id: '2' },
     { firstName: 'john', lastName: 'smith', job: 'batman', id: '3' },
@@ -45,23 +49,20 @@ const cards: ICard[] = [
     { rating: '5', id: 'aswsd' },
 ];
 
+const message: IMessage[] = [
+    { firstName: 'nick', lastName: 'kave', job: 'dev', id: 'f1', text: 'fsdfsdf' },
+    { firstName: 'mike', lastName: 'bzhezinsky', job: 'design', id: 'f2', text: 'fsdfsdf' },
+    { firstName: 'john', lastName: 'smith', job: 'batman', id: 'f3', text: 'fsdfsdf' },
+];
+
 const Lobby: () => JSX.Element = () => {
     return (
         <div className={styles.lobby}>
             <div className={styles.container}>
                 <section className={styles.top}>
                     <h4>Spring 23 planning ()</h4>
-                    <div className={styles.scramMaster}>
-                        <p>Scram master:</p>
-                        <div className={styles.memberCard} />
-                    </div>
-                    <div className={styles.linkToLobby}>
-                        <p>Link to Lobby:</p>
-                        <div className={styles.linkToLobby__controls}>
-                            <input />
-                            <button type="button">Copy</button>
-                        </div>
-                    </div>
+                    <ScramMaster />
+                    <LinkToLobby />
                     <div className={styles.top__buttons}>
                         <button type="button">Start Game</button>
                         <button type="button">Cancel Game</button>
@@ -133,6 +134,18 @@ const Lobby: () => JSX.Element = () => {
                     </div>
                 </section>
             </div>
+            <aside className={styles.chat}>
+                {message.map(({ text, firstName, lastName, job, id }) => {
+                    return (
+                        <div key={id} className={styles.chat__message}>
+                            <div className={styles.chat__message__text}>{text}</div>
+                            <div className={styles.memberCard_small}>
+                                {`${firstName} ${lastName} ${job}`}
+                            </div>
+                        </div>
+                    );
+                })}
+            </aside>
         </div>
     );
 };

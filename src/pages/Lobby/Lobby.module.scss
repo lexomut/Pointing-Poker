@@ -5,9 +5,12 @@
 }
 .lobby {
     flex-grow: 1;
-    width: 1000px;
+    width: 1378px;
     height: 100%;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 17px 17px 43px;
     h4 {
         font-family: 'Ruda', sans-serif;
         font-size: 24px;
@@ -35,52 +38,6 @@
         button {
             width: 189px;
             height: 47px;
-        }
-    }
-}
-
-.scramMaster {
-    height: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-family: Ruda;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 15px;
-    letter-spacing: 0em;
-}
-
-.memberCard {
-    width: 298px;
-    height: 69px;
-    border: 2px solid black;    
-}
-
-.linkToLobby {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 94px;
-    p {
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        font-style: italic;
-        font-weight: 400;
-        line-height: 28px;
-        letter-spacing: 0em;
-        text-align: left;
-    }
-    &__controls {
-        display: flex;
-        input {
-            height: 47px;
-            width: 276px;
-        }
-        button {
-            height: 47px;
-            width: 189px;
-            cursor: pointer;
         }
     }
 }
@@ -122,4 +79,18 @@
     // width: 100px;
     height: 161px;
     border: 1px solid black;
+}
+
+.chat {
+    width: 407px;
+    &__message {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        &__text {
+            width: 250px;
+            border: 1px solid black;
+            border-radius: 5px 0 0 5px;
+        }
+    }
 }
