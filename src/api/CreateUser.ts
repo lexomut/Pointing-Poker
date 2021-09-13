@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { User } from '../types/user';
-import SERVER_URL from './url';
+import { SERVER_URL } from './url';
 
 export interface CreateUser {
     firstName: string;
