@@ -1,7 +1,7 @@
 import React from 'react';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
-import { IssueCard } from './components/IssueCard';
 import { Button } from '@material-ui/core';
+import { IssueCard } from './components/IssueCard';
 import { IssueButton } from './components/buttons';
 import { Switch } from './components/switch';
 import { Header, Footer } from './components';
