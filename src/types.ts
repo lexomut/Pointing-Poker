@@ -11,7 +11,7 @@ export interface IMemberCard {
 export interface IIssues {
     issueNumber: string;
     priority: 'low' | 'high';
-    id: string;
+    id?: string;
 }
 
 export interface ICard {
