@@ -9,7 +9,7 @@ export const IssueButton: React.FC = (): JSX.Element => {
     return (
         <MaterialButton
             color="secondary"
-            variant="outlined"
+            variant="contained"
             onClick={handlerClick}
             endIcon={<AddIcon />}
         >
