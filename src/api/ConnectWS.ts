@@ -16,13 +16,31 @@ class Connect {
     async connect(
         messageBody: WSMessageBody,
         dispatch: (arg: Action) => unknown,
-    ): Promise<WebSocket> {
-        const url = `ws://${SERVER_URL.split('://')[1]}/ws`;
-        this.socket = new WebSocket(url);
-        this.socket.onopen = async () => {
-            await this.socket?.send(JSON.stringify({ ...messageBody, event: 'userConnection' }));
-            // console.log('подключение c сервером установлено');
-        };
+    ): Promise<WebSocket | void> {
+        const url = `ws://${SERVER_URL.split('://')[1]}ws`;
+        try {
+            this.socket = new WebSocket(url);
+            console.log('new WebSocket');
+            if (!this.socket) {
+                console.log('this.socket --', this.socket);
+                return;
+            }
+
+            console.log('connect');
+
+            this.socket.onopen = async () => {
+                await this.socket?.send(
+                    JSON.stringify({ ...messageBody, event: 'userConnection' }),
+                );
+                console.log('подключение c сервером установлено');
+            };
+        } catch {
+            console.log('ошибка соединения с сервером');
+        }
+        if (!this.socket) {
+            console.log('this.socket --', this.socket);
+            return;
+        }
         this.socket.onmessage = (event) => {
             let message: WSMessageBody = dummy;
             try {
@@ -32,6 +50,7 @@ class Connect {
             }
             HandlerMessageWS(message, dispatch);
         };
+        // eslint-disable-next-line consistent-return
         return this.socket;
     }
 

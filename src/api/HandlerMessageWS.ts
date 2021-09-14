@@ -8,26 +8,23 @@ export function HandlerMessageWS(message: WSMessageBody, dispatch: (arg: Action)
             dispatch({
                 type: 'addChatMessage',
                 payLoad: {
-                    chatMessage: {
-                        author: '',
-                        text: `пользователь ${message.userName} подключился`,
-                    },
+                    userID: message.userID,
+                    userName: message.userName,
+                    date: new Date(),
+                    id: new Date().toDateString(),
+                    text: `пользователь ${message.userName} подключился`,
                 },
             });
             break;
         }
         case 'message':
             console.log(
-                `пользователь ${message.userName} написал сообшение: ${message.chatMessage}`,
+                `пользователь ${message.userName} написал сообшение: ${message.chatMessage?.text}`,
             );
+            if (!message.chatMessage) return;
             dispatch({
                 type: 'addChatMessage',
-                payLoad: {
-                    chatMessage: {
-                        author: message.userName,
-                        text: `${message.chatMessage}`,
-                    },
-                },
+                payLoad: message.chatMessage,
             });
             break;
         case 'setGameState':

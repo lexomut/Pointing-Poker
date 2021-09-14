@@ -41,8 +41,9 @@ export function Temp() {
             {/* eslint-disable-next-line react/button-has-type */}
             <button onClick={() => submitHandler()}> send</button>
             <div>
-                {state.chatMessages.map((chatMessage: ChatMessage) => (
-                    <div key={Date.now()}>
+                {state.chatMessages.map((chatMessage: ChatMessage, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div key={index}>
                         <span>{chatMessage.author} </span> <span> {chatMessage.text}</span>
                     </div>
                 ))}
