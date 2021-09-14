@@ -5,12 +5,9 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   color: $secondaryColor;
+
 }
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+
 .fakeHeader {
   flex-grow: 1;
 }
