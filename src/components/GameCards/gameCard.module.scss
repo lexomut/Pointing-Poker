@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   .container {
     width: 100%;
@@ -13,11 +14,12 @@
     flex-direction: column;
     justify-content: space-between;
 
-    .header{
+    .header {
       display: flex;
       justify-content: space-between;
       margin: 5px;
-      .menuBtn{
+
+      .menuBtn {
         padding: 0;
       }
     }
@@ -27,34 +29,39 @@
       display: flex;
       transform: rotate(-180deg);
     }
-    .center{
+
+    .center {
       display: flex;
       justify-content: center;
     }
   }
 }
 
-.bgMountains{
+.bgMountains {
   background: url('assets/mountains.jpg') no-repeat center;
   background-size: cover;
 }
-.bgLeaf{
+
+.bgLeaf {
   background: url('assets/leaf.jpg') no-repeat center;
   background-size: cover;
 }
-.bgMoon{
+
+.bgMoon {
   background: url('assets/moon.jpg') no-repeat center;
   background-size: cover;
 }
-.bgEagle{
+
+.bgEagle {
   background: url('assets/eagle.jpg') no-repeat center;
   background-size: cover;
 }
+
 .coffee {
   transform: scale(3);
 }
 
-.demo{
+.demo {
   display: flex;
   flex-wrap: wrap;
 }
