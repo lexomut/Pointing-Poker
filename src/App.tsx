@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import { IssueCard } from './components/IssueCard';
 import { IssueButton } from './components/buttons';
 import { Switch } from './components/switch';
-import { Header, Footer } from './components';
+import { Header, Footer, DemoUserCards } from './components';
 import styles from './style.module.scss';
 
 const App: React.FC = () => {
@@ -19,6 +19,7 @@ const App: React.FC = () => {
             </Button>
             <IssueButton />
             <ThreeDRotation />
+            <DemoUserCards />
             <IssueCard name="Issue 234" priority="High" dealer />
             <IssueCard current name="Issue 235" priority="Low" />
             <Switch label="Scrum master as player:" />
