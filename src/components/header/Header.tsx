@@ -13,12 +13,15 @@ const useStyles = makeStyles({
         top: 30,
         background: '#a7ffeb',
     },
+    header: {
+        marginBottom: 30,
+    },
 });
 
 export const Header: React.FC = () => {
     const classes = useStyles();
     return (
-        <AppBar color="primary" position="static">
+        <AppBar color="primary" position="static" className={classes.header}>
             <Toolbar>
                 <Fab className={classes.fab}>
                     <img className={classes.img} src={pokerIcon} alt="pointing poker" />
