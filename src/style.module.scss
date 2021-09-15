@@ -5,8 +5,13 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   color: $secondaryColor;
+
 }
-.container {
-  position: relative;
-  min-height: 100vh;
+
+.fakeHeader {
+  flex-grow: 1;
+}
+
+.fakeContent {
+  flex-grow: 3;
 }
