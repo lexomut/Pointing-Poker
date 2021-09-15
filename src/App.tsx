@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import ThreeDRotation from '@material-ui/icons/ThreeDRotation';
-import { Footer } from './components';
+import { Footer, Invitation } from './components';
 import styles from './style.module.scss';
 
 const App: React.FC = () => {
@@ -14,20 +14,8 @@ const App: React.FC = () => {
                     <Button>pointing-poker</Button>
                     <ThreeDRotation />
                 </Route>
-                <Route exact path="/lobby">
-                    Lobby
-                </Route>
-                <Route exact path="/connect/:id">
-                    Popup connect to lobby
-                </Route>
-                <Route exact path="/settings">
-                    Settings for dealer
-                </Route>
-                <Route exact path="/game">
-                    Game
-                </Route>
-                <Route exact path="*">
-                    404
+                <Route path="/:id">
+                    <Invitation />
                 </Route>
             </Switch>
             <Footer />
