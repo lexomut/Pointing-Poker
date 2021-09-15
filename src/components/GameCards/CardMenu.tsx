@@ -21,7 +21,7 @@ export const CardMenu = (): JSX.Element => {
     };
 
     return (
-        <div>
+        <>
             <IconButton
                 aria-label="more"
                 aria-controls="long-menu"
@@ -50,6 +50,6 @@ export const CardMenu = (): JSX.Element => {
                     </MenuItem>
                 ))}
             </Menu>
-        </div>
+        </>
     );
 };
