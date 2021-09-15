@@ -4,9 +4,9 @@ body {
   margin: 0 auto;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  color: $secondaryColor;
+  color: $primaryDarkColor;
 }
 .container {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
 }
