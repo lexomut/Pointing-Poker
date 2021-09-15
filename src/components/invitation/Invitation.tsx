@@ -1,38 +1,27 @@
 import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 
 export const Invitation: React.FC = () => {
     const { path } = useRouteMatch();
     const isAuthorized = true; // DEMO => TODO replace with selector from REDUX
     const isDealer = true;
 
-    return isAuthorized ? (
+    return (
         <Switch>
             <Route exact path={`${path}`}>
                 Popup to connect
             </Route>
             <Route exact path={`${path}/lobby`}>
-                Lobby for all players
+                {isAuthorized ? <h2>Lobby for all players</h2> : <Redirect to="/" />}
             </Route>
-            {isDealer && (
-                <Route exact path={`${path}/settings`}>
-                    Lobby for dealer
-                </Route>
-            )}
+            <Route exact path={`${path}/settings`}>
+                {isAuthorized && isDealer ? <h2>Lobby for dealer</h2> : <Redirect to="/" />}
+            </Route>
             <Route exact path={`${path}/game`}>
-                Game
+                {isAuthorized ? <h2>Game</h2> : <Redirect to="/" />}
             </Route>
             <Route exact path="*">
-                404
-            </Route>
-        </Switch>
-    ) : (
-        <Switch>
-            <Route exact path={`${path}`}>
-                Popup to connect
-            </Route>
-            <Route exact path="*">
-                404
+                <h2>404</h2>
             </Route>
         </Switch>
     );
