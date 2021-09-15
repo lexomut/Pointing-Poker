@@ -1,9 +1,14 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { DemoGameCards, Footer, Header, DemoUserCards } from './components';
-import { IssueCard } from './components/IssueCard';
-import { IssueButton } from './components/buttons';
-import { Switch } from './components/switch';
+import {
+    DemoGameCards,
+    Footer,
+    Header,
+    DemoUserCards,
+    IssueCard,
+    IssueButton,
+    Switch,
+} from './components';
 import styles from './style.module.scss';
 
 const App: React.FC = () => {
