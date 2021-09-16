@@ -11,14 +11,13 @@ const useStyles = makeStyles({
     },
     fab: {
         position: 'relative',
-        right: '50%',
+        right: '40%',
         top: 30,
         background: '#a7ffeb',
     },
     header: {
         display: 'flex',
         justifyContent: 'flex-end',
-        flexGrow: 1,
     },
 });
 
