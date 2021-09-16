@@ -6,11 +6,20 @@
 .lobby {
     flex-grow: 1;
     width: 1418px;
-    height: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     padding-top: 23px;
+    @media screen and (max-width: 1500px) {
+        flex-direction: column;
+        width: 1100px;
+    }
+    @media screen and (max-width: 1150px) {
+        width: 800px;
+    }
+    @media screen and (max-width: 850px) {
+        width: 470px;
+    }
     h4 {
         font-family: 'Ruda', sans-serif;
         font-size: 24px;
@@ -25,6 +34,15 @@
     width: 1000px;
     padding: 35px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    @media screen and (max-width: 1500px) {
+        margin: 0 auto;
+    }
+    @media screen and (max-width: 1150px) {
+        width: 700px;
+    }
+    @media screen and (max-width: 850px) {
+        width: 450px;
+    }
 }
 
 .top {
@@ -52,6 +70,10 @@
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
+        @media screen and (max-width: 850px) {
+            width: 380px;
+            justify-content: center;
+        }
     }
 }
 
