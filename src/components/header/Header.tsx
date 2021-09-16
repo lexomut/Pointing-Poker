@@ -30,25 +30,14 @@ export const Header: React.FC = () => {
                 <Fab className={classes.fab}>
                     <img className={classes.img} src={pokerIcon} alt="pointing poker" />
                 </Fab>
-                {!isChatOpen ? (
-                    <IconButton
-                        color="secondary"
-                        onClick={() => {
-                            setIsChatOpen(true);
-                        }}
-                    >
-                        <SpeakerNotesIcon />
-                    </IconButton>
-                ) : (
-                    <IconButton
-                        color="secondary"
-                        onClick={() => {
-                            setIsChatOpen(false);
-                        }}
-                    >
-                        <SpeakerNotesOffIcon />
-                    </IconButton>
-                )}
+                <IconButton
+                    color="secondary"
+                    onClick={() => {
+                        setIsChatOpen(!isChatOpen);
+                    }}
+                >
+                    {!isChatOpen ? <SpeakerNotesIcon /> : <SpeakerNotesOffIcon />}
+                </IconButton>
             </Toolbar>
         </AppBar>
     );
