@@ -1,5 +1,6 @@
-export interface Author {
+export interface Card {
     id: number;
-    name: string;
-    link: string;
+    value: number;
+    scoreType: string;
+    isEditable: boolean;
 }
