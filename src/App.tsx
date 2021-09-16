@@ -1,20 +1,26 @@
-import React, { useReducer } from 'react';
-
+import React, { useEffect, useReducer } from 'react';
 import { Footer } from './components';
-import { Context, initState } from './state/Context';
-import { reducer } from './state/reduser';
-import styles from './style.module.scss';
+import { GlobalContext } from './state/Context';
+import { initState } from './state/InitState';
+import { reducer } from './state/reducer';
 import { Temp } from './temp';
+import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypes';
+import styles from './style.module.scss';
 
 const App: React.FC = () => {
-    const [state, dispatch] = useReducer(reducer, initState);
+    const [globalState, dispatch] = useReducer(reducer, initState);
+    // useEffect для подключения к websocket, после выполнения инстанс класса WSProvider доступен из globalState
+    useEffect(() => {
+        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: dispatch });
+    }, []);
+
     return (
-        <Context.Provider value={{ dispatch, state }}>
+        <GlobalContext.Provider value={{ dispatch, globalState }}>
             <div className={styles.container}>
                 <Temp />
                 <Footer />
             </div>
-        </Context.Provider>
+        </GlobalContext.Provider>
     );
 };
 

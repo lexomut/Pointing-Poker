@@ -1,4 +1,5 @@
 import { ChatMessage } from './ChatMessage';
+import { Game } from './game';
 
 export interface WSMessageBody {
     gameID: string;
@@ -9,5 +10,11 @@ export interface WSMessageBody {
     gameProperty?: string;
     value?: string;
     errorMessage?: string;
+    game?: Game;
 }
-type WSMessageEvent = 'userConnection' | 'message' | 'setGameState' | 'initMessage' | 'error';
+export type WSMessageEvent =
+    | 'userConnection'
+    | 'chatMessage'
+    | 'setGameState'
+    | 'initMessage'
+    | 'error';

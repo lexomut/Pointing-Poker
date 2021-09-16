@@ -1,11 +1,12 @@
 import React from 'react';
-import { State as GlobalState } from '../types/State';
-import { Action } from './reduser';
+import { GlobalState } from '../types/GlobalState';
+import { initState } from './InitState';
+import { Action } from './ActionTypes';
 
-export const initState = { chatMessages: [] };
-export const Context = React.createContext<{ state: GlobalState; dispatch: (arg: Action) => void }>(
-    {
-        state: initState,
-        dispatch: () => {},
-    },
-);
+export const GlobalContext = React.createContext<{
+    globalState: GlobalState;
+    dispatch: (arg: Action) => void;
+}>({
+    globalState: initState,
+    dispatch: () => {},
+});

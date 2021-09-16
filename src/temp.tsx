@@ -1,53 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { connect } from './api/ConnectWS';
-import { Context } from './state/Context';
-import { ChatMessage } from './types/State';
+import React, { Dispatch, FC, useContext, useState } from 'react';
+import { GlobalContext } from './state/Context';
+import { ChatMessage } from './types/ChatMessage';
+import { GlobalState } from './types/GlobalState';
+import { Action } from './state/ActionTypes';
+import { WSProvider } from './api/WSProvider';
 
-export function Temp() {
-    const { state, dispatch } = useContext(Context);
-
-    const [firstName, setFirstName] = useState('');
-    const submitHandler = async () => {
-        connect.send({
-            userID: '321',
-            gameID: '613b99e0b9ec58ffea641419',
-            event: 'message',
-            chatMessage: firstName,
-            userName: 'baba',
-        });
-    };
-    useEffect(() => {}, []);
-
+export const Temp: FC = () => {
+    const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
+        useContext(GlobalContext);
+    const [text, setText] = useState<string>('');
+    const wsProvider: WSProvider | undefined = globalState.ws.provider;
+    function send() {
+        if (!wsProvider) return;
+        wsProvider.sendChatMessage(text);
+        setText('');
+    }
     return (
         <div>
-            {/* eslint-disable-next-line react/button-has-type */}
-            <button
-                onClick={() =>
-                    connect.connect(
-                        {
-                            userID: '321',
-                            gameID: '613b99e0b9ec58ffea641419',
-                            event: 'userConnection',
-                            userName: 'baba',
-                        },
-                        dispatch,
-                    )
-                }
-            >
-                connect
+            <textarea value={text} onChange={(e) => setText(e.target.value)} />
+            <button type="button" disabled={!globalState.ws.status} onClick={send}>
+                Send
             </button>
-            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-
-            {/* eslint-disable-next-line react/button-has-type */}
-            <button onClick={() => submitHandler()}> send</button>
             <div>
-                {state.chatMessages.map((chatMessage: ChatMessage, index) => (
+                {globalState.game.chatMessages.map((chatMessage: ChatMessage) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <div key={index}>
-                        <span>{chatMessage.author} </span> <span> {chatMessage.text}</span>
+                    <div key={chatMessage.id}>
+                        <span>{chatMessage.userName}</span> <span>{chatMessage.text}</span>
                     </div>
                 ))}
             </div>
         </div>
     );
-}
+};

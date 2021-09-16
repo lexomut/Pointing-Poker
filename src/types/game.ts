@@ -1,5 +1,8 @@
+import { ChatMessage } from './ChatMessage';
+
 export interface Game {
-    _id: string;
-    status?: string;
+    gameID: string;
+    status: 'new' | 'pending' | 'going' | 'over';
     users: Array<string>;
+    chatMessages: Array<ChatMessage>;
 }
