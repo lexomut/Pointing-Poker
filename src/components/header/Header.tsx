@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     header: {
         display: 'flex',
         justifyContent: 'flex-end',
+        flexGrow: 1,
     },
 });
 
@@ -25,7 +26,7 @@ export const Header: React.FC = () => {
     const classes = useStyles();
     const [isChatOpen, setIsChatOpen] = useState(false);
     return (
-        <AppBar color="primary" position="static">
+        <AppBar className={classes.header} color="primary" position="static">
             <Toolbar className={classes.header}>
                 <Fab className={classes.fab}>
                     <img className={classes.img} src={pokerIcon} alt="pointing poker" />
