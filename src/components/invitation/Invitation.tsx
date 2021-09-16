@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { NotFound } from '../notFound';
 
 export const Invitation: React.FC = () => {
     const { path } = useRouteMatch();
@@ -21,7 +22,7 @@ export const Invitation: React.FC = () => {
                 {isAuthorized ? <h2>Game</h2> : <Redirect to="/" />}
             </Route>
             <Route exact path="*">
-                <h2>404</h2>
+                <NotFound />
             </Route>
         </Switch>
     );
