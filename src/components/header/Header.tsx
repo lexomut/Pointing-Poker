@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Header: React.FC = () => {
     const classes = useStyles();
     return (
-        <AppBar className={classes.header} color="primary" position="static" className={classes.header}>
+        <AppBar className={classes.header} color="primary" position="static">
             <Toolbar>
                 <Fab className={classes.fab}>
                     <img className={classes.img} src={pokerIcon} alt="pointing poker" />
