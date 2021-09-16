@@ -1,22 +1,25 @@
 import React from 'react';
-import { AppBar, Fab, makeStyles, Toolbar } from '@material-ui/core';
+import { AppBar, createStyles, Fab, makeStyles, Theme, Toolbar } from '@material-ui/core';
 import pokerIcon from './assets/transparent_dark_icon.png';
 
-const useStyles = makeStyles({
-    img: {
-        width: 50,
-        height: 50,
-    },
-    fab: {
-        position: 'relative',
-        left: '50%',
-        top: 30,
-        background: '#a7ffeb',
-    },
-    header: {
-        flexGrow: 1,
-    },
-});
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        img: {
+            width: 50,
+            height: 50,
+        },
+        fab: {
+            position: 'relative',
+            left: '50%',
+            top: 30,
+            background: theme.palette.secondary.main,
+        },
+        header: {
+            marginBottom: 30,
+            flexGrow: 1,
+        },
+    }),
+);
 
 export const Header: React.FC = () => {
     const classes = useStyles();
