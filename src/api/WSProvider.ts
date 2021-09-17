@@ -16,8 +16,6 @@ const stub: WSMessageBody = {
 };
 
 export class WSProvider implements WSProviderInterface {
-    globalState: GlobalState;
-
     globalDispatch: Dispatch<Action>;
 
     currentUser: CurrentUser;
@@ -26,14 +24,13 @@ export class WSProvider implements WSProviderInterface {
 
     socket: WebSocket | undefined;
 
-    constructor(globalState: GlobalState, globalDispatcher: Dispatch<Action>) {
-        this.globalState = globalState;
-        this.globalDispatch = globalDispatcher;
-        this.currentUser = globalState.currentUser;
-        this.game = this.globalState.game;
+    constructor({ currentUser, game }: GlobalState, globalDispatch: Dispatch<Action>) {
+        this.globalDispatch = globalDispatch;
+        this.currentUser = currentUser;
+        this.game = game;
     }
 
-    async connection(): Promise<void> {
+    async connects(): Promise<void> {
         const url = `ws://${SERVER_URL.split('://')[1]}ws`;
         try {
             this.socket = new WebSocket(url);
@@ -62,7 +59,7 @@ export class WSProvider implements WSProviderInterface {
         this.socket.onclose = () => {
             this.globalDispatch({ type: SET_SOCKET_STATUS, payLoad: false });
             setTimeout(() => {
-                this.connection();
+                this.connects();
             }, 5000);
         };
         this.socket.onmessage = (event) => {
@@ -91,17 +88,17 @@ export class WSProvider implements WSProviderInterface {
 
     async sendChatMessage(text: string): Promise<void> {
         const chatMessage: ChatMessage = {
-            userID: this.globalState.currentUser.userID,
+            userID: this.currentUser.userID,
             text,
             id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
-            userName: this.globalState.currentUser.firstName,
+            userName: this.currentUser.firstName,
             date: new Date(),
         };
         const message: WSMessageBody = {
             gameID: this.game.gameID,
-            userID: this.globalState.currentUser.userID,
+            userID: this.currentUser.userID,
             event: CHAT_MESSAGE,
-            userName: this.globalState.currentUser.firstName,
+            userName: this.currentUser.firstName,
             chatMessage,
         };
         await this.send(message);

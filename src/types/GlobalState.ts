@@ -24,12 +24,11 @@ export interface WS {
 }
 
 export interface WSProviderInterface {
-    globalState: GlobalState;
     globalDispatch: Dispatch<Action>;
     currentUser: CurrentUser;
     game: Game;
     socket: WebSocket | undefined;
-    connection: () => Promise<void>;
+    connects: () => Promise<void>;
     send(messObj: WSMessageBody): Promise<void>;
     sendChatMessage(text: string): Promise<void>;
 }

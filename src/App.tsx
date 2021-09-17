@@ -41,7 +41,7 @@ const App: React.FC = () => {
     useEffect(() => {
         const provider = new WSProvider(globalState, dispatch);
         dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
-        globalState.ws.provider?.connection();
+        globalState.ws.provider?.connects();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
