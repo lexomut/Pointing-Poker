@@ -1,6 +1,6 @@
 import React from 'react';
 import { createGame } from '../../api/server';
-import styles from './NewSession.module.css';
+import styles from './NewSession.module.scss';
 
 interface NewSessionProps {
     setOpen: (value: React.SetStateAction<boolean>) => void;

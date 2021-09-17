@@ -2,7 +2,7 @@ import { Avatar, Button, Switch } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import UploadButton from '../UploadButton';
-import styles from './RegistrationForm.module.css';
+import styles from './RegistrationForm.module.scss';
 import { IFormData } from '../../types';
 import { createUser } from '../../api/server';
 

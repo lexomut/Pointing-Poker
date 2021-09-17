@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { connectGame } from '../../api/server';
 import ErrorMessage from '../ErrorMessage';
 import RegistrationForm from '../RegistrationForm';
-import styles from './ConnectForm.module.css';
+import styles from './ConnectForm.module.scss';
 
 interface IConnectForm {
     open: boolean;

@@ -1,6 +1,6 @@
 import Popover from '@material-ui/core/Popover';
 import React from 'react';
-import styles from './ErrorMessage.module.css';
+import styles from './ErrorMessage.module.scss';
 
 interface ErrorMessageProps {
     id: 'simple-popover' | undefined;

@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import classNames from 'classnames';
-import styles from './UploadButton.module.css';
+// import styles from './UploadButton.module.scss';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,7 +30,7 @@ const UploadButton: React.FC<IUploadButton> = ({ setImage }) => {
     };
 
     return (
-        <div className={classNames(classes.root, styles.input)}>
+        <div className={classes.root}>
             <label htmlFor="contained-button-file">
                 <input
                     accept="image/*"

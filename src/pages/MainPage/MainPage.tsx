@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './MainPage.module.css';
+import styles from './MainPage.module.scss';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
 import ConnectForm from '../../components/ConnectForm';
 import NewSession from '../../components/NewSession';

@@ -12,6 +12,7 @@ import {
     Invitation,
 } from './components';
 import styles from './style.module.scss';
+import MainPage from './pages/MainPage/MainPage';
 
 const theme = createTheme({
     palette: {
@@ -36,7 +37,7 @@ const App: React.FC = () => {
                 <main className={styles.content}>
                     <Switch>
                         <Route exact path="/">
-                            Main
+                            <MainPage />
                             <Button
                                 color="primary"
                                 variant="contained"

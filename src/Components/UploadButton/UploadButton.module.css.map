@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,IAAI;CACb",
-    "sources": [
-        "UploadButton.module.scss"
-    ],
-    "names": [],
-    "file": "UploadButton.module.css"
-}
