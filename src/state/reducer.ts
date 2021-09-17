@@ -1,14 +1,11 @@
-import { GlobalState } from '../types/GlobalState';
-// eslint-disable-next-line import/no-cycle
-import { WSProvider } from '../api/WSProvider';
+import { Action, GlobalState } from '../types/GlobalState';
 import {
-    Action,
     ADD_CHAT_MESSAGE,
     ADD_WS_PROVIDER_TO_GLOBAL_STATE,
     SET_SOCKET,
     SET_SOCKET_STATUS,
     SET_GAME,
-} from './ActionTypes';
+} from './ActionTypesConstants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
     switch (action.type) {
@@ -33,9 +30,9 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
             return { ...globalState, ws: { ...globalState.ws, status } };
         }
         case ADD_WS_PROVIDER_TO_GLOBAL_STATE: {
-            const globalDispatcher = action.payLoad;
+            const provider = action.payLoad;
             const state = globalState;
-            state.ws.provider = new WSProvider(globalState, globalDispatcher);
+            state.ws.provider = provider;
             return state;
         }
         case SET_GAME: {

@@ -1,9 +1,9 @@
-import { Action, ADD_CHAT_MESSAGE, SET_GAME } from '../state/ActionTypes';
-
+import { ADD_CHAT_MESSAGE, SET_GAME } from '../state/ActionTypesConstants';
 import { CHAT_MESSAGE, INIT_MESSAGE, SET_GAME_STATE, USER_CONNECTION } from './Constants';
 import { WSMessageBody } from '../types/WSMessageBody';
+import { Action } from '../types/GlobalState';
 
-export function WSHandlerMessage(message: WSMessageBody, dispatch: (arg: Action) => unknown): void {
+export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action) => unknown): void {
     switch (message.event) {
         case INIT_MESSAGE: {
             if (!message.game) return;

@@ -1,12 +1,11 @@
+import { Dispatch } from 'react';
 import { WSMessageBody } from '../types/WSMessageBody';
 import { SERVER_URL } from './url';
-// eslint-disable-next-line import/no-cycle
-import { WSHandlerMessage } from './WSHandlerMessage';
-// eslint-disable-next-line import/no-cycle
-import { CurrentUser, GlobalState } from '../types/GlobalState';
+import { WSMessageHandler } from './WSMessageHandler';
+import { Action, CurrentUser, GlobalState, WSProviderInterface } from '../types/GlobalState';
 import { Game } from '../types/game';
 import { CHAT_MESSAGE, USER_CONNECTION } from './Constants';
-import { Action, SET_SOCKET, SET_SOCKET_STATUS } from '../state/ActionTypes';
+import { SET_SOCKET, SET_SOCKET_STATUS } from '../state/ActionTypesConstants';
 import { ChatMessage } from '../types/ChatMessage';
 
 const stub: WSMessageBody = {
@@ -16,25 +15,23 @@ const stub: WSMessageBody = {
     userName: '',
 };
 
-export class WSProvider {
+export class WSProvider implements WSProviderInterface {
     globalState: GlobalState;
 
-    globalDispatcher: (arg: Action) => unknown;
+    globalDispatch: Dispatch<Action>;
 
     currentUser: CurrentUser;
 
-    private game: Game;
+    game: Game;
 
-    constructor(globalState: GlobalState, globalDispatcher: (arg: Action) => unknown) {
+    socket: WebSocket | undefined;
+
+    constructor(globalState: GlobalState, globalDispatcher: Dispatch<Action>) {
         this.globalState = globalState;
-        this.globalDispatcher = globalDispatcher;
+        this.globalDispatch = globalDispatcher;
         this.currentUser = globalState.currentUser;
         this.game = this.globalState.game;
-
-        this.connection();
     }
-
-    private socket: WebSocket | undefined;
 
     async connection(): Promise<void> {
         const url = `ws://${SERVER_URL.split('://')[1]}ws`;
@@ -51,7 +48,7 @@ export class WSProvider {
                     event: USER_CONNECTION,
                     userName: `${this.currentUser.firstName} ${this.currentUser?.firstName}` || '',
                 };
-                this.globalDispatcher({ type: SET_SOCKET_STATUS, payLoad: true });
+                this.globalDispatch({ type: SET_SOCKET_STATUS, payLoad: true });
                 await this.socket?.send(JSON.stringify(connectionMessage));
             };
         } catch {
@@ -60,10 +57,10 @@ export class WSProvider {
         }
         if (!this.socket) return;
 
-        this.globalDispatcher({ type: SET_SOCKET, payLoad: this.socket });
+        this.globalDispatch({ type: SET_SOCKET, payLoad: this.socket });
 
         this.socket.onclose = () => {
-            this.globalDispatcher({ type: SET_SOCKET_STATUS, payLoad: false });
+            this.globalDispatch({ type: SET_SOCKET_STATUS, payLoad: false });
             setTimeout(() => {
                 this.connection();
             }, 5000);
@@ -78,7 +75,7 @@ export class WSProvider {
                 // eslint-disable-next-line no-console
                 console.log(event.data, '  ', e);
             }
-            WSHandlerMessage(message, this.globalDispatcher);
+            WSMessageHandler(message, this.globalDispatch);
         };
     }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { Dispatch, useEffect, useReducer } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import {
@@ -15,14 +15,19 @@ import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
 import { Temp } from './temp';
-import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypes';
+import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 import styles from './style.module.scss';
+import { Action, GlobalState } from './types/GlobalState';
+import { WSProvider } from './api/WSProvider';
 
 const App: React.FC = () => {
-    const [globalState, dispatch] = useReducer(reducer, initState);
+    const [globalState, dispatch]: [GlobalState, Dispatch<Action>] = useReducer(reducer, initState);
     // useEffect для подключения к websocket, после выполнения инстанс класса WSProvider доступен из globalState
     useEffect(() => {
-        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: dispatch });
+        const provider = new WSProvider(globalState, dispatch);
+        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
+        globalState.ws.provider?.connection();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
