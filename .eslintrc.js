@@ -1,4 +1,3 @@
-
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
@@ -25,6 +24,7 @@ module.exports = {
         project: './tsconfig.json',
     },
     rules: {
+        'import/prefer-default-export': 'off',
         // Include .prettierrc.js rules
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 
@@ -32,5 +32,10 @@ module.exports = {
         'react/prop-types': 'off',
         // We don't want unused vars
         '@typescript-eslint/no-unused-vars': ['error'],
+    },
+    settings: {
+        'import/resolver': {
+            node: {},
+        },
     },
 };
