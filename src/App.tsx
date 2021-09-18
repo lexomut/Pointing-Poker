@@ -37,14 +37,11 @@ const App: React.FC = () => {
                 <Header />
                 <main className={styles.content}>
                     <TransitionGroup>
+                        {' '}
                         <CSSTransition
-                            timeout={300}
-                            classNames={{
-                                enter: styles.myNodeEnter,
-                                enterActive: styles.myNodeEnterActive,
-                                exit: styles.myNodeExit,
-                                exitActive: styles.myNodeExitActive,
-                            }}
+                            timeout={1000}
+                            classNames="page"
+                            // or myNode
                             key={location.pathname}
                         >
                             <Switch>
