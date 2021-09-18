@@ -1,4 +1,4 @@
-import { Avatar, Button, Switch } from '@material-ui/core';
+import { Avatar, Button, InputLabel, Switch, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import UploadButton from '../UploadButton';
@@ -41,36 +41,45 @@ const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
                     <Switch value={observer} onChange={() => setObserver(!observer)} />
                 </div>
                 <div className={styles.inputs}>
-                    <label htmlFor="firstName">
+                    <InputLabel htmlFor="firstName">
                         Your first name:
-                        <input
+                        <TextField
                             required
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            id="firstName"
+                            id="filled-error-helper-text"
                             type="text"
                             name="firstName"
+                            variant="outlined"
                         />
-                    </label>
-                    <label htmlFor="lastName">
+                    </InputLabel>
+
+                    <InputLabel htmlFor="lastName">
                         Your last name:
-                        <input
+                        <TextField
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            id="lastName"
+                            id="filled-error-helper-text"
+                            variant="outlined"
+                            name="lastName"
                         />
-                    </label>
-                    <label htmlFor="job">
+                    </InputLabel>
+
+                    <InputLabel htmlFor="job">
                         Your job position:
-                        <input value={job} onChange={(e) => setJob(e.target.value)} id="job" />
-                    </label>
+                        <TextField
+                            value={job}
+                            onChange={(e) => setJob(e.target.value)}
+                            id="filled-error-helper-text"
+                            name="job"
+                            variant="outlined"
+                        />
+                    </InputLabel>
+
                     <div className={styles.upload}>
                         <p>Image:</p>
                         <div className={styles.upload__buttons}>
                             <UploadButton setImage={setImage} />
-                            <Button className={styles.btn} type="button" variant="outlined">
-                                Button
-                            </Button>
                         </div>
                         <Avatar src={image ? URL.createObjectURL(image) : '/broken-image.jpg'}>
                             {firstName && lastName ? `${firstName[0]}${lastName[0]}` : null}
