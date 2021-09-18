@@ -46,17 +46,6 @@ const App: React.FC = () => {
     }, []);
 
     return (
-<<<<<<< HEAD
-        <Router>
-            <div>
-                <Switch>
-                    <Route exact path="/" component={Lobby} />
-                    <Route path="/lobby" component={Lobby} />
-                    <Route path="/game" component={Game} />
-                </Switch>
-            </div>
-        </Router>
-=======
         <>
             <GlobalContext.Provider value={{ dispatch, globalState }}>
                 <MuiThemeProvider theme={theme}>
@@ -96,7 +85,6 @@ const App: React.FC = () => {
                 </MuiThemeProvider>
             </GlobalContext.Provider>
         </>
->>>>>>> 5bbdb47282400e30e812f7f43857df800c974315
     );
 };
 

@@ -8,7 +8,6 @@ import MembersField from '../../components/MembersField/MembersField';
 import IssueField from '../../components/IssueField/IssueField';
 import GameSettings from '../../components/GameSettings';
 import CardField from '../../components/CardField';
-import Chat from '../../components/Chat';
 
 const Lobby: () => JSX.Element = () => {
     return (
@@ -40,7 +39,6 @@ const Lobby: () => JSX.Element = () => {
                     <CardField classNames={styles.cards__cardField} />
                 </section>
             </div>
-            <Chat />
         </div>
     );
 };
