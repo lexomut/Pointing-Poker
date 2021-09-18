@@ -6,6 +6,7 @@
     &__control {
         display: flex;
         width: 545px;
+        height: 97px;
         @media screen and (max-width: 750px) {
             width: 450px;
         }

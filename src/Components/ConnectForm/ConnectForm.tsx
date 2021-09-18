@@ -4,7 +4,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 import React, { useState } from 'react';
 import { connectGame } from '../../api/server';
-import ErrorMessage from '../ErrorMessage';
 import RegistrationForm from '../RegistrationForm';
 import styles from './ConnectForm.module.scss';
 
@@ -33,19 +32,6 @@ const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
         }
     };
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const openPop = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
-
     return (
         <form onSubmit={handleConnect} className={styles.connect}>
             <p>
@@ -53,34 +39,18 @@ const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
             </p>
             <div className={styles.connect__control}>
                 <TextField
-                    error={false}
+                    error={urlError}
                     required
                     id="filled-error-helper-text"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     type="text"
-                    helperText="invalid URL"
+                    helperText={urlError ? 'invalid URL' : ''}
                     variant="outlined"
                 />
-                <Button
-                    aria-describedby={id}
-                    color="primary"
-                    variant="contained"
-                    type="submit"
-                    onClick={handleClick}
-                    disabled={isConnecting}
-                >
+                <Button color="primary" variant="contained" type="submit" disabled={isConnecting}>
                     {isConnecting ? <CircularProgress /> : 'Connect'}
                 </Button>
-                {urlError && (
-                    <ErrorMessage
-                        id={id}
-                        open={openPop}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        message="Invalid url!"
-                    />
-                )}
 
                 <Modal
                     open={open}
