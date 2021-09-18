@@ -1,14 +1,14 @@
 import React from 'react';
-import LinkToLobby from '../../Components/LinkToLobby';
-import ScramMaster from '../../Components/ScramMaster';
+import LinkToLobby from '../../components/LinkToLobby';
+import ScramMaster from '../../components/ScramMaster';
 import styles from './Lobby.module.css';
-import StartButton from '../../Components/StartButton';
-import CancelButton from '../../Components/CancelButton';
-import MembersField from '../../Components/MembersField/MembersField';
-import IssueField from '../../Components/IssueField/IssueField';
-import GameSettings from '../../Components/GameSettings';
-import CardField from '../../Components/CardField';
-import Chat from '../../Components/Chat';
+import StartButton from '../../components/StartButton';
+import CancelButton from '../../components/CancelButton';
+import MembersField from '../../components/MembersField/MembersField';
+import IssueField from '../../components/IssueField/IssueField';
+import GameSettings from '../../components/GameSettings';
+import CardField from '../../components/CardField';
+import Chat from '../../components/Chat';
 
 const Lobby: () => JSX.Element = () => {
     return (
