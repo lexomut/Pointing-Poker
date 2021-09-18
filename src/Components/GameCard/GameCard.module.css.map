@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,SAAS,CAAC;EACN,IAAI,EAAE,SAAS;EACf,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,MAAM,EAAE,eAAe;CAC1B",
-    "sources": [
-        "GameCard.module.scss"
-    ],
-    "names": [],
-    "file": "GameCard.module.css"
-}
