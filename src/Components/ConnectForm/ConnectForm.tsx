@@ -1,3 +1,4 @@
+import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
@@ -51,17 +52,20 @@ const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
                 Connect to lobby by <span className={styles.highlight}>URL</span>:
             </p>
             <div className={styles.connect__control}>
-                <input
+                <TextField
+                    error={false}
                     required
+                    id="filled-error-helper-text"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     type="text"
-                    id="connect"
+                    helperText="invalid URL"
+                    variant="outlined"
                 />
                 <Button
                     aria-describedby={id}
                     color="primary"
-                    variant="outlined"
+                    variant="contained"
                     type="submit"
                     onClick={handleClick}
                     disabled={isConnecting}

@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { createGame } from '../../api/server';
 import styles from './NewSession.module.scss';
@@ -15,9 +16,9 @@ const NewSession: React.FC<NewSessionProps> = ({ setOpen }) => {
     return (
         <div className={styles.new_session}>
             <p>Create session:</p>
-            <button type="button" onClick={startGame}>
-                start new game
-            </button>
+            <Button color="primary" variant="contained" onClick={startGame}>
+                Start new game
+            </Button>
         </div>
     );
 };
