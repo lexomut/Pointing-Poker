@@ -9,10 +9,10 @@ interface NewSessionProps {
 }
 
 export const NewSession: React.FC<NewSessionProps> = ({ setOpen, setIsDealer }) => {
-    const startGame = () => {
+    const startGame = async () => {
+        createGame();
         setOpen(true);
         setIsDealer(true);
-        createGame();
     };
 
     return (
