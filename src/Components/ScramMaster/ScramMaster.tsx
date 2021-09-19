@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import axiosInstance from '../../api/memberInfo';
-import styles from './ScramMaster.module.css';
+import styles from './ScramMaster.module.scss';
 import { IUserCard } from '../../types';
 import { UserCard } from '../UserCard';
 

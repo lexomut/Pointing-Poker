@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './LinkToLobby.module.css';
+import styles from './LinkToLobby.module.scss';
 
 const LinkToLobby: () => JSX.Element = () => {
     const currentURL = window.location.href;

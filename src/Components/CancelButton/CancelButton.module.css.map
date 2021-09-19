@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "CancelButton.module.scss"
-    ],
-    "names": [],
-    "file": "CancelButton.module.css"
-}

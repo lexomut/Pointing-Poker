@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "CardField.module.scss"
-    ],
-    "names": [],
-    "file": "CardField.module.css"
-}
