@@ -53,7 +53,6 @@ const App: React.FC = () => {
                     <main className={styles.content}>
                         <Switch>
                             <Route exact path="/">
-                                <Chat />
                                 Main
                                 <Button
                                     color="primary"
@@ -80,6 +79,7 @@ const App: React.FC = () => {
                                 <Invitation />
                             </Route>
                         </Switch>
+                        <Chat />
                     </main>
                     <Footer />
                 </MuiThemeProvider>
