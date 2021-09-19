@@ -8,21 +8,39 @@ import { NewSwitch } from '../NewSwitch';
 
 interface IRegistrationForm {
     setOpen: (value: React.SetStateAction<boolean>) => void;
+    isDealer: boolean;
 }
 
-export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
+export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDealer }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [job, setJob] = useState('');
-    const [position, setObserver] = useState(false);
+    const [isObserver, setIsObserver] = useState(false);
     const [data, setData] = useState<CreateUser>();
     const [avatar, setAvatar] = useState<File>();
     const history = useHistory();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        let position: 'dealer' | 'observer' | 'player';
+        switch (true) {
+            case isDealer:
+                position = 'dealer';
+                break;
+            case isObserver:
+                position = 'observer';
+                break;
+            default:
+                position = 'player';
+        }
         if (firstName.trim() !== '') {
-            setData({ firstName, lastName, job, position, avatar });
+            setData({
+                firstName,
+                lastName,
+                job,
+                position,
+                avatar,
+            });
             history.push('/lobby');
         }
     };
@@ -59,13 +77,15 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
             <div className={styles.registration}>
                 <div className={styles.top}>
                     <h2>Connect to lobby</h2>
-                    <div className={styles.SwitchContainer}>
-                        <NewSwitch
-                            label="Connect as Observer"
-                            setObserver={setObserver}
-                            isObserver={position}
-                        />
-                    </div>
+                    {!isDealer && (
+                        <div className={styles.SwitchContainer}>
+                            <NewSwitch
+                                label="Connect as Observer"
+                                setObserver={setIsObserver}
+                                isObserver={isObserver}
+                            />
+                        </div>
+                    )}
                 </div>
                 <div className={styles.inputs}>
                     {inputData.map(({ label, required, value, onChange, name }) => {

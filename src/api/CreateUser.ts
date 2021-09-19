@@ -6,7 +6,7 @@ export interface CreateUser {
     firstName: string;
     lastName?: string;
     job: string;
-    position?: boolean;
+    position?: 'dealer' | 'observer' | 'player';
     avatar?: File | undefined;
 }
 export async function createUser({

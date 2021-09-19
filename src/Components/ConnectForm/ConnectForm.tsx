@@ -10,9 +10,11 @@ import styles from './ConnectForm.module.scss';
 interface IConnectForm {
     open: boolean;
     setOpen: (value: React.SetStateAction<boolean>) => void;
+    setIsDealer: (value: React.SetStateAction<boolean>) => void;
+    isDealer: boolean;
 }
 
-export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
+export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer, isDealer }) => {
     const [url, setUrl] = useState('');
     const [urlError, setUrlError] = useState(false);
     const [isConnecting, setIsConnecting] = useState(false);
@@ -24,6 +26,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
         setIsConnecting(false);
         if (isConnect) {
             setOpen(true);
+            setIsDealer(false);
         } else {
             setUrlError(true);
             setTimeout(() => {
@@ -58,7 +61,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
-                    <RegistrationForm setOpen={setOpen} />
+                    <RegistrationForm isDealer={isDealer} setOpen={setOpen} />
                 </Modal>
             </div>
         </form>

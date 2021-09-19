@@ -5,11 +5,13 @@ import styles from './NewSession.module.scss';
 
 interface NewSessionProps {
     setOpen: (value: React.SetStateAction<boolean>) => void;
+    setIsDealer: (value: React.SetStateAction<boolean>) => void;
 }
 
-export const NewSession: React.FC<NewSessionProps> = ({ setOpen }) => {
+export const NewSession: React.FC<NewSessionProps> = ({ setOpen, setIsDealer }) => {
     const startGame = () => {
         setOpen(true);
+        setIsDealer(true);
         createGame();
     };
 

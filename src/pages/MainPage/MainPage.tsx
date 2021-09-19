@@ -6,6 +6,7 @@ import { NewSession } from '../../components/NewSession';
 
 export function MainPage(): JSX.Element {
     const [open, setOpen] = useState(false);
+    const [isDealer, setIsDealer] = useState(false);
 
     return (
         <div className={styles.main_page}>
@@ -18,9 +19,14 @@ export function MainPage(): JSX.Element {
                     />
                     <section className={styles.content}>
                         <h3 className={styles.start}>Start your planning:</h3>
-                        <NewSession setOpen={setOpen} />
+                        <NewSession setIsDealer={setIsDealer} setOpen={setOpen} />
                         <h3 className={styles.center}>OR:</h3>
-                        <ConnectForm open={open} setOpen={setOpen} />
+                        <ConnectForm
+                            open={open}
+                            isDealer={isDealer}
+                            setIsDealer={setIsDealer}
+                            setOpen={setOpen}
+                        />
                     </section>
                 </div>
             </main>
