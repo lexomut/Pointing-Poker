@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const StartButton: () => JSX.Element = () => {
+export const StartButton: () => JSX.Element = () => {
     const history = useHistory();
 
     const buttonHandler = () => {
@@ -14,5 +14,3 @@ const StartButton: () => JSX.Element = () => {
         </button>
     );
 };
-
-export default StartButton;

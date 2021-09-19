@@ -2,19 +2,20 @@ import React from 'react';
 import LinkToLobby from '../../components/LinkToLobby';
 import ScramMaster from '../../components/ScramMaster';
 import styles from './Lobby.module.scss';
-import StartButton from '../../components/StartButton';
+import { StartButton } from '../../components/StartButton';
 import CancelButton from '../../components/CancelButton';
 import MembersField from '../../components/MembersField/MembersField';
 import IssueField from '../../components/IssueField/IssueField';
 import GameSettings from '../../components/GameSettings';
 import CardField from '../../components/CardField';
+import { GameInfo } from '../../components/GameInfo';
 
 const Lobby: () => JSX.Element = () => {
     return (
         <div className={styles.lobby}>
             <div className={styles.container}>
                 <section className={styles.top}>
-                    <h4>Spring 23 planning ()</h4>
+                    <GameInfo />
                     <ScramMaster />
                     <LinkToLobby />
                     <div className={styles.top__buttons}>
