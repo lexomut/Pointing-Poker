@@ -10,11 +10,11 @@ import {
     IssueButton,
     Switch as Switcher,
     Invitation,
+    Chat,
 } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
-import { Temp } from './temp';
 import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 import { Action, GlobalState } from './types/GlobalState';
 import { WSProvider } from './api/WSProvider';
@@ -53,7 +53,7 @@ const App: React.FC = () => {
                     <main className={styles.content}>
                         <Switch>
                             <Route exact path="/">
-                                <Temp />
+                                <Chat />
                                 Main
                                 <Button
                                     color="primary"
