@@ -11,22 +11,48 @@ import BlockIcon from '@material-ui/icons/Block';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        root: {
-            minWidth: 250,
-            width: 250,
-            height: 60,
-            boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-            marginBottom: 10,
+        root: (props: Props) => {
+            if (props.size === 'large') {
+                return {
+                    // minWidth: 250,
+                    width: 250,
+                    height: 60,
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    marginBottom: 10,
+                };
+            }
+            return {
+                // minWidth: 200,
+                width: 120,
+                height: 50,
+                boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                marginBottom: 0,
+            };
         },
         cardContainer: {
             width: '100%',
             padding: 0,
         },
-        title: {
-            lineHeight: 1,
+        title: (props: Props) => {
+            if (props.size === 'large') {
+                return {
+                    lineHeight: 1,
+                };
+            }
+            return {
+                lineHeight: 0.5,
+                fontSize: '14px',
+            };
         },
-        caption: {
-            fontSize: '0.6rem',
+        caption: (props: Props) => {
+            if (props.size === 'large') {
+                return {
+                    fontSize: '0.6rem',
+                };
+            }
+            return {
+                fontSize: '0.3rem',
+            };
         },
         avatar: {
             background: '#60DABF',
@@ -48,12 +74,13 @@ type Props = {
     initials: string;
     imgSrc?: string;
     kickID: number;
+    size: 'large' | 'small';
 };
 
 export const UserCard: React.FC<Props> = (props: Props) => {
-    const { name, currentUser, position, initials, imgSrc, kickID } = props;
-    const classes = useStyles();
-
+    const { name, currentUser, position, initials, imgSrc, kickID, size } = props;
+    const classes = useStyles(props);
+    console.log(size);
     const clickHandler = (id: number) => {
         return alert(`kick off ${id}`);
     };
