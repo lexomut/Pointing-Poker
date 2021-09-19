@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 import { Game } from './game';
 import { WSMessageBody } from './WSMessageBody';
 import { ChatMessage } from './ChatMessage';
+import { User } from './user';
 
 export interface GlobalState {
     game: Game;
@@ -9,13 +10,9 @@ export interface GlobalState {
     ws: WS;
 }
 
-export interface CurrentUser {
-    firstName: string;
-    lastName?: string;
-    userID: string;
-    jobPosition: JobPosition;
+export interface CurrentUser extends User {
+    anything?: string;
 }
-export type JobPosition = 'observer' | 'user' | 'dialer';
 
 export interface WS {
     socket?: WebSocket;

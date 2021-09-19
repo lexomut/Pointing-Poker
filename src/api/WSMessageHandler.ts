@@ -15,15 +15,14 @@ export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action)
 
         case USER_CONNECTION: {
             // eslint-disable-next-line no-console
-            console.log(`Пользователь ${message.userName} подключился`);
+            console.log(`Пользователь ${message.user.firstName} подключился`);
             dispatch({
                 type: ADD_CHAT_MESSAGE,
                 payLoad: {
-                    userID: message.userID,
-                    userName: message.userName,
+                    user: message.user,
                     date: new Date(),
                     id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
-                    text: `пользователь ${message.userName} подключился`,
+                    text: `пользователь ${message.user.firstName} подключился`,
                 },
             });
             break;
@@ -31,7 +30,7 @@ export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action)
         case CHAT_MESSAGE:
             // eslint-disable-next-line no-console
             console.log(
-                `Пользователь ${message.userName} написал сообщение: ${message.chatMessage?.text}`,
+                `Пользователь ${message.user.firstName} написал сообщение: ${message.chatMessage?.text}`,
             );
             if (!message.chatMessage) return;
             dispatch({
@@ -42,7 +41,7 @@ export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action)
         case SET_GAME_STATE:
             // eslint-disable-next-line no-console
             console.log(
-                `Пользователь ${message.userName} изменил значение в поле ${message.gameProperty} на ${message.value} `,
+                `Пользователь ${message.user.firstName} изменил значение в поле ${message.gameProperty} на ${message.value} `,
             );
             break;
         default:

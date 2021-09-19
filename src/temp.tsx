@@ -22,7 +22,7 @@ export const Temp: FC = () => {
             </button>
             {globalState.game.chatMessages.map((chatMessage: ChatMessage) => (
                 <div key={chatMessage.id}>
-                    <span>{chatMessage.userName}</span> <span>{chatMessage.text}</span>
+                    <span>{chatMessage.user.firstName}</span> <span>{chatMessage.text}</span>
                 </div>
             ))}
         </>

@@ -5,13 +5,15 @@ export const initState: GlobalState = {
 
     currentUser: {
         userID: '',
-        lastName: '',
         firstName: 'Alex',
-        jobPosition: 'user',
+        lastName: 'Pirozerskiy',
+        role: 'player',
+        jobPosition: 'junior',
+        initials: 'AP',
     },
     game: {
         chatMessages: [],
-        gameID: '6143654cb3ea186faaeae677',
+        gameID: '614705fa65ac5609b1bf41c7',
         users: [],
         status: 'new',
     },
