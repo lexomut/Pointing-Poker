@@ -1,24 +1,26 @@
-export interface IMemberCard {
-    firstName: string;
-    lastName?: string;
-    image?: File;
-    job?: string;
-    id?: string;
-    classNames?: string;
+export interface IUserCard {
+    currentUser?: boolean;
+    name: string;
+    position: string;
+    initials: string;
+    imgSrc?: string;
+    kickID: number;
+    id: number;
 }
 
-
-
 export interface IIssues {
-    issueNumber: string;
-    priority: 'low' | 'high';
-    id?: string;
+    name: string;
+    dealer: boolean;
+    current: boolean;
+    priority: 'Critical' | 'High' | 'Medium' | 'Low';
+    id: number;
 }
 
 export interface ICard {
-    image?: File;
-    rating: string;
-    id?: string;
+    value: number;
+    scoreType: string;
+    isEditable: boolean;
+    id: number;
 }
 
 export interface IMessage {

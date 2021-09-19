@@ -1,6 +1,6 @@
 import React from 'react';
 import { issues } from '../../data';
-import IssueCard from '../IssueCard/IssueCard';
+import { IssueCard } from '../IssueCard';
 
 interface IIssueField {
     classNames: string;
@@ -9,8 +9,16 @@ interface IIssueField {
 const IssueField: React.FC<IIssueField> = ({ classNames }) => {
     return (
         <div className={classNames}>
-            {issues.map(({ issueNumber, priority, id }) => {
-                return <IssueCard issueNumber={issueNumber} priority={priority} key={id} />;
+            {issues.map(({ name, priority, current, dealer, id }) => {
+                return (
+                    <IssueCard
+                        key={id}
+                        name={name}
+                        priority={priority}
+                        current={current}
+                        dealer={dealer}
+                    />
+                );
             })}
         </div>
     );

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import axiosInstance from '../../api/memberInfo';
 import styles from './ScramMaster.module.css';
-import MemberCard from '../MemberCard';
-import { IMemberCard } from '../../types';
+import { IUserCard } from '../../types';
+import { UserCard } from '../UserCard';
 
 const ScramMaster: () => JSX.Element = () => {
-    const [data, setData] = useState<IMemberCard>();
+    const [data, setData] = useState<IUserCard>();
 
     useEffect(() => {
         const getMember = async (): Promise<void> => {
             try {
-                const response: AxiosResponse<IMemberCard> = await axiosInstance.get(``);
+                const response: AxiosResponse<IUserCard> = await axiosInstance.get(``);
 
                 setData(response.data);
             } catch (error) {
@@ -25,12 +25,12 @@ const ScramMaster: () => JSX.Element = () => {
         <div className={styles.scramMaster}>
             <p>Scram master:</p>
             {data ? (
-                <MemberCard
-                    firstName={data.firstName}
-                    lastName={data.lastName}
-                    job={data.job}
-                    image={data.image}
-                    id="dfxx"
+                <UserCard
+                    initials={data.initials}
+                    name={data.name}
+                    position={data.position}
+                    kickID={data.kickID}
+                    currentUser={data.currentUser}
                 />
             ) : (
                 'download'

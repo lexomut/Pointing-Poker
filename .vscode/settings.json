@@ -5,6 +5,8 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "cSpell.words": [
         "clsx",
+        "dealer",
+        "initials",
         "issues",
         "Lobby",
         "planning",

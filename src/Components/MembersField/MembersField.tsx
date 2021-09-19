@@ -1,6 +1,6 @@
 import React from 'react';
-import { members } from '../../data';
-import MemberCard from '../MemberCard';
+import { users } from '../../data';
+import { UserCard } from '../UserCard';
 
 interface IMemberField {
     classNames: string;
@@ -9,8 +9,17 @@ interface IMemberField {
 const MembersField: React.FC<IMemberField> = ({ classNames }) => {
     return (
         <div className={classNames}>
-            {members.map(({ firstName, lastName, job, id }) => {
-                return <MemberCard firstName={firstName} lastName={lastName} job={job} key={id} />;
+            {users.map(({ name, position, kickID, initials, currentUser, id }) => {
+                return (
+                    <UserCard
+                        initials={initials}
+                        name={name}
+                        position={position}
+                        kickID={kickID}
+                        currentUser={currentUser}
+                        key={id}
+                    />
+                );
             })}
         </div>
     );

@@ -1,24 +1,15 @@
 import React, { Dispatch, useEffect, useReducer } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Button, createTheme, MuiThemeProvider } from '@material-ui/core';
-import {
-    Footer,
-    DemoGameCards,
-    Header,
-    DemoUserCards,
-    IssueCard,
-    IssueButton,
-    Switch as Switcher,
-    Invitation,
-} from './components';
+import { createTheme, MuiThemeProvider } from '@material-ui/core';
+import { Footer, Header, Invitation } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
-import { Temp } from './temp';
 import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 import { Action, GlobalState } from './types/GlobalState';
 import { WSProvider } from './api/WSProvider';
 import styles from './style.module.scss';
+import Lobby from './pages/Lobby/Lobby';
 
 const theme = createTheme({
     palette: {
@@ -53,28 +44,7 @@ const App: React.FC = () => {
                     <main className={styles.content}>
                         <Switch>
                             <Route exact path="/">
-                                <Temp />
-                                Main
-                                <Button
-                                    color="primary"
-                                    variant="contained"
-                                    onClick={() => alert('Put logic here')}
-                                >
-                                    start game
-                                </Button>
-                                <Button
-                                    color="primary"
-                                    variant="outlined"
-                                    onClick={() => alert('Put logic here')}
-                                >
-                                    cancel game
-                                </Button>
-                                <IssueButton />
-                                <DemoGameCards />
-                                <DemoUserCards />
-                                <IssueCard name="Issue 234" priority="High" dealer />
-                                <IssueCard current name="Issue 235" priority="Low" />
-                                <Switcher label="Scrum master as player:" />
+                                <Lobby />
                             </Route>
                             <Route path="/:id">
                                 <Invitation />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { cards } from '../../data';
-import GameCard from '../GameCard/GameCard';
+import { GameCard } from '../GameCards';
 
 interface IIssueField {
     classNames: string;
@@ -9,8 +9,15 @@ interface IIssueField {
 const CardField: React.FC<IIssueField> = ({ classNames }) => {
     return (
         <div className={classNames}>
-            {cards.map(({ rating, id }) => {
-                return <GameCard rating={rating} key={id} />;
+            {cards.map(({ value, scoreType, isEditable, id }) => {
+                return (
+                    <GameCard
+                        value={value}
+                        scoreType={scoreType}
+                        isEditable={isEditable}
+                        key={id}
+                    />
+                );
             })}
         </div>
     );
