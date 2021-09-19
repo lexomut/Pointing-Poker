@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
         },
         currentUser: {
-            paddingTop: 10,
             background: theme.palette.secondary.main,
         },
     }),
