@@ -1,1 +1,1 @@
-export { default } from './NewSession';
+export { NewSession } from './NewSession';

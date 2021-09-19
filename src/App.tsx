@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
 import { Footer, Header, Invitation } from './components';
 import styles from './style.module.scss';
-import MainPage from './pages/MainPage/MainPage';
+import { MainPage } from './pages/MainPage';
 
 const theme = createTheme({
     palette: {

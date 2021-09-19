@@ -4,18 +4,20 @@ import { SERVER_URL } from './url';
 
 export interface CreateUser {
     firstName: string;
-    lastNme?: string;
-    jobPosition?: "observer"|"player"| "dealer";
+    lastName?: string;
+    job: string;
+    position?: boolean;
     avatar?: File | undefined;
 }
 export async function createUser({
     firstName,
-    lastNme,
-    jobPosition,
+    lastName,
+    position,
+    job,
     avatar,
 }: CreateUser): Promise<User | string> {
     const formData = new FormData();
-    formData.append('userConfig', JSON.stringify({ firstName, lastNme, jobPosition }));
+    formData.append('userConfig', JSON.stringify({ firstName, lastName, job, position }));
     if (avatar) formData.append('avatar', avatar);
     try {
         const response = await axios({

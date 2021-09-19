@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './MainPage.module.scss';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
-import ConnectForm from '../../components/ConnectForm';
-import NewSession from '../../components/NewSession';
+import { ConnectForm } from '../../components/ConnectForm';
+import { NewSession } from '../../components/NewSession';
 
-function MainPage(): JSX.Element {
+export function MainPage(): JSX.Element {
     const [open, setOpen] = useState(false);
 
     return (
@@ -27,5 +27,3 @@ function MainPage(): JSX.Element {
         </div>
     );
 }
-
-export default MainPage;

@@ -3,27 +3,26 @@ import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import UploadButton from '../UploadButton';
 import styles from './RegistrationForm.module.scss';
-import { IFormData } from '../../types';
-import { createUser } from '../../api/server';
-import { Switch } from '../switch';
+import { CreateUser, createUser } from '../../api/CreateUser';
+import { NewSwitch } from '../NewSwitch';
 
 interface IRegistrationForm {
     setOpen: (value: React.SetStateAction<boolean>) => void;
 }
 
-const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
+export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [job, setJob] = useState('');
-    const [isObserver, setObserver] = useState(false);
-    const [data, setData] = useState<IFormData>();
-    const [image, setImage] = useState<File>();
+    const [position, setObserver] = useState(false);
+    const [data, setData] = useState<CreateUser>();
+    const [avatar, setAvatar] = useState<File>();
     const history = useHistory();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (firstName.trim() !== '') {
-            setData({ firstName, lastName, job, isObserver, image });
+            setData({ firstName, lastName, job, position, avatar });
             history.push('/lobby');
         }
     };
@@ -31,61 +30,67 @@ const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
         if (data) createUser(data);
     }, [data]);
 
+    const inputData = [
+        {
+            label: 'Your first name:',
+            required: true,
+            value: firstName,
+            onChange: setFirstName,
+            name: 'firstName',
+        },
+        {
+            label: 'Your first name:',
+            required: false,
+            value: lastName,
+            onChange: setLastName,
+            name: 'lastName',
+        },
+        {
+            label: 'Your job position:',
+            required: false,
+            value: job,
+            onChange: setJob,
+            name: 'job',
+        },
+    ];
+
     return (
         <form onSubmit={handleSubmit} className={styles.modal}>
             <div className={styles.registration}>
                 <div className={styles.top}>
                     <h2>Connect to lobby</h2>
                     <div className={styles.SwitchContainer}>
-                        <Switch
+                        <NewSwitch
                             label="Connect as Observer"
                             setObserver={setObserver}
-                            isObserver={isObserver}
+                            isObserver={position}
                         />
                     </div>
                 </div>
                 <div className={styles.inputs}>
-                    <InputLabel htmlFor="firstName">
-                        Your first name:
-                        <TextField
-                            required
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                            id="filled-error-helper-text"
-                            type="text"
-                            name="firstName"
-                            variant="outlined"
-                        />
-                    </InputLabel>
-
-                    <InputLabel htmlFor="lastName">
-                        Your last name:
-                        <TextField
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                            id="filled-error-helper-text"
-                            variant="outlined"
-                            name="lastName"
-                        />
-                    </InputLabel>
-
-                    <InputLabel htmlFor="job">
-                        Your job position:
-                        <TextField
-                            value={job}
-                            onChange={(e) => setJob(e.target.value)}
-                            id="filled-error-helper-text"
-                            name="job"
-                            variant="outlined"
-                        />
-                    </InputLabel>
+                    {inputData.map(({ label, required, value, onChange, name }) => {
+                        return (
+                            <InputLabel key={name} htmlFor={name}>
+                                {label}
+                                <TextField
+                                    required={required}
+                                    value={value}
+                                    onChange={(e) => onChange(e.target.value)}
+                                    id="filled-error-helper-text"
+                                    type="text"
+                                    name={name}
+                                    variant="outlined"
+                                />
+                            </InputLabel>
+                        );
+                    })}
 
                     <div className={styles.upload}>
                         <p>Image:</p>
                         <div className={styles.upload__buttons}>
-                            <UploadButton setImage={setImage} />
+                            <UploadButton setImage={setAvatar} />
                         </div>
-                        <Avatar src={image ? URL.createObjectURL(image) : '/broken-image.jpg'}>
+                        <Avatar src={avatar ? URL.createObjectURL(avatar) : '/broken-image.jpg'}>
                             {firstName && lastName ? `${firstName[0]}${lastName[0]}` : null}
                         </Avatar>
                     </div>
@@ -107,5 +112,3 @@ const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen }) => {
         </form>
     );
 };
-
-export default RegistrationForm;

@@ -7,7 +7,7 @@ interface NewSessionProps {
     setOpen: (value: React.SetStateAction<boolean>) => void;
 }
 
-const NewSession: React.FC<NewSessionProps> = ({ setOpen }) => {
+export const NewSession: React.FC<NewSessionProps> = ({ setOpen }) => {
     const startGame = () => {
         setOpen(true);
         createGame();
@@ -22,5 +22,3 @@ const NewSession: React.FC<NewSessionProps> = ({ setOpen }) => {
         </div>
     );
 };
-
-export default NewSession;

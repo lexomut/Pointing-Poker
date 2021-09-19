@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 import React, { useState } from 'react';
 import { connectGame } from '../../api/server';
-import RegistrationForm from '../RegistrationForm';
+import { RegistrationForm } from '../RegistrationForm';
 import styles from './ConnectForm.module.scss';
 
 interface IConnectForm {
@@ -12,7 +12,7 @@ interface IConnectForm {
     setOpen: (value: React.SetStateAction<boolean>) => void;
 }
 
-const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
+export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
     const [url, setUrl] = useState('');
     const [urlError, setUrlError] = useState(false);
     const [isConnecting, setIsConnecting] = useState(false);
@@ -64,5 +64,3 @@ const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen }) => {
         </form>
     );
 };
-
-export default ConnectForm;
