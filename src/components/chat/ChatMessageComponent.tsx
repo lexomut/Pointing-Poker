@@ -12,7 +12,7 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
     const { text, user }: { text: string; user: User } = message;
     const current = currentUserID === user.userID;
     return (
-        <div className="chart__message">
+        <div className="chat__message">
             <ChatText text={text} current={current} />
             <UserCard
                 name={user.firstName}

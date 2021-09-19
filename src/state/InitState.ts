@@ -4,7 +4,7 @@ export const initState: GlobalState = {
     ws: { status: false, provider: undefined },
 
     currentUser: {
-        userID: '',
+        userID: '3434',
         firstName: 'Alex',
         lastName: 'Pirozerskiy',
         role: 'player',
