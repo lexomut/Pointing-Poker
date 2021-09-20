@@ -8,7 +8,7 @@ export const DemoUserCards: React.FC = () => {
                 name="Mark"
                 initials="MZ"
                 position="junior front-end developer"
-                kickID={1}
+                userID={1}
                 size="large"
             />
             <UserCard
@@ -16,7 +16,7 @@ export const DemoUserCards: React.FC = () => {
                 initials="LA"
                 position="senior"
                 currentUser
-                kickID={1}
+                userID={1}
                 size="large"
             />
             <UserCard
@@ -24,7 +24,7 @@ export const DemoUserCards: React.FC = () => {
                 initials="JL"
                 position="junior lion"
                 imgSrc="https://placekitten.com/200/200"
-                kickID={1}
+                userID={1}
                 size="large"
             />
             <UserCard
@@ -32,7 +32,7 @@ export const DemoUserCards: React.FC = () => {
                 initials="MM"
                 position="middle"
                 imgSrc="https://image.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg"
-                kickID={2}
+                userID={2}
                 size="large"
             />
         </>
