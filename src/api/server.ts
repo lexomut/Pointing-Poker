@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { Game } from '../types/game';
 import { SERVER_URL } from './url';
 
-export async function connectGame(id: string): Promise<boolean | Game> {
+export async function connectGame(id: string): Promise<false | Game> {
     try {
         const response = await axios.get(`${SERVER_URL}game/${id}`);
         if (response.status === 200) return response.data;
@@ -11,12 +12,14 @@ export async function connectGame(id: string): Promise<boolean | Game> {
     }
 }
 
-export const createGame = async (): Promise<boolean | Game> => {
+export const createGame = async (): Promise<false | Game> => {
     try {
         const response = await axios.post(`${SERVER_URL}game`);
         if (response.status === 200) return response.data;
+        console.log('ошибка сoздания игры на сервере ');
         return false;
     } catch (e) {
+        console.log('ошибка соединения с сервером , ');
         return false;
     }
 };

@@ -1,8 +1,11 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { Dispatch, useContext } from 'react';
 import { createGame } from '../../api/server';
+import { GlobalContext } from '../../state/Context';
+import { Game } from '../../types/game';
+import { Action } from '../../types/GlobalState';
 import styles from './NewSession.module.scss';
-import { Game } from '../../../../MATCH/lexomut-JSFE2021Q1/match-match-game/src/components/game/game';
+import { SET_GAME } from '../../state/ActionTypesConstants';
 
 interface NewSessionProps {
     setOpen: (value: React.SetStateAction<boolean>) => void;
@@ -10,12 +13,12 @@ interface NewSessionProps {
 }
 
 export const NewSession: React.FC<NewSessionProps> = ({ setOpen, setIsDealer }) => {
-    const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
-        useContext(GlobalContext);
+    const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
     const startGame = async () => {
-        const game: Game | false = createGame();
-        if (!game) return
-          setOpen(true);
+        const game: Game | false = await createGame();
+        if (!game) return;
+        dispatch({ type: SET_GAME, payLoad: game });
+        setOpen(true);
         setIsDealer(true);
     };
 

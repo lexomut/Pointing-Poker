@@ -2,10 +2,14 @@ import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
-import React, { useState } from 'react';
+import React, { Dispatch, useContext, useState } from 'react';
 import { connectGame } from '../../api/server';
+import { Game } from '../../types/game';
 import { RegistrationForm } from '../RegistrationForm';
 import styles from './ConnectForm.module.scss';
+import { SET_GAME } from '../../state/ActionTypesConstants';
+import { Action } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
 
 interface IConnectForm {
     open: boolean;
@@ -18,13 +22,15 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer
     const [url, setUrl] = useState('');
     const [urlError, setUrlError] = useState(false);
     const [isConnecting, setIsConnecting] = useState(false);
+    const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
 
     const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsConnecting(true);
-        const isConnect = await connectGame(url);
+        const game: Game | false = await connectGame(url);
         setIsConnecting(false);
-        if (isConnect) {
+        if (game) {
+            dispatch({ type: SET_GAME, payLoad: game });
             setOpen(true);
             setIsDealer(false);
         } else {
