@@ -9,7 +9,7 @@ export async function connectGame(id: string): Promise<false | Game> {
         if (response.status === 200) return response.data;
         return false;
     } catch (e) {
-        return false;
+        return false
     }
 }
 

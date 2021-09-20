@@ -21,8 +21,9 @@ module.exports = {
     },
     // Airbnb's ESLint config requires this
     parserOptions: {
-        project: './tsconfig.json',
-    },
+        project: 'tsconfig.json',
+        tsconfigRootDir: __dirname // <-- this did the trick for me
+     },
     rules: {
         'import/prefer-default-export': 'off',
         // Include .prettierrc.js rules
