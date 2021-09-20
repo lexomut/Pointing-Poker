@@ -1,9 +1,10 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography, Grid, Theme, createStyles, makeStyles, Button } from '@material-ui/core';
 import { issues, usersWithScore } from '../../shared/data';
 import { IssueButton } from '../buttons';
 import { IssueCard } from '../IssueCard';
+import { Timer } from '../timer';
 import { UserCard } from '../UserCard';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Game: React.FC = () => {
     const classes = useStyles();
+    const [startTimer, setStartTimer] = useState(false);
     return (
         <Grid container className={classes.mainContainer}>
             <Grid
@@ -91,9 +93,16 @@ export const Game: React.FC = () => {
                         </Grid>
                     </Grid>
                     <Grid item container spacing={2} className={classes.column} xs={6}>
-                        <Grid item> TODO timer</Grid>
                         <Grid item>
-                            <Button color="primary" variant="contained">
+                            <Timer seconds={30} start={startTimer} />
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                color="primary"
+                                variant="contained"
+                                onClick={() => setStartTimer(!startTimer)}
+                                disabled={startTimer}
+                            >
                                 Run round
                             </Button>
                         </Grid>
