@@ -1,6 +1,15 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { Typography, Grid, Theme, createStyles, makeStyles, Button } from '@material-ui/core';
+import {
+    Typography,
+    Grid,
+    Theme,
+    createStyles,
+    makeStyles,
+    Button,
+    Paper,
+    Box,
+} from '@material-ui/core';
 import { issues, usersWithScore } from '../../shared/data';
 import { IssueButton } from '../buttons';
 import { IssueCard } from '../IssueCard';
@@ -22,6 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
         bottomSpace: {
             marginBottom: 20,
         },
+        topSpace: {
+            marginTop: 40,
+        },
         minWidth: {
             minWidth: 125,
         },
@@ -30,7 +42,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Game: React.FC = () => {
     const classes = useStyles();
+    const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
+    const [roundOver, setRoundOver] = useState(false);
     return (
         <Grid container className={classes.mainContainer}>
             <Grid
@@ -92,20 +106,59 @@ export const Game: React.FC = () => {
                             <IssueButton />
                         </Grid>
                     </Grid>
-                    <Grid item container spacing={2} className={classes.column} xs={6}>
-                        <Grid item>
-                            <Timer seconds={30} start={startTimer} />
-                        </Grid>
-                        <Grid item>
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                onClick={() => setStartTimer(!startTimer)}
-                                disabled={startTimer}
-                            >
-                                Run round
-                            </Button>
-                        </Grid>
+
+                    <Grid item className={classes.topSpace} xs={12} sm={12} md={3}>
+                        <Paper elevation={3}>
+                            <Box p={3}>
+                                <Grid
+                                    container
+                                    spacing={2}
+                                    alignItems="center"
+                                    className={classes.column}
+                                >
+                                    <Grid item>
+                                        <Timer
+                                            key={key}
+                                            seconds={10}
+                                            start={startTimer}
+                                            onComplete={() => setRoundOver(true)}
+                                        />
+                                    </Grid>
+                                    {!startTimer && !roundOver && (
+                                        <Grid item>
+                                            <Button
+                                                color="primary"
+                                                variant="contained"
+                                                onClick={() => setStartTimer(!startTimer)}
+                                            >
+                                                Run round
+                                            </Button>
+                                        </Grid>
+                                    )}
+                                    {roundOver && (
+                                        <Grid item>
+                                            <Button
+                                                color="primary"
+                                                variant="contained"
+                                                onClick={() => {
+                                                    setRoundOver(false);
+                                                    setKey((prevKey) => prevKey + 1);
+                                                }}
+                                            >
+                                                Restart round
+                                            </Button>
+                                        </Grid>
+                                    )}
+                                    {roundOver && (
+                                        <Grid item>
+                                            <Button color="primary" variant="contained">
+                                                Next Issue
+                                            </Button>
+                                        </Grid>
+                                    )}
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
                 </Grid>
             </Grid>
