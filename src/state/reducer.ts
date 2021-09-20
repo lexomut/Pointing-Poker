@@ -5,6 +5,7 @@ import {
     SET_SOCKET,
     SET_SOCKET_STATUS,
     SET_GAME,
+    SET_CURRENT_USER,
 } from './ActionTypesConstants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
@@ -38,6 +39,12 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         case SET_GAME: {
             const game = action.payLoad;
             return { ...globalState, game };
+        }
+        case SET_CURRENT_USER: {
+            const currentUser = action.payLoad;
+            const state = globalState;
+            state.currentUser = currentUser;
+            return state;
         }
 
         default:

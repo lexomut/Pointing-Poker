@@ -1,10 +1,13 @@
 import { Avatar, Button, InputLabel, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useContext, useState } from 'react';
 import UploadButton from '../UploadButton';
 import styles from './RegistrationForm.module.scss';
 import { CreateUser, createUser } from '../../api/CreateUser';
 import { NewSwitch } from '../NewSwitch';
+import { Action, CurrentUser } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
+import { SET_CURRENT_USER } from '../../state/ActionTypesConstants';
 
 interface IRegistrationForm {
     setOpen: (value: React.SetStateAction<boolean>) => void;
@@ -16,11 +19,10 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
     const [lastName, setLastName] = useState('');
     const [job, setJob] = useState('');
     const [isObserver, setIsObserver] = useState(false);
-    const [data, setData] = useState<CreateUser>();
     const [avatar, setAvatar] = useState<File>();
     const history = useHistory();
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let position: 'dealer' | 'observer' | 'player';
         switch (true) {
@@ -34,20 +36,23 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                 position = 'player';
         }
         if (firstName.trim() !== '') {
-            setData({
+            const data: CreateUser = {
                 firstName,
                 lastName,
-                job,
-                position,
+                jobPosition: job,
+                role: position,
                 avatar,
-            });
-            history.push('/lobby');
+            };
+
+            if (data) {
+                const currentUser: CurrentUser | false = await createUser(data);
+                if (!currentUser) return;
+                if (!currentUser.userID) return;
+                dispatch({ type: SET_CURRENT_USER, payLoad: currentUser });
+                history.push('/lobby');
+            }
         }
     };
-    useEffect(() => {
-        if (data) createUser(data);
-    }, [data]);
-
     const inputData = [
         {
             label: 'Your first name:',

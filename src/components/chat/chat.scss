@@ -9,6 +9,7 @@
   flex-direction: column;
   padding: 0px 10px;
   max-width: 505px;
+  justify-content: end;
   &__messages-container {
     overflow-y: scroll;
     overflow-x: hidden;

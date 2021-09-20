@@ -4,6 +4,7 @@ import { User } from '../../types/user';
 import { ChatText } from './ChatText';
 import { UserCard } from '../UserCard';
 import './chat.scss';
+import { SERVER_URL } from '../../api/url';
 
 export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: string }> = ({
     message,
@@ -18,7 +19,7 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
                 name={user.firstName}
                 initials={user.firstName[0] + (user.lastName || '')[0]}
                 position={user.jobPosition}
-                imgSrc={user.imgSrc}
+                imgSrc={SERVER_URL + user.imgSrc}
                 kickID={+user.userID}
                 currentUser={current}
             />

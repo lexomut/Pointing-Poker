@@ -35,4 +35,5 @@ export type Action =
     | { type: 'setSocket'; payLoad: WebSocket }
     | { type: 'setSocketStatus'; payLoad: boolean }
     | { type: 'addWSProviderToGlobalState'; payLoad: WSProviderInterface }
-    | { type: 'setGame'; payLoad: Game };
+    | { type: 'setGame'; payLoad: Game }
+    | { type: 'setCurrentUser'; payLoad: CurrentUser };

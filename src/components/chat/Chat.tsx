@@ -5,14 +5,23 @@ import { ChatMessage } from '../../types/ChatMessage';
 import { ChatMessageComponent } from './ChatMessageComponent';
 import { ChatInput } from './input';
 import './chat.scss';
+import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from '../../state/ActionTypesConstants';
+import { WSProvider } from '../../api/WSProvider';
 
 export const Chat: FC = () => {
-    const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
+    const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const chatRef = React.useRef<HTMLDivElement>(null);
-
     useEffect(() => {
-        if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
+        const provider = new WSProvider(globalState, dispatch);
+        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
+        globalState.ws.provider?.connects();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    useEffect(() => {
+        if (globalState.game.chatMessages.length > 0) {
+            if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
+        }
     }, [globalState.game.chatMessages]);
 
     return (

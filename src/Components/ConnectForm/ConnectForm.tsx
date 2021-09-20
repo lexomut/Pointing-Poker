@@ -27,9 +27,11 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer
     const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsConnecting(true);
+        if (!url) return;
         const game: Game | false = await connectGame(url);
         setIsConnecting(false);
         if (game) {
+            console.log(game);
             dispatch({ type: SET_GAME, payLoad: game });
             setOpen(true);
             setIsDealer(false);
