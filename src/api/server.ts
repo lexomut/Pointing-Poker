@@ -1,21 +1,20 @@
 import axios from 'axios';
+import { SERVER_URL } from './url';
 
-const baseURL = 'http://localhost:5000';
-
-export async function connectGame(url: string): Promise<boolean> {
+export async function connectGame(id: string): Promise<boolean | Game> {
     try {
-        const response = await axios.get(url);
-        if (response.status === 200) return true;
+        const response = await axios.get(`${SERVER_URL}game/${id}`);
+        if (response.status === 200) return response.data;
         return false;
     } catch (e) {
         return false;
     }
 }
 
-export const createGame = async (): Promise<boolean> => {
+export const createGame = async (): Promise<boolean | Game> => {
     try {
-        const response = await axios.post(`${baseURL}/game`);
-        if (response.status === 200) return true;
+        const response = await axios.post(`${SERVER_URL}game`);
+        if (response.status === 200) return response.data;
         return false;
     } catch (e) {
         return false;
