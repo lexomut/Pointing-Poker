@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
         minWidth: {
             minWidth: 125,
         },
+        rightContainer: {
+            height: '50%',
+        },
     }),
 );
 
@@ -76,7 +79,11 @@ export const Game: React.FC = () => {
                         />
                     </Grid>
                     <Grid item>
-                        <Button color="primary" variant="outlined">
+                        <Button
+                            color="primary"
+                            variant="outlined"
+                            onClick={() => alert('add logic')}
+                        >
                             Stop game
                         </Button>
                     </Grid>
@@ -173,7 +180,16 @@ export const Game: React.FC = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item container xs={12} sm={7} md={4} lg={3} xl={2}>
+            <Grid
+                item
+                container
+                xs={12}
+                sm={7}
+                md={4}
+                lg={3}
+                xl={2}
+                className={classes.rightContainer}
+            >
                 <Grid item container justifyContent="space-around">
                     <Grid item>
                         <Typography variant="subtitle1">Score:</Typography>

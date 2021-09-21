@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
             width: 180,
             height: 40,
             boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-            marginBottom: 0,
+            marginBottom: 10,
         };
     },
     small: {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
             };
         }
         return {
-            fontSize: '0.6rem',
+            fontSize: '0.8rem',
         };
     },
     caption: (props: Props) => {
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
             };
         }
         return {
-            fontSize: '0.5rem',
+            fontSize: '0.7rem',
         };
     },
     button: (props: Props) => {
