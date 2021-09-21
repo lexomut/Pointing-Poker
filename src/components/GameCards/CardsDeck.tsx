@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: props.isActiveCard
             ? theme.palette.secondary.main
             : theme.palette.background.default,
+        transform: props.isActiveCard ? 'scale(1.1)' : 'scale(1)',
     }),
 }));
 
@@ -34,7 +35,7 @@ export const CardsDeck: React.FC = () => {
                 );
             })}
             <Paper
-                elevation={10}
+                elevation={!activeCardID ? 9 : 3}
                 className={styles.card}
                 classes={{ root: classes.activeCard }}
                 onClick={() => {

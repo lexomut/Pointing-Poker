@@ -17,15 +17,17 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: props.isActiveCard
             ? theme.palette.secondary.main
             : theme.palette.background.default,
+        transform: props.isActiveCard ? 'scale(1.1)' : 'scale(1)',
     }),
 }));
 
 export const GameCard: React.FC<Props> = (props: Props) => {
+    const { isActiveCard } = props;
     const classes = useStyles(props);
     const { value, scoreType, isEditable, onClick } = props;
     return (
         <Paper
-            elevation={3}
+            elevation={isActiveCard ? 9 : 3}
             className={styles.card}
             classes={{ root: classes.activeCard }}
             onClick={() => onClick && onClick()}
