@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { issues, usersWithScore } from '../../shared/data';
 import { IssueButton } from '../buttons';
+import { DemoCardsDeck } from '../GameCards';
 import { IssueCard } from '../IssueCard';
 import { Statistic } from '../statistic';
 import { Timer } from '../timer';
@@ -41,10 +42,18 @@ const useStyles = makeStyles((theme: Theme) =>
         rightContainer: {
             height: '50%',
         },
+        minimize: {
+            transform: 'scale(0.7)',
+        },
     }),
 );
 
-export const Game: React.FC = () => {
+type Props = {
+    isDealer: boolean;
+};
+
+export const Game: React.FC<Props> = (props: Props) => {
+    const { isDealer } = props;
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
@@ -84,7 +93,7 @@ export const Game: React.FC = () => {
                             variant="outlined"
                             onClick={() => alert('add logic')}
                         >
-                            Stop game
+                            {isDealer ? 'Stop game' : 'Exit game'}
                         </Button>
                     </Grid>
                 </Grid>
@@ -106,13 +115,15 @@ export const Game: React.FC = () => {
                                     name={item.name}
                                     priority={item.priority}
                                     current={item.current}
-                                    dealer={item.dealer}
+                                    dealer={isDealer}
                                 />
                             </Grid>
                         ))}
-                        <Grid item>
-                            <IssueButton />
-                        </Grid>
+                        {isDealer && (
+                            <Grid item>
+                                <IssueButton />
+                            </Grid>
+                        )}
                         {roundOver && (
                             <>
                                 <Grid item>
@@ -142,7 +153,7 @@ export const Game: React.FC = () => {
                                             onComplete={() => setRoundOver(true)}
                                         />
                                     </Grid>
-                                    {!startTimer && !roundOver && (
+                                    {!startTimer && !roundOver && isDealer && (
                                         <Grid item>
                                             <Button
                                                 color="primary"
@@ -167,9 +178,15 @@ export const Game: React.FC = () => {
                                             </Button>
                                         </Grid>
                                     )}
-                                    {roundOver && (
+                                    {roundOver && isDealer && (
                                         <Grid item>
-                                            <Button color="primary" variant="contained">
+                                            <Button
+                                                color="primary"
+                                                variant="contained"
+                                                onClick={() => {
+                                                    alert('put logic here');
+                                                }}
+                                            >
                                                 Next Issue
                                             </Button>
                                         </Grid>
@@ -178,6 +195,26 @@ export const Game: React.FC = () => {
                             </Box>
                         </Paper>
                     </Grid>
+                    {!isDealer && roundOver && (
+                        <Grid item container justifyContent="center">
+                            <Grid item>
+                                <Typography variant="h6">Statistics:</Typography>
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                justifyContent="center"
+                                className={classes.minimize}
+                            >
+                                <Statistic />
+                            </Grid>
+                        </Grid>
+                    )}
+                    {!isDealer && (
+                        <Grid item container justifyContent="center">
+                            <DemoCardsDeck />
+                        </Grid>
+                    )}
                 </Grid>
             </Grid>
             <Grid

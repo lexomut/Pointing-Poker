@@ -29,5 +29,4 @@ export interface Issue {
     current?: boolean;
     name: string;
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
-    dealer?: boolean;
 }

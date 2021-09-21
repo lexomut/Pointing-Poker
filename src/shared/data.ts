@@ -112,30 +112,64 @@ export const issues: Issue[] = [
         current: true,
         name: 'Issue 123',
         priority: 'Critical',
-        dealer: true,
     },
     {
         current: false,
         name: 'Issue 135',
         priority: 'High',
-        dealer: true,
     },
     {
         current: false,
         name: 'Issue 144',
         priority: 'Medium',
-        dealer: true,
     },
     {
         current: false,
         name: 'Issue 162',
         priority: 'Low',
-        dealer: true,
     },
     {
         current: false,
         name: 'Issue 163',
         priority: 'Low',
-        dealer: true,
+    },
+];
+
+export const cardsDeck: Card[] = [
+    {
+        id: 1,
+        value: 1,
+        scoreType: 'SP',
+        isEditable: false,
+    },
+    {
+        id: 2,
+        value: 2,
+        scoreType: 'SP',
+        isEditable: false,
+    },
+    {
+        id: 3,
+        value: 3,
+        scoreType: 'SP',
+        isEditable: false,
+    },
+    {
+        id: 4,
+        value: 5,
+        scoreType: 'SP',
+        isEditable: false,
+    },
+    {
+        id: 5,
+        value: 8,
+        scoreType: 'SP',
+        isEditable: false,
+    },
+    {
+        id: 6,
+        value: 13,
+        scoreType: 'SP',
+        isEditable: false,
     },
 ];
