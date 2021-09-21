@@ -127,7 +127,7 @@ export const Game: React.FC<Props> = (props: Props) => {
                                     <IssueButton />
                                 </Grid>
                             )}
-                            {roundOver && (
+                            {roundOver && isDealer && (
                                 <>
                                     <Grid item>
                                         <Typography variant="h6">Statistics:</Typography>
@@ -167,7 +167,7 @@ export const Game: React.FC<Props> = (props: Props) => {
                                                 </Button>
                                             </Grid>
                                         )}
-                                        {roundOver && (
+                                        {roundOver && isDealer && (
                                             <Grid item>
                                                 <Button
                                                     color="primary"
