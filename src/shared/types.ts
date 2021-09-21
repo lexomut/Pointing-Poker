@@ -11,6 +11,10 @@ export interface Card {
     isEditable: boolean;
 }
 
+export interface StatisticCard extends Card {
+    voteResult: string;
+}
+
 export interface UserWithScore {
     currentUser?: boolean;
     name: string;

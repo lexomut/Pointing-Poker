@@ -8,3 +8,4 @@ export * from './buttons';
 export * from './switch';
 export * from './notFound';
 export * from './game';
+export * from './statistic';

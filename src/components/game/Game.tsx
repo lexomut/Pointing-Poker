@@ -13,6 +13,7 @@ import {
 import { issues, usersWithScore } from '../../shared/data';
 import { IssueButton } from '../buttons';
 import { IssueCard } from '../IssueCard';
+import { Statistic } from '../statistic';
 import { Timer } from '../timer';
 import { UserCard } from '../UserCard';
 
@@ -105,6 +106,16 @@ export const Game: React.FC = () => {
                         <Grid item>
                             <IssueButton />
                         </Grid>
+                        {roundOver && (
+                            <>
+                                <Grid item>
+                                    <Typography variant="h6">Statistics:</Typography>
+                                </Grid>
+                                <Grid item container justifyContent="center">
+                                    <Statistic />
+                                </Grid>
+                            </>
+                        )}
                     </Grid>
 
                     <Grid item className={classes.topSpace} xs={12} sm={12} md={3}>

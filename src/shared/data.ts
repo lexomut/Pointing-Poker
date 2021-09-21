@@ -1,4 +1,4 @@
-import { Author, Card, Issue, UserWithScore } from './types';
+import { Author, Card, Issue, StatisticCard, UserWithScore } from './types';
 
 export const authors: Author[] = [
     {
@@ -30,6 +30,22 @@ export const gameCardsData: Card[] = [
         value: 13,
         scoreType: 'SP',
         isEditable: false,
+    },
+];
+export const statisticCardsData: StatisticCard[] = [
+    {
+        id: 1,
+        value: 1,
+        scoreType: 'SP',
+        isEditable: true,
+        voteResult: '45%',
+    },
+    {
+        id: 2,
+        value: 13,
+        scoreType: 'SP',
+        isEditable: false,
+        voteResult: '10%',
     },
 ];
 
