@@ -12,6 +12,7 @@ export const Statistic: React.FC = () => {
                 return (
                     <div className={styles.container}>
                         <GameCard
+                            isActiveCard={false}
                             key={el.id}
                             value={el.value}
                             isEditable={el.isEditable}
