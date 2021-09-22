@@ -46,6 +46,7 @@ export class WSProvider implements WSProviderInterface {
                     userName: `${this.currentUser.firstName} ${this.currentUser?.firstName}` || '',
                 };
                 this.globalDispatch({ type: SET_SOCKET_STATUS, payLoad: true });
+                if (!this.socket) throw new Error();
                 await this.socket?.send(JSON.stringify(connectionMessage));
             };
         } catch {
