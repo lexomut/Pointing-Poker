@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, FC, useContext, useState } from 'react';
+import React, { Dispatch, useContext, useState, useEffect, useCallback } from 'react';
 import { Button, Box, Input } from '@material-ui/core';
 import Send from '@material-ui/icons/Send';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,20 +13,37 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export const ChatInput: FC = () => {
+export const ChatInput: React.FC = () => {
     const classes = useStyles();
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const [text, setText] = useState<string>('');
     const wsProvider: WSProvider | undefined = globalState.ws.provider;
-    function send(event: ChangeEvent<HTMLFormElement>): void {
-        event.preventDefault();
-        if (!wsProvider) return;
-        wsProvider.sendChatMessage(text);
-        setText('');
-    }
+
+    const send = useCallback(
+        (message: string) => {
+            if (!wsProvider) return;
+            wsProvider.sendChatMessage(message);
+            setText('');
+        },
+        [setText, wsProvider],
+    );
+
+    useEffect(() => {
+        const listener = (event: KeyboardEvent) => {
+            if (event.code === 'Enter' || event.code === 'NumpadEnter') {
+                event.preventDefault();
+                send(text);
+            }
+        };
+        document.addEventListener('keydown', listener);
+        return () => {
+            document.removeEventListener('keydown', listener);
+        };
+    }, [text, send]);
+
     return (
-        <form onSubmit={send} className={styles.chat__input}>
+        <Box className={styles.chat__input}>
             <Box sx={{ flexGrow: 1 }}>
                 <Input
                     fullWidth
@@ -34,23 +51,22 @@ export const ChatInput: FC = () => {
                     multiline
                     onChange={(e) => setText(e.target.value)}
                     value={text}
-                    // variant="outlined"
-                    // size="small"
                     disabled={!globalState.ws.status}
                 />
             </Box>
             <Box>
                 <Button
+                    type="submit"
                     variant="contained"
                     color="primary"
                     className={classes.button}
                     endIcon={<Send />}
                     disabled={!globalState.ws.status}
-                    type="submit"
+                    onClick={() => send(text)}
                 >
                     Send
                 </Button>
             </Box>
-        </form>
+        </Box>
     );
 };
