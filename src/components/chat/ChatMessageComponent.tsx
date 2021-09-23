@@ -3,7 +3,7 @@ import { ChatMessage } from '../../types/ChatMessage';
 import { User } from '../../types/user';
 import { ChatText } from './ChatText';
 import { UserCard } from '../UserCard';
-import './chat.scss';
+import styles from './chat.module.scss';
 
 export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: string }> = ({
     message,
@@ -12,7 +12,7 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
     const { text, user }: { text: string; user: User } = message;
     const current = currentUserID === user.userID;
     return (
-        <div className="chat__message">
+        <div className={styles.chat__message}>
             <ChatText text={text} current={current} />
             <UserCard
                 name={user.firstName}

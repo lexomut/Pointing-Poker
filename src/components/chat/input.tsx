@@ -1,11 +1,11 @@
-import React, { Dispatch, FC, useContext, useState } from 'react';
-import { Button, TextField, Box } from '@material-ui/core';
+import React, { ChangeEvent, Dispatch, FC, useContext, useState } from 'react';
+import { Button, Box, Input } from '@material-ui/core';
 import Send from '@material-ui/icons/Send';
 import { makeStyles } from '@material-ui/core/styles';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { WSProvider } from '../../api/WSProvider';
-import './chat.scss';
+import styles from './chat.module.scss';
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -19,22 +19,23 @@ export const ChatInput: FC = () => {
         useContext(GlobalContext);
     const [text, setText] = useState<string>('');
     const wsProvider: WSProvider | undefined = globalState.ws.provider;
-    function send() {
+    function send(event: ChangeEvent<HTMLFormElement>): void {
+        event.preventDefault();
         if (!wsProvider) return;
         wsProvider.sendChatMessage(text);
         setText('');
     }
     return (
-        <div className="chat__input">
+        <form onSubmit={send} className={styles.chat__input}>
             <Box sx={{ flexGrow: 1 }}>
-                <TextField
+                <Input
                     fullWidth
                     id="outlined-textarea"
                     multiline
                     onChange={(e) => setText(e.target.value)}
                     value={text}
-                    variant="outlined"
-                    size="small"
+                    // variant="outlined"
+                    // size="small"
                     disabled={!globalState.ws.status}
                 />
             </Box>
@@ -45,11 +46,11 @@ export const ChatInput: FC = () => {
                     className={classes.button}
                     endIcon={<Send />}
                     disabled={!globalState.ws.status}
-                    onClick={() => send()}
+                    type="submit"
                 >
                     Send
                 </Button>
             </Box>
-        </div>
+        </form>
     );
 };
