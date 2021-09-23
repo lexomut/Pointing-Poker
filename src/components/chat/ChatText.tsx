@@ -2,11 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-
 import CardContent from '@material-ui/core/CardContent';
-
 import Typography from '@material-ui/core/Typography';
-
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) =>
