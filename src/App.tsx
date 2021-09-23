@@ -5,9 +5,7 @@ import { Chat, Footer, Header, Invitation } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
-// import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 import { Action, GlobalState } from './types/GlobalState';
-// import { WSProvider } from './api/WSProvider';
 import styles from './style.module.scss';
 import { MainPage } from './pages/MainPage';
 
@@ -28,14 +26,6 @@ const theme = createTheme({
 
 const App: React.FC = () => {
     const [globalState, dispatch]: [GlobalState, Dispatch<Action>] = useReducer(reducer, initState);
-    // // useEffect для подключения к websocket, после выполнения инстанс класса WSProvider доступен из globalState
-    // useEffect(() => {
-    //     const provider = new WSProvider(globalState, dispatch);
-    //     dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
-    //     globalState.ws.provider?.connects();
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
     return (
         <>
             <GlobalContext.Provider value={{ dispatch, globalState }}>
@@ -44,15 +34,14 @@ const App: React.FC = () => {
                     <main className={styles.content}>
                         <Router>
                             <Switch>
+                                <Route exact path="/">
+                                    <MainPage />
+                                </Route>
                                 <Route exact path="/lobby">
-                                    Main
                                     <Chat />
                                 </Route>
-                                <Route path="/:id">
+                                <Route exact path="/:id">
                                     <Invitation />
-                                </Route>
-                                <Route path="/">
-                                    <MainPage />
                                 </Route>
                             </Switch>
                         </Router>
