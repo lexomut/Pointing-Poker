@@ -1,17 +1,7 @@
 import React, { Dispatch, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import {
-    Chat,
-    DemoGameCards,
-    DemoUserCards,
-    Footer,
-    Header,
-    Invitation,
-    IssueButton,
-    IssueCard,
-} from './components';
+import { Chat, Footer, Header, Invitation } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
@@ -56,26 +46,6 @@ const App: React.FC = () => {
                             <Switch>
                                 <Route exact path="/lobby">
                                     Main
-                                    <Button
-                                        color="primary"
-                                        variant="contained"
-                                        onClick={() => alert('Put logic here')}
-                                    >
-                                        start game
-                                    </Button>
-                                    <Button
-                                        color="primary"
-                                        variant="outlined"
-                                        onClick={() => alert('Put logic here')}
-                                    >
-                                        cancel game
-                                    </Button>
-                                    <IssueButton />
-                                    <DemoGameCards />
-                                    <DemoUserCards />
-                                    <IssueCard name="Issue 234" priority="High" dealer />
-                                    <IssueCard current name="Issue 235" priority="Low" />
-                                    {/* <Switcher label="Scrum master as player:" /> */}
                                     <Chat />
                                 </Route>
                                 <Route path="/:id">
