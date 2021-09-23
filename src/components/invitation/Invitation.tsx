@@ -20,7 +20,7 @@ export const Invitation: React.FC = () => {
                 {isAuthorized && isDealer ? <h2>Lobby for dealer</h2> : <Redirect to="/" />}
             </Route>
             <Route exact path={`${path}/game`}>
-                {isAuthorized ? <Game isDealer={true} /> : <Redirect to="/" />}
+                {isAuthorized ? <Game isDealer /> : <Redirect to="/" />}
             </Route>
             <Route exact path="*">
                 <NotFound />
