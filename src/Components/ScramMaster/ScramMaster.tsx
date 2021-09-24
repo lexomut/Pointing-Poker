@@ -28,8 +28,8 @@ const ScramMaster: () => JSX.Element = () => {
                 <UserCard
                     initials={data.initials}
                     name={data.name}
-                    position={data.position}
-                    kickID={data.kickID}
+                    jobPosition={data.jobPosition}
+                    UserID={data.UserID}
                     currentUser={data.currentUser}
                 />
             ) : (

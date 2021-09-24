@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 import { Game } from './game';
 import { WSMessageBody } from './WSMessageBody';
 import { ChatMessage } from './ChatMessage';
+import { User } from './user';
 
 export interface GlobalState {
     game: Game;
@@ -9,13 +10,9 @@ export interface GlobalState {
     ws: WS;
 }
 
-export interface CurrentUser {
-    firstName: string;
-    lastName?: string;
-    userID: string;
-    jobPosition: JobPosition;
+export interface CurrentUser extends User {
+    anything?: string;
 }
-export type JobPosition = 'observer' | 'user' | 'dialer';
 
 export interface WS {
     socket?: WebSocket;
@@ -38,4 +35,6 @@ export type Action =
     | { type: 'setSocket'; payLoad: WebSocket }
     | { type: 'setSocketStatus'; payLoad: boolean }
     | { type: 'addWSProviderToGlobalState'; payLoad: WSProviderInterface }
-    | { type: 'setGame'; payLoad: Game };
+    | { type: 'setGame'; payLoad: Game }
+    | { type: 'setCurrentUser'; payLoad: CurrentUser }
+    | { type: 'initGame'; payLoad: Game };

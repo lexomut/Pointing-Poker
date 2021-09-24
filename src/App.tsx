@@ -1,15 +1,14 @@
-import React, { Dispatch, useEffect, useReducer } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { Dispatch, useReducer } from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
 import { Footer, Header, Invitation } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
-import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 import { Action, GlobalState } from './types/GlobalState';
-import { WSProvider } from './api/WSProvider';
 import styles from './style.module.scss';
-import Lobby from './pages/Lobby/Lobby';
+import { Lobby } from './pages/Lobby/Lobby';
+import { MainPage } from './pages/MainPage/MainPage';
 
 const theme = createTheme({
     palette: {
@@ -26,30 +25,27 @@ const theme = createTheme({
     },
 });
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
     const [globalState, dispatch]: [GlobalState, Dispatch<Action>] = useReducer(reducer, initState);
-    // useEffect для подключения к websocket, после выполнения инстанс класса WSProvider доступен из globalState
-    useEffect(() => {
-        const provider = new WSProvider(globalState, dispatch);
-        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
-        globalState.ws.provider?.connects();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     return (
         <>
             <GlobalContext.Provider value={{ dispatch, globalState }}>
                 <MuiThemeProvider theme={theme}>
                     <Header />
                     <main className={styles.content}>
-                        <Switch>
-                            <Route exact path="/">
-                                <Lobby />
-                            </Route>
-                            <Route path="/:id">
-                                <Invitation />
-                            </Route>
-                        </Switch>
+                        <Router>
+                            <Switch>
+                                <Route exact path="/">
+                                    <MainPage />
+                                </Route>
+                                <Route exact path="/lobby">
+                                    <Lobby />
+                                </Route>
+                                <Route exact path="/:id">
+                                    <Invitation />
+                                </Route>
+                            </Switch>
+                        </Router>
                     </main>
                     <Footer />
                 </MuiThemeProvider>
@@ -57,5 +53,3 @@ const App: React.FC = () => {
         </>
     );
 };
-
-export default App;

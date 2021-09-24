@@ -1,0 +1,1 @@
+export { NewSwitch } from './NewSwitch';

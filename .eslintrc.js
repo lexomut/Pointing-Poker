@@ -1,4 +1,3 @@
-
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
@@ -22,12 +21,14 @@ module.exports = {
     },
     // Airbnb's ESLint config requires this
     parserOptions: {
-        project: './tsconfig.json',
-    },
+        project: 'tsconfig.json',
+        tsconfigRootDir: __dirname // <-- this did the trick for me
+     },
     rules: {
+        'import/prefer-default-export': 'off',
         // Include .prettierrc.js rules
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
-        'import/prefer-default-export': 'off',
+
         // We will use TypeScript's types for component props instead
         'react/prop-types': 'off',
         // We don't want unused vars
@@ -39,3 +40,4 @@ module.exports = {
         },
     },
 };
+

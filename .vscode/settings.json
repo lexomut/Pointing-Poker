@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
@@ -15,3 +16,26 @@
         "Spring"
     ]
 }
+=======
+{
+    "eslint.workingDirectories": [
+        "src"
+      ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "cSpell.words": [
+        "Avatar",
+        "Avatars",
+        "broken",
+        "dealer",
+        "lobby",
+        "outlined",
+        "planning",
+        "poker",
+        "Popover",
+        "secondary"
+    ]
+}
+>>>>>>> main-page-with-connections

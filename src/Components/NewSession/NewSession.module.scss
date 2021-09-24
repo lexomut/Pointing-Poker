@@ -1,0 +1,12 @@
+.new_session {
+    display: flex;
+    width: 515px;
+    justify-content: space-between;
+    margin-top: 32px;
+    align-items: center;
+    @media screen and (max-width: 750px) {
+        width: 440px;
+    }
+}
+
+

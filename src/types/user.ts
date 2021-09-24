@@ -1,7 +1,9 @@
 export interface User {
-    _id: string;
+    userID: string;
     firstName: string;
-    lastNme?: string;
-    jobPosition: 'observer' | 'player' | 'dealer';
-    avatarUrl?: string;
+    lastName?: string;
+    role: 'observer' | 'player' | 'dealer';
+    jobPosition?: string;
+    imgSrc?: string;
+    initials: string;
 }

@@ -1,11 +1,11 @@
 import { ChatMessage } from './ChatMessage';
 import { Game } from './game';
+import { User } from './user';
 
 export interface WSMessageBody {
     gameID: string;
-    userID: string;
+    user: User;
     event: WSMessageEvent;
-    userName: string;
     chatMessage?: ChatMessage;
     gameProperty?: string;
     value?: string;

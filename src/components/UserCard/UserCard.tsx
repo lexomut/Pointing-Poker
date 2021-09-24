@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme: Theme) =>
             fontWeight: 'bold',
         },
         currentUser: {
-            paddingTop: 10,
             background: theme.palette.secondary.main,
         },
     }),
@@ -44,14 +43,14 @@ const useStyles = makeStyles((theme: Theme) =>
 type Props = {
     currentUser?: boolean;
     name: string;
-    position: string;
+    jobPosition: string;
     initials: string;
     imgSrc?: string;
-    kickID: number;
+    UserID: number;
 };
 
 export const UserCard: React.FC<Props> = (props: Props) => {
-    const { name, currentUser, position, initials, imgSrc, kickID } = props;
+    const { name, currentUser, jobPosition, initials, imgSrc, UserID } = props;
     const classes = useStyles();
 
     const clickHandler = (id: number) => {
@@ -86,13 +85,13 @@ export const UserCard: React.FC<Props> = (props: Props) => {
                             variant="caption"
                             className={classes.caption}
                         >
-                            {position}
+                            {jobPosition}
                         </Typography>
                     </Grid>
                     <Grid item container xs={3}>
                         {!currentUser && (
                             <CardActions>
-                                <Button onClick={() => clickHandler(kickID)}>
+                                <Button onClick={() => clickHandler(UserID)}>
                                     <BlockIcon />
                                 </Button>
                             </CardActions>

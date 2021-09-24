@@ -1,11 +1,10 @@
 export interface IUserCard {
     currentUser?: boolean;
     name: string;
-    position: string;
-    initials: string;
+    jobPosition: string;
     imgSrc?: string;
-    kickID: number;
-    id: number;
+    UserID: number;
+    initials: string;
 }
 
 export interface IIssues {
@@ -30,4 +29,12 @@ export interface IMessage {
     job?: string;
     id: string;
     text: string;
+}
+
+export interface IFormData {
+    firstName: string;
+    lastName?: string;
+    job?: string;
+    isObserver: boolean;
+    image?: File;
 }

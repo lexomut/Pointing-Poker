@@ -9,15 +9,15 @@ interface IMemberField {
 const MembersField: React.FC<IMemberField> = ({ classNames }) => {
     return (
         <div className={classNames}>
-            {users.map(({ name, position, kickID, initials, currentUser, id }) => {
+            {users.map(({ name, jobPosition, UserID, initials, currentUser }) => {
                 return (
                     <UserCard
                         initials={initials}
                         name={name}
-                        position={position}
-                        kickID={kickID}
+                        jobPosition={jobPosition}
+                        UserID={UserID}
                         currentUser={currentUser}
-                        key={id}
+                        key={UserID}
                     />
                 );
             })}
