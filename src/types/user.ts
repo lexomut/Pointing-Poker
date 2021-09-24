@@ -3,7 +3,7 @@ export interface User {
     firstName: string;
     lastName?: string;
     role: 'observer' | 'player' | 'dealer';
-    jobPosition: string;
+    jobPosition?: string;
     imgSrc?: string;
     initials: string;
 }

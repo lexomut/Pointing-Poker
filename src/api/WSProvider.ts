@@ -82,6 +82,7 @@ export class WSProvider implements WSProviderInterface {
     }
 
     async sendChatMessage(text: string): Promise<void> {
+        if (!this.game.gameID) throw new Error('нет Game id');
         const chatMessage: ChatMessage = {
             user: this.currentUser,
             text,

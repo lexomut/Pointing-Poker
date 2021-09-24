@@ -7,7 +7,7 @@ import { connectGame } from '../../api/server';
 import { Game } from '../../types/game';
 import { RegistrationForm } from '../RegistrationForm';
 import styles from './ConnectForm.module.scss';
-import { SET_GAME } from '../../state/ActionTypesConstants';
+import { INIT_GAME } from '../../state/ActionTypesConstants';
 import { Action } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 
@@ -32,7 +32,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer
         setIsConnecting(false);
         if (game) {
             console.log(game);
-            dispatch({ type: SET_GAME, payLoad: game });
+            dispatch({ type: INIT_GAME, payLoad: game });
             setOpen(true);
             setIsDealer(false);
         } else {

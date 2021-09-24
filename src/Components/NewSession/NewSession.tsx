@@ -5,7 +5,7 @@ import { GlobalContext } from '../../state/Context';
 import { Game } from '../../types/game';
 import { Action } from '../../types/GlobalState';
 import styles from './NewSession.module.scss';
-import { SET_GAME } from '../../state/ActionTypesConstants';
+import { INIT_GAME } from '../../state/ActionTypesConstants';
 
 interface NewSessionProps {
     setOpen: (value: React.SetStateAction<boolean>) => void;
@@ -17,7 +17,7 @@ export const NewSession: React.FC<NewSessionProps> = ({ setOpen, setIsDealer }) 
     const startGame = async () => {
         const game: Game | false = await createGame();
         if (!game) return;
-        dispatch({ type: SET_GAME, payLoad: game });
+        dispatch({ type: INIT_GAME, payLoad: game });
         setOpen(true);
         setIsDealer(true);
     };

@@ -1,5 +1,5 @@
 import { ADD_CHAT_MESSAGE, SET_GAME } from '../state/ActionTypesConstants';
-import { CHAT_MESSAGE, INIT_MESSAGE, SET_GAME_STATE, USER_CONNECTION } from './Constants';
+import { CHAT_MESSAGE, INIT_MESSAGE, SET_GAME_STATE } from './Constants';
 import { WSMessageBody } from '../types/WSMessageBody';
 import { Action } from '../types/GlobalState';
 
@@ -13,20 +13,6 @@ export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action)
             break;
         }
 
-        case USER_CONNECTION: {
-            // // eslint-disable-next-line no-console
-            // console.log(`Пользователь ${message.user.firstName} подключился`);
-            dispatch({
-                type: ADD_CHAT_MESSAGE,
-                payLoad: {
-                    user: message.user,
-                    date: new Date(),
-                    id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
-                    text: `пользователь ${message.user.firstName} подключился`,
-                },
-            });
-            break;
-        }
         case CHAT_MESSAGE:
             // // eslint-disable-next-line no-console
             // console.log(
@@ -34,7 +20,7 @@ export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action)
             // );
             if (!message.chatMessage) return;
             dispatch({
-                type: 'addChatMessage',
+                type: ADD_CHAT_MESSAGE,
                 payLoad: message.chatMessage,
             });
             break;

@@ -1,3 +1,4 @@
+import { ChatMessage } from '../types/ChatMessage';
 import { Action, GlobalState } from '../types/GlobalState';
 import {
     ADD_CHAT_MESSAGE,
@@ -6,12 +7,16 @@ import {
     SET_SOCKET_STATUS,
     SET_GAME,
     SET_CURRENT_USER,
+    INIT_GAME,
 } from './ActionTypesConstants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
+            const arr: Array<ChatMessage> = globalState.game.chatMessages;
+            if (arr.filter((message) => message.id !== chatMessage.id).length < 0)
+                return globalState;
             return {
                 ...globalState,
                 game: {
@@ -36,9 +41,15 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
             state.ws.provider = provider;
             return state;
         }
-        case SET_GAME: {
+        case INIT_GAME: {
             const game = action.payLoad;
             return { ...globalState, game };
+        }
+
+        case SET_GAME: {
+            const game = action.payLoad;
+            game.gameID = globalState.game.gameID;
+            return { ...globalState, game: { ...globalState.game, ...game } };
         }
         case SET_CURRENT_USER: {
             const currentUser = action.payLoad;
