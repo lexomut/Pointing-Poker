@@ -6,12 +6,12 @@ import { UserCard } from '../UserCard';
 import { SERVER_URL } from '../../api/url';
 import styles from './chat.module.scss';
 
-export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: string }> = ({
+export const ChatMessageComponent: FC<{ message: ChatMessage; currentuserID: string }> = ({
     message,
-    currentUserID,
+    currentuserID,
 }) => {
     const { text, user }: { text: string; user: User } = message;
-    const current = currentUserID === user.userID;
+    const current = currentuserID === user.userID;
     return (
         <div className={styles.chat__message}>
             <ChatText text={text} current={current} />
@@ -20,7 +20,7 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
                 initials={user.firstName[0] + (user.lastName || '')[0]}
                 jobPosition={user.jobPosition ? user.jobPosition : ''}
                 imgSrc={SERVER_URL + user.imgSrc}
-                UserID={+user.userID}
+                userID={+user.userID}
                 currentUser={current}
             />
         </div>

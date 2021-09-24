@@ -1,23 +1,28 @@
-import React from 'react';
-import { users } from '../../data';
+import React, { useContext } from 'react';
 import { UserCard } from '../UserCard';
+import { GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
+import { User } from '../../types/user';
 
 interface IMemberField {
     classNames: string;
 }
 
 const MembersField: React.FC<IMemberField> = ({ classNames }) => {
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const users = globalState.game.users.filter((user: User) => user.role !== 'dealer');
+
     return (
         <div className={classNames}>
-            {users.map(({ name, jobPosition, UserID, initials, currentUser }) => {
+            {users.map(({ firstName, lastName, jobPosition, userID, initials }: User) => {
                 return (
                     <UserCard
                         initials={initials}
-                        name={name}
-                        jobPosition={jobPosition}
-                        UserID={UserID}
-                        currentUser={currentUser}
-                        key={UserID}
+                        name={`${firstName} ${lastName}`}
+                        jobPosition={jobPosition || ''}
+                        userID={+userID}
+                        currentUser={userID === globalState.currentUser.userID}
+                        key={userID}
                     />
                 );
             })}

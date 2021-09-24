@@ -1,12 +1,12 @@
 import { ICard, IIssues, IMessage, IUserCard } from './types';
 
 export const users: IUserCard[] = [
-    { name: 'nick kave', jobPosition: 'dev', initials: 'AB', UserID: 222 },
-    { name: 'mike bzhezinsky', jobPosition: 'design', initials: 'AB', UserID: 223 },
-    { name: 'john smith', jobPosition: 'batman', initials: 'AB', UserID: 224 },
-    { name: 'miranda harris', jobPosition: 'cleaner', initials: 'AB', UserID: 225 },
-    { name: 'miranda harris', jobPosition: 'cleaner', initials: 'AB', UserID: 226 },
-    { name: 'miranda harris', jobPosition: 'cleaner', initials: 'AB', UserID: 227 },
+    { name: 'nick kave', jobPosition: 'dev', initials: 'AB', userID: 222 },
+    { name: 'mike bzhezinsky', jobPosition: 'design', initials: 'AB', userID: 223 },
+    { name: 'john smith', jobPosition: 'batman', initials: 'AB', userID: 224 },
+    { name: 'miranda harris', jobPosition: 'cleaner', initials: 'AB', userID: 225 },
+    { name: 'miranda harris', jobPosition: 'cleaner', initials: 'AB', userID: 226 },
+    { name: 'miranda harris', jobPosition: 'cleaner', initials: 'AB', userID: 227 },
 ];
 
 export const issues: IIssues[] = [

@@ -3,7 +3,7 @@ export interface IUserCard {
     name: string;
     jobPosition: string;
     imgSrc?: string;
-    UserID: number;
+    userID: number;
     initials: string;
 }
 

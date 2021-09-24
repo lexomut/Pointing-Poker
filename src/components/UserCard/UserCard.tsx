@@ -46,11 +46,11 @@ type Props = {
     jobPosition: string;
     initials: string;
     imgSrc?: string;
-    UserID: number;
+    userID: number;
 };
 
 export const UserCard: React.FC<Props> = (props: Props) => {
-    const { name, currentUser, jobPosition, initials, imgSrc, UserID } = props;
+    const { name, currentUser, jobPosition, initials, imgSrc, userID } = props;
     const classes = useStyles();
 
     const clickHandler = (id: number) => {
@@ -91,7 +91,7 @@ export const UserCard: React.FC<Props> = (props: Props) => {
                     <Grid item container xs={3}>
                         {!currentUser && (
                             <CardActions>
-                                <Button onClick={() => clickHandler(UserID)}>
+                                <Button onClick={() => clickHandler(userID)}>
                                     <BlockIcon />
                                 </Button>
                             </CardActions>

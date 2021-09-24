@@ -23,7 +23,7 @@ export const Chat: FC = () => {
                     <ChatMessageComponent
                         key={chatMessage.id}
                         message={chatMessage}
-                        currentUserID={globalState.currentUser.userID}
+                        currentuserID={globalState.currentUser.userID}
                     />
                 ))}
             </div>

@@ -1,36 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { AxiosResponse } from 'axios';
-import axiosInstance from '../../api/memberInfo';
+import React, { useContext } from 'react';
 import styles from './ScramMaster.module.scss';
-import { IUserCard } from '../../types';
 import { UserCard } from '../UserCard';
+import { User } from '../../types/user';
+import { GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
 
 const ScramMaster: () => JSX.Element = () => {
-    const [data, setData] = useState<IUserCard>();
-
-    useEffect(() => {
-        const getMember = async (): Promise<void> => {
-            try {
-                const response: AxiosResponse<IUserCard> = await axiosInstance.get(``);
-
-                setData(response.data);
-            } catch (error) {
-                throw new Error();
-            }
-        };
-        getMember();
-    }, []);
-
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const scramMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
     return (
         <div className={styles.scramMaster}>
             <p>Scram master:</p>
-            {data ? (
+            {scramMaster ? (
                 <UserCard
-                    initials={data.initials}
-                    name={data.name}
-                    jobPosition={data.jobPosition}
-                    UserID={data.UserID}
-                    currentUser={data.currentUser}
+                    initials={scramMaster.initials}
+                    name={`${scramMaster.firstName} ${scramMaster.lastName}`}
+                    jobPosition={scramMaster.jobPosition ? scramMaster.jobPosition : ''}
+                    userID={+scramMaster.userID}
+                    currentUser={scramMaster.userID === globalState.currentUser.userID}
                 />
             ) : (
                 'download'
