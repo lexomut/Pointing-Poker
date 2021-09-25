@@ -2,7 +2,7 @@ import axios from 'axios';
 import { User } from '../types/user';
 import { SERVER_URL } from './url';
 
-export interface CreateUser {
+export interface CreateUserInterface {
     firstName: string;
     lastName?: string;
     jobPosition: string;
@@ -15,7 +15,7 @@ export async function createUser({
     role,
     jobPosition,
     avatar,
-}: CreateUser): Promise<User | false> {
+}: CreateUserInterface): Promise<User | undefined> {
     const formData = new FormData();
     formData.append('userConfig', JSON.stringify({ firstName, lastName, jobPosition, role }));
     if (avatar) formData.append('avatar', avatar);
@@ -26,12 +26,11 @@ export async function createUser({
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' },
         });
-        console.log('response.data as User  ', response.data);
         return response.data as User;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         // eslint-disable-next-line no-console
         console.log(error.response.data);
-        return false;
+        return undefined;
     }
 }

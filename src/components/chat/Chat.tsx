@@ -12,11 +12,15 @@ export const Chat: FC = () => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const chatRef = React.useRef<HTMLDivElement>(null);
+
     // этот useEffect перенесется в нест/:id'
     useEffect(() => {
-        const provider = new WSProvider(globalState, dispatch);
-        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
-        globalState.ws.provider?.connects();
+        async function addWSProvider() {
+            const provider = new WSProvider(globalState, dispatch);
+            await dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
+            globalState.ws.provider?.connects();
+        }
+        addWSProvider();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
