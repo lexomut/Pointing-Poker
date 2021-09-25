@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import React, { Dispatch, useContext, useState } from 'react';
 import UploadButton from '../UploadButton';
 import styles from './RegistrationForm.module.scss';
-import { CreateUser, createUser } from '../../api/CreateUser';
+import { CreateUserInterface, createUser } from '../../api/CreateUser';
 import { NewSwitch } from '../NewSwitch';
 import { Action, CurrentUser } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
@@ -36,7 +36,7 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                 jobPosition = 'player';
         }
         if (firstName.trim() !== '') {
-            const data: CreateUser = {
+            const data: CreateUserInterface = {
                 firstName,
                 lastName,
                 jobPosition: job,
@@ -44,13 +44,10 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                 avatar,
             };
 
-            if (data) {
-                const currentUser: CurrentUser | false = await createUser(data);
-                if (!currentUser) return;
-                if (!currentUser.userID) return;
-                dispatch({ type: SET_CURRENT_USER, payLoad: currentUser });
-                history.push('/lobby');
-            }
+            const currentUser: CurrentUser | undefined = await createUser(data);
+            if (!currentUser?.userID) return;
+            dispatch({ type: SET_CURRENT_USER, payLoad: currentUser });
+            history.push('/lobby');
         }
     };
     const inputData = [

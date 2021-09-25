@@ -6,12 +6,12 @@ import { UserCard } from '../UserCard';
 import { SERVER_URL } from '../../api/url';
 import styles from './chat.module.scss';
 
-export const ChatMessageComponent: FC<{ message: ChatMessage; currentuserID: string }> = ({
+export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: string }> = ({
     message,
-    currentuserID,
+    currentUserID,
 }) => {
     const { text, user }: { text: string; user: User } = message;
-    const current = currentuserID === user.userID;
+    const current = currentUserID === user.userID;
     return (
         <div className={styles.chat__message}>
             <ChatText text={text} current={current} />

@@ -28,10 +28,9 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer
         e.preventDefault();
         setIsConnecting(true);
         if (!url) return;
-        const game: Game | false = await connectGame(url);
+        const game: Game | undefined = await connectGame(url);
         setIsConnecting(false);
         if (game) {
-            console.log(game);
             dispatch({ type: INIT_GAME, payLoad: game });
             setOpen(true);
             setIsDealer(false);

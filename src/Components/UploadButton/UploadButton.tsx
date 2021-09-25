@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-// import styles from './UploadButton.module.scss';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

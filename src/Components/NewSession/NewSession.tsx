@@ -15,7 +15,7 @@ interface NewSessionProps {
 export const NewSession: React.FC<NewSessionProps> = ({ setOpen, setIsDealer }) => {
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
     const startGame = async () => {
-        const game: Game | false = await createGame();
+        const game: Game | undefined = await createGame();
         if (!game) return;
         dispatch({ type: INIT_GAME, payLoad: game });
         setOpen(true);

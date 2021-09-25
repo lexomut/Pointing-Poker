@@ -27,9 +27,6 @@ export class WSProvider implements WSProviderInterface {
         const url = `ws://${SERVER_URL.split('://')[1]}ws`;
         try {
             this.socket = new WebSocket(url);
-            // eslint-disable-next-line no-console
-            // console.log('Open new WebSocket connection');
-
             this.socket.onopen = async () => {
                 const connectionMessage: WSMessageBody = {
                     user: this.currentUser,
@@ -40,8 +37,8 @@ export class WSProvider implements WSProviderInterface {
                 await this.socket?.send(JSON.stringify(connectionMessage));
             };
         } catch {
-            // // eslint-disable-next-line no-console
-            // console.log('Ошибка соединения с сервером');
+            // eslint-disable-next-line no-console
+            console.log('Ошибка соединения с сервером');
         }
         if (!this.socket) return;
 
@@ -61,11 +58,9 @@ export class WSProvider implements WSProviderInterface {
             };
             try {
                 message = JSON.parse(event.data);
-                // // eslint-disable-next-line no-console
-                // console.log('Получено сообщение с типом:', message.event);
             } catch (e) {
-                // // eslint-disable-next-line no-console
-                // console.log(event.data, '  ', e);
+                // eslint-disable-next-line no-console
+                console.log(event.data, '  ', e);
             }
             WSMessageHandler(message, this.globalDispatch);
         };
@@ -76,8 +71,8 @@ export class WSProvider implements WSProviderInterface {
             if (!this.socket) return;
             await this.socket.send(JSON.stringify(messObj));
         } catch (e) {
-            // // eslint-disable-next-line no-console
-            // console.log('Ошибка отправки', e);
+            // eslint-disable-next-line no-console
+            console.log('Ошибка отправки', e);
         }
     }
 

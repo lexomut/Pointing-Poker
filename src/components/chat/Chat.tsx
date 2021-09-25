@@ -9,7 +9,6 @@ import styles from './chat.module.scss';
 export const Chat: FC = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const chatRef = React.useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         if (globalState.game.chatMessages.length > 0) {
             if (chatRef.current) chatRef.current.scrollTop = chatRef.current.scrollHeight;
@@ -23,7 +22,7 @@ export const Chat: FC = () => {
                     <ChatMessageComponent
                         key={chatMessage.id}
                         message={chatMessage}
-                        currentuserID={globalState.currentUser.userID}
+                        currentUserID={globalState.currentUser.userID}
                     />
                 ))}
             </div>
