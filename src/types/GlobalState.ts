@@ -22,12 +22,13 @@ export interface WS {
 
 export interface WSProviderInterface {
     globalDispatch: Dispatch<Action>;
-    currentUser: CurrentUser;
-    game: Game;
+    currentUser: CurrentUser | undefined;
+    game: Game | undefined;
     socket: WebSocket | undefined;
     connects: () => Promise<void>;
     send(messObj: WSMessageBody): Promise<void>;
     sendChatMessage(text: string): Promise<void>;
+    updateProviderState: (arg: GlobalState) => void;
 }
 
 export type Action =

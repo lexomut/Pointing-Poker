@@ -1,4 +1,4 @@
-import React, { Dispatch, useReducer } from 'react';
+import React, { Dispatch, useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
 import { Chat, Footer, Header, Invitation } from './components';
@@ -8,6 +8,8 @@ import { reducer } from './state/reducer';
 import { Action, GlobalState } from './types/GlobalState';
 import styles from './style.module.scss';
 import { MainPage } from './pages/MainPage';
+import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
+import { WSProvider } from './api/WSProvider';
 
 const theme = createTheme({
     palette: {
@@ -26,6 +28,10 @@ const theme = createTheme({
 
 const App: React.FC = () => {
     const [globalState, dispatch]: [GlobalState, Dispatch<Action>] = useReducer(reducer, initState);
+    useEffect(() => {
+        const provider = new WSProvider(dispatch);
+        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
+    }, [dispatch]);
     return (
         <>
             <GlobalContext.Provider value={{ dispatch, globalState }}>

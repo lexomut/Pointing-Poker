@@ -11,23 +11,25 @@ import { ChatMessage } from '../types/ChatMessage';
 export class WSProvider implements WSProviderInterface {
     globalDispatch: Dispatch<Action>;
 
-    currentUser: CurrentUser;
+    currentUser: CurrentUser | undefined;
 
-    game: Game;
+    game: Game | undefined;
 
     socket: WebSocket | undefined;
 
-    constructor({ currentUser, game }: GlobalState, globalDispatch: Dispatch<Action>) {
+    constructor(globalDispatch: Dispatch<Action>) {
+        this.currentUser = undefined;
+        this.game = undefined;
         this.globalDispatch = globalDispatch;
-        this.currentUser = currentUser;
-        this.game = game;
     }
 
     async connects(): Promise<void> {
         const url = `ws://${SERVER_URL.split('://')[1]}ws`;
         try {
+            if (!this.game?.gameID) throw new Error('нет gameID');
             this.socket = new WebSocket(url);
             this.socket.onopen = async () => {
+                if (!this.game?.gameID || !this.currentUser) return;
                 const connectionMessage: WSMessageBody = {
                     user: this.currentUser,
                     gameID: this.game.gameID,
@@ -51,6 +53,7 @@ export class WSProvider implements WSProviderInterface {
             }, 5000);
         };
         this.socket.onmessage = (event) => {
+            if (!this.currentUser) return;
             let message: WSMessageBody = {
                 user: this.currentUser,
                 gameID: '',
@@ -63,6 +66,7 @@ export class WSProvider implements WSProviderInterface {
                 console.log(event.data, '  ', e);
             }
             WSMessageHandler(message, this.globalDispatch);
+            console.log(this.game);
         };
     }
 
@@ -77,7 +81,7 @@ export class WSProvider implements WSProviderInterface {
     }
 
     async sendChatMessage(text: string): Promise<void> {
-        if (!this.game.gameID) throw new Error('нет Game id');
+        if (!this.game?.gameID || !this.currentUser) return;
         const chatMessage: ChatMessage = {
             user: this.currentUser,
             text,
@@ -91,5 +95,10 @@ export class WSProvider implements WSProviderInterface {
             chatMessage,
         };
         await this.send(message);
+    }
+
+    updateProviderState(globalState: GlobalState) {
+        this.currentUser = globalState.currentUser;
+        this.game = globalState.game;
     }
 }

@@ -1,28 +1,20 @@
-import React, { Dispatch, FC, useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { GlobalContext } from '../../state/Context';
-import { Action, GlobalState } from '../../types/GlobalState';
+import { GlobalState } from '../../types/GlobalState';
 import { ChatMessage } from '../../types/ChatMessage';
 import { ChatMessageComponent } from './ChatMessageComponent';
 import { ChatInput } from './input';
-import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from '../../state/ActionTypesConstants';
-import { WSProvider } from '../../api/WSProvider';
 import styles from './chat.module.scss';
 
 export const Chat: FC = () => {
-    const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
-        useContext(GlobalContext);
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const chatRef = React.useRef<HTMLDivElement>(null);
 
-    // этот useEffect перенесется в нест/:id'
     useEffect(() => {
-        async function addWSProvider() {
-            const provider = new WSProvider(globalState, dispatch);
-            await dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
-            globalState.ws.provider?.connects();
-        }
-        addWSProvider();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        const { provider } = globalState.ws;
+        provider?.updateProviderState(globalState);
+        if (!globalState.ws.socket) provider?.connects();
+    }, [globalState]);
 
     useEffect(() => {
         if (globalState.game.chatMessages.length > 0) {
