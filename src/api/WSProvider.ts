@@ -66,7 +66,6 @@ export class WSProvider implements WSProviderInterface {
                 console.log(event.data, '  ', e);
             }
             WSMessageHandler(message, this.globalDispatch);
-            console.log(this.game);
         };
     }
 

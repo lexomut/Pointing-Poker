@@ -26,8 +26,8 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer
 
     const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsConnecting(true);
         if (!url) return;
+        setIsConnecting(true);
         const game: Game | undefined = await connectGame(url);
         setIsConnecting(false);
         if (game) {

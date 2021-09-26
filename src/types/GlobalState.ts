@@ -3,6 +3,16 @@ import { Game } from './game';
 import { WSMessageBody } from './WSMessageBody';
 import { ChatMessage } from './ChatMessage';
 import { User } from './user';
+import {
+    ADD_CHAT_MESSAGE,
+    ADD_WS_PROVIDER_TO_GLOBAL_STATE,
+    SET_SOCKET,
+    SET_SOCKET_STATUS,
+    SET_GAME,
+    SET_CURRENT_USER,
+    INIT_GAME,
+} from '../state/ActionTypesConstants';
+import { USER_CONNECTION } from '../api/Constants';
 
 export interface GlobalState {
     game: Game;
@@ -32,10 +42,11 @@ export interface WSProviderInterface {
 }
 
 export type Action =
-    | { type: 'addChatMessage'; payLoad: ChatMessage }
-    | { type: 'setSocket'; payLoad: WebSocket }
-    | { type: 'setSocketStatus'; payLoad: boolean }
-    | { type: 'addWSProviderToGlobalState'; payLoad: WSProviderInterface }
-    | { type: 'setGame'; payLoad: Game }
-    | { type: 'setCurrentUser'; payLoad: CurrentUser }
-    | { type: 'initGame'; payLoad: Game };
+    | { type: typeof ADD_CHAT_MESSAGE; payLoad: ChatMessage }
+    | { type: typeof SET_SOCKET; payLoad: WebSocket }
+    | { type: typeof SET_SOCKET_STATUS; payLoad: boolean }
+    | { type: typeof ADD_WS_PROVIDER_TO_GLOBAL_STATE; payLoad: WSProviderInterface }
+    | { type: typeof SET_GAME; payLoad: Game }
+    | { type: typeof SET_CURRENT_USER; payLoad: CurrentUser }
+    | { type: typeof INIT_GAME; payLoad: Game }
+    | { type: typeof USER_CONNECTION; payLoad: User };
