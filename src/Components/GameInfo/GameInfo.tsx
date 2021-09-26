@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import CreateIcon from '@material-ui/icons/Create';
 import { TextField } from '@material-ui/core';
 import styles from './GameInfo.module.scss';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 
-export const GameInfo = () => {
+export const GameInfo = (): ReactElement => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
 
     const [title, setTitle] = useState('');
@@ -14,6 +14,9 @@ export const GameInfo = () => {
     const handleSubmit = () => {
         if (isInput) globalState.ws.provider?.changeValueOfGameProperty('title', title);
         setIsInput(!isInput);
+    };
+    const hendler = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === 'NumpadEnter') handleSubmit();
     };
 
     useEffect(() => {
@@ -29,6 +32,7 @@ export const GameInfo = () => {
                     id="filled-error-helper-text"
                     type="text"
                     variant="outlined"
+                    onKeyPress={hendler}
                 />
             )}
             {!isInput && <h4>{title}</h4>}

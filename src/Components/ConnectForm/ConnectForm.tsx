@@ -32,8 +32,8 @@ export const ConnectForm: React.FC<IConnectForm> = ({
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
 
     const connect = useCallback(async () => {
-        setIsConnecting(true);
         if (!url) return;
+        setIsConnecting(true);
         const game: Game | undefined = await connectGame(url);
         setIsConnecting(false);
         if (game) {

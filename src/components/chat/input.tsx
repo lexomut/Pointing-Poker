@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useState, useEffect, useCallback } from 'react';
+import React, { Dispatch, useContext, useState } from 'react';
 import { Button, Box, Input } from '@material-ui/core';
 import Send from '@material-ui/icons/Send';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,27 +20,15 @@ export const ChatInput: React.FC = () => {
     const [text, setText] = useState<string>('');
     const wsProvider: WSProvider | undefined = globalState.ws.provider;
 
-    const send = useCallback(
-        (message: string) => {
-            if (!wsProvider) return;
-            wsProvider.sendChatMessage(message);
-            setText('');
-        },
-        [setText, wsProvider],
-    );
+    const send = () => {
+        if (!wsProvider) return;
+        wsProvider.sendChatMessage(text);
+        setText('');
+    };
 
-    useEffect(() => {
-        const listener = (event: KeyboardEvent) => {
-            if (event.code === 'Enter' || event.code === 'NumpadEnter') {
-                event.preventDefault();
-                send(text);
-            }
-        };
-        document.addEventListener('keydown', listener);
-        return () => {
-            document.removeEventListener('keydown', listener);
-        };
-    }, [text, send]);
+    const hendler = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' || event.key === 'NumpadEnter') send();
+    };
 
     return (
         <Box className={styles.chat__input}>
@@ -49,7 +37,10 @@ export const ChatInput: React.FC = () => {
                     fullWidth
                     id="outlined-textarea"
                     multiline
-                    onChange={(e) => setText(e.target.value)}
+                    onKeyPress={hendler}
+                    onChange={(e) => {
+                        setText(e.target.value);
+                    }}
                     value={text}
                     disabled={!globalState.ws.status}
                 />
@@ -62,7 +53,7 @@ export const ChatInput: React.FC = () => {
                     className={classes.button}
                     endIcon={<Send />}
                     disabled={!globalState.ws.status}
-                    onClick={() => send(text)}
+                    onClick={() => send()}
                 >
                     Send
                 </Button>

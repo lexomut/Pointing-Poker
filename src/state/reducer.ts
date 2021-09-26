@@ -40,11 +40,13 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         }
         case INIT_GAME: {
             const game = action.payLoad;
+
             return { ...globalState, game: { ...globalState.game, ...game } };
         }
 
         case SET_GAME: {
             const game = action.payLoad;
+
             return { ...globalState, game: { ...globalState.game, ...game } };
         }
         case SET_CURRENT_USER: {

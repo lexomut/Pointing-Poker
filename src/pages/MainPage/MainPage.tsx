@@ -11,28 +11,22 @@ export function MainPage(): JSX.Element {
     const [isDealer, setIsDealer] = useState(false);
 
     return (
-        <div className={styles.main_page}>
-            <main>
-                <div className={styles.container}>
-                    <img
-                        className={styles.poker_planning}
-                        src={pokerPlanning}
-                        alt="poker-planning"
+        <main className={styles.main_page}>
+            <div className={styles.container}>
+                <img className={styles.poker_planning} src={pokerPlanning} alt="poker-planning" />
+                <section className={styles.content}>
+                    <h3 className={styles.start}>Start your planning:</h3>
+                    <NewSession setIsDealer={setIsDealer} setOpen={setOpen} />
+                    <h3 className={styles.center}>OR:</h3>
+                    <ConnectForm
+                        id={id}
+                        open={open}
+                        isDealer={isDealer}
+                        setIsDealer={setIsDealer}
+                        setOpen={setOpen}
                     />
-                    <section className={styles.content}>
-                        <h3 className={styles.start}>Start your planning:</h3>
-                        <NewSession setIsDealer={setIsDealer} setOpen={setOpen} />
-                        <h3 className={styles.center}>OR:</h3>
-                        <ConnectForm
-                            id={id}
-                            open={open}
-                            isDealer={isDealer}
-                            setIsDealer={setIsDealer}
-                            setOpen={setOpen}
-                        />
-                    </section>
-                </div>
-            </main>
-        </div>
+                </section>
+            </div>
+        </main>
     );
 }
