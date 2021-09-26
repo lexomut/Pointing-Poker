@@ -38,4 +38,5 @@ export type Action =
     | { type: 'addWSProviderToGlobalState'; payLoad: WSProviderInterface }
     | { type: 'setGame'; payLoad: Game }
     | { type: 'setCurrentUser'; payLoad: CurrentUser }
-    | { type: 'initGame'; payLoad: Game };
+    | { type: 'initGame'; payLoad: Game }
+    | { type: 'userConnection'; payLoad: User };

@@ -9,6 +9,7 @@ import {
     SET_CURRENT_USER,
     INIT_GAME,
 } from './ActionTypesConstants';
+import { USER_CONNECTION } from '../api/Constants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
     switch (action.type) {
@@ -49,6 +50,16 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         case SET_CURRENT_USER: {
             const currentUser = action.payLoad;
             return { ...globalState, currentUser };
+        }
+        case USER_CONNECTION: {
+            const newUser = action.payLoad;
+            if (globalState.game.users.every((user) => user.userID !== newUser.userID)) {
+                return {
+                    ...globalState,
+                    game: { ...globalState.game, users: [...globalState.game.users, newUser] },
+                };
+            }
+            return { ...globalState };
         }
 
         default:

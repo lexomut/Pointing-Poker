@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './LinkToLobby.module.scss';
+import { GlobalContext } from '../../state/Context';
+import { GlobalState } from '../../types/GlobalState';
 
 const LinkToLobby: () => JSX.Element = () => {
-    const currentURL = window.location.href;
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const currentURL = `${window.location.origin}/${globalState.game.gameID}`;
 
     return (
         <div className={styles.linkToLobby}>
