@@ -2,7 +2,7 @@ import { ChatMessage } from './ChatMessage';
 import { User } from './user';
 
 export interface Game {
-    gameID: string;
+    gameID: string | undefined;
     status: 'new' | 'pending' | 'going' | 'over';
     users: Array<User>;
     chatMessages: Array<ChatMessage>;

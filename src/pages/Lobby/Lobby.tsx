@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import LinkToLobby from '../../components/LinkToLobby';
 import ScramMaster from '../../components/ScramMaster';
 import styles from './Lobby.module.scss';
@@ -9,21 +9,19 @@ import IssueField from '../../components/IssueField/IssueField';
 import GameSettings from '../../components/GameSettings';
 import CardField from '../../components/CardField';
 import { GameInfo } from '../../components/GameInfo';
-import { WSProvider } from '../../api/WSProvider';
-import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from '../../state/ActionTypesConstants';
-import { Action, GlobalState } from '../../types/GlobalState';
+import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { Chat } from '../../components/chat';
 
 export const Lobby: () => JSX.Element = () => {
-    const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
-        useContext(GlobalContext);
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    console.log(globalState.game);
+
     useEffect(() => {
-        const provider = new WSProvider(globalState, dispatch);
-        dispatch({ type: ADD_WS_PROVIDER_TO_GLOBAL_STATE, payLoad: provider });
-        globalState.ws.provider?.connects();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        const { provider } = globalState.ws;
+        provider?.updateProviderState(globalState);
+        if (!globalState.ws.socket) provider?.connects();
+    }, [globalState]);
 
     return (
         <div className={styles.lobby}>

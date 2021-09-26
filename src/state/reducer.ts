@@ -35,9 +35,7 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         }
         case ADD_WS_PROVIDER_TO_GLOBAL_STATE: {
             const provider = action.payLoad;
-            const { ws } = globalState;
-            ws.provider = provider;
-            return { ...globalState, ws };
+            return { ...globalState, ws: { ...globalState.ws, provider } };
         }
         case INIT_GAME: {
             const game = action.payLoad;

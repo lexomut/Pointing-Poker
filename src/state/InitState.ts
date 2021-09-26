@@ -15,7 +15,7 @@ export const initState: GlobalState = {
     } as CurrentUser,
     game: {
         chatMessages: [],
-        gameID: '614705fa65ac5609b1bf41c7',
+        gameID: undefined,
         users: [],
         status: 'new',
         startTimer: undefined,
