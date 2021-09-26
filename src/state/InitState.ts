@@ -14,6 +14,7 @@ export const initState: GlobalState = {
         initials: 'AP',
     } as CurrentUser,
     game: {
+        title: '',
         chatMessages: [],
         gameID: undefined,
         users: [],
@@ -27,7 +28,11 @@ export const initState: GlobalState = {
             jobPosition: 'junior',
             initials: 'AP',
         } as User,
-        issues: [],
+        issues: [
+            { name: 'InitState', priority: 'Low', current: true, dealer: false, id: '111' },
+            { name: 'InitState2', priority: 'Critical', current: false, dealer: true, id: '112' },
+            { name: 'InitState3', priority: 'High', current: false, dealer: false, id: '113' },
+        ],
         cards: [],
         selectedCards: [
             {

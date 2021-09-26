@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CreateIcon from '@material-ui/icons/Create';
 import { TextField } from '@material-ui/core';
 import styles from './GameInfo.module.scss';
+import { GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
 
 export const GameInfo = () => {
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+
     const [title, setTitle] = useState('');
     const [isInput, setIsInput] = useState(false);
 
+    const handleSubmit = () => {
+        if (isInput) globalState.ws.provider?.changeValueOfGameProperty('title', title);
+        setIsInput(!isInput);
+    };
+
+    useEffect(() => {
+        setTitle(globalState.game.title);
+    }, [globalState]);
     return (
         <div className={styles.gameInfo}>
             {isInput && (
@@ -19,8 +31,11 @@ export const GameInfo = () => {
                     variant="outlined"
                 />
             )}
-            {!isInput && <h4>{title}()</h4>}
-            <CreateIcon className={styles.icon} onClick={() => setIsInput(!isInput)} />
+            {!isInput && <h4>{title}</h4>}
+            {}
+            {globalState.currentUser.role === 'dealer' && (
+                <CreateIcon className={styles.icon} onClick={() => handleSubmit()} />
+            )}
         </div>
     );
 };

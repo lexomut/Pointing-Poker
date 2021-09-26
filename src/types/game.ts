@@ -2,6 +2,7 @@ import { ChatMessage } from './ChatMessage';
 import { User } from './user';
 
 export interface Game {
+    title: string;
     gameID: string | undefined;
     status: 'new' | 'pending' | 'going' | 'over';
     users: Array<User>;
@@ -26,6 +27,7 @@ export interface Issue {
     name: string;
     current?: boolean;
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
+    dealer: boolean;
 }
 export interface Card {
     id: number;

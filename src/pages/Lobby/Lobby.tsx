@@ -15,7 +15,6 @@ import { Chat } from '../../components/chat';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    console.log(globalState.game);
 
     useEffect(() => {
         const { provider } = globalState.ws;
@@ -30,10 +29,12 @@ export const Lobby: () => JSX.Element = () => {
                     <GameInfo />
                     <ScramMaster />
                     <LinkToLobby />
-                    <div className={styles.top__buttons}>
-                        <StartButton />
-                        <CancelButton />
-                    </div>
+                    {globalState.currentUser.role === 'dealer' && (
+                        <div className={styles.top__buttons}>
+                            <StartButton />
+                            <CancelButton />
+                        </div>
+                    )}
                 </section>
                 <section className={styles.members}>
                     <h4>Members</h4>
@@ -43,14 +44,19 @@ export const Lobby: () => JSX.Element = () => {
                     <h4>Issues:</h4>
                     <IssueField classNames={styles.issues__cardField} />
                 </section>
-                <section className={styles.settings}>
-                    <h4>Game settings:</h4>
-                    <GameSettings />
-                </section>
-                <section className={styles.cards}>
-                    <h4>Add card values:</h4>
-                    <CardField classNames={styles.cards__cardField} />
-                </section>
+                {globalState.currentUser.role === 'dealer' && (
+                    <>
+                        {' '}
+                        <section className={styles.settings}>
+                            <h4>Game settings:</h4>
+                            <GameSettings />
+                        </section>
+                        <section className={styles.cards}>
+                            <h4>Add card values:</h4>
+                            <CardField classNames={styles.cards__cardField} />
+                        </section>
+                    </>
+                )}
             </div>
             <Chat />
         </div>

@@ -15,8 +15,8 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
-            const arr: Array<ChatMessage> = globalState.game.chatMessages;
-            if (arr.filter((message) => message.id !== chatMessage.id).length < 0)
+            const messages: Array<ChatMessage> = globalState.game.chatMessages;
+            if (messages.filter((message) => message.id !== chatMessage.id).length < 0)
                 return globalState;
             return {
                 ...globalState,
@@ -40,12 +40,12 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         }
         case INIT_GAME: {
             const game = action.payLoad;
-            return { ...globalState, game };
+            return { ...globalState, game: { ...globalState.game, ...game } };
         }
 
         case SET_GAME: {
             const game = action.payLoad;
-            return { ...globalState, game };
+            return { ...globalState, game: { ...globalState.game, ...game } };
         }
         case SET_CURRENT_USER: {
             const currentUser = action.payLoad;

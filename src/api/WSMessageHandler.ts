@@ -24,11 +24,11 @@ export function WSMessageHandler(message: WSMessageBody, dispatch: (arg: Action)
             });
             break;
         case SET_GAME_STATE:
-            // на будущее
-            // eslint-disable-next-line no-console
-            console.log(
-                `Пользователь ${message.user.firstName} изменил значение в поле ${message.gameProperty} на ${message.value} `,
-            );
+            if (!message.game) return;
+            dispatch({
+                type: SET_GAME,
+                payLoad: { ...message.game, [`${message.gameProperty}`]: message.value },
+            });
             break;
         default:
             break;
