@@ -3,11 +3,12 @@ import { Action, GlobalState } from '../types/GlobalState';
 import {
     ADD_CHAT_MESSAGE,
     ADD_WS_PROVIDER_TO_GLOBAL_STATE,
+    INIT_GAME,
+    SET_CURRENT_USER,
+    SET_GAME,
+    SET_POPUP,
     SET_SOCKET,
     SET_SOCKET_STATUS,
-    SET_GAME,
-    SET_CURRENT_USER,
-    INIT_GAME,
 } from './ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 
@@ -65,6 +66,10 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
                 };
             }
             return { ...globalState };
+        }
+        case SET_POPUP: {
+            const popup = action.payLoad;
+            return { ...globalState, popup };
         }
 
         default:

@@ -4,7 +4,7 @@ import { User } from './user';
 export interface Game {
     title: string;
     gameID: string | undefined;
-    status: 'new' | 'pending' | 'going' | 'over';
+    status: 'new' | 'pending' | 'going' | 'over' | 'canceled';
     users: Array<User>;
     chatMessages: Array<ChatMessage>;
     startTimer: Date | undefined;
@@ -26,9 +26,11 @@ export interface Issue {
     id: string;
     name: string;
     current?: boolean;
-    priority: 'Critical' | 'High' | 'Medium' | 'Low';
+    priority: Priority;
     dealer: boolean;
+    link?: string;
 }
+export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 export interface Card {
     id: number;
     value: number;

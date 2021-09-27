@@ -11,6 +11,7 @@ import {
     SET_GAME,
     SET_CURRENT_USER,
     INIT_GAME,
+    SET_POPUP,
 } from '../state/ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 
@@ -18,8 +19,9 @@ export interface GlobalState {
     game: Game;
     currentUser: CurrentUser;
     ws: WS;
+    popup: PopupType;
 }
-
+export type PopupType = 'createIssue' | 'kickUser' | '';
 export interface CurrentUser extends User {
     anything?: string;
 }
@@ -39,7 +41,7 @@ export interface WSProviderInterface {
     send(messObj: WSMessageBody): Promise<void>;
     sendChatMessage(text: string): Promise<void>;
     updateProviderState: (arg: GlobalState) => void;
-    changeValueOfGameProperty: (arg1: string, arg2: any) => Promise<void>;
+    changeValueOfGameProperty: (property: string, value: any) => Promise<void>;
 }
 
 export type Action =
@@ -50,4 +52,5 @@ export type Action =
     | { type: typeof SET_GAME; payLoad: Game }
     | { type: typeof SET_CURRENT_USER; payLoad: CurrentUser }
     | { type: typeof INIT_GAME; payLoad: Game }
-    | { type: typeof USER_CONNECTION; payLoad: User };
+    | { type: typeof USER_CONNECTION; payLoad: User }
+    | { type: typeof SET_POPUP; payLoad: PopupType };

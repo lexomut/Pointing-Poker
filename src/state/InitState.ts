@@ -4,6 +4,7 @@ import { Card, GameSettings } from '../types/game';
 
 export const initState: GlobalState = {
     ws: { status: false, provider: undefined },
+    popup: '',
 
     currentUser: {
         userID: '3434',

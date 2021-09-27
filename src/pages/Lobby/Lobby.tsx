@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from 'react';
+import Modal from '@material-ui/core/Modal';
 import LinkToLobby from '../../components/LinkToLobby';
 import ScramMaster from '../../components/ScramMaster';
 import styles from './Lobby.module.scss';
 import { StartButton } from '../../components/StartButton';
 import CancelButton from '../../components/CancelButton';
 import MembersField from '../../components/MembersField/MembersField';
-import IssueField from '../../components/IssueField/IssueField';
 import GameSettings from '../../components/GameSettings';
 import CardField from '../../components/CardField';
 import { GameInfo } from '../../components/GameInfo';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { Chat } from '../../components/chat';
+import { IssueCreateForm, IssueField } from '../../components';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
@@ -59,6 +60,15 @@ export const Lobby: () => JSX.Element = () => {
                 )}
             </div>
             <Chat />
+
+            <Modal
+                open={globalState.popup === 'createIssue'}
+                onClose={() => console.log('попап закрыт')}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <IssueCreateForm />
+            </Modal>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button/Button';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -9,8 +10,8 @@ export const StartButton: () => JSX.Element = () => {
     };
 
     return (
-        <button type="button" onClick={buttonHandler}>
-            Start Game
-        </button>
+        <Button color="primary" variant="contained" onClick={buttonHandler}>
+            start game
+        </Button>
     );
 };

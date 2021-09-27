@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import { IssueCard } from '../IssueCard';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+import { IssueButton } from '../buttons/IssueButton';
 
 interface IIssueField {
     classNames: string;
 }
 
-const IssueField: React.FC<IIssueField> = ({ classNames }) => {
+export const IssueField: React.FC<IIssueField> = ({ classNames }) => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const { issues } = globalState.game;
     return (
@@ -20,11 +21,11 @@ const IssueField: React.FC<IIssueField> = ({ classNames }) => {
                         priority={priority}
                         current={current}
                         dealer={dealer}
+                        id={id}
                     />
                 );
             })}
+            {globalState.currentUser.role === 'dealer' && <IssueButton />}
         </div>
     );
 };
-
-export default IssueField;

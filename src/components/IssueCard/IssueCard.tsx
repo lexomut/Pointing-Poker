@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import clsx from 'clsx';
+import { GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
+import { Issue } from '../../types/game';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -45,13 +48,16 @@ type Props = {
     name: string;
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
     dealer?: boolean;
+    id: string;
 };
 
 export const IssueCard: React.FC<Props> = (props: Props) => {
-    const { name, current, priority, dealer } = props;
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const { name, current, priority, dealer, id } = props;
     const classes = useStyles();
     const handlerClick = () => {
-        alert('add logic');
+        const newIssues = globalState.game.issues.filter((issue: Issue) => id !== issue.id);
+        globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
     };
 
     return (

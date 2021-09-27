@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Button from '@material-ui/core/Button/Button';
 import styles from './LinkToLobby.module.scss';
 import { GlobalContext } from '../../state/Context';
 import { GlobalState } from '../../types/GlobalState';
@@ -12,14 +13,15 @@ const LinkToLobby: () => JSX.Element = () => {
             <p>Link to Lobby:</p>
             <div className={styles.linkToLobby__controls}>
                 <div className={styles.linkToLobby__controls__url}>{currentURL}</div>
-                <button
+                <Button
+                    color="primary"
+                    variant="contained"
                     onClick={() => {
                         navigator.clipboard.writeText(currentURL);
                     }}
-                    type="button"
                 >
                     Copy
-                </button>
+                </Button>
             </div>
         </div>
     );
