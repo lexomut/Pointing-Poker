@@ -12,6 +12,9 @@ import {
 import { USER_CONNECTION } from '../api/Constants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
+    console.log('globalState', globalState);
+    console.log('action.type', action.type);
+    console.log('action.payLoad', action.payLoad);
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
