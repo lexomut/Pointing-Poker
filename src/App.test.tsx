@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders learn react link', () => {
     render(<App />);
-    const linkElement = screen.getByText(/pointing-poker/i);
+    const linkElement = screen.getByText(/create/i);
     expect(linkElement).toBeInTheDocument();
 });

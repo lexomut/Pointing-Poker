@@ -1,7 +1,8 @@
+import { User } from './user';
+
 export interface ChatMessage {
-    userID: string;
+    user: User;
     text: string;
     id: string;
-    userName: string;
-    date?: Date;
+    date: Date;
 }

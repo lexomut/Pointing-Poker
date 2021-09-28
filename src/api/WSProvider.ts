@@ -8,42 +8,32 @@ import { CHAT_MESSAGE, USER_CONNECTION } from './Constants';
 import { SET_SOCKET, SET_SOCKET_STATUS } from '../state/ActionTypesConstants';
 import { ChatMessage } from '../types/ChatMessage';
 
-const stub: WSMessageBody = {
-    userID: '',
-    gameID: '',
-    event: 'userConnection',
-    userName: '',
-};
-
 export class WSProvider implements WSProviderInterface {
     globalDispatch: Dispatch<Action>;
 
-    currentUser: CurrentUser;
+    currentUser: CurrentUser | undefined;
 
-    game: Game;
+    game: Game | undefined;
 
     socket: WebSocket | undefined;
 
-    constructor({ currentUser, game }: GlobalState, globalDispatch: Dispatch<Action>) {
+    constructor(globalDispatch: Dispatch<Action>) {
+        this.currentUser = undefined;
+        this.game = undefined;
         this.globalDispatch = globalDispatch;
-        this.currentUser = currentUser;
-        this.game = game;
     }
 
     async connects(): Promise<void> {
         const url = `ws://${SERVER_URL.split('://')[1]}ws`;
         try {
+            if (!this.game?.gameID) throw new Error('нет gameID');
             this.socket = new WebSocket(url);
-            // eslint-disable-next-line no-console
-            console.log('Open new WebSocket connection');
-
             this.socket.onopen = async () => {
+                if (!this.game?.gameID || !this.currentUser) return;
                 const connectionMessage: WSMessageBody = {
-                    userID: this.currentUser.userID,
-                    // eslint-disable-next-line no-underscore-dangle
+                    user: this.currentUser,
                     gameID: this.game.gameID,
                     event: USER_CONNECTION,
-                    userName: `${this.currentUser.firstName} ${this.currentUser?.firstName}` || '',
                 };
                 this.globalDispatch({ type: SET_SOCKET_STATUS, payLoad: true });
                 if (!this.socket) throw new Error();
@@ -64,11 +54,14 @@ export class WSProvider implements WSProviderInterface {
             }, 5000);
         };
         this.socket.onmessage = (event) => {
-            let message: WSMessageBody = stub;
+            if (!this.currentUser) return;
+            let message: WSMessageBody = {
+                user: this.currentUser,
+                gameID: '',
+                event: 'userConnection',
+            };
             try {
                 message = JSON.parse(event.data);
-                // eslint-disable-next-line no-console
-                console.log('Получено сообщение с типом:', message.event);
             } catch (e) {
                 // eslint-disable-next-line no-console
                 console.log(event.data, '  ', e);
@@ -88,20 +81,24 @@ export class WSProvider implements WSProviderInterface {
     }
 
     async sendChatMessage(text: string): Promise<void> {
+        if (!this.game?.gameID || !this.currentUser) return;
         const chatMessage: ChatMessage = {
-            userID: this.currentUser.userID,
+            user: this.currentUser,
             text,
             id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
-            userName: this.currentUser.firstName,
             date: new Date(),
         };
         const message: WSMessageBody = {
             gameID: this.game.gameID,
-            userID: this.currentUser.userID,
+            user: this.currentUser,
             event: CHAT_MESSAGE,
-            userName: this.currentUser.firstName,
             chatMessage,
         };
         await this.send(message);
+    }
+
+    updateProviderState(globalState: GlobalState) {
+        this.currentUser = globalState.currentUser;
+        this.game = globalState.game;
     }
 }

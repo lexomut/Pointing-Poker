@@ -7,7 +7,7 @@ type Props = {
     isObserver: boolean;
 };
 
-export const Switch: React.FC<Props> = (props: Props) => {
+export const NewSwitch: React.FC<Props> = (props: Props) => {
     const { label, setObserver, isObserver } = props;
     return (
         <FormGroup>

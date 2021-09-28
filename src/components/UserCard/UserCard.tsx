@@ -90,7 +90,7 @@ type Props = {
     size: 'large' | 'small';
 };
 
-export function UserCard(props: Props) {
+export function UserCard(props: Props): JSX.Element {
     const classes = useStyles(props);
     const { name, position, size, imgSrc, initials, currentUser, userID } = props;
     const clickHandler = (id: number) => {

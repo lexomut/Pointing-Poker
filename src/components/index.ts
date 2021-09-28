@@ -10,3 +10,4 @@ export * from './notFound';
 export * from './game';
 export * from './statistic';
 export * from './popups';
+export * from './chat';

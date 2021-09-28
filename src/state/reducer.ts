@@ -1,3 +1,4 @@
+import { ChatMessage } from '../types/ChatMessage';
 import { Action, GlobalState } from '../types/GlobalState';
 import {
     ADD_CHAT_MESSAGE,
@@ -5,12 +6,17 @@ import {
     SET_SOCKET,
     SET_SOCKET_STATUS,
     SET_GAME,
+    SET_CURRENT_USER,
+    INIT_GAME,
 } from './ActionTypesConstants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
+            const messages: Array<ChatMessage> = globalState.game.chatMessages;
+            if (messages.filter((message) => message.id !== chatMessage.id).length < 0)
+                return globalState;
             return {
                 ...globalState,
                 game: {
@@ -21,9 +27,7 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         }
         case SET_SOCKET: {
             const socket = action.payLoad;
-            const state = globalState;
-            state.ws.socket = socket;
-            return { ...state };
+            return { ...globalState, ws: { ...globalState.ws, socket } };
         }
         case SET_SOCKET_STATUS: {
             const status = action.payLoad;
@@ -31,13 +35,20 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         }
         case ADD_WS_PROVIDER_TO_GLOBAL_STATE: {
             const provider = action.payLoad;
-            const state = globalState;
-            state.ws.provider = provider;
-            return state;
+            return { ...globalState, ws: { ...globalState.ws, provider } };
         }
+        case INIT_GAME: {
+            const game = action.payLoad;
+            return { ...globalState, ...game };
+        }
+
         case SET_GAME: {
             const game = action.payLoad;
-            return { ...globalState, game };
+            return { ...globalState, ...game };
+        }
+        case SET_CURRENT_USER: {
+            const currentUser = action.payLoad;
+            return { ...globalState, currentUser };
         }
 
         default:
