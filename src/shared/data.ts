@@ -22,29 +22,99 @@ export const gameCardsData: Card[] = [
     {
         id: 1,
         value: 1,
-        scoreType: 'SP',
-        isEditable: true,
     },
     {
         id: 2,
         value: 13,
-        scoreType: 'SP',
-        isEditable: false,
+    },
+];
+
+export const fibonacciDeck: Card[] = [
+    {
+        id: 1,
+        value: 1,
+    },
+    {
+        id: 2,
+        value: 2,
+    },
+    {
+        id: 3,
+        value: 3,
+    },
+    {
+        id: 4,
+        value: 5,
+    },
+    {
+        id: 5,
+        value: 8,
+    },
+    {
+        id: 6,
+        value: 13,
+    },
+    {
+        id: 7,
+        value: 21,
+    },
+    {
+        id: 8,
+        value: 34,
+    },
+    {
+        id: 9,
+        value: 55,
+    },
+    {
+        id: 10,
+        value: 89,
+    },
+];
+
+export const powersOfTwoDeck: Card[] = [
+    {
+        id: 1,
+        value: 2,
+    },
+    {
+        id: 2,
+        value: 4,
+    },
+    {
+        id: 3,
+        value: 8,
+    },
+    {
+        id: 4,
+        value: 16,
+    },
+    {
+        id: 5,
+        value: 32,
+    },
+    {
+        id: 6,
+        value: 64,
+    },
+    {
+        id: 7,
+        value: 128,
+    },
+    {
+        id: 8,
+        value: 256,
     },
 ];
 export const statisticCardsData: StatisticCard[] = [
     {
         id: 1,
         value: 1,
-        scoreType: 'SP',
-        isEditable: true,
         voteResult: '45%',
     },
     {
         id: 2,
         value: 13,
-        scoreType: 'SP',
-        isEditable: false,
         voteResult: '10%',
     },
 ];
@@ -139,37 +209,25 @@ export const cardsDeck: Card[] = [
     {
         id: 1,
         value: 1,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 2,
         value: 2,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 3,
         value: 3,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 4,
         value: 5,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 5,
         value: 8,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 6,
         value: 13,
-        scoreType: 'SP',
-        isEditable: false,
     },
 ];

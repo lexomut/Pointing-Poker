@@ -49,3 +49,7 @@ export const GameCard: React.FC<Props> = (props: Props) => {
         </Paper>
     );
 };
+
+GameCard.defaultProps = {
+    onClick: () => {},
+};

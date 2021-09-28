@@ -4,6 +4,7 @@ import FreeBreakfastOutlinedIcon from '@material-ui/icons/FreeBreakfastOutlined'
 import { Paper } from '@material-ui/core';
 import { GameCard } from './GameCard';
 import { cardsDeck } from '../../shared/data';
+import { Card } from '../../shared/types';
 import styles from './gameCard.module.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,14 +21,14 @@ export const CardsDeck: React.FC = () => {
     const classes = useStyles({ isActiveCard: activeCardID === 0 });
     return (
         <div className={styles.demo}>
-            {cardsDeck.map((el) => {
+            {cardsDeck.map((el: Card) => {
                 return (
                     <GameCard
                         isActiveCard={el.id === activeCardID}
                         key={el.id}
                         value={el.value}
-                        isEditable={el.isEditable}
-                        scoreType={el.scoreType}
+                        isEditable={false}
+                        scoreType="SP"
                         onClick={() => {
                             setActiveCardID(el.id);
                         }}
