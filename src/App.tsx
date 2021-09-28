@@ -46,7 +46,7 @@ const App: React.FC = () => {
                                 <Route exact path="/lobby">
                                     <Chat />
                                 </Route>
-                                <Route exact path="/:id">
+                                <Route path="/:id">
                                     <Invitation />
                                 </Route>
                             </Switch>
