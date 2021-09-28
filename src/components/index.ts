@@ -10,4 +10,4 @@ export * from './notFound';
 export * from './chat';
 export * from './IssueField';
 export * from './IssueCreateForm';
-
+export * from './CardAddForm';

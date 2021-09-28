@@ -12,14 +12,17 @@ export interface Game {
     issues: Array<Issue>;
     cards: Array<Card>;
     selectedCards: Array<{ card: Card; user: User }>;
-    gameSettings: GameSettings;
+    gameSettings: GameSettingsInterface;
+    cartBackClass: string;
 }
 
-export interface GameSettings {
+export interface GameSettingsInterface {
     timer?: number;
     dealerIsPlaying: boolean;
     scoreType: string;
     shortScoreType: string;
+    isTimerNeeded: boolean;
+    changingCardInRoundEnd: boolean;
 }
 
 export interface Issue {
@@ -32,8 +35,6 @@ export interface Issue {
 }
 export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 export interface Card {
-    id: number;
-    value: number;
-    scoreType: string;
-    isEditable: boolean;
+    id: string;
+    value: string;
 }

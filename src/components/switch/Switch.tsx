@@ -3,18 +3,19 @@ import { FormControlLabel, FormGroup, Switch as MaterialSwitch } from '@material
 
 type Props = {
     label: string;
-    setObserver: React.Dispatch<React.SetStateAction<boolean>>;
-    isObserver: boolean;
+    toggle: (arg: boolean) => void;
+    value: boolean;
 };
 
 export const Switch: React.FC<Props> = (props: Props) => {
-    const { label, setObserver, isObserver } = props;
+    const { label, toggle, value } = props;
+
     return (
         <FormGroup>
             <FormControlLabel
-                control={<MaterialSwitch color="primary" size="medium" checked={isObserver} />}
+                control={<MaterialSwitch color="primary" size="medium" checked={value} />}
                 label={label}
-                onClick={() => setObserver(!isObserver)}
+                onClick={() => toggle(!value)}
                 labelPlacement="start"
             />
         </FormGroup>

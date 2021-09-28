@@ -1,10 +1,11 @@
 import { CurrentUser, GlobalState } from '../types/GlobalState';
 import { User } from '../types/user';
-import { Card, GameSettings } from '../types/game';
+import { Card, GameSettingsInterface } from '../types/game';
 
 export const initState: GlobalState = {
     ws: { status: false, provider: undefined },
     popup: '',
+    chatOpen: false,
 
     currentUser: {
         userID: '3434',
@@ -21,6 +22,7 @@ export const initState: GlobalState = {
         users: [],
         status: 'new',
         startTimer: undefined,
+        cartBackClass: 'bgMountains',
         dealer: {
             userID: '3434',
             firstName: 'Alex',
@@ -38,10 +40,8 @@ export const initState: GlobalState = {
         selectedCards: [
             {
                 card: {
-                    id: 123,
-                    value: 1,
-                    scoreType: '',
-                    isEditable: false,
+                    id: '123',
+                    value: '1',
                 } as Card,
                 user: {
                     userID: '3434',
@@ -57,6 +57,8 @@ export const initState: GlobalState = {
             dealerIsPlaying: false,
             scoreType: '',
             shortScoreType: '',
-        } as GameSettings,
+            isTimerNeeded: false,
+            changingCardInRoundEnd: false,
+        } as GameSettingsInterface,
     },
 };

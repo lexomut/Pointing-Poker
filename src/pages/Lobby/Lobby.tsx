@@ -12,7 +12,8 @@ import { GameInfo } from '../../components/GameInfo';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { Chat } from '../../components/chat';
-import { IssueCreateForm, IssueField } from '../../components';
+import { CardAddForm, IssueCreateForm, IssueField } from '../../components';
+import { CardFieldSelectCover } from '../../components/CardField/CardFieldSelectCover';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
@@ -53,21 +54,31 @@ export const Lobby: () => JSX.Element = () => {
                             <GameSettings />
                         </section>
                         <section className={styles.cards}>
+                            <h4>Select cover:</h4>
+                            <CardFieldSelectCover />
+                        </section>
+                        <section className={styles.cards}>
                             <h4>Add card values:</h4>
-                            <CardField classNames={styles.cards__cardField} />
+                            <CardField />
                         </section>
                     </>
                 )}
             </div>
-            <Chat />
+            {globalState.chatOpen && <Chat />}
 
             <Modal
                 open={globalState.popup === 'createIssue'}
-                onClose={() => console.log('попап закрыт')}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
                 <IssueCreateForm />
+            </Modal>
+            <Modal
+                open={globalState.popup === 'createCard'}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <CardAddForm />
             </Modal>
         </div>
     );

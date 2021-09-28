@@ -5,7 +5,11 @@
     flex-direction: column;
     justify-content: space-between;
 
-    label {
+    .label {
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-family: Ruda;
         font-size: 24px;
         font-style: normal;
@@ -13,6 +17,11 @@
         line-height: 30px;
         letter-spacing: 0em;
         text-align: left;
-        
+
     }
+}
+.timer{
+    display: flex;
+    width: 269px;
+    justify-content: space-between;
 }

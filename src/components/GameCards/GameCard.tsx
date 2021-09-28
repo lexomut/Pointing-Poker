@@ -4,7 +4,7 @@ import { CardMenu } from './CardMenu';
 import styles from './gameCard.module.scss';
 
 type Props = {
-    value: number;
+    value: string;
     scoreType: string;
     isEditable: boolean;
 };

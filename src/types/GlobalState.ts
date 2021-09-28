@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { Game } from './game';
+import { Game, GameSettingsInterface } from './game';
 import { WSMessageBody } from './WSMessageBody';
 import { ChatMessage } from './ChatMessage';
 import { User } from './user';
@@ -12,6 +12,7 @@ import {
     SET_CURRENT_USER,
     INIT_GAME,
     SET_POPUP,
+    SET_GAME_SETTINGS, SHOW_CHAT,
 } from '../state/ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 
@@ -20,8 +21,9 @@ export interface GlobalState {
     currentUser: CurrentUser;
     ws: WS;
     popup: PopupType;
+    chatOpen: boolean;
 }
-export type PopupType = 'createIssue' | 'kickUser' | '';
+export type PopupType = 'createIssue' | 'kickUser' | '' | 'createCard';
 export interface CurrentUser extends User {
     anything?: string;
 }
@@ -53,4 +55,6 @@ export type Action =
     | { type: typeof SET_CURRENT_USER; payLoad: CurrentUser }
     | { type: typeof INIT_GAME; payLoad: Game }
     | { type: typeof USER_CONNECTION; payLoad: User }
-    | { type: typeof SET_POPUP; payLoad: PopupType };
+    | { type: typeof SET_POPUP; payLoad: PopupType }
+    | { type: typeof SET_GAME_SETTINGS; payLoad: GameSettingsInterface }
+    | { type: typeof SHOW_CHAT; payLoad: undefined };

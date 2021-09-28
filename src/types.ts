@@ -3,7 +3,7 @@ export interface IUserCard {
     name: string;
     jobPosition: string;
     imgSrc?: string;
-    userID: number;
+    userID: string;
     initials: string;
 }
 
@@ -12,14 +12,14 @@ export interface IIssues {
     dealer: boolean;
     current: boolean;
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
-    id: number;
+    id: string;
 }
 
 export interface ICard {
-    value: number;
+    value: string;
     scoreType: string;
     isEditable: boolean;
-    id: number;
+    id: string;
 }
 
 export interface IMessage {

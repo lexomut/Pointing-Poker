@@ -6,16 +6,14 @@ import {
     INIT_GAME,
     SET_CURRENT_USER,
     SET_GAME,
+    SET_GAME_SETTINGS,
     SET_POPUP,
     SET_SOCKET,
-    SET_SOCKET_STATUS,
+    SET_SOCKET_STATUS, SHOW_CHAT,
 } from './ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
-    console.log('globalState', globalState);
-    console.log('action.type', action.type);
-    console.log('action.payLoad', action.payLoad);
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
@@ -50,7 +48,6 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
 
         case SET_GAME: {
             const game = action.payLoad;
-
             return { ...globalState, game: { ...globalState.game, ...game } };
         }
         case SET_CURRENT_USER: {
@@ -70,6 +67,14 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         case SET_POPUP: {
             const popup = action.payLoad;
             return { ...globalState, popup };
+        }
+        case SET_GAME_SETTINGS: {
+            const gameSettings = action.payLoad;
+            return { ...globalState, game: { ...globalState.game, gameSettings } };
+        }
+        case SHOW_CHAT: {
+            const chatOpen = !globalState.chatOpen;
+            return { ...globalState, chatOpen };
         }
 
         default:

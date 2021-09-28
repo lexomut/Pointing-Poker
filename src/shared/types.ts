@@ -1,12 +1,12 @@
 export interface Author {
-    id: number;
+    id: string;
     name: string;
     link: string;
 }
 
 export interface Card {
-    id: number;
-    value: number;
+    id: string;
+    value: string;
     scoreType: string;
     isEditable: boolean;
 }

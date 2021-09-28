@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, useContext } from 'react';
 import {
     AppBar,
     createStyles,
@@ -11,6 +11,9 @@ import {
 import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
 import SpeakerNotesOffIcon from '@material-ui/icons/SpeakerNotesOff';
 import pokerIcon from './assets/transparent_dark_icon.png';
+import { Action, GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
+import { SHOW_CHAT } from '../../state/ActionTypesConstants';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,8 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const Header: React.FC = () => {
+    const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
+        useContext(GlobalContext);
     const classes = useStyles();
-    const [isChatOpen, setIsChatOpen] = useState(false);
     return (
         <AppBar className={classes.header} color="primary" position="static">
             <Toolbar className={classes.header_bar}>
@@ -46,10 +50,10 @@ export const Header: React.FC = () => {
                 <IconButton
                     color="secondary"
                     onClick={() => {
-                        setIsChatOpen(!isChatOpen);
+                        dispatch({ type: SHOW_CHAT, payLoad: undefined });
                     }}
                 >
-                    {!isChatOpen ? <SpeakerNotesIcon /> : <SpeakerNotesOffIcon />}
+                    {!globalState.chatOpen ? <SpeakerNotesIcon /> : <SpeakerNotesOffIcon />}
                 </IconButton>
             </Toolbar>
         </AppBar>

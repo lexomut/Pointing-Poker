@@ -11,9 +11,11 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+    align-items: center;
 }
 
 .settings__wrap label {
+    white-space: nowrap;
   font-family: Ruda;
   font-size: 24px;
   font-style: normal;
