@@ -13,7 +13,7 @@ export const DemoGameCards: React.FC = () => {
             {gameCardsData.map((el) => {
                 return (
                     <GameCard
-                        isActiveCard={true}
+                        isActiveCard
                         key={el.id}
                         value={el.value}
                         isEditable={el.isEditable}
