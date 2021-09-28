@@ -11,7 +11,15 @@ export const DemoGameCards: React.FC = () => {
         <div className={styles.demo}>
             DEMO CARD BACK
             {gameCardsData.map((el) => {
-                return <GameCard key={el.id} value={el.value} isEditable scoreType="SP" />;
+                return (
+                    <GameCard
+                        key={el.id}
+                        value={el.value}
+                        isEditable
+                        scoreType="SP"
+                        isActiveCard={false}
+                    />
+                );
             })}
             <Paper elevation={3} className={styles.card}>
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />
@@ -20,7 +28,15 @@ export const DemoGameCards: React.FC = () => {
                 return <CardBack key={el.id} back={el.class} />;
             })}
             {powersOfTwoDeck.map((el) => {
-                return <GameCard key={el.id} value={el.value} isEditable scoreType="SP" />;
+                return (
+                    <GameCard
+                        key={el.id}
+                        value={el.value}
+                        isEditable
+                        scoreType="SP"
+                        isActiveCard={false}
+                    />
+                );
             })}
             <Paper elevation={3} className={styles.card}>
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />
@@ -29,7 +45,15 @@ export const DemoGameCards: React.FC = () => {
                 return <CardBack key={el.id} back={el.class} />;
             })}
             {fibonacciDeck.map((el) => {
-                return <GameCard key={el.id} value={el.value} isEditable scoreType="SP" />;
+                return (
+                    <GameCard
+                        key={el.id}
+                        value={el.value}
+                        isEditable
+                        scoreType="SP"
+                        isActiveCard={false}
+                    />
+                );
             })}
             <Paper elevation={3} className={styles.card}>
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />

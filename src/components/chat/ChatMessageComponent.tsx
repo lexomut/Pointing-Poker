@@ -20,8 +20,9 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
                 initials={user.firstName[0] + (user.lastName || '')[0]}
                 position={user.jobPosition ? user.jobPosition : ''}
                 imgSrc={SERVER_URL + user.imgSrc}
-                kickID={+user.userID}
+                userID={+user.userID}
                 currentUser={current}
+                size="large"
             />
         </div>
     );
