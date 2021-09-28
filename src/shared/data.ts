@@ -110,15 +110,11 @@ export const statisticCardsData: StatisticCard[] = [
     {
         id: 1,
         value: 1,
-        scoreType: 'SP',
-        isEditable: true,
         voteResult: '45%',
     },
     {
         id: 2,
         value: 13,
-        scoreType: 'SP',
-        isEditable: false,
         voteResult: '10%',
     },
 ];
@@ -213,37 +209,25 @@ export const cardsDeck: Card[] = [
     {
         id: 1,
         value: 1,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 2,
         value: 2,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 3,
         value: 3,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 4,
         value: 5,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 5,
         value: 8,
-        scoreType: 'SP',
-        isEditable: false,
     },
     {
         id: 6,
         value: 13,
-        scoreType: 'SP',
-        isEditable: false,
     },
 ];

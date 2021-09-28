@@ -10,13 +10,12 @@ export const Statistic: React.FC = () => {
         <div className={styles.demo}>
             {statisticCardsData.map((el) => {
                 return (
-                    <div className={styles.container}>
+                    <div className={styles.container} key={el.id}>
                         <GameCard
                             isActiveCard={false}
-                            key={el.id}
                             value={el.value}
-                            isEditable={el.isEditable}
-                            scoreType={el.scoreType}
+                            isEditable={false}
+                            scoreType="SP"
                         />
                         <Typography variant="subtitle1">{el.voteResult}</Typography>
                     </div>
