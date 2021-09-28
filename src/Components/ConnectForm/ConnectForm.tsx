@@ -58,7 +58,13 @@ export const ConnectForm: React.FC<IConnectForm> = ({ open, setOpen, setIsDealer
                     helperText={urlError ? 'invalid URL' : ''}
                     variant="outlined"
                 />
-                <Button color="primary" variant="contained" type="submit" disabled={isConnecting}>
+                <Button
+                    className={styles.btn}
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    disabled={isConnecting}
+                >
                     {isConnecting ? <CircularProgress /> : 'Connect'}
                 </Button>
 
