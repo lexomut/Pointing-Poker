@@ -22,3 +22,5 @@ export * from './ScramMaster';
 export * from './LinkToLobby';
 export * from './StartButton';
 export * from './MembersField';
+export * from './ConnectForm';
+export * from './NewSession';
