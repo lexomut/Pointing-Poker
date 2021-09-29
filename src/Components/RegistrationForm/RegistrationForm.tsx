@@ -1,11 +1,12 @@
 import { Avatar, Button, InputLabel, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import React, { Dispatch, useContext, useState } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import UploadButton from '../UploadButton';
 import styles from './RegistrationForm.module.scss';
 import { CreateUserInterface, createUser } from '../../api/CreateUser';
 import { NewSwitch } from '../NewSwitch';
-import { Action, CurrentUser } from '../../types/GlobalState';
+import { Action, CurrentUser, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { SET_CURRENT_USER } from '../../state/ActionTypesConstants';
 
@@ -21,7 +22,9 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
     const [isObserver, setIsObserver] = useState(false);
     const [avatar, setAvatar] = useState<File>();
     const history = useHistory();
-    const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
+    const [isConnecting, setIsConnecting] = useState(false);
+    const { dispatch, globalState }: { dispatch: Dispatch<Action>; globalState: GlobalState } =
+        useContext(GlobalContext);
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let jobPosition: 'dealer' | 'observer' | 'player';
@@ -43,11 +46,12 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                 role: jobPosition,
                 avatar,
             };
-
+            setIsConnecting(true);
             const currentUser: CurrentUser | undefined = await createUser(data);
+            setIsConnecting(false);
             if (!currentUser?.userID) return;
             dispatch({ type: SET_CURRENT_USER, payLoad: currentUser });
-            history.push('/lobby');
+            history.push(`/${globalState.game.gameID}/lobby`);
         }
     };
     const inputData = [
@@ -119,8 +123,15 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                 </div>
             </div>
             <div className={styles.buttons}>
-                <Button color="primary" className={styles.btn} type="submit" variant="contained">
-                    Confirm
+                <Button
+                    disabled={isConnecting}
+                    color="primary"
+                    className={styles.btn}
+                    type="submit"
+                    variant="contained"
+                    
+                >
+                    {isConnecting ? <CircularProgress /> : 'Confirm'}
                 </Button>
                 <Button
                     color="primary"

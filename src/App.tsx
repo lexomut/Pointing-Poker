@@ -1,7 +1,7 @@
 import React, { Dispatch, useEffect, useReducer } from 'react';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
-import { Footer, Header } from './components';
+import { Footer, Game, Header } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
@@ -11,6 +11,7 @@ import { Lobby } from './pages/Lobby/Lobby';
 import { MainPage } from './pages/MainPage/MainPage';
 import { WSProvider } from './api/WSProvider';
 import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
+
 
 const theme = createTheme({
     palette: {
@@ -45,8 +46,12 @@ export const App: React.FC = () => {
                                 <Route exact path="/">
                                     <MainPage />
                                 </Route>
-                                <Route exact path="/lobby">
+
+                                <Route exact path="/:id/lobby">
                                     <Lobby />
+                                </Route>
+                                <Route exact path="/:id/game">
+                                    <Game />
                                 </Route>
 
                                 <Route exact path="/:id">

@@ -8,6 +8,7 @@ const LinkToLobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const currentURL = `${window.location.origin}/${globalState.game.gameID}`;
 
+
     return (
         <div className={styles.linkToLobby}>
             <p>Link to Lobby:</p>

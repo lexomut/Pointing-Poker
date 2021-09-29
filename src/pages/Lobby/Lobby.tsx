@@ -81,7 +81,6 @@ export const Lobby: () => JSX.Element = () => {
                 <CardAddForm />
             </Modal>
 
-            <DemoGameCards />
         </div>
     );
 };

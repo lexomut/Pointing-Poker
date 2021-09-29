@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { Dispatch, useContext, useState } from 'react';
 import {
     Typography,
     Grid,
@@ -18,6 +18,8 @@ import { AddUserPopup } from '../popups';
 import { Statistic } from '../statistic';
 import { Timer } from '../timer';
 import { UserCard } from '../UserCard';
+import { Action, GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -49,12 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-type Props = {
-    isDealer: boolean;
-};
-
-export const Game: React.FC<Props> = (props: Props) => {
-    const { isDealer } = props;
+export const Game: React.FC = () => {
+    const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
+        useContext(GlobalContext);
+    const isDealer = globalState.currentUser.role === 'dealer';
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
