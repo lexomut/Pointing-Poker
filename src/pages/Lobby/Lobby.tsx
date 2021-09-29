@@ -1,10 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
-import LinkToLobby from '../../components/LinkToLobby';
-import ScramMaster from '../../components/ScramMaster';
-import { StartButton } from '../../components/StartButton';
 import CancelButton from '../../components/CancelButton';
-import MembersField from '../../components/MembersField/MembersField';
 import GameSettings from '../../components/GameSettings';
 import CardField from '../../components/CardField';
 import { GameInfo } from '../../components/GameInfo';
@@ -13,6 +9,10 @@ import { GlobalContext } from '../../state/Context';
 import { Chat } from '../../components/chat';
 import { CardAddForm, IssueCreateForm, IssueField } from '../../components';
 import { CardFieldSelectCover } from '../../components/CardField/CardFieldSelectCover';
+import ScramMaster from '../../components/ScramMaster';
+import LinkToLobby from '../../components/LinkToLobby';
+import { StartButton } from '../../components/StartButton';
+import MembersField from '../../components/MembersField/MembersField';
 
 import styles from './Lobby.module.scss';
 

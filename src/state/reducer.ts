@@ -9,7 +9,8 @@ import {
     SET_GAME_SETTINGS,
     SET_POPUP,
     SET_SOCKET,
-    SET_SOCKET_STATUS, SHOW_CHAT,
+    SET_SOCKET_STATUS,
+    SHOW_CHAT,
 } from './ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 

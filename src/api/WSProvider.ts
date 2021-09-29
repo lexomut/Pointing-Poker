@@ -62,7 +62,6 @@ export class WSProvider implements WSProviderInterface {
             };
             try {
                 message = JSON.parse(event.data);
-                console.log(message);
             } catch (e) {
                 // eslint-disable-next-line no-console
                 console.log(event.data, '  ', e);

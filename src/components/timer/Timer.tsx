@@ -10,11 +10,6 @@ type Props = {
 };
 export const Timer = (props: Props) => {
     const { seconds, start, onComplete } = props;
-    const timerProps = {
-        isPlaying: start,
-        size: 110,
-        strokeWidth: 10,
-    };
     const theme = useTheme();
     const renderTime = (dimension: string, time: number) => {
         return (
@@ -26,7 +21,9 @@ export const Timer = (props: Props) => {
     };
     return (
         <CountdownCircleTimer
-            {...timerProps}
+            isPlaying={start}
+            size={110}
+            strokeWidth={10}
             colors={[
                 [theme.palette.primary.main, 0.25],
                 [theme.palette.primary.light, 0.25],

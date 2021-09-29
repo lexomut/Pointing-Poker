@@ -12,7 +12,8 @@ import {
     SET_CURRENT_USER,
     INIT_GAME,
     SET_POPUP,
-    SET_GAME_SETTINGS, SHOW_CHAT,
+    SET_GAME_SETTINGS,
+    SHOW_CHAT,
 } from '../state/ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 

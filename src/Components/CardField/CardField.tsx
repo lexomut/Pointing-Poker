@@ -26,7 +26,10 @@ const CardField = () => {
                     />
                 );
             })}
-            <div onClick={() => dispatch({ type: SET_POPUP, payLoad: 'createCard' as PopupType })}>
+            <div
+                role="presentation"
+                onClick={() => dispatch({ type: SET_POPUP, payLoad: 'createCard' as PopupType })}
+            >
                 <Paper elevation={3} className={styles.card}>
                     <AddCircleOutlineIcon className={styles.plus} />
                 </Paper>

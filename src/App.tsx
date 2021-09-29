@@ -1,13 +1,12 @@
 import React, { Dispatch, useEffect, useReducer } from 'react';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
-import { Footer, Game, Header } from './components';
+import { Footer, Header, Invitation } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
 import { Action, GlobalState } from './types/GlobalState';
-import { Lobby } from './pages/Lobby/Lobby';
-import { MainPage } from './pages/MainPage/MainPage';
+import { MainPage } from './pages/MainPage';
 import { WSProvider } from './api/WSProvider';
 import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 
@@ -47,15 +46,15 @@ export const App: React.FC = () => {
                                     <MainPage />
                                 </Route>
 
-                                <Route exact path="/:id/lobby">
-                                    <Lobby />
-                                </Route>
-                                <Route exact path="/:id/game">
-                                    <Game />
-                                </Route>
+                                {/* <Route exact path="/:id/lobby"> */}
+                                {/*    <Lobby /> */}
+                                {/* </Route> */}
+                                {/* <Route exact path="/:id/game"> */}
+                                {/*    <Game /> */}
+                                {/* </Route> */}
 
-                                <Route exact path="/:id">
-                                    <MainPage />
+                                <Route path="/:id">
+                                    <Invitation />
                                 </Route>
                             </Switch>
                         </Router>
