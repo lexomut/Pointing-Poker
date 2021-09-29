@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 
-const CancelButton: () => JSX.Element = () => {
+export const CancelButton: () => JSX.Element = () => {
     const history = useHistory();
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
 
@@ -19,5 +19,3 @@ const CancelButton: () => JSX.Element = () => {
         </Button>
     );
 };
-
-export default CancelButton;

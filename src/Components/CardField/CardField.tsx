@@ -8,7 +8,7 @@ import { GlobalContext } from '../../state/Context';
 import { SET_POPUP } from '../../state/ActionTypesConstants';
 import styles from './CardField.module.scss';
 
-const CardField = () => {
+export const CardField = (): JSX.Element => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const { cards } = globalState.game;
@@ -37,5 +37,3 @@ const CardField = () => {
         </div>
     );
 };
-
-export default CardField;

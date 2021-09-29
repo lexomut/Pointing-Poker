@@ -5,7 +5,7 @@ import { User } from '../../types/user';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 
-const ScramMaster: () => JSX.Element = () => {
+export const ScramMaster: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const scramMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
     return (
@@ -26,5 +26,3 @@ const ScramMaster: () => JSX.Element = () => {
         </div>
     );
 };
-
-export default ScramMaster;

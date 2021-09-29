@@ -8,7 +8,7 @@ import { Action } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { SET_GAME_SETTINGS } from '../../state/ActionTypesConstants';
 
-const GameSettings: () => JSX.Element = () => {
+export const GameSettings: () => JSX.Element = () => {
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
     const [settings, setSettings] = useState<GameSettingsInterface>({
         timer: 120,
@@ -89,5 +89,3 @@ const GameSettings: () => JSX.Element = () => {
         </div>
     );
 };
-
-export default GameSettings;

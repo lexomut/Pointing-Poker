@@ -1,1 +1,1 @@
-export { default } from './ScramMaster';
+export { ScramMaster } from './ScramMaster';

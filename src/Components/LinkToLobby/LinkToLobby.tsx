@@ -5,7 +5,7 @@ import { GlobalState } from '../../types/GlobalState';
 
 import styles from './LinkToLobby.module.scss';
 
-const LinkToLobby: () => JSX.Element = () => {
+export const LinkToLobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const currentURL = `${window.location.origin}/${globalState.game.gameID}`;
 
@@ -27,5 +27,3 @@ const LinkToLobby: () => JSX.Element = () => {
         </div>
     );
 };
-
-export default LinkToLobby;
