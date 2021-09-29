@@ -6,12 +6,12 @@ import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
 import { Action, GlobalState } from './types/GlobalState';
-import styles from './style.module.scss';
 import { Lobby } from './pages/Lobby/Lobby';
 import { MainPage } from './pages/MainPage/MainPage';
 import { WSProvider } from './api/WSProvider';
 import { ADD_WS_PROVIDER_TO_GLOBAL_STATE } from './state/ActionTypesConstants';
 
+import styles from './style.module.scss';
 
 const theme = createTheme({
     palette: {

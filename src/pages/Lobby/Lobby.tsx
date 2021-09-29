@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import LinkToLobby from '../../components/LinkToLobby';
 import ScramMaster from '../../components/ScramMaster';
-import styles from './Lobby.module.scss';
 import { StartButton } from '../../components/StartButton';
 import CancelButton from '../../components/CancelButton';
 import MembersField from '../../components/MembersField/MembersField';
@@ -12,8 +11,10 @@ import { GameInfo } from '../../components/GameInfo';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { Chat } from '../../components/chat';
-import { CardAddForm, DemoGameCards, IssueCreateForm, IssueField } from '../../components';
+import { CardAddForm, IssueCreateForm, IssueField } from '../../components';
 import { CardFieldSelectCover } from '../../components/CardField/CardFieldSelectCover';
+
+import styles from './Lobby.module.scss';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
@@ -80,7 +81,6 @@ export const Lobby: () => JSX.Element = () => {
             >
                 <CardAddForm />
             </Modal>
-
         </div>
     );
 };

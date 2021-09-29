@@ -6,10 +6,11 @@ import React, { Dispatch, useCallback, useContext, useEffect, useState } from 'r
 import { connectGame } from '../../api/server';
 import { Game } from '../../types/game';
 import { RegistrationForm } from '../RegistrationForm';
-import styles from './ConnectForm.module.scss';
 import { INIT_GAME } from '../../state/ActionTypesConstants';
 import { Action } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+
+import styles from './ConnectForm.module.scss';
 
 interface IConnectForm {
     open: boolean;

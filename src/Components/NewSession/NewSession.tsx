@@ -5,8 +5,9 @@ import { createGame } from '../../api/server';
 import { GlobalContext } from '../../state/Context';
 import { Game } from '../../types/game';
 import { Action } from '../../types/GlobalState';
-import styles from './NewSession.module.scss';
 import { INIT_GAME } from '../../state/ActionTypesConstants';
+
+import styles from './NewSession.module.scss';
 
 interface NewSessionProps {
     setOpen: (value: React.SetStateAction<boolean>) => void;

@@ -3,12 +3,13 @@ import { useHistory } from 'react-router-dom';
 import React, { Dispatch, useContext, useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import UploadButton from '../UploadButton';
-import styles from './RegistrationForm.module.scss';
 import { CreateUserInterface, createUser } from '../../api/CreateUser';
 import { NewSwitch } from '../NewSwitch';
 import { Action, CurrentUser, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { SET_CURRENT_USER } from '../../state/ActionTypesConstants';
+
+import styles from './RegistrationForm.module.scss';
 
 interface IRegistrationForm {
     setOpen: (value: React.SetStateAction<boolean>) => void;
@@ -129,7 +130,6 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                     className={styles.btn}
                     type="submit"
                     variant="contained"
-                    
                 >
                     {isConnecting ? <CircularProgress /> : 'Confirm'}
                 </Button>

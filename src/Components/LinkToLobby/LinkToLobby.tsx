@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import Button from '@material-ui/core/Button/Button';
-import styles from './LinkToLobby.module.scss';
 import { GlobalContext } from '../../state/Context';
 import { GlobalState } from '../../types/GlobalState';
+
+import styles from './LinkToLobby.module.scss';
 
 const LinkToLobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
