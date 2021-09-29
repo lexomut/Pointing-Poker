@@ -12,7 +12,7 @@ import { GameInfo } from '../../components/GameInfo';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { Chat } from '../../components/chat';
-import { CardAddForm, IssueCreateForm, IssueField } from '../../components';
+import { CardAddForm, DemoGameCards, IssueCreateForm, IssueField } from '../../components';
 import { CardFieldSelectCover } from '../../components/CardField/CardFieldSelectCover';
 
 export const Lobby: () => JSX.Element = () => {
@@ -80,6 +80,8 @@ export const Lobby: () => JSX.Element = () => {
             >
                 <CardAddForm />
             </Modal>
+
+            <DemoGameCards />
         </div>
     );
 };
