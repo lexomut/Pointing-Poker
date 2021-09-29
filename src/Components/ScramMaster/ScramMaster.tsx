@@ -16,8 +16,9 @@ const ScramMaster: () => JSX.Element = () => {
                     initials={scramMaster.initials}
                     name={`${scramMaster.firstName} ${scramMaster.lastName}`}
                     jobPosition={scramMaster.jobPosition ? scramMaster.jobPosition : ''}
-                    userID={+scramMaster.userID}
+                    userID={scramMaster.userID}
                     currentUser={scramMaster.userID === globalState.currentUser.userID}
+                    size="large"
                 />
             ) : (
                 'download'

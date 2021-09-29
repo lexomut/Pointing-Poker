@@ -6,4 +6,5 @@ export interface User {
     jobPosition?: string;
     imgSrc?: string;
     initials: string;
+    size?: string;
 }

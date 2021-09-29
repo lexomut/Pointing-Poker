@@ -28,12 +28,13 @@ export interface GameSettingsInterface {
 export interface Issue {
     id: string;
     name: string;
-    current?: boolean;
     priority: Priority;
-    dealer: boolean;
+    current?: boolean;
+    dealer?: boolean;
     link?: string;
 }
 export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
+
 export interface Card {
     id: string;
     value: string;

@@ -3,7 +3,7 @@ import FreeBreakfastOutlinedIcon from '@material-ui/icons/FreeBreakfastOutlined'
 import { Paper } from '@material-ui/core';
 import { GameCard } from './GameCard';
 import { CardBack } from './CardBack';
-import { cardsBackground, gameCardsData } from '../../shared/data';
+import { cardsBackground, fibonacciDeck, gameCardsData, powersOfTwoDeck } from '../../shared/data';
 import styles from './gameCard.module.scss';
 
 export const DemoGameCards: React.FC = () => {
@@ -15,8 +15,43 @@ export const DemoGameCards: React.FC = () => {
                     <GameCard
                         key={el.id}
                         value={el.value}
-                        isEditable={el.isEditable}
-                        scoreType={el.scoreType}
+                        isEditable
+                        scoreType="SP"
+                        isActiveCard={false}
+                    />
+                );
+            })}
+            <Paper elevation={3} className={styles.card}>
+                <FreeBreakfastOutlinedIcon className={styles.coffee} />
+            </Paper>
+            {cardsBackground.map((el) => {
+                return <CardBack key={el.id} back={el.class} />;
+            })}
+            {powersOfTwoDeck.map((el) => {
+                return (
+                    <GameCard
+                        key={el.id}
+                        value={el.value}
+                        isEditable
+                        scoreType="SP"
+                        isActiveCard={false}
+                    />
+                );
+            })}
+            <Paper elevation={3} className={styles.card}>
+                <FreeBreakfastOutlinedIcon className={styles.coffee} />
+            </Paper>
+            {cardsBackground.map((el) => {
+                return <CardBack key={el.id} back={el.class} />;
+            })}
+            {fibonacciDeck.map((el) => {
+                return (
+                    <GameCard
+                        key={el.id}
+                        value={el.value}
+                        isEditable
+                        scoreType="SP"
+                        isActiveCard={false}
                     />
                 );
             })}

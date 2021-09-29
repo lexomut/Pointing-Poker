@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Game } from '../game';
 import { NotFound } from '../notFound';
 
 export const Invitation: React.FC = () => {
@@ -19,7 +20,7 @@ export const Invitation: React.FC = () => {
                 {isAuthorized && isDealer ? <h2>Lobby for dealer</h2> : <Redirect to="/" />}
             </Route>
             <Route exact path={`${path}/game`}>
-                {isAuthorized ? <h2>Game</h2> : <Redirect to="/" />}
+                {isAuthorized ? <Game isDealer /> : <Redirect to="/" />}
             </Route>
             <Route exact path="*">
                 <NotFound />

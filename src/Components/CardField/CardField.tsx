@@ -16,7 +16,15 @@ const CardField = () => {
     return (
         <div className={styles.cards__cardField}>
             {cards.map(({ value, id }) => {
-                return <GameCard value={value} scoreType={scoreType} isEditable={false} key={id} />;
+                return (
+                    <GameCard
+                        value={value}
+                        scoreType={scoreType}
+                        isEditable={false}
+                        key={id}
+                        isActiveCard={false}
+                    />
+                );
             })}
             <div onClick={() => dispatch({ type: SET_POPUP, payLoad: 'createCard' as PopupType })}>
                 <Paper elevation={3} className={styles.card}>

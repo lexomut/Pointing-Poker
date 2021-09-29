@@ -73,7 +73,7 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
                 <Typography color="textSecondary" variant="caption" className={classes.caption}>
                     {priority} priority
                 </Typography>
-                {dealer && (
+                {dealer && !current && (
                     <CardActions className={classes.button}>
                         <Button onClick={handlerClick}>
                             <CloseIcon />

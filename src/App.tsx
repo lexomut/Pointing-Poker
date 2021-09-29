@@ -48,6 +48,7 @@ export const App: React.FC = () => {
                                 <Route exact path="/lobby">
                                     <Lobby />
                                 </Route>
+
                                 <Route exact path="/:id">
                                     <MainPage />
                                 </Route>

@@ -20,9 +20,10 @@ const MembersField: React.FC<IMemberField> = ({ classNames }) => {
                         initials={initials}
                         name={`${firstName} ${lastName}`}
                         jobPosition={jobPosition || ''}
-                        userID={+userID}
+                        userID={userID}
                         currentUser={userID === globalState.currentUser.userID}
                         key={userID}
+                        size="large"
                     />
                 );
             })}
