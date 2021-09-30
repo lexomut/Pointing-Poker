@@ -61,7 +61,7 @@ export const Lobby: () => JSX.Element = () => {
                             <CardFieldSelectCover />
                         </section>
                         <section className={styles.cards}>
-                            <h4>Add card values:</h4>
+                            <h4>Cards values:</h4>
                             <CardField />
                         </section>
                     </>

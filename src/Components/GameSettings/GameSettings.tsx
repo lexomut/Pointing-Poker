@@ -1,5 +1,14 @@
 import TextField from '@material-ui/core/TextField/TextField';
 import React, { ChangeEvent, Dispatch, useContext, useEffect, useState } from 'react';
+import {
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    makeStyles,
+    createStyles,
+    Theme,
+} from '@material-ui/core';
 import { GameSettingsInterface } from '../../types/game';
 import { Switch } from '../switch';
 import styles from './GameSettings.module.scss';
@@ -7,6 +16,18 @@ import { Timer } from './Timer';
 import { Action } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { SET_GAME_SETTINGS } from '../../state/ActionTypesConstants';
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }),
+);
 
 export const GameSettings: () => JSX.Element = () => {
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
@@ -17,7 +38,13 @@ export const GameSettings: () => JSX.Element = () => {
         shortScoreType: '',
         isTimerNeeded: false,
         changingCardInRoundEnd: false,
+        cardsDeckType: 'fibonacci',
     });
+    const classes = useStyles();
+
+    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setSettings({ ...settings, cardsDeckType: event.target.value as string });
+    };
 
     useEffect(() => {
         dispatch({ type: SET_GAME_SETTINGS, payLoad: settings });
@@ -65,6 +92,21 @@ export const GameSettings: () => JSX.Element = () => {
                     <Switch label="" value={value} toggle={callback} />
                 </div>
             ))}
+
+            <FormControl className={classes.formControl}>
+                <InputLabel id="demo-simple-select-label">Cards Deck</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={settings.cardsDeckType}
+                    onChange={handleChange}
+                >
+                    <MenuItem value="fibonacci">Fibonacci Sequence</MenuItem>
+                    <MenuItem value="powersOfTwo">Powers of Two</MenuItem>
+                    <MenuItem value="custom">Create your deck</MenuItem>
+                </Select>
+            </FormControl>
+
             {textFields.map(({ value, label, callback }) => (
                 <div key={label} className={styles.label}>
                     {label}
