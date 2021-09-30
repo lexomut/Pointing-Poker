@@ -22,7 +22,7 @@ export const ScramMaster: () => JSX.Element = () => {
                     size="large"
                 />
             ) : (
-                'download'
+                'Loading...'
             )}
         </div>
     );
