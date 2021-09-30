@@ -12,14 +12,14 @@ export const CardField = (): JSX.Element => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const { cards } = globalState.game;
-    const { scoreType } = globalState.game.gameSettings;
+    const { shortScoreType } = globalState.game.gameSettings;
     return (
         <div className={styles.cards__cardField}>
             {cards.map(({ value, id }) => {
                 return (
                     <GameCard
                         value={value}
-                        scoreType={scoreType}
+                        scoreType={shortScoreType}
                         isEditable={false}
                         key={id}
                         isActiveCard={false}
