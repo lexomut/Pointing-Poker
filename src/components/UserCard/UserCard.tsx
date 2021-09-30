@@ -112,7 +112,9 @@ export function UserCard(props: Props): JSX.Element {
                             })}
                             src={imgSrc}
                             alt={name}
-                        />
+                        >
+                            {initials}
+                        </Avatar>
                     ) : (
                         <Avatar
                             className={clsx(classes.avatar, {

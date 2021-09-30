@@ -4,6 +4,7 @@ import { UserCard } from '../UserCard';
 import { User } from '../../types/user';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+import { SERVER_URL } from '../../api/url';
 import styles from './ScramMaster.module.scss';
 
 export const ScramMaster: () => JSX.Element = () => {
@@ -20,6 +21,7 @@ export const ScramMaster: () => JSX.Element = () => {
                     userID={scramMaster.userID}
                     currentUser={scramMaster.userID === globalState.currentUser.userID}
                     size="large"
+                    imgSrc={SERVER_URL + scramMaster.imgSrc}
                 />
             ) : (
                 'Loading...'
