@@ -10,7 +10,7 @@ export function MainPage(): JSX.Element {
     const [isDealer, setIsDealer] = useState(false);
 
     return (
-        <main className={styles.main_page}>
+        <div className={styles.main_page}>
             <div className={styles.container}>
                 <img className={styles.poker_planning} src={pokerPlanning} alt="poker-planning" />
                 <section className={styles.content}>
@@ -26,6 +26,6 @@ export function MainPage(): JSX.Element {
                     />
                 </section>
             </div>
-        </main>
+        </div>
     );
 }
