@@ -27,6 +27,7 @@
         line-height: 30px;
         letter-spacing: 0em;
         text-align: center;
+        padding-bottom: 10px;
     }
 }
 
@@ -65,6 +66,7 @@
 .members,
 .issues,
 .cards {
+    margin-bottom: 10px;
     width: 100%;
     &__cardField {
         display: flex;

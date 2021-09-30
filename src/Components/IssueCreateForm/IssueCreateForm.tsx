@@ -31,7 +31,7 @@ export const IssueCreateForm: React.FC = () => {
     };
     const inputData = [
         {
-            label: 'name:',
+            label: 'Title:',
             required: true,
             value: issue.name,
             onChange: (value: string) => {

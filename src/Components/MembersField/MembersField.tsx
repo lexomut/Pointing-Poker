@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { UserCard } from '../UserCard';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
+import { UserCard } from '../UserCard';
 
 interface IMemberField {
     classNames: string;
