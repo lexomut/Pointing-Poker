@@ -8,18 +8,18 @@ import { GlobalContext } from '../../state/Context';
 import { SET_POPUP } from '../../state/ActionTypesConstants';
 import styles from './CardField.module.scss';
 
-const CardField = () => {
+const CardField = (): JSX.Element => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
-    const { cards } = globalState.game;
-    const { scoreType } = globalState.game.gameSettings;
+    const { cards } = globalState.temporaryDialerSettings;
+    const { scoreType } = globalState.temporaryDialerSettings.gameSettings;
     return (
         <div className={styles.cards__cardField}>
             {cards.map(({ value, id }) => {
                 return (
                     <GameCard
                         value={value}
-                        scoreType={scoreType}
+                        scoreType={scoreType || ''}
                         isEditable={false}
                         key={id}
                         isActiveCard={false}

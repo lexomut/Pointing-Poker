@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { Game, GameSettingsInterface } from './game';
+import { Card, Game, GameSettingsInterface } from './game';
 import { WSMessageBody } from './WSMessageBody';
 import { ChatMessage } from './ChatMessage';
 import { User } from './user';
@@ -14,6 +14,7 @@ import {
     SET_POPUP,
     SET_GAME_SETTINGS,
     SHOW_CHAT,
+    SET_GAME_TEMP_SETTINGS,
 } from '../state/ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
 
@@ -23,10 +24,16 @@ export interface GlobalState {
     ws: WS;
     popup: PopupType;
     chatOpen: boolean;
+    temporaryDialerSettings: TemporaryDialerSettings;
 }
 export type PopupType = 'createIssue' | 'kickUser' | '' | 'createCard';
 export interface CurrentUser extends User {
     anything?: string;
+}
+export interface TemporaryDialerSettings {
+    gameSettings: GameSettingsInterface;
+    cards: Array<Card>;
+    cartBackClass: string;
 }
 
 export interface WS {
@@ -58,4 +65,8 @@ export type Action =
     | { type: typeof USER_CONNECTION; payLoad: User }
     | { type: typeof SET_POPUP; payLoad: PopupType }
     | { type: typeof SET_GAME_SETTINGS; payLoad: GameSettingsInterface }
-    | { type: typeof SHOW_CHAT; payLoad: undefined };
+    | { type: typeof SHOW_CHAT; payLoad: undefined }
+    | {
+          type: typeof SET_GAME_TEMP_SETTINGS;
+          payLoad: { property: string; value: GameSettingsInterface | Card[] | string };
+      };

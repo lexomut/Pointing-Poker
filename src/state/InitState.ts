@@ -6,6 +6,17 @@ export const initState: GlobalState = {
     ws: { status: false, provider: undefined },
     popup: '',
     chatOpen: false,
+    temporaryDialerSettings: {
+        gameSettings: {
+            dealerIsPlaying: false,
+            scoreType: '',
+            shortScoreType: '',
+            isTimerNeeded: false,
+            changingCardInRoundEnd: false,
+        } as GameSettingsInterface,
+        cards: [],
+        cartBackClass: 'bgMountains',
+    },
 
     currentUser: {
         userID: '3434',

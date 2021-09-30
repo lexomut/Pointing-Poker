@@ -7,12 +7,14 @@ import {
     SET_CURRENT_USER,
     SET_GAME,
     SET_GAME_SETTINGS,
+    SET_GAME_TEMP_SETTINGS,
     SET_POPUP,
     SET_SOCKET,
     SET_SOCKET_STATUS,
     SHOW_CHAT,
 } from './ActionTypesConstants';
 import { USER_CONNECTION } from '../api/Constants';
+import { Card, GameSettingsInterface } from '../types/game';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
     switch (action.type) {
@@ -76,6 +78,44 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         case SHOW_CHAT: {
             const chatOpen = !globalState.chatOpen;
             return { ...globalState, chatOpen };
+        }
+        case SET_GAME_TEMP_SETTINGS: {
+            switch (action.payLoad.property) {
+                case 'gameSettings': {
+                    const gameSettings: GameSettingsInterface = action.payLoad
+                        .value as GameSettingsInterface;
+                    return {
+                        ...globalState,
+                        temporaryDialerSettings: {
+                            ...globalState.temporaryDialerSettings,
+                            gameSettings,
+                        },
+                    };
+                }
+
+                case 'cards': {
+                    const cards: Array<Card> = action.payLoad.value as Array<Card>;
+                    return {
+                        ...globalState,
+                        temporaryDialerSettings: {
+                            ...globalState.temporaryDialerSettings,
+                            cards,
+                        },
+                    };
+                }
+                case 'cartBackClass': {
+                    const cartBackClass: string = action.payLoad.value as string;
+                    return {
+                        ...globalState,
+                        temporaryDialerSettings: {
+                            ...globalState.temporaryDialerSettings,
+                            cartBackClass,
+                        },
+                    };
+                }
+                default:
+                    return { ...globalState };
+            }
         }
 
         default:

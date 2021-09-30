@@ -6,7 +6,7 @@ import styles from './GameSettings.module.scss';
 import { Timer } from './Timer';
 import { Action } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
-import { SET_GAME_SETTINGS } from '../../state/ActionTypesConstants';
+import { SET_GAME_SETTINGS, SET_GAME_TEMP_SETTINGS } from '../../state/ActionTypesConstants';
 
 const GameSettings: () => JSX.Element = () => {
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
@@ -20,7 +20,10 @@ const GameSettings: () => JSX.Element = () => {
     });
 
     useEffect(() => {
-        dispatch({ type: SET_GAME_SETTINGS, payLoad: settings });
+        dispatch({
+            type: SET_GAME_TEMP_SETTINGS,
+            payLoad: { property: 'gameSettings', value: settings as GameSettingsInterface },
+        });
     }, [settings, dispatch]);
     const switchers = [
         {

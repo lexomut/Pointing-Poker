@@ -6,7 +6,7 @@ import styles from './CardAddForm.module.scss';
 import { Action, GlobalState, PopupType } from '../../types/GlobalState';
 import { Card } from '../../types/game';
 import { GlobalContext } from '../../state/Context';
-import { SET_GAME, SET_POPUP } from '../../state/ActionTypesConstants';
+import { SET_GAME_TEMP_SETTINGS, SET_POPUP } from '../../state/ActionTypesConstants';
 
 export const CardAddForm: React.FC = () => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
@@ -20,10 +20,10 @@ export const CardAddForm: React.FC = () => {
         e.preventDefault();
 
         dispatch({
-            type: SET_GAME,
+            type: SET_GAME_TEMP_SETTINGS,
             payLoad: {
-                ...globalState.game,
-                cards: [...globalState.game.cards, card],
+                property: 'cards',
+                value: [...globalState.temporaryDialerSettings.cards, card] as Card[],
             },
         });
         dispatch({ type: SET_POPUP, payLoad: '' as PopupType });
