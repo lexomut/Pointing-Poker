@@ -14,7 +14,12 @@ const CancelButton: () => JSX.Element = () => {
     };
 
     return (
-        <Button color="primary" variant="outlined" onClick={buttonHandler}>
+        <Button
+            disabled={!globalState.ws.status}
+            color="primary"
+            variant="outlined"
+            onClick={buttonHandler}
+        >
             cancel game
         </Button>
     );

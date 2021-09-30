@@ -30,7 +30,6 @@ export const IssueCreateForm: React.FC = () => {
         dispatch({ type: SET_POPUP, payLoad: '' as PopupType });
     };
 
-
     return (
         <form onSubmit={handleSubmit} className={styles.modal}>
             <div className={styles.registration}>
@@ -38,7 +37,7 @@ export const IssueCreateForm: React.FC = () => {
                     <h2>Create Issue</h2>
                 </div>
                 <div className={styles.inputs}>
-                    <InputLabel  htmlFor={'name'}>
+                    <InputLabel htmlFor="name">
                         name:
                         <TextField
                             required
@@ -46,11 +45,11 @@ export const IssueCreateForm: React.FC = () => {
                             onChange={(e) => setIssue({ ...issue, name: e.target.value })}
                             id="filled-error-helper-text"
                             type="text"
-                            name='name'
+                            name="name"
                             variant="outlined"
                         />
                     </InputLabel>
-                    <InputLabel  htmlFor={'link'}>
+                    <InputLabel htmlFor="link">
                         Link:
                         <TextField
                             required
@@ -58,7 +57,7 @@ export const IssueCreateForm: React.FC = () => {
                             onChange={(e) => setIssue({ ...issue, link: e.target.value })}
                             id="filled-error-helper-text"
                             type="text"
-                            name='link'
+                            name="link"
                             variant="outlined"
                         />
                     </InputLabel>
@@ -84,7 +83,13 @@ export const IssueCreateForm: React.FC = () => {
                 </div>
             </div>
             <div className={styles.buttons}>
-                <Button color="primary" className={styles.btn} type="submit" variant="contained">
+                <Button
+                    disabled={!globalState.ws.status}
+                    color="primary"
+                    className={styles.btn}
+                    type="submit"
+                    variant="contained"
+                >
                     Confirm
                 </Button>
                 <Button

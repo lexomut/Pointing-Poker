@@ -3,6 +3,7 @@ import { UserCard } from '../UserCard';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
+import {SERVER_URL} from "../../api/url";
 
 interface IMemberField {
     classNames: string;
@@ -14,7 +15,7 @@ const MembersField: React.FC<IMemberField> = ({ classNames }) => {
 
     return (
         <div className={classNames}>
-            {users.map(({ firstName, lastName, jobPosition, userID, initials }: User) => {
+            {users.map(({ firstName, lastName, jobPosition, userID, imgSrc, initials }: User) => {
                 return (
                     <UserCard
                         initials={initials}
@@ -24,6 +25,7 @@ const MembersField: React.FC<IMemberField> = ({ classNames }) => {
                         currentUser={userID === globalState.currentUser.userID}
                         key={userID}
                         size="large"
+                        imgSrc={SERVER_URL + imgSrc}
                     />
                 );
             })}

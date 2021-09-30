@@ -4,6 +4,7 @@ import { UserCard } from '../UserCard';
 import { User } from '../../types/user';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+import {SERVER_URL} from "../../api/url";
 
 const ScramMaster: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
@@ -19,6 +20,7 @@ const ScramMaster: () => JSX.Element = () => {
                     userID={scramMaster.userID}
                     currentUser={scramMaster.userID === globalState.currentUser.userID}
                     size="large"
+                    imgSrc={SERVER_URL + scramMaster.imgSrc}
                 />
             ) : (
                 'download'

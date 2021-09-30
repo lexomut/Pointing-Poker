@@ -21,7 +21,12 @@ export const StartButton: () => JSX.Element = () => {
     };
 
     return (
-        <Button color="primary" variant="contained" onClick={buttonHandler}>
+        <Button
+            disabled={!globalState.ws.status}
+            color="primary"
+            variant="contained"
+            onClick={buttonHandler}
+        >
             start game
         </Button>
     );

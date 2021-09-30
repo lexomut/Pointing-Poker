@@ -75,7 +75,7 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
                 </Typography>
                 {dealer && !current && (
                     <CardActions className={classes.button}>
-                        <Button onClick={handlerClick}>
+                        <Button disabled={!globalState.ws.status} onClick={handlerClick}>
                             <CloseIcon />
                         </Button>
                     </CardActions>
