@@ -14,14 +14,20 @@ export const StartButton: () => JSX.Element = () => {
             globalState.ws.provider,
         );
         if (!sendGameProperty) return;
-        await sendGameProperty('gameSettings', globalState.game.gameSettings);
-        await sendGameProperty('cards', globalState.game.cards);
+        await sendGameProperty('gameSettings', globalState.temporaryDialerSettings.gameSettings);
+        await sendGameProperty('cards', globalState.temporaryDialerSettings.cards);
+        await sendGameProperty('cartBackClass', globalState.temporaryDialerSettings.cartBackClass);
         await sendGameProperty('status', 'going');
         history.push(`/${globalState.game.gameID}/game`);
     };
 
     return (
-        <Button color="primary" variant="contained" onClick={buttonHandler}>
+        <Button
+            disabled={!globalState.ws.status}
+            color="primary"
+            variant="contained"
+            onClick={buttonHandler}
+        >
             start game
         </Button>
     );

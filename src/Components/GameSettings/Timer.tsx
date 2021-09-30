@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { ChangeEvent, useMemo, useState } from 'react';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Select from '@material-ui/core/Select/Select';
 import styles from './GameSettings.module.scss';
 
-export const Timer = ({ hendler }: { hendler: (arg: number) => void }) => {
+export const Timer = ({ handler }: { handler: (arg: number) => void }): JSX.Element => {
     const [time, setTime] = useState({ minutes: 1, seconds: 20 });
     const selectMap = useMemo(() => {
         return {
@@ -13,6 +13,15 @@ export const Timer = ({ hendler }: { hendler: (arg: number) => void }) => {
         };
     }, []);
 
+    const minutesHandler = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
+        setTime({ ...time, minutes: e.target.value as number });
+        handler(time.minutes * 50 + time.seconds);
+    };
+    const secondsHandler = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
+        setTime({ ...time, seconds: e.target.value as number });
+        handler(time.minutes * 50 + time.seconds);
+    };
+
     return (
         <div className={styles.timer}>
             <InputLabel id="minutes">minutes</InputLabel>
@@ -20,11 +29,7 @@ export const Timer = ({ hendler }: { hendler: (arg: number) => void }) => {
                 labelId="minutes"
                 id="demo-simple-select"
                 value={time.minutes}
-                // label="minutes"
-                onChange={(e) => {
-                    setTime({ ...time, minutes: e.target.value as number });
-                    hendler(time.minutes * 50 + time.seconds);
-                }}
+                onChange={minutesHandler}
             >
                 {selectMap.minutesMap.map((item) => (
                     <MenuItem key={item} value={item}>
@@ -37,12 +42,8 @@ export const Timer = ({ hendler }: { hendler: (arg: number) => void }) => {
                 labelId="seconds"
                 id="demo-simple-select"
                 value={time.seconds}
-                label=".
-"
-                onChange={(e) => {
-                    setTime({ ...time, seconds: e.target.value as number });
-                    hendler(time.minutes * 50 + time.seconds);
-                }}
+                label=""
+                onChange={secondsHandler}
             >
                 {selectMap.secondsMap.map((item) => (
                     <MenuItem key={item} value={item}>

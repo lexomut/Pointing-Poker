@@ -11,8 +11,8 @@ import { fibonacciDeck, powersOfTwoDeck } from '../../shared/data';
 export const CardField = (): JSX.Element => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
-    const { cards } = globalState.game;
-    const { shortScoreType, cardsDeckType } = globalState.game.gameSettings;
+    const { cards } = globalState.temporaryDialerSettings;
+    const { shortScoreType, cardsDeckType } = globalState.temporaryDialerSettings.gameSettings;
     let visibleCards;
     switch (cardsDeckType) {
         case 'fibonacci':
@@ -33,7 +33,7 @@ export const CardField = (): JSX.Element => {
                 return (
                     <GameCard
                         value={value}
-                        scoreType={shortScoreType}
+                        scoreType={shortScoreType || ''}
                         isEditable={false}
                         key={id}
                         isActiveCard={false}

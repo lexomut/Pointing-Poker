@@ -2,7 +2,7 @@ import React, { Dispatch, useContext } from 'react';
 import { Paper } from '@material-ui/core';
 import clsx from 'clsx';
 import styles from './gameCard.module.scss';
-import { SET_GAME } from '../../state/ActionTypesConstants';
+import { SET_GAME_TEMP_SETTINGS } from '../../state/ActionTypesConstants';
 import { GlobalContext } from '../../state/Context';
 import { Action, GlobalState } from '../../types/GlobalState';
 
@@ -14,16 +14,23 @@ export const CardBack = (props: Props): JSX.Element => {
         useContext(GlobalContext);
 
     const { back } = props;
-    const hendler = () => {
+    const handler = () => {
         dispatch({
-            type: SET_GAME,
-            payLoad: { ...globalState.game, cartBackClass: back },
+            type: SET_GAME_TEMP_SETTINGS,
+            payLoad: {
+                property: 'cartBackClass',
+                value: back,
+            },
         });
     };
     return (
-        <div className={globalState.game.cartBackClass === back ? styles.current : ''}>
+        <div
+            className={
+                globalState.temporaryDialerSettings.cartBackClass === back ? styles.current : ''
+            }
+        >
             <Paper
-                onClick={() => hendler()}
+                onClick={() => handler()}
                 elevation={3}
                 className={clsx(styles.card, styles[back])}
             />

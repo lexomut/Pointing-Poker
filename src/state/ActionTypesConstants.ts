@@ -8,3 +8,4 @@ export const INIT_GAME = 'initGame';
 export const SET_POPUP = 'setPopup';
 export const SET_GAME_SETTINGS = 'setGameSettings';
 export const SHOW_CHAT = 'showChat';
+export const SET_GAME_TEMP_SETTINGS = 'setGameTemporarySettings';

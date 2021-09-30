@@ -1,22 +1,4 @@
-<<<<<<< HEAD
-{
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "cSpell.words": [
-        "clsx",
-        "dealer",
-        "initials",
-        "issues",
-        "Lobby",
-        "planning",
-        "rating",
-        "scram",
-        "Spring"
-    ]
-}
-=======
+
 {
     "eslint.workingDirectories": [
         "src"
@@ -38,4 +20,4 @@
         "secondary"
     ]
 }
->>>>>>> main-page-with-connections
+
