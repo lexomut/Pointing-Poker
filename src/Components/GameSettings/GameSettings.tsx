@@ -25,7 +25,7 @@ export const GameSettings: () => JSX.Element = () => {
     const switchers = [
         {
             value: settings.dealerIsPlaying,
-            label: 'Scram master as player:',
+            label: 'Scrum master as player:',
             callback: (state: boolean) => setSettings({ ...settings, dealerIsPlaying: state }),
         },
         {
@@ -78,14 +78,16 @@ export const GameSettings: () => JSX.Element = () => {
                 </div>
             ))}
 
-            <div className={styles.label}>
-                Round time:
-                <Timer
-                    hendler={(seconds: number) => {
-                        setSettings({ ...settings, timer: seconds });
-                    }}
-                />
-            </div>
+            {settings.isTimerNeeded && (
+                <div className={styles.label}>
+                    Round time:
+                    <Timer
+                        hendler={(seconds: number) => {
+                            setSettings({ ...settings, timer: seconds });
+                        }}
+                    />
+                </div>
+            )}
         </div>
     );
 };
