@@ -49,7 +49,6 @@ export const Lobby: () => JSX.Element = () => {
                 </section>
                 {globalState.currentUser.role === 'dealer' && (
                     <>
-                        {' '}
                         <section className={styles.settings}>
                             <h4>Game settings:</h4>
                             <GameSettings />

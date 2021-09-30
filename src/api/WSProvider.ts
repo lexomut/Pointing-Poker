@@ -71,8 +71,8 @@ export class WSProvider implements WSProviderInterface {
     }
 
     async send(messObj: WSMessageBody): Promise<void> {
+        if (!this.socket) return;
         try {
-            if (!this.socket) return;
             await this.socket.send(JSON.stringify(messObj));
         } catch (e) {
             // eslint-disable-next-line no-console

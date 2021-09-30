@@ -29,26 +29,7 @@ export const IssueCreateForm: React.FC = () => {
         ]);
         dispatch({ type: SET_POPUP, payLoad: '' as PopupType });
     };
-    const inputData = [
-        {
-            label: 'name:',
-            required: true,
-            value: issue.name,
-            onChange: (value: string) => {
-                setIssue({ ...issue, name: value });
-            },
-            name: 'name',
-        },
-        {
-            label: 'Link',
-            required: false,
-            value: issue.link,
-            onChange: (value: string) => {
-                setIssue({ ...issue, link: value });
-            },
-            name: 'link',
-        },
-    ];
+
 
     return (
         <form onSubmit={handleSubmit} className={styles.modal}>
@@ -57,22 +38,31 @@ export const IssueCreateForm: React.FC = () => {
                     <h2>Create Issue</h2>
                 </div>
                 <div className={styles.inputs}>
-                    {inputData.map(({ label, required, value, onChange, name }) => {
-                        return (
-                            <InputLabel key={name} htmlFor={name}>
-                                {label}
-                                <TextField
-                                    required={required}
-                                    value={value}
-                                    onChange={(e) => onChange(e.target.value)}
-                                    id="filled-error-helper-text"
-                                    type="text"
-                                    name={name}
-                                    variant="outlined"
-                                />
-                            </InputLabel>
-                        );
-                    })}
+                    <InputLabel  htmlFor={'name'}>
+                        name:
+                        <TextField
+                            required
+                            value={issue.name}
+                            onChange={(e) => setIssue({ ...issue, name: e.target.value })}
+                            id="filled-error-helper-text"
+                            type="text"
+                            name='name'
+                            variant="outlined"
+                        />
+                    </InputLabel>
+                    <InputLabel  htmlFor={'link'}>
+                        Link:
+                        <TextField
+                            required
+                            value={issue.link}
+                            onChange={(e) => setIssue({ ...issue, link: e.target.value })}
+                            id="filled-error-helper-text"
+                            type="text"
+                            name='link'
+                            variant="outlined"
+                        />
+                    </InputLabel>
+
                     <InputLabel id="priority">
                         Priority
                         <Select

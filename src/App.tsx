@@ -45,14 +45,6 @@ export const App: React.FC = () => {
                                 <Route exact path="/">
                                     <MainPage />
                                 </Route>
-
-                                {/* <Route exact path="/:id/lobby"> */}
-                                {/*    <Lobby /> */}
-                                {/* </Route> */}
-                                {/* <Route exact path="/:id/game"> */}
-                                {/*    <Game /> */}
-                                {/* </Route> */}
-
                                 <Route path="/:id">
                                     <Invitation />
                                 </Route>

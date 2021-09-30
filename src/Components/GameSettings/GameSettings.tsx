@@ -81,7 +81,7 @@ const GameSettings: () => JSX.Element = () => {
             <div className={styles.label}>
                 Round time:
                 <Timer
-                    hendler={(seconds: number) => {
+                    handler={(seconds: number) => {
                         setSettings({ ...settings, timer: seconds });
                     }}
                 />

@@ -28,17 +28,6 @@ export const CardAddForm: React.FC = () => {
         });
         dispatch({ type: SET_POPUP, payLoad: '' as PopupType });
     };
-    const inputData = [
-        {
-            label: 'value:',
-            required: true,
-            value: card.value,
-            onChange: (value: string) => {
-                setCard({ ...card, value });
-            },
-            name: 'value',
-        },
-    ];
 
     return (
         <form onSubmit={handleSubmit} className={styles.modal}>
@@ -47,22 +36,18 @@ export const CardAddForm: React.FC = () => {
                     <h2>Create Card</h2>
                 </div>
                 <div className={styles.inputs}>
-                    {inputData.map(({ label, required, value, onChange, name }) => {
-                        return (
-                            <InputLabel key={name} htmlFor={name}>
-                                {label}
-                                <TextField
-                                    required={required}
-                                    value={value}
-                                    onChange={(e) => onChange(e.target.value)}
-                                    id="filled-error-helper-text"
-                                    type="text"
-                                    name={name}
-                                    variant="outlined"
-                                />
-                            </InputLabel>
-                        );
-                    })}
+                    <InputLabel htmlFor="value">
+                        Value:
+                        <TextField
+                            required
+                            value={card.value}
+                            onChange={(e) => setCard({ ...card, value: e.target.value })}
+                            id="filled-error-helper-text"
+                            type="text"
+                            name="value"
+                            variant="outlined"
+                        />
+                    </InputLabel>
                 </div>
             </div>
             <div className={styles.buttons}>

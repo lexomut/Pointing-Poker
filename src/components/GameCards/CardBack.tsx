@@ -14,7 +14,7 @@ export const CardBack = (props: Props): JSX.Element => {
         useContext(GlobalContext);
 
     const { back } = props;
-    const hendler = () => {
+    const handler = () => {
         dispatch({
             type: SET_GAME,
             payLoad: { ...globalState.game, cartBackClass: back },
@@ -23,7 +23,7 @@ export const CardBack = (props: Props): JSX.Element => {
     return (
         <div className={globalState.game.cartBackClass === back ? styles.current : ''}>
             <Paper
-                onClick={() => hendler()}
+                onClick={() => handler()}
                 elevation={3}
                 className={clsx(styles.card, styles[back])}
             />

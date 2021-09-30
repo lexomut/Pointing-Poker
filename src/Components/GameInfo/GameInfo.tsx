@@ -15,7 +15,7 @@ export const GameInfo = (): ReactElement => {
         if (isInput) globalState.ws.provider?.changeValueOfGameProperty('title', title);
         setIsInput(!isInput);
     };
-    const hendler = (event: React.KeyboardEvent) => {
+    const handler = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' || event.key === 'NumpadEnter') handleSubmit();
     };
 
@@ -32,11 +32,10 @@ export const GameInfo = (): ReactElement => {
                     id="filled-error-helper-text"
                     type="text"
                     variant="outlined"
-                    onKeyPress={hendler}
+                    onKeyPress={handler}
                 />
             )}
             {!isInput && <h4>{title}</h4>}
-            {}
             {globalState.currentUser.role === 'dealer' && (
                 <CreateIcon className={styles.icon} onClick={() => handleSubmit()} />
             )}

@@ -26,7 +26,7 @@ export const ChatInput: React.FC = () => {
         setText('');
     };
 
-    const hendler = (event: React.KeyboardEvent) => {
+    const handler = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' || event.key === 'NumpadEnter') send();
     };
 
@@ -37,7 +37,7 @@ export const ChatInput: React.FC = () => {
                     fullWidth
                     id="outlined-textarea"
                     multiline
-                    onKeyPress={hendler}
+                    onKeyPress={handler}
                     onChange={(e) => {
                         setText(e.target.value);
                     }}
