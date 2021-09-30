@@ -1,1 +1,2 @@
-export { default } from './CardField';
+export { CardField } from './CardField';
+export { CardFieldSelectCover } from './CardFieldSelectCover';

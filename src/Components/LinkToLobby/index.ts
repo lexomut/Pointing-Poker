@@ -1,1 +1,1 @@
-export { default } from './LinkToLobby';
+export { LinkToLobby } from './LinkToLobby';

@@ -1,4 +1,4 @@
-import { Avatar, Button, InputLabel, TextField } from '@material-ui/core';
+import { Avatar, Button, InputLabel, TextField, Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import React, { Dispatch, useContext, useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -94,25 +94,27 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                         </div>
                     )}
                 </div>
-                <div className={styles.inputs}>
+                <Grid container className={styles.inputs} spacing={3}>
                     {inputData.map(({ label, required, value, onChange, name }) => {
                         return (
-                            <InputLabel key={name} htmlFor={name}>
-                                {label}
-                                <TextField
-                                    required={required}
-                                    value={value}
-                                    onChange={(e) => onChange(e.target.value)}
-                                    id="filled-error-helper-text"
-                                    type="text"
-                                    name={name}
-                                    variant="outlined"
-                                />
-                            </InputLabel>
+                            <Grid item key={name}>
+                                <InputLabel htmlFor={name}>
+                                    {label}
+                                    <TextField
+                                        required={required}
+                                        value={value}
+                                        onChange={(e) => onChange(e.target.value)}
+                                        id="filled-error-helper-text"
+                                        type="text"
+                                        name={name}
+                                        variant="outlined"
+                                    />
+                                </InputLabel>
+                            </Grid>
                         );
                     })}
 
-                    <div className={styles.upload}>
+                    <Grid item className={styles.upload}>
                         <p>Image:</p>
                         <div className={styles.upload__buttons}>
                             <UploadButton setImage={setAvatar} />
@@ -120,8 +122,8 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                         <Avatar src={avatar ? URL.createObjectURL(avatar) : '/broken-image.jpg'}>
                             {firstName && lastName ? `${firstName[0]}${lastName[0]}` : null}
                         </Avatar>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             </div>
             <div className={styles.buttons}>
                 <Button

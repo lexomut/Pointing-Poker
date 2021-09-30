@@ -32,6 +32,7 @@ export interface GameSettingsInterface {
     shortScoreType: string;
     isTimerNeeded: boolean;
     changingCardInRoundEnd: boolean;
+    cardsDeckType: string;
 }
 
 export interface Issue {

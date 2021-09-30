@@ -1,17 +1,18 @@
 import React, { useContext } from 'react';
-import styles from './ScramMaster.module.scss';
+import { Typography } from '@material-ui/core';
 import { UserCard } from '../UserCard';
 import { User } from '../../types/user';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
-import {SERVER_URL} from "../../api/url";
+import { SERVER_URL } from '../../api/url';
+import styles from './ScramMaster.module.scss';
 
-const ScramMaster: () => JSX.Element = () => {
+export const ScramMaster: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const scramMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
     return (
         <div className={styles.scramMaster}>
-            <p>Scram master:</p>
+            <Typography>Scrum master:</Typography>
             {scramMaster ? (
                 <UserCard
                     initials={scramMaster.initials}
@@ -23,10 +24,8 @@ const ScramMaster: () => JSX.Element = () => {
                     imgSrc={SERVER_URL + scramMaster.imgSrc}
                 />
             ) : (
-                'download'
+                'Loading...'
             )}
         </div>
     );
 };
-
-export default ScramMaster;
