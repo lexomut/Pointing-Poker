@@ -2,11 +2,13 @@ import { Avatar } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import BlockIcon from '@material-ui/icons/Block';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { GlobalState } from '../../types/GlobalState';
+import { GlobalContext } from '../../state/Context';
 
 const useStyles = makeStyles((theme) => ({
     paper: (props: Props) => {
@@ -93,8 +95,25 @@ type Props = {
 export function UserCard(props: Props): JSX.Element {
     const classes = useStyles(props);
     const { name, jobPosition, size, imgSrc, initials, currentUser, userID } = props;
-    const clickHandler = (id: string) => {
-        return alert(`kick off ${id}`);
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+
+    const clickHandler = () => {
+        if (globalState.currentUser.role === 'dealer') {
+            globalState.ws.provider?.changeValueOfGameProperty('kickedUserid', [
+                ...globalState.game.kickedUsersID,
+                userID,
+            ]);
+            const users = globalState.game.users.filter((user) => user.userID !== userID);
+            globalState.ws.provider?.changeValueOfGameProperty('users', users);
+        }
+        if (globalState.game.vote) return;
+        globalState.ws.provider?.changeValueOfGameProperty('vote', {
+            author: globalState.currentUser,
+            yes: 1,
+            no: 0,
+            kickID: userID,
+            votedUsersID: [globalState.currentUser.userID],
+        });
     };
 
     return (
@@ -141,7 +160,7 @@ export function UserCard(props: Props): JSX.Element {
                             <Button
                                 className={classes.button}
                                 aria-label="kick"
-                                onClick={() => clickHandler(userID)}
+                                onClick={() => clickHandler()}
                             >
                                 <BlockIcon fontSize="inherit" />
                             </Button>

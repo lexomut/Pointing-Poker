@@ -13,7 +13,7 @@ import ScramMaster from '../../components/ScramMaster';
 import LinkToLobby from '../../components/LinkToLobby';
 import { StartButton } from '../../components/StartButton';
 import MembersField from '../../components/MembersField/MembersField';
-
+import { VoteForm } from '../../components/VoteForm';
 import styles from './Lobby.module.scss';
 
 export const Lobby: () => JSX.Element = () => {
@@ -24,6 +24,13 @@ export const Lobby: () => JSX.Element = () => {
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
+
+    function checkVoted() {
+        if (!globalState.game.vote) return false;
+        return globalState.game.vote.votedUsersID.every(
+            (votedUserID: string) => votedUserID !== globalState.currentUser.userID,
+        );
+    }
 
     return (
         <div className={styles.lobby}>
@@ -79,6 +86,13 @@ export const Lobby: () => JSX.Element = () => {
                 aria-describedby="simple-modal-description"
             >
                 <CardAddForm />
+            </Modal>
+            <Modal
+                open={checkVoted()}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <VoteForm />
             </Modal>
         </div>
     );

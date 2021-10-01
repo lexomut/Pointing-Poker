@@ -4,7 +4,7 @@ import { SERVER_URL } from './url';
 import { WSMessageHandler } from './WSMessageHandler';
 import { Action, CurrentUser, GlobalState, WSProviderInterface } from '../types/GlobalState';
 import { Game } from '../types/game';
-import { CHAT_MESSAGE, SET_GAME_STATE, USER_CONNECTION } from './Constants';
+import { CHAT_MESSAGE, SET_GAME_STATE, USER_CONNECTION, VOTE } from './Constants';
 import { SET_SOCKET, SET_SOCKET_STATUS } from '../state/ActionTypesConstants';
 import { ChatMessage } from '../types/ChatMessage';
 
@@ -113,6 +113,24 @@ export class WSProvider implements WSProviderInterface {
                 event: SET_GAME_STATE,
                 gameProperty,
                 value,
+            };
+            await this.send(message);
+        } catch (e) {
+            // eslint-disable-next-line no-console
+            console.log('Ошибка отправки', e);
+        }
+    }
+
+    async sendVote(vote: boolean) {
+        if (!this.game?.gameID || !this.currentUser) return;
+
+        try {
+            if (!this.game.vote) throw new Error('нет голосования');
+            const message: WSMessageBody = {
+                gameID: this.game.gameID,
+                user: this.currentUser,
+                event: VOTE,
+                vote,
             };
             await this.send(message);
         } catch (e) {
