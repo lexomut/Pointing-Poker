@@ -1,4 +1,7 @@
 .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     width: 876px;
     height: 500px;
@@ -29,6 +32,15 @@
     }
     form {
         width: 100%;
+    }
+    h4{
+        font-family: 'Ruda', sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: center;
+        padding-bottom: 10px;
     }
 }
 
@@ -128,13 +140,4 @@ input {
 .SwitchContainer {
     font-size: 24px;
     width: 190px;    
-}
-h4{
-    font-family: 'Ruda', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 30px;
-    letter-spacing: 0em;
-    text-align: center;
-    padding-bottom: 10px;
 }

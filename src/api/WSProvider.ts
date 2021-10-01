@@ -102,7 +102,7 @@ export class WSProvider implements WSProviderInterface {
         this.game = globalState.game;
     }
 
-    async changeValueOfGameProperty(gameProperty: string, value: any) {
+    async changeValueOfGameProperty(gameProperty: string, value: any): Promise<void> {
         if (!this.game?.gameID || !this.currentUser) return;
         const keys = Object.keys(this.game);
         try {

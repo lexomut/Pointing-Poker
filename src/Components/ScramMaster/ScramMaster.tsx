@@ -20,6 +20,7 @@ export const ScramMaster: () => JSX.Element = () => {
                     jobPosition={scramMaster.jobPosition ? scramMaster.jobPosition : ''}
                     userID={scramMaster.userID}
                     currentUser={scramMaster.userID === globalState.currentUser.userID}
+                    role={scramMaster.role}
                     size="large"
                     imgSrc={SERVER_URL + scramMaster.imgSrc}
                 />

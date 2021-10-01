@@ -1,19 +1,24 @@
 import React, { Dispatch, useContext } from 'react';
 import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
+import { Card } from '@material-ui/core';
 import { Game } from '../game';
 import { NotFound } from '../notFound';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { MainPage } from '../../pages/MainPage';
 import { Lobby } from '../../pages/Lobby';
-import { CardAddForm } from '../CardAddForm';
+
+import styles from './invitation.module.scss';
 
 export const Invitation: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const { path } = useRouteMatch();
     const isAuthorized = true;
+    const openModal = globalState.game.kickedUsersID.some(
+        (item: string) => item === globalState.currentUser.userID,
+    );
 
     return (
         <>
@@ -38,13 +43,13 @@ export const Invitation: React.FC = () => {
                 </Route>
             </Switch>
             <Modal
-                open={globalState.game.kickedUsersID.some(
-                    (item: string) => item === globalState.currentUser.userID,
-                )}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
+                open={openModal}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
             >
-                <h2>You kicked</h2>
+                <Card className={styles.modal}>
+                    <h4>YOU KICKED</h4>
+                </Card>
             </Modal>
         </>
     );

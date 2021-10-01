@@ -14,7 +14,7 @@ export interface Game {
     selectedCards: Array<{ card: Card; user: User }>;
     gameSettings: GameSettingsInterface;
     cartBackClass: string;
-    vote?: Vote | undefined;
+    vote: Vote | undefined;
     kickedUsersID: string[];
 }
 export interface Vote {

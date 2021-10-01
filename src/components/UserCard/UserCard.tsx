@@ -92,31 +92,37 @@ type Props = {
     initials: string;
     imgSrc?: string;
     userID: string;
+    role: 'observer' | 'player' | 'dealer';
     size: 'large' | 'small';
 };
 
 export function UserCard(props: Props): JSX.Element {
     const classes = useStyles(props);
-    const { name, jobPosition, size, imgSrc, initials, currentUser, userID } = props;
+    const { name, jobPosition, size, imgSrc, initials, currentUser, userID, role } = props;
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
 
-    const clickHandler = () => {
+    const clickHandler = async () => {
         if (globalState.currentUser.role === 'dealer') {
-            globalState.ws.provider?.changeValueOfGameProperty('kickedUserid', [
+            await globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
                 ...globalState.game.kickedUsersID,
                 userID,
             ]);
             const users = globalState.game.users.filter((user) => user.userID !== userID);
-            globalState.ws.provider?.changeValueOfGameProperty('users', users);
+            await globalState.ws.provider?.changeValueOfGameProperty('users', users);
+        } else {
+            if (globalState.game.vote) return;
+            if (globalState.game.users.length > 4) {
+                alert('player less then 3');
+                return;
+            }
+            globalState.ws.provider?.changeValueOfGameProperty('vote', {
+                author: globalState.currentUser,
+                yes: 1,
+                no: 0,
+                kickID: userID,
+                votedUsersID: [globalState.currentUser.userID],
+            });
         }
-        if (globalState.game.vote) return;
-        globalState.ws.provider?.changeValueOfGameProperty('vote', {
-            author: globalState.currentUser,
-            yes: 1,
-            no: 0,
-            kickID: userID,
-            votedUsersID: [globalState.currentUser.userID],
-        });
     };
 
     return (
@@ -161,7 +167,8 @@ export function UserCard(props: Props): JSX.Element {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        {!currentUser && (
+                        {(!(currentUser || globalState.game.vote || role === 'dealer') ||
+                            (globalState.currentUser.role === 'dealer' && role !== 'dealer')) && (
                             <Button
                                 className={classes.button}
                                 aria-label="kick"

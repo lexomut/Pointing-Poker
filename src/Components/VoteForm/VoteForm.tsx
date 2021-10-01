@@ -4,6 +4,7 @@ import styles from './VoteForm.module.scss';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 
+
 export const VoteForm: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
@@ -20,14 +21,14 @@ export const VoteForm: React.FC = () => {
                     <h2>Vote</h2>
                 </div>
             </div>
-            <h5>
+            <h4>
                 {`user ${globalState.game.vote?.author.firstName}
              enters kick user ${
                  globalState.game.users.find(
                      (user) => user.userID === globalState.game.vote?.kickID,
                  )?.firstName
              }`}
-            </h5>
+            </h4>
             <div className={styles.buttons}>
                 <Button color="primary" className={styles.btn} type="submit" variant="contained">
                     Kick user

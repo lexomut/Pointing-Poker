@@ -145,40 +145,50 @@ export const cardsBackground = [
 
 export const usersWithScore: UserWithScore[] = [
     {
+        firstName: 'Lily',
         name: 'Lily Atkins',
         jobPosition: 'Senior',
         initials: 'LA',
         userID: '1',
         score: 'In progress',
+        role: 'player',
     },
     {
+        firstName: 'Barsik',
         name: 'Barsik',
         jobPosition: 'Junior lion',
         initials: 'BB',
         userID: '2',
         score: '5 SP',
         imgSrc: 'https://placekitten.com/200/200',
+        role: 'player',
     },
     {
+        firstName: 'Mark',
         name: 'Mark Zuckerberg',
         jobPosition: 'Facebook founder',
         initials: 'MZ',
         userID: '3',
         score: '1 SP',
+        role: 'player',
     },
     {
+        firstName: 'Alex',
         name: 'Alex',
         jobPosition: 'Junior',
         initials: 'AL',
         userID: '4',
         score: '10 SP',
+        role: 'player',
     },
     {
+        firstName: 'Mike',
         name: 'Mike Smith',
         jobPosition: 'Middle',
         initials: 'MS',
         userID: '5',
         score: 'In progress',
+        role: 'player',
     },
 ];
 

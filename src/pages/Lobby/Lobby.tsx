@@ -31,6 +31,9 @@ export const Lobby: () => JSX.Element = () => {
 
     function checkVoted() {
         if (!globalState.game.vote) return false;
+        if (globalState.game.vote.kickID === globalState.currentUser.userID) return false;
+        if (globalState.game.kickedUsersID.some((id) => id !== globalState.currentUser.userID))
+            return false;
         return globalState.game.vote.votedUsersID.every(
             (votedUserID: string) => votedUserID !== globalState.currentUser.userID,
         );

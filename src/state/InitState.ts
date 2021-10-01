@@ -35,6 +35,7 @@ export const initState: GlobalState = {
         startTimer: undefined,
         cartBackClass: 'bgMountains',
         kickedUsersID: [],
+        vote: undefined,
         dealer: {
             userID: '3434',
             firstName: 'Alex',

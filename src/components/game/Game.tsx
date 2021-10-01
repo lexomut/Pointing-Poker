@@ -88,6 +88,7 @@ export const Game: React.FC = () => {
                                 name="Lily Smith"
                                 jobPosition="senior developer"
                                 currentUser
+                                role="player"
                             />
                         </Grid>
                         <Grid item>
@@ -258,7 +259,8 @@ export const Game: React.FC = () => {
                                         initials={item.initials}
                                         userID={item.userID}
                                         name={item.name}
-                                        jobPosition={item.jobPosition}
+                                        jobPosition={item.jobPosition || ''}
+                                        role={item.role}
                                     />
                                 </Grid>
                             </Grid>
