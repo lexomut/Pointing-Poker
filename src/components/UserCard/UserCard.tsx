@@ -80,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
             fontSize: '1rem',
         };
     },
+    icon: ({ size }: Props) => ({
+        fontSize: size === 'large' ? '1.5rem' : '1rem',
+    }),
 }));
 
 type Props = {
@@ -128,7 +131,9 @@ export function UserCard(props: Props): JSX.Element {
                             })}
                             src={imgSrc}
                             alt={name}
-                        />
+                        >
+                            {initials}
+                        </Avatar>
                     ) : (
                         <Avatar
                             className={clsx(classes.avatar, {
@@ -162,7 +167,7 @@ export function UserCard(props: Props): JSX.Element {
                                 aria-label="kick"
                                 onClick={() => clickHandler()}
                             >
-                                <BlockIcon fontSize="inherit" />
+                                <BlockIcon className={classes.icon} />
                             </Button>
                         )}
                     </Grid>

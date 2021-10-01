@@ -3,11 +3,27 @@ import React, { Dispatch, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+import { fibonacciDeck, powersOfTwoDeck } from '../../shared/data';
+import { Card } from '../../types/game';
 
 export const StartButton: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const history = useHistory();
+    let visibleCards: Card[] = [];
+    switch (globalState.temporaryDialerSettings.gameSettings.cardsDeckType) {
+        case 'fibonacci':
+            visibleCards = fibonacciDeck;
+            break;
+        case 'powersOfTwo':
+            visibleCards = powersOfTwoDeck;
+            break;
+        case 'custom':
+            visibleCards = globalState.temporaryDialerSettings.cards;
+            break;
+        default:
+            visibleCards = fibonacciDeck;
+    }
 
     const buttonHandler = async () => {
         const sendGameProperty = globalState.ws.provider?.changeValueOfGameProperty.bind(
@@ -15,7 +31,7 @@ export const StartButton: () => JSX.Element = () => {
         );
         if (!sendGameProperty) return;
         await sendGameProperty('gameSettings', globalState.temporaryDialerSettings.gameSettings);
-        await sendGameProperty('cards', globalState.temporaryDialerSettings.cards);
+        await sendGameProperty('cards', visibleCards);
         await sendGameProperty('cartBackClass', globalState.temporaryDialerSettings.cartBackClass);
         await sendGameProperty('status', 'going');
         history.push(`/${globalState.game.gameID}/game`);

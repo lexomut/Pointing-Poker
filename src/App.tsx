@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useReducer } from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
 import { Footer, Header, Invitation } from './components';
 import { GlobalContext } from './state/Context';
@@ -40,16 +40,14 @@ export const App: React.FC = () => {
                 <MuiThemeProvider theme={theme}>
                     <Header />
                     <main className={styles.content}>
-                        <Router>
-                            <Switch>
-                                <Route exact path="/">
-                                    <MainPage />
-                                </Route>
-                                <Route path="/:id">
-                                    <Invitation />
-                                </Route>
-                            </Switch>
-                        </Router>
+                        <Switch>
+                            <Route exact path="/">
+                                <MainPage />
+                            </Route>
+                            <Route path="/:id">
+                                <Invitation />
+                            </Route>
+                        </Switch>
                     </main>
                     <Footer />
                 </MuiThemeProvider>

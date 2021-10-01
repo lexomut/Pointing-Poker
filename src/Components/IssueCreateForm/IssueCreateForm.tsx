@@ -38,7 +38,7 @@ export const IssueCreateForm: React.FC = () => {
                 </div>
                 <div className={styles.inputs}>
                     <InputLabel htmlFor="name">
-                        name:
+                        Title:
                         <TextField
                             required
                             value={issue.name}

@@ -1,19 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
-import CancelButton from '../../components/CancelButton';
-import GameSettings from '../../components/GameSettings';
-import CardField from '../../components/CardField';
-import { GameInfo } from '../../components/GameInfo';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
-import { Chat } from '../../components/chat';
-import { CardAddForm, IssueCreateForm, IssueField } from '../../components';
-import { CardFieldSelectCover } from '../../components/CardField/CardFieldSelectCover';
-import ScramMaster from '../../components/ScramMaster';
-import LinkToLobby from '../../components/LinkToLobby';
-import { StartButton } from '../../components/StartButton';
-import MembersField from '../../components/MembersField/MembersField';
-import { VoteForm } from '../../components/VoteForm';
+import {
+    VoteForm,
+    CardAddForm,
+    IssueCreateForm,
+    IssueField,
+    CancelButton,
+    GameSettings,
+    CardField,
+    GameInfo,
+    CardFieldSelectCover,
+    Chat,
+    ScramMaster,
+    LinkToLobby,
+    StartButton,
+    MembersField,
+} from '../../components';
 import styles from './Lobby.module.scss';
 
 export const Lobby: () => JSX.Element = () => {
@@ -65,7 +69,7 @@ export const Lobby: () => JSX.Element = () => {
                             <CardFieldSelectCover />
                         </section>
                         <section className={styles.cards}>
-                            <h4>Add card values:</h4>
+                            <h4>Cards values:</h4>
                             <CardField />
                         </section>
                     </>

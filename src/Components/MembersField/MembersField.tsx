@@ -3,13 +3,13 @@ import { UserCard } from '../UserCard';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
-import {SERVER_URL} from "../../api/url";
+import { SERVER_URL } from "../../api/url";
 
 interface IMemberField {
     classNames: string;
 }
 
-const MembersField: React.FC<IMemberField> = ({ classNames }) => {
+export const MembersField: React.FC<IMemberField> = ({ classNames }) => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const users = globalState.game.users.filter((user: User) => user.role !== 'dealer');
 
@@ -32,5 +32,3 @@ const MembersField: React.FC<IMemberField> = ({ classNames }) => {
         </div>
     );
 };
-
-export default MembersField;

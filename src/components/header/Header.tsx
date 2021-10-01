@@ -1,4 +1,5 @@
 import React, { Dispatch, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
     AppBar,
     createStyles,
@@ -41,20 +42,23 @@ export const Header: React.FC = () => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const classes = useStyles();
+    const location = useLocation();
     return (
         <AppBar className={classes.header} color="primary" position="static">
             <Toolbar className={classes.header_bar}>
                 <Fab className={classes.fab}>
                     <img className={classes.img} src={pokerIcon} alt="pointing poker" />
                 </Fab>
-                <IconButton
-                    color="secondary"
-                    onClick={() => {
-                        dispatch({ type: SHOW_CHAT, payLoad: undefined });
-                    }}
-                >
-                    {!globalState.chatOpen ? <SpeakerNotesIcon /> : <SpeakerNotesOffIcon />}
-                </IconButton>
+                {location.pathname !== '/' && (
+                    <IconButton
+                        color="secondary"
+                        onClick={() => {
+                            dispatch({ type: SHOW_CHAT, payLoad: undefined });
+                        }}
+                    >
+                        {!globalState.chatOpen ? <SpeakerNotesIcon /> : <SpeakerNotesOffIcon />}
+                    </IconButton>
+                )}
             </Toolbar>
         </AppBar>
     );

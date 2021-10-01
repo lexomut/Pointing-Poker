@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import pokerPlanning from '../../assets/images/poker-planning.svg';
-import { ConnectForm } from '../../components/ConnectForm';
-import { NewSession } from '../../components/NewSession';
-
+import { ConnectForm, NewSession } from '../../components';
 import styles from './MainPage.module.scss';
 
 export function MainPage(): JSX.Element {
@@ -12,7 +10,7 @@ export function MainPage(): JSX.Element {
     const [isDealer, setIsDealer] = useState(false);
 
     return (
-        <main className={styles.main_page}>
+        <div className={styles.main_page}>
             <div className={styles.container}>
                 <img className={styles.poker_planning} src={pokerPlanning} alt="poker-planning" />
                 <section className={styles.content}>
@@ -28,6 +26,6 @@ export function MainPage(): JSX.Element {
                     />
                 </section>
             </div>
-        </main>
+        </div>
     );
 }

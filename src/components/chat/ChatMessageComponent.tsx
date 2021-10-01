@@ -12,12 +12,13 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
 }) => {
     const { text, user }: { text: string; user: User } = message;
     const current = currentUserID === user.userID;
+
     return (
         <div className={styles.chat__message}>
             <ChatText text={text} current={current} />
             <UserCard
-                name={user.firstName}
-                initials={user.firstName[0] + (user.lastName || '')[0]}
+                name={`${user.firstName} ${user.lastName}`}
+                initials={`${user.firstName[0]}${(user.lastName || '')[0]}`}
                 jobPosition={user.jobPosition ? user.jobPosition : ''}
                 imgSrc={SERVER_URL + user.imgSrc}
                 userID={user.userID}
