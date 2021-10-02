@@ -9,8 +9,8 @@ import {
     Button,
     Paper,
     Box,
+    Modal,
 } from '@material-ui/core';
-import { issues } from '../../shared/data';
 import { IssueButton } from '../buttons';
 import { CardsDeck } from '../GameCards';
 import { IssueCard } from '../IssueCard';
@@ -21,11 +21,11 @@ import { UserCard } from '../UserCard';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
+import { IssueCreateForm } from '..';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         mainContainer: {
-            height: '100%',
             color: theme.palette.primary.dark,
         },
         rightBorder: {
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         minWidth: {
             minWidth: 125,
+            cursor: 'default',
         },
         rightContainer: {
             height: '50%',
@@ -61,11 +62,8 @@ export const Game: React.FC = () => {
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
     const scrumMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
-    console.log('globalState.currentUser.userID:', globalState.currentUser.userID);
-    console.log('scrumMaster.userID:', scrumMaster?.userID);
-    console.log(globalState.currentUser);
-    console.log(globalState.currentUser.userID === scrumMaster?.userID);
-
+    const { issues } = globalState.game;
+    const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
     return (
         <>
             <Grid container className={classes.mainContainer}>
@@ -248,11 +246,53 @@ export const Game: React.FC = () => {
                             <Typography variant="subtitle1">Score:</Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant="subtitle1">Players:</Typography>
+                            <Typography variant="subtitle1">Participants:</Typography>
                         </Grid>
                     </Grid>
+                    {dealerIsPlaying && (
+                        <Grid item container justifyContent="center">
+                            <Typography variant="subtitle1">Dealer</Typography>
+                        </Grid>
+                    )}
+                    {dealerIsPlaying &&
+                        globalState.game.selectedCards
+                            .filter((item) => item.user.role === 'dealer')
+                            .map((item) => {
+                                return (
+                                    <Grid
+                                        key={item.user.userID}
+                                        item
+                                        container
+                                        justifyContent="space-around"
+                                    >
+                                        <Grid item>
+                                            <Button
+                                                color="primary"
+                                                variant="outlined"
+                                                className={classes.minWidth}
+                                            >
+                                                {`${item.card.value} ${globalState.game.gameSettings.shortScoreType}`}
+                                            </Button>
+                                        </Grid>
+                                        <Grid item>
+                                            <UserCard
+                                                size="small"
+                                                initials={item.user.initials}
+                                                userID={item.user.userID}
+                                                name={`${item.user.firstName} ${
+                                                    item.user.lastName || ''
+                                                }`}
+                                                jobPosition={item.user.jobPosition || ''}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                );
+                            })}
+                    <Grid item container justifyContent="center">
+                        <Typography variant="subtitle1">Players</Typography>
+                    </Grid>
                     {globalState.game.selectedCards
-                        .filter((item) => item.user.role === 'dealer')
+                        .filter((item) => item.user.role === 'player')
                         .map((item) => {
                             return (
                                 <Grid
@@ -262,14 +302,12 @@ export const Game: React.FC = () => {
                                     justifyContent="space-around"
                                 >
                                     <Grid item>
-                                        <Typography variant="h6">Dealer:</Typography>
                                         <Button
                                             color="primary"
                                             variant="outlined"
-                                            onClick={() => alert('Put logic here')}
                                             className={classes.minWidth}
                                         >
-                                            {item.card.value}
+                                            {`${item.card.value} ${globalState.game.gameSettings.shortScoreType}`}
                                         </Button>
                                     </Grid>
                                     <Grid item>
@@ -277,17 +315,65 @@ export const Game: React.FC = () => {
                                             size="small"
                                             initials={item.user.initials}
                                             userID={item.user.userID}
-                                            name={`${item.user.firstName} ${item.user.lastName}`}
+                                            name={`${item.user.firstName} ${
+                                                item.user.lastName || ''
+                                            }`}
                                             jobPosition={item.user.jobPosition || ''}
                                         />
                                     </Grid>
                                 </Grid>
                             );
                         })}
+                    {globalState.game.users.find((item) => item.role === 'observer') && (
+                        <Grid item container justifyContent="center">
+                            <Typography variant="subtitle1">Observers</Typography>
+                        </Grid>
+                    )}
+                    {globalState.game.users.some((item) => item.role === 'observer') &&
+                        globalState.game.selectedCards
+                            .filter((item) => item.user.role === 'observer')
+                            .map((item) => {
+                                return (
+                                    <Grid
+                                        key={item.user.userID}
+                                        item
+                                        container
+                                        justifyContent="space-around"
+                                    >
+                                        <Grid item>
+                                            <Button
+                                                color="primary"
+                                                variant="outlined"
+                                                className={classes.minWidth}
+                                            >
+                                                {`${item.card.value} ${globalState.game.gameSettings.shortScoreType}`}
+                                            </Button>
+                                        </Grid>
+                                        <Grid item>
+                                            <UserCard
+                                                size="small"
+                                                initials={item.user.initials}
+                                                userID={item.user.userID}
+                                                name={`${item.user.firstName} ${
+                                                    item.user.lastName || ''
+                                                }`}
+                                                jobPosition={item.user.jobPosition || ''}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                );
+                            })}
                 </Grid>
             </Grid>
 
             {isDealer && <AddUserPopup name="Mike" />}
+            <Modal
+                open={globalState.popup === 'createIssue'}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <IssueCreateForm />
+            </Modal>
         </>
     );
 };

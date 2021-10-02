@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
                 height: 60,
                 boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
                 marginBottom: 10,
+                userSelect: 'none',
             };
         }
         return {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
             height: 45,
             boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
             marginBottom: 10,
+            userSelect: 'none',
         };
     },
     small: {

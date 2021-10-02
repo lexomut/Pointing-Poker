@@ -1,5 +1,6 @@
 import { Author, StatisticCard, UserWithScore } from './types';
 import { Card, Issue } from '../types/game';
+import { User } from '../types/user';
 
 export const authors: Author[] = [
     {
@@ -179,6 +180,41 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'MS',
         userID: '5',
         score: 'In progress',
+    },
+];
+
+export const selectedCards: Array<{ card: Card; user: User }> = [
+    {
+        card: { id: '1', value: '1' },
+        user: {
+            firstName: 'Lily',
+            lastName: 'Atkins',
+            role: 'dealer',
+            jobPosition: 'Senior',
+            initials: 'LA',
+            userID: '1',
+        },
+    },
+    {
+        card: { id: '2', value: '2' },
+        user: {
+            firstName: 'Barsik',
+            role: 'player',
+            jobPosition: 'Junior lion',
+            initials: 'BB',
+            userID: '2',
+            imgSrc: 'https://placekitten.com/200/200',
+        },
+    },
+    {
+        card: { id: '3', value: '3' },
+        user: {
+            firstName: 'Alex',
+            role: 'observer',
+            jobPosition: 'Junior',
+            initials: 'AL',
+            userID: '4',
+        },
     },
 ];
 
