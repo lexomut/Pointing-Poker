@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
     icon: ({ size }: Props) => ({
         fontSize: size === 'large' ? '1.5rem' : '1rem',
     }),
+    current: {
+        backgroundColor: theme.palette.secondary.main,
+    },
 }));
 
 type Props = {
@@ -101,7 +104,7 @@ export function UserCard(props: Props): JSX.Element {
     };
 
     return (
-        <Paper className={classes.paper}>
+        <Paper className={clsx(classes.paper, { [classes.current]: currentUser })}>
             <Grid container spacing={1} alignItems="center" wrap="nowrap">
                 <Grid item>
                     {imgSrc ? (

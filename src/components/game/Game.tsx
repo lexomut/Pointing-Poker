@@ -10,7 +10,7 @@ import {
     Paper,
     Box,
 } from '@material-ui/core';
-import { issues, usersWithScore } from '../../shared/data';
+import { issues } from '../../shared/data';
 import { IssueButton } from '../buttons';
 import { CardsDeck } from '../GameCards';
 import { IssueCard } from '../IssueCard';
@@ -20,6 +20,7 @@ import { Timer } from '../timer';
 import { UserCard } from '../UserCard';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+import { User } from '../../types/user';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -59,6 +60,11 @@ export const Game: React.FC = () => {
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
+    const scrumMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
+    console.log('globalState.currentUser.userID:', globalState.currentUser.userID);
+    console.log('scrumMaster.userID:', scrumMaster?.userID);
+    console.log(globalState.currentUser);
+    console.log(globalState.currentUser.userID === scrumMaster?.userID);
 
     return (
         <>
@@ -81,14 +87,20 @@ export const Game: React.FC = () => {
                     <Grid item container alignItems="center" spacing={10} justifyContent="center">
                         <Grid item>
                             <Typography variant="caption">Scrum master:</Typography>
-                            <UserCard
-                                size="large"
-                                initials="LS"
-                                userID="3"
-                                name="Lily Smith"
-                                jobPosition="senior developer"
-                                currentUser
-                            />
+                            {scrumMaster ? (
+                                <UserCard
+                                    size="large"
+                                    initials={scrumMaster.initials}
+                                    userID={scrumMaster.userID}
+                                    name={`${scrumMaster.firstName} ${scrumMaster.lastName}`}
+                                    jobPosition={scrumMaster.jobPosition || ''}
+                                    currentUser={
+                                        globalState.currentUser.userID === scrumMaster.userID
+                                    }
+                                />
+                            ) : (
+                                <Typography variant="h6">Loading...</Typography>
+                            )}
                         </Grid>
                         <Grid item>
                             <Button
@@ -239,31 +251,39 @@ export const Game: React.FC = () => {
                             <Typography variant="subtitle1">Players:</Typography>
                         </Grid>
                     </Grid>
-                    {usersWithScore.map((item) => {
-                        return (
-                            <Grid key={item.userID} item container justifyContent="space-around">
-                                <Grid item>
-                                    <Button
-                                        color="primary"
-                                        variant="outlined"
-                                        onClick={() => alert('Put logic here')}
-                                        className={classes.minWidth}
-                                    >
-                                        {item.score}
-                                    </Button>
+                    {globalState.game.selectedCards
+                        .filter((item) => item.user.role === 'dealer')
+                        .map((item) => {
+                            return (
+                                <Grid
+                                    key={item.user.userID}
+                                    item
+                                    container
+                                    justifyContent="space-around"
+                                >
+                                    <Grid item>
+                                        <Typography variant="h6">Dealer:</Typography>
+                                        <Button
+                                            color="primary"
+                                            variant="outlined"
+                                            onClick={() => alert('Put logic here')}
+                                            className={classes.minWidth}
+                                        >
+                                            {item.card.value}
+                                        </Button>
+                                    </Grid>
+                                    <Grid item>
+                                        <UserCard
+                                            size="small"
+                                            initials={item.user.initials}
+                                            userID={item.user.userID}
+                                            name={`${item.user.firstName} ${item.user.lastName}`}
+                                            jobPosition={item.user.jobPosition || ''}
+                                        />
+                                    </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <UserCard
-                                        size="small"
-                                        initials={item.initials}
-                                        userID={item.userID}
-                                        name={item.name}
-                                        jobPosition={item.jobPosition}
-                                    />
-                                </Grid>
-                            </Grid>
-                        );
-                    })}
+                            );
+                        })}
                 </Grid>
             </Grid>
 
