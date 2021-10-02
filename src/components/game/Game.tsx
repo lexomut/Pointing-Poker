@@ -76,7 +76,7 @@ export const Game: React.FC = () => {
                     className={clsx(classes.rightBorder, classes.column)}
                 >
                     <Grid item>
-                        <Typography variant="h4">Name of the game/session</Typography>
+                        <Typography variant="h4">{globalState.game.title}</Typography>
                     </Grid>
                     <Grid item container alignItems="center" spacing={10} justifyContent="center">
                         <Grid item>
