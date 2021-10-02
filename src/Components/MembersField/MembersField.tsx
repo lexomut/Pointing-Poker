@@ -3,7 +3,7 @@ import { UserCard } from '../UserCard';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
-import { SERVER_URL } from "../../api/url";
+import { SERVER_URL } from '../../api/url';
 
 interface IMemberField {
     classNames: string;
