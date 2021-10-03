@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
+import { useHistory } from 'react-router-dom';
+import { Card } from '@material-ui/core';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import {
@@ -19,15 +21,45 @@ import {
     MembersField,
 } from '../../components';
 import styles from './Lobby.module.scss';
+import { User } from '../../types/user';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const history = useHistory();
+    const isPaddingUser = globalState.game.pendingUsers.some(
+        (user: User) => globalState.currentUser.userID === user.userID,
+    );
 
     useEffect(() => {
         const { provider } = globalState.ws;
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
+
+    useEffect(() => {
+        function sendRequestEnterToGame() {
+            globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
+                ...globalState.game.pendingUsers,
+                globalState.currentUser,
+            ]);
+        }
+        function passNext() {
+            if (globalState.game.status === 'going') {
+                if (isPaddingUser) return;
+                if (
+                    globalState.game.users.every(
+                        (user: User) => globalState.currentUser.userID !== user.userID,
+                    )
+                ) {
+                    sendRequestEnterToGame();
+                    return;
+                }
+
+                history.push(`/${globalState.game.gameID}/game`);
+            }
+        }
+        passNext();
+    }, [globalState, isPaddingUser, history]);
 
     function checkVoted() {
         if (!globalState.game.vote) return false;
@@ -100,6 +132,15 @@ export const Lobby: () => JSX.Element = () => {
                 aria-describedby="simple-modal-description"
             >
                 <VoteForm />
+            </Modal>
+            <Modal
+                open={isPaddingUser}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+            >
+                <Card className={styles.modal}>
+                    <h4>please wait until they let you in</h4>
+                </Card>
             </Modal>
         </div>
     );

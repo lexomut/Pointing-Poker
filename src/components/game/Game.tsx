@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { Dispatch, useContext, useState } from 'react';
+import React, { Dispatch, useContext, useEffect, useState } from 'react';
 import {
     Typography,
     Grid,
@@ -10,6 +10,7 @@ import {
     Paper,
     Box,
 } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
 import { issues, usersWithScore } from '../../shared/data';
 import { IssueButton } from '../buttons';
 import { CardsDeck } from '../GameCards';
@@ -20,6 +21,8 @@ import { Timer } from '../timer';
 import { UserCard } from '../UserCard';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
+import { User } from '../../types/user';
+import { LetInUserToGameForm } from '../LetInUserToGameForm';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -59,6 +62,11 @@ export const Game: React.FC = () => {
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
+    useEffect(() => {
+        const { provider } = globalState.ws;
+        provider?.updateProviderState(globalState);
+        if (!globalState.ws.socket) provider?.connects();
+    }, [globalState]);
 
     return (
         <>
@@ -270,6 +278,17 @@ export const Game: React.FC = () => {
             </Grid>
 
             {isDealer && <AddUserPopup name="Mike" />}
+            <Modal
+                open={globalState.game.pendingUsers.length > 0 && isDealer}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div>
+                    {globalState.game.pendingUsers.map((user: User) => {
+                        return <LetInUserToGameForm key={user.userID} user={user} />;
+                    })}
+                </div>
+            </Modal>
         </>
     );
 };

@@ -17,14 +17,16 @@ export const Invitation: React.FC = (): JSX.Element => {
     const history = useHistory();
     const [isTimeout, setIsTimeout] = useState(false);
     const { path } = useRouteMatch();
-    const isAuthorized = true;
+
     const openModal = globalState.game.kickedUsersID.some(
         (item: string) => item === globalState.currentUser.userID,
     );
+    const isAuthorized = !openModal;
     if (openModal && !isTimeout) {
         setIsTimeout(true);
         setTimeout(() => history.push(`/`), 6000);
     }
+
     return (
         <>
             {' '}

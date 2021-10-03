@@ -16,6 +16,7 @@ export interface Game {
     cartBackClass: string;
     vote: Vote | undefined;
     kickedUsersID: string[];
+    pendingUsers: User[];
 }
 export interface Vote {
     author: User;
