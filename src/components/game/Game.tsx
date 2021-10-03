@@ -296,8 +296,7 @@ export const Game: React.FC = () => {
                                 </Grid>
                             </Grid>
                         )}
-                        {/* TODO CARDS FOR USERS and DEALER */}
-                        {!isDealer && (
+                        {(!isDealer || dealerIsPlaying) && (
                             <Grid item container justifyContent="center">
                                 <CardsDeck />
                             </Grid>
