@@ -1,5 +1,5 @@
 import { Dispatch } from 'react';
-import { Card, Game, GameSettingsInterface } from './game';
+import { Card, Game, GameSettingsInterface, Issue } from './game';
 import { WSMessageBody } from './WSMessageBody';
 import { ChatMessage } from './ChatMessage';
 import { User } from './user';
@@ -52,6 +52,7 @@ export interface WSProviderInterface {
     sendChatMessage(text: string): Promise<void>;
     updateProviderState: (arg: GlobalState) => void;
     changeValueOfGameProperty: (property: string, value: any) => Promise<void>;
+    changeValueOfIssueProperty: (property: keyof Issue, id: string, value: string) => Promise<void>;
 }
 
 export type Action =

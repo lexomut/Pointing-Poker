@@ -42,6 +42,7 @@ export interface Issue {
     current?: boolean;
     dealer?: boolean;
     link?: string;
+    score: string;
 }
 export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 

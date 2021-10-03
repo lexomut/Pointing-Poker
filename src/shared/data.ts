@@ -224,30 +224,35 @@ export const issues: Issue[] = [
         current: true,
         name: 'Issue 123',
         priority: 'Critical',
+        score: '-',
     },
     {
         id: '4',
         current: false,
         name: 'Issue 135',
         priority: 'High',
+        score: '-',
     },
     {
         id: '3',
         current: false,
         name: 'Issue 144',
         priority: 'Medium',
+        score: '-',
     },
     {
         id: '2',
         current: false,
         name: 'Issue 162',
         priority: 'Low',
+        score: '-',
     },
     {
         id: '1',
         current: false,
         name: 'Issue 163',
         priority: 'Low',
+        score: '-',
     },
 ];
 

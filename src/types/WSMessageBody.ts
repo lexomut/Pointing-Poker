@@ -1,5 +1,5 @@
 import { ChatMessage } from './ChatMessage';
-import { Game } from './game';
+import { Game, Issue } from './game';
 import { User } from './user';
 
 export interface WSMessageBody {
@@ -8,7 +8,7 @@ export interface WSMessageBody {
     event: WSMessageEvent;
     chatMessage?: ChatMessage;
     gameProperty?: string;
-    value?: string;
+    value?: string | Array<Issue>;
     errorMessage?: string;
     game?: Game;
 }

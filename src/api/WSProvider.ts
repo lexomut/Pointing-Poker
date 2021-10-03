@@ -3,7 +3,7 @@ import { WSMessageBody } from '../types/WSMessageBody';
 import { SERVER_URL } from './url';
 import { WSMessageHandler } from './WSMessageHandler';
 import { Action, CurrentUser, GlobalState, WSProviderInterface } from '../types/GlobalState';
-import { Game } from '../types/game';
+import { Game, Issue } from '../types/game';
 import { CHAT_MESSAGE, SET_GAME_STATE, USER_CONNECTION } from './Constants';
 import { SET_SOCKET, SET_SOCKET_STATUS } from '../state/ActionTypesConstants';
 import { ChatMessage } from '../types/ChatMessage';
@@ -118,6 +118,41 @@ export class WSProvider implements WSProviderInterface {
         } catch (e) {
             // eslint-disable-next-line no-console
             console.log('Ошибка отправки', e);
+        }
+    }
+
+    async changeValueOfIssueProperty(
+        issueProperty: keyof Issue,
+        id: string,
+        value: string,
+    ): Promise<void> {
+        console.log(1);
+        console.log(!this.game?.gameID);
+        console.log(!this.currentUser);
+        if (!this.game?.gameID || !this.currentUser) return;
+        const issue = this.game.issues.find((item) => item.id === id);
+        console.log(2);
+        console.log(this.game.issues);
+        if (!issue) return;
+        const keys = Object.keys(issue);
+        try {
+            if (!keys.includes(issueProperty))
+                throw new Error(`There is no such field inside Issue: ${issueProperty}`);
+            Object.assign(issue, { [issueProperty]: value });
+            const issues = this.game.issues.map((item) => {
+                return item.id === id ? issue : item;
+            });
+            const message: WSMessageBody = {
+                gameID: this.game.gameID,
+                user: this.currentUser,
+                event: SET_GAME_STATE,
+                gameProperty: 'issues',
+                value: issues,
+            };
+            await this.send(message);
+            console.log(message);
+        } catch (e) {
+            console.log('Send error', e);
         }
     }
 }

@@ -13,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { IssueButton } from '../buttons';
 import { CardsDeck } from '../GameCards';
-import { IssueCard } from '../IssueCard';
 import { AddUserPopup } from '../popups';
 import { Statistic } from '../statistic';
 import { Timer } from '../timer';
@@ -22,6 +21,7 @@ import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
 import { IssueCreateForm } from '..';
+import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -57,6 +57,7 @@ export const Game: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const isDealer = globalState.currentUser.role === 'dealer';
+    console.log(globalState.currentUser.role);
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
@@ -123,13 +124,15 @@ export const Game: React.FC = () => {
                                 <Typography variant="h6">Issues:</Typography>
                             </Grid>
                             {issues.map((item) => (
-                                <Grid item key={item.name}>
-                                    <IssueCard
+                                <Grid item key={item.id}>
+                                    <IssueCardExpandable
                                         id={item.id}
                                         name={item.name}
                                         priority={item.priority}
                                         current={item.current}
                                         dealer={isDealer}
+                                        score={item.score}
+                                        link={item.link}
                                     />
                                 </Grid>
                             ))}
@@ -159,14 +162,16 @@ export const Game: React.FC = () => {
                                         alignItems="center"
                                         className={classes.column}
                                     >
-                                        <Grid item>
-                                            <Timer
-                                                key={key}
-                                                seconds={10}
-                                                start={startTimer}
-                                                onComplete={() => setRoundOver(true)}
-                                            />
-                                        </Grid>
+                                        {globalState.game.gameSettings.timer && (
+                                            <Grid item>
+                                                <Timer
+                                                    key={key}
+                                                    seconds={globalState.game.gameSettings.timer}
+                                                    start={startTimer}
+                                                    onComplete={() => setRoundOver(true)}
+                                                />
+                                            </Grid>
+                                        )}
                                         {!startTimer && !roundOver && isDealer && (
                                             <Grid item>
                                                 <Button

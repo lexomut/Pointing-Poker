@@ -19,6 +19,7 @@ export const IssueCreateForm: React.FC = () => {
         priority: 'Medium',
         id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
         dealer: true,
+        score: '-',
     });
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import { Button } from '@material-ui/core';
+import { Button, Link, TextField } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import SaveIcon from '@material-ui/icons/Save';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -51,6 +52,12 @@ const useStyles = makeStyles((theme: Theme) =>
         expandOpen: {
             transform: 'rotate(180deg)',
         },
+        link: {
+            wordWrap: 'break-word',
+        },
+        score: {
+            marginTop: 10,
+        },
     }),
 );
 
@@ -60,19 +67,29 @@ type Props = {
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
     dealer?: boolean;
     id: string;
+    score: string;
+    link: string | undefined;
 };
 
 export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
-    const { name, current, priority, dealer, id } = props;
+    const { name, current, priority, dealer, id, link, score } = props;
     const classes = useStyles();
+
     const [expanded, setExpanded] = useState(false);
+    const [newScore, setNewScore] = useState(score);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+
     const handlerClick = () => {
         const newIssues = globalState.game.issues.filter((issue: Issue) => id !== issue.id);
         globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
+    };
+
+    const handleScoreSave = () => {
+        if (dealer) globalState.ws.provider?.changeValueOfIssueProperty('score', id, newScore);
     };
 
     return (
@@ -107,8 +124,30 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
             </CardContent>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Link:</Typography>
-                    <Typography paragraph>Score:</Typography>
+                    <Typography variant="subtitle1">Link:</Typography>
+                    <Link href={link} target="_blank" className={classes.link}>
+                        {link}
+                    </Link>
+                    <TextField
+                        className={classes.score}
+                        id="outlined-read-only-input"
+                        label="Score:"
+                        value={newScore}
+                        onChange={(event) => setNewScore(event.target.value || '')}
+                        InputProps={{
+                            readOnly: !dealer,
+                            endAdornment: (
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={handleScoreSave}
+                                    endIcon={<SaveIcon />}
+                                >
+                                    Save
+                                </Button>
+                            ),
+                        }}
+                    />
                 </CardContent>
             </Collapse>
         </Card>
