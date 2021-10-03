@@ -70,10 +70,11 @@ type Props = {
     id: string;
     score: string;
     link: string | undefined;
+    isRoundGoing: boolean;
 };
 
 export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
-    const { name, current, priority, dealer, id, link, score } = props;
+    const { name, current, priority, dealer, id, link, score, isRoundGoing } = props;
     const classes = useStyles();
 
     const [expanded, setExpanded] = useState(false);
@@ -166,6 +167,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                         variant="outlined"
                         onClick={handleCurrentIssue}
                         endIcon={<ForumIcon />}
+                        disabled={isRoundGoing}
                     >
                         Set as current issue
                     </Button>

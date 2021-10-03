@@ -133,6 +133,7 @@ export const Game: React.FC = () => {
                                         dealer={isDealer}
                                         score={item.score}
                                         link={item.link}
+                                        isRoundGoing={startTimer}
                                     />
                                 </Grid>
                             ))}
@@ -162,6 +163,11 @@ export const Game: React.FC = () => {
                                             alignItems="center"
                                             className={classes.column}
                                         >
+                                            {startTimer && (
+                                                <Typography variant="h6">
+                                                    Round in progress. Waiting for players vote...
+                                                </Typography>
+                                            )}
                                             {isTimerNeeded && (
                                                 <Grid item>
                                                     <Timer
