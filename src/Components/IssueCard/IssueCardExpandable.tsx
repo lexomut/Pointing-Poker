@@ -77,19 +77,21 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
 
     const [expanded, setExpanded] = useState(false);
     const [newScore, setNewScore] = useState(score);
-
+    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-    const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
 
-    const handlerClick = () => {
+    const handlerDelete = () => {
         const newIssues = globalState.game.issues.filter((issue: Issue) => id !== issue.id);
         globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
     };
 
     const handleScoreSave = () => {
-        if (dealer) globalState.ws.provider?.changeValueOfIssueProperty('score', id, newScore);
+        const issues = globalState.game.issues.map((item) => {
+            return item.id === id ? { ...item, score: newScore } : item;
+        });
+        if (dealer) globalState.ws.provider?.changeValueOfGameProperty('issues', issues);
     };
 
     return (
@@ -106,7 +108,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                 </Typography>
                 <CardActions className={classes.button} disableSpacing>
                     {dealer && !current && (
-                        <Button disabled={!globalState.ws.status} onClick={handlerClick}>
+                        <Button disabled={!globalState.ws.status} onClick={handlerDelete}>
                             <CloseIcon />
                         </Button>
                     )}
@@ -133,7 +135,9 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                         id="outlined-read-only-input"
                         label="Score:"
                         value={newScore}
-                        onChange={(event) => setNewScore(event.target.value || '')}
+                        onChange={(event) => {
+                            return setNewScore(event.target.value || '');
+                        }}
                         InputProps={{
                             readOnly: !dealer,
                             endAdornment: (
