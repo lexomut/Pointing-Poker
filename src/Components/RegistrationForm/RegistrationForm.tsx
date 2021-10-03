@@ -64,7 +64,7 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
             name: 'firstName',
         },
         {
-            label: 'Your first name:',
+            label: 'Your last name:',
             required: false,
             value: lastName,
             onChange: setLastName,

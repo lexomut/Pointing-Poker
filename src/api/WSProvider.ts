@@ -97,7 +97,7 @@ export class WSProvider implements WSProviderInterface {
         await this.send(message);
     }
 
-    updateProviderState(globalState: GlobalState) {
+    updateProviderState(globalState: GlobalState): void {
         this.currentUser = globalState.currentUser;
         this.game = globalState.game;
     }
