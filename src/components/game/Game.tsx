@@ -10,7 +10,11 @@ import {
     Paper,
     Box,
     Modal,
+    IconButton,
+    Collapse,
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import { Alert } from '@material-ui/lab';
 import { IssueButton } from '../buttons';
 import { CardsDeck } from '../GameCards';
 import { AddUserPopup } from '../popups';
@@ -61,10 +65,47 @@ export const Game: React.FC = () => {
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
+    const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
     const { issues } = globalState.game;
     const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
     const { isTimerNeeded, timer } = globalState.game.gameSettings;
+    const handleNextIssue = () => {
+        let currentItemFound = false;
+        let newNextIssueFound = false;
+        let newIssues = issues.map((item) => {
+            if (item.current) {
+                currentItemFound = true;
+                return { ...item, current: false };
+            }
+            if (currentItemFound) {
+                if (item.score === '-' && !newNextIssueFound) {
+                    newNextIssueFound = true;
+                    return { ...item, current: true };
+                }
+            }
+            return item;
+        });
+        if (!newNextIssueFound) {
+            newIssues = newIssues.map((item) => {
+                if (item.score === '-' && !newNextIssueFound) {
+                    newNextIssueFound = true;
+                    return { ...item, current: true };
+                }
+
+                return item;
+            });
+        }
+        if (newNextIssueFound) {
+            if (isDealer) globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
+            setIsLastIssue(false);
+            setRoundOver(false);
+            setKey((prevKey) => prevKey + 1);
+            setStartTimer(false);
+        } else {
+            setIsLastIssue(true);
+        }
+    };
     return (
         <>
             <Grid container className={classes.mainContainer}>
@@ -163,11 +204,31 @@ export const Game: React.FC = () => {
                                             alignItems="center"
                                             className={classes.column}
                                         >
-                                            {startTimer && (
-                                                <Typography variant="h6">
+                                            <Collapse in={startTimer && !roundOver}>
+                                                <Alert severity="success">
                                                     Round in progress. Waiting for players vote...
-                                                </Typography>
-                                            )}
+                                                </Alert>
+                                            </Collapse>
+                                            <Collapse in={isLastIssue}>
+                                                <Alert
+                                                    severity="success"
+                                                    action={
+                                                        <IconButton
+                                                            aria-label="close"
+                                                            color="inherit"
+                                                            size="small"
+                                                            onClick={() => {
+                                                                setIsLastIssue(false);
+                                                            }}
+                                                        >
+                                                            <CloseIcon fontSize="inherit" />
+                                                        </IconButton>
+                                                    }
+                                                >
+                                                    All issues were discussed. There is no next
+                                                    issue.
+                                                </Alert>
+                                            </Collapse>
                                             {isTimerNeeded && (
                                                 <Grid item>
                                                     <Timer
@@ -208,9 +269,7 @@ export const Game: React.FC = () => {
                                                     <Button
                                                         color="primary"
                                                         variant="contained"
-                                                        onClick={() => {
-                                                            alert('put logic here');
-                                                        }}
+                                                        onClick={handleNextIssue}
                                                     >
                                                         Next Issue
                                                     </Button>
@@ -237,6 +296,7 @@ export const Game: React.FC = () => {
                                 </Grid>
                             </Grid>
                         )}
+                        {/* TODO CARDS FOR USERS and DEALER */}
                         {!isDealer && (
                             <Grid item container justifyContent="center">
                                 <CardsDeck />
