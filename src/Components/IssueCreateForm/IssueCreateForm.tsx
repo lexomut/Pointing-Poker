@@ -20,6 +20,7 @@ export const IssueCreateForm: React.FC = () => {
         id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
         dealer: true,
         score: '-',
+        current: globalState.game.issues.length === 0,
     });
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import { Button, Link, TextField } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import ForumIcon from '@material-ui/icons/Forum';
 import SaveIcon from '@material-ui/icons/Save';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
         link: {
             wordWrap: 'break-word',
         },
-        score: {
+        mt: {
             marginTop: 10,
         },
     }),
@@ -90,6 +91,13 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
     const handleScoreSave = () => {
         const issues = globalState.game.issues.map((item) => {
             return item.id === id ? { ...item, score: newScore } : item;
+        });
+        if (dealer) globalState.ws.provider?.changeValueOfGameProperty('issues', issues);
+    };
+
+    const handleCurrentIssue = () => {
+        const issues = globalState.game.issues.map((item) => {
+            return { ...item, current: item.id === id };
         });
         if (dealer) globalState.ws.provider?.changeValueOfGameProperty('issues', issues);
     };
@@ -131,7 +139,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                         {link}
                     </Link>
                     <TextField
-                        className={classes.score}
+                        className={classes.mt}
                         id="outlined-read-only-input"
                         label="Score:"
                         value={newScore}
@@ -143,7 +151,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                             endAdornment: (
                                 <Button
                                     color="primary"
-                                    variant="contained"
+                                    variant="outlined"
                                     onClick={handleScoreSave}
                                     endIcon={<SaveIcon />}
                                 >
@@ -152,6 +160,15 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                             ),
                         }}
                     />
+                    <Button
+                        className={classes.mt}
+                        color="primary"
+                        variant="outlined"
+                        onClick={handleCurrentIssue}
+                        endIcon={<ForumIcon />}
+                    >
+                        Set as current issue
+                    </Button>
                 </CardContent>
             </Collapse>
         </Card>
