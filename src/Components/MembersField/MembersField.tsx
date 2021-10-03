@@ -11,12 +11,20 @@ interface IMemberField {
 
 export const MembersField: React.FC<IMemberField> = ({ classNames }) => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const users = globalState.game.users.filter((user: User) => user.role !== 'dealer');
+    const users = globalState.game.users.filter((user: User) => user.roleInGame !== 'dealer');
 
     return (
         <div className={classNames}>
             {users.map(
-                ({ firstName, lastName, jobPosition, userID, imgSrc, initials, role }: User) => {
+                ({
+                    firstName,
+                    lastName,
+                    jobPosition,
+                    userID,
+                    imgSrc,
+                    initials,
+                    roleInGame,
+                }: User) => {
                     return (
                         <UserCard
                             initials={initials}
@@ -26,7 +34,7 @@ export const MembersField: React.FC<IMemberField> = ({ classNames }) => {
                             currentUser={userID === globalState.currentUser.userID}
                             key={userID}
                             size="large"
-                            role={role}
+                            roleInGame={roleInGame}
                             imgSrc={SERVER_URL + imgSrc}
                         />
                     );

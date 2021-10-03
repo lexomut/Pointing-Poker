@@ -44,22 +44,30 @@ export const Lobby: () => JSX.Element = () => {
             ]);
         }
         function passNext() {
+            if (
+                globalState.game.kickedUsersID.some(
+                    (item: string) => item === globalState.currentUser.userID,
+                )
+            )
+                return;
             if (globalState.game.status === 'going') {
-                if (isPaddingUser) return;
+                if (
+                    globalState.game.pendingUsers.some(
+                        (user: User) => globalState.currentUser.userID === user.userID,
+                    )
+                )
+                    return;
                 if (
                     globalState.game.users.every(
                         (user: User) => globalState.currentUser.userID !== user.userID,
                     )
                 ) {
                     sendRequestEnterToGame();
-                    return;
-                }
-
-                history.push(`/${globalState.game.gameID}/game`);
+                } else history.push(`/${globalState.game.gameID}/game`);
             }
         }
         passNext();
-    }, [globalState, isPaddingUser, history]);
+    }, [globalState, history]);
 
     function checkVoted() {
         if (!globalState.game.vote) return false;
@@ -78,7 +86,7 @@ export const Lobby: () => JSX.Element = () => {
                     <GameInfo />
                     <ScramMaster />
                     <LinkToLobby />
-                    {globalState.currentUser.role === 'dealer' && (
+                    {globalState.currentUser.roleInGame === 'dealer' && (
                         <div className={styles.top__buttons}>
                             <StartButton />
                             <CancelButton />
@@ -93,7 +101,7 @@ export const Lobby: () => JSX.Element = () => {
                     <h4>Issues:</h4>
                     <IssueField classNames={styles.issues__cardField} />
                 </section>
-                {globalState.currentUser.role === 'dealer' && (
+                {globalState.currentUser.roleInGame === 'dealer' && (
                     <>
                         <section className={styles.settings}>
                             <h4>Game settings:</h4>

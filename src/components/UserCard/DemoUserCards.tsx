@@ -10,7 +10,7 @@ export const DemoUserCards: React.FC = () => {
                 jobPosition="junior front-end developer"
                 userID="1"
                 size="large"
-                role="player"
+                roleInGame="player"
             />
             <UserCard
                 name="Linda Atkins"
@@ -19,7 +19,7 @@ export const DemoUserCards: React.FC = () => {
                 currentUser
                 userID="1"
                 size="large"
-                role="player"
+                roleInGame="player"
             />
             <UserCard
                 name="Barsik"
@@ -28,7 +28,7 @@ export const DemoUserCards: React.FC = () => {
                 imgSrc="https://placekitten.com/200/200"
                 userID="1"
                 size="large"
-                role="player"
+                roleInGame="player"
             />
             <UserCard
                 name="Max "
@@ -37,7 +37,7 @@ export const DemoUserCards: React.FC = () => {
                 imgSrc="https://image.freepik.com/free-photo/handsome-confident-smiling-man-with-hands-crossed-chest_176420-18743.jpg"
                 userID="2"
                 size="large"
-                role="player"
+                roleInGame="player"
             />
         </>
     );

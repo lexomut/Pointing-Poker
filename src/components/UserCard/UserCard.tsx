@@ -92,17 +92,17 @@ type Props = {
     initials: string;
     imgSrc?: string;
     userID: string;
-    role: 'observer' | 'player' | 'dealer';
+    roleInGame: 'observer' | 'player' | 'dealer';
     size: 'large' | 'small';
 };
 
 export function UserCard(props: Props): JSX.Element {
     const classes = useStyles(props);
-    const { name, jobPosition, size, imgSrc, initials, currentUser, userID, role } = props;
+    const { name, jobPosition, size, imgSrc, initials, currentUser, userID, roleInGame } = props;
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
 
     const clickHandler = async () => {
-        if (globalState.currentUser.role === 'dealer') {
+        if (globalState.currentUser.roleInGame === 'dealer') {
             await globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
                 ...globalState.game.kickedUsersID,
                 userID,
@@ -167,8 +167,9 @@ export function UserCard(props: Props): JSX.Element {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        {(!(currentUser || globalState.game.vote || role === 'dealer') ||
-                            (globalState.currentUser.role === 'dealer' && role !== 'dealer')) && (
+                        {(!(currentUser || globalState.game.vote || roleInGame === 'dealer') ||
+                            (globalState.currentUser.roleInGame === 'dealer' &&
+                                roleInGame !== 'dealer')) && (
                             <Button
                                 className={classes.button}
                                 aria-label="kick"

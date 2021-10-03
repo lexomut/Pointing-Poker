@@ -151,7 +151,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'LA',
         userID: '1',
         score: 'In progress',
-        role: 'player',
+        roleInGame: 'player',
     },
     {
         firstName: 'Barsik',
@@ -161,7 +161,7 @@ export const usersWithScore: UserWithScore[] = [
         userID: '2',
         score: '5 SP',
         imgSrc: 'https://placekitten.com/200/200',
-        role: 'player',
+        roleInGame: 'player',
     },
     {
         firstName: 'Mark',
@@ -170,7 +170,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'MZ',
         userID: '3',
         score: '1 SP',
-        role: 'player',
+        roleInGame: 'player',
     },
     {
         firstName: 'Alex',
@@ -179,7 +179,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'AL',
         userID: '4',
         score: '10 SP',
-        role: 'player',
+        roleInGame: 'player',
     },
     {
         firstName: 'Mike',
@@ -188,7 +188,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'MS',
         userID: '5',
         score: 'In progress',
-        role: 'player',
+        roleInGame: 'player',
     },
 ];
 

@@ -44,14 +44,15 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
                     className={styles.btn}
                     variant="outlined"
                     onClick={() => {
+                        globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
+                            ...globalState.game.kickedUsersID,
+                            user.userID,
+                        ]);
+
                         globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
                             ...globalState.game.pendingUsers.filter(
                                 (pendingUser) => pendingUser.userID !== user.userID,
                             ),
-                        ]);
-                        globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
-                            ...globalState.game.kickedUsersID,
-                            user.userID,
                         ]);
                     }}
                 >

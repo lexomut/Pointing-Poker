@@ -24,5 +24,5 @@ export * from './StartButton';
 export * from './MembersField';
 export * from './ConnectForm';
 export * from './NewSession';
-export * from './VoteForm';
 export * from './LetInUserToGameForm';
+export * from './VoteForm';

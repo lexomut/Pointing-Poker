@@ -9,7 +9,7 @@ import styles from './ScramMaster.module.scss';
 
 export const ScramMaster: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const scramMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
+    const scramMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
     return (
         <div className={styles.scramMaster}>
             <Typography>Scrum master:</Typography>
@@ -20,7 +20,7 @@ export const ScramMaster: () => JSX.Element = () => {
                     jobPosition={scramMaster.jobPosition ? scramMaster.jobPosition : ''}
                     userID={scramMaster.userID}
                     currentUser={scramMaster.userID === globalState.currentUser.userID}
-                    role={scramMaster.role}
+                    roleInGame={scramMaster.roleInGame}
                     size="large"
                     imgSrc={SERVER_URL + scramMaster.imgSrc}
                 />
