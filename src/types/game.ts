@@ -26,7 +26,7 @@ export interface Vote {
 }
 
 export interface GameSettingsInterface {
-    timer?: number;
+    timer: number;
     dealerIsPlaying: boolean;
     scoreType: string;
     shortScoreType: string;

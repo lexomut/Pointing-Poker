@@ -15,11 +15,11 @@ export const Timer = ({ handler }: { handler: (arg: number) => void }): JSX.Elem
 
     const minutesHandler = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
         setTime({ ...time, minutes: e.target.value as number });
-        handler(time.minutes * 50 + time.seconds);
+        handler((e.target.value as number) * 60 + time.seconds);
     };
     const secondsHandler = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
         setTime({ ...time, seconds: e.target.value as number });
-        handler(time.minutes * 50 + time.seconds);
+        handler(time.minutes * 60 + (e.target.value as number));
     };
 
     return (

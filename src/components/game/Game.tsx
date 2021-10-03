@@ -57,7 +57,6 @@ export const Game: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const isDealer = globalState.currentUser.role === 'dealer';
-    console.log(globalState.currentUser.role);
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
@@ -65,6 +64,7 @@ export const Game: React.FC = () => {
     const scrumMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
     const { issues } = globalState.game;
     const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
+    const { isTimerNeeded, timer } = globalState.game.gameSettings;
     return (
         <>
             <Grid container className={classes.mainContainer}>
@@ -152,68 +152,70 @@ export const Game: React.FC = () => {
                                 </>
                             )}
                         </Grid>
+                        {(isTimerNeeded || isDealer) && (
+                            <Grid item className={classes.topSpace} xs={12} sm={12} md={3}>
+                                <Paper elevation={3}>
+                                    <Box p={3}>
+                                        <Grid
+                                            container
+                                            spacing={2}
+                                            alignItems="center"
+                                            className={classes.column}
+                                        >
+                                            {isTimerNeeded && (
+                                                <Grid item>
+                                                    <Timer
+                                                        key={key}
+                                                        seconds={timer}
+                                                        start={startTimer}
+                                                        onComplete={() => setRoundOver(true)}
+                                                    />
+                                                </Grid>
+                                            )}
+                                            {!startTimer && !roundOver && isDealer && (
+                                                <Grid item>
+                                                    <Button
+                                                        color="primary"
+                                                        variant="contained"
+                                                        onClick={() => setStartTimer(!startTimer)}
+                                                    >
+                                                        Run round
+                                                    </Button>
+                                                </Grid>
+                                            )}
+                                            {roundOver && isDealer && (
+                                                <Grid item>
+                                                    <Button
+                                                        color="primary"
+                                                        variant="contained"
+                                                        onClick={() => {
+                                                            setRoundOver(false);
+                                                            setKey((prevKey) => prevKey + 1);
+                                                        }}
+                                                    >
+                                                        Restart round
+                                                    </Button>
+                                                </Grid>
+                                            )}
+                                            {roundOver && isDealer && (
+                                                <Grid item>
+                                                    <Button
+                                                        color="primary"
+                                                        variant="contained"
+                                                        onClick={() => {
+                                                            alert('put logic here');
+                                                        }}
+                                                    >
+                                                        Next Issue
+                                                    </Button>
+                                                </Grid>
+                                            )}
+                                        </Grid>
+                                    </Box>
+                                </Paper>
+                            </Grid>
+                        )}
 
-                        <Grid item className={classes.topSpace} xs={12} sm={12} md={3}>
-                            <Paper elevation={3}>
-                                <Box p={3}>
-                                    <Grid
-                                        container
-                                        spacing={2}
-                                        alignItems="center"
-                                        className={classes.column}
-                                    >
-                                        {globalState.game.gameSettings.timer && (
-                                            <Grid item>
-                                                <Timer
-                                                    key={key}
-                                                    seconds={globalState.game.gameSettings.timer}
-                                                    start={startTimer}
-                                                    onComplete={() => setRoundOver(true)}
-                                                />
-                                            </Grid>
-                                        )}
-                                        {!startTimer && !roundOver && isDealer && (
-                                            <Grid item>
-                                                <Button
-                                                    color="primary"
-                                                    variant="contained"
-                                                    onClick={() => setStartTimer(!startTimer)}
-                                                >
-                                                    Run round
-                                                </Button>
-                                            </Grid>
-                                        )}
-                                        {roundOver && isDealer && (
-                                            <Grid item>
-                                                <Button
-                                                    color="primary"
-                                                    variant="contained"
-                                                    onClick={() => {
-                                                        setRoundOver(false);
-                                                        setKey((prevKey) => prevKey + 1);
-                                                    }}
-                                                >
-                                                    Restart round
-                                                </Button>
-                                            </Grid>
-                                        )}
-                                        {roundOver && isDealer && (
-                                            <Grid item>
-                                                <Button
-                                                    color="primary"
-                                                    variant="contained"
-                                                    onClick={() => {
-                                                        alert('put logic here');
-                                                    }}
-                                                >
-                                                    Next Issue
-                                                </Button>
-                                            </Grid>
-                                        )}
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
                         {!isDealer && roundOver && (
                             <Grid item container justifyContent="center">
                                 <Grid item>
