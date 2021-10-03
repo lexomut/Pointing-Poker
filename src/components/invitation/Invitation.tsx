@@ -1,5 +1,5 @@
-import React, { Dispatch, useContext } from 'react';
-import { Redirect, Route, Switch, useRouteMatch } from 'react-router-dom';
+import React, { Dispatch, useContext, useState } from 'react';
+import { Redirect, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import { Card } from '@material-ui/core';
 import { Game } from '../game';
@@ -11,15 +11,20 @@ import { Lobby } from '../../pages/Lobby';
 
 import styles from './invitation.module.scss';
 
-export const Invitation: React.FC = () => {
+export const Invitation: React.FC = (): JSX.Element => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
+    const history = useHistory();
+    const [isTimeout, setIsTimeout] = useState(false);
     const { path } = useRouteMatch();
     const isAuthorized = true;
     const openModal = globalState.game.kickedUsersID.some(
         (item: string) => item === globalState.currentUser.userID,
     );
-
+    if (openModal && !isTimeout) {
+        setIsTimeout(true);
+        setTimeout(() => history.push(`/`), 6000);
+    }
     return (
         <>
             {' '}
