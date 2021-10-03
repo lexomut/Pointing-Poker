@@ -49,6 +49,9 @@ export const IssueCreateForm: React.FC = () => {
                             type="text"
                             name="name"
                             variant="outlined"
+                            inputProps={{
+                                maxLength: 10,
+                            }}
                         />
                     </InputLabel>
                     <InputLabel htmlFor="link">
