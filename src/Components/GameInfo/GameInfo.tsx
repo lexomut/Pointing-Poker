@@ -36,7 +36,7 @@ export const GameInfo = (): ReactElement => {
                 />
             )}
             {!isInput && <h4>{title}</h4>}
-            {globalState.currentUser.role === 'dealer' && globalState.ws.status && (
+            {globalState.currentUser.roleInGame === 'dealer' && globalState.ws.status && (
                 <CreateIcon className={styles.icon} onClick={() => handleSubmit()} />
             )}
         </div>

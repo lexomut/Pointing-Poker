@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Game: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
-    const isDealer = globalState.currentUser.role === 'dealer';
+    const isDealer = globalState.currentUser.roleInGame === 'dealer';
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
@@ -88,6 +88,7 @@ export const Game: React.FC = () => {
                                 name="Lily Smith"
                                 jobPosition="senior developer"
                                 currentUser
+                                roleInGame="player"
                             />
                         </Grid>
                         <Grid item>
@@ -258,7 +259,8 @@ export const Game: React.FC = () => {
                                         initials={item.initials}
                                         userID={item.userID}
                                         name={item.name}
-                                        jobPosition={item.jobPosition}
+                                        jobPosition={item.jobPosition || ''}
+                                        roleInGame={item.roleInGame}
                                     />
                                 </Grid>
                             </Grid>

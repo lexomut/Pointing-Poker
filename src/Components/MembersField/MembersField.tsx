@@ -11,24 +11,35 @@ interface IMemberField {
 
 export const MembersField: React.FC<IMemberField> = ({ classNames }) => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const users = globalState.game.users.filter((user: User) => user.role !== 'dealer');
+    const users = globalState.game.users.filter((user: User) => user.roleInGame !== 'dealer');
 
     return (
         <div className={classNames}>
-            {users.map(({ firstName, lastName, jobPosition, userID, imgSrc, initials }: User) => {
-                return (
-                    <UserCard
-                        initials={initials}
-                        name={`${firstName} ${lastName}`}
-                        jobPosition={jobPosition || ''}
-                        userID={userID}
-                        currentUser={userID === globalState.currentUser.userID}
-                        key={userID}
-                        size="large"
-                        imgSrc={SERVER_URL + imgSrc}
-                    />
-                );
-            })}
+            {users.map(
+                ({
+                    firstName,
+                    lastName,
+                    jobPosition,
+                    userID,
+                    imgSrc,
+                    initials,
+                    roleInGame,
+                }: User) => {
+                    return (
+                        <UserCard
+                            initials={initials}
+                            name={`${firstName} ${lastName}`}
+                            jobPosition={jobPosition || ''}
+                            userID={userID}
+                            currentUser={userID === globalState.currentUser.userID}
+                            key={userID}
+                            size="large"
+                            roleInGame={roleInGame}
+                            imgSrc={SERVER_URL + imgSrc}
+                        />
+                    );
+                },
+            )}
         </div>
     );
 };

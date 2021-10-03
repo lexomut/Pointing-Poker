@@ -150,6 +150,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'LA',
         userID: '1',
         score: 'In progress',
+        roleInGame: 'player',
     },
     {
         name: 'Barsik',
@@ -158,6 +159,7 @@ export const usersWithScore: UserWithScore[] = [
         userID: '2',
         score: '5 SP',
         imgSrc: 'https://placekitten.com/200/200',
+        roleInGame: 'player',
     },
     {
         name: 'Mark Zuckerberg',
@@ -165,6 +167,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'MZ',
         userID: '3',
         score: '1 SP',
+        roleInGame: 'player',
     },
     {
         name: 'Alex',
@@ -172,6 +175,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'AL',
         userID: '4',
         score: '10 SP',
+        roleInGame: 'player',
     },
     {
         name: 'Mike Smith',
@@ -179,6 +183,7 @@ export const usersWithScore: UserWithScore[] = [
         initials: 'MS',
         userID: '5',
         score: 'In progress',
+        roleInGame: 'player',
     },
 ];
 

@@ -6,18 +6,18 @@ export interface CreateUserInterface {
     firstName: string;
     lastName?: string;
     jobPosition: string;
-    role?: 'dealer' | 'observer' | 'player';
+    roleInGame?: 'dealer' | 'observer' | 'player';
     avatar?: File | undefined;
 }
 export async function createUser({
     firstName,
     lastName,
-    role,
+    roleInGame,
     jobPosition,
     avatar,
 }: CreateUserInterface): Promise<User | undefined> {
     const formData = new FormData();
-    formData.append('userConfig', JSON.stringify({ firstName, lastName, jobPosition, role }));
+    formData.append('userConfig', JSON.stringify({ firstName, lastName, jobPosition, roleInGame }));
     if (avatar) formData.append('avatar', avatar);
     try {
         const response = await axios({

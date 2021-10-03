@@ -35,7 +35,7 @@ export const Lobby: () => JSX.Element = () => {
                     <GameInfo />
                     <ScramMaster />
                     <LinkToLobby />
-                    {globalState.currentUser.role === 'dealer' && (
+                    {globalState.currentUser.roleInGame === 'dealer' && (
                         <div className={styles.top__buttons}>
                             <StartButton />
                             <CancelButton />
@@ -50,7 +50,7 @@ export const Lobby: () => JSX.Element = () => {
                     <h4>Issues:</h4>
                     <IssueField classNames={styles.issues__cardField} />
                 </section>
-                {globalState.currentUser.role === 'dealer' && (
+                {globalState.currentUser.roleInGame === 'dealer' && (
                     <>
                         <section className={styles.settings}>
                             <h4>Game settings:</h4>
