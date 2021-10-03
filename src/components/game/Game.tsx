@@ -245,6 +245,7 @@ export const Game: React.FC = () => {
                                                         color="primary"
                                                         variant="contained"
                                                         onClick={() => setStartTimer(!startTimer)}
+                                                        disabled={issues.length === 0}
                                                     >
                                                         Run round
                                                     </Button>
