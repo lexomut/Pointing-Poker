@@ -106,6 +106,7 @@ export const Game: React.FC = () => {
             setIsLastIssue(true);
         }
     };
+
     return (
         <>
             <Grid container className={classes.mainContainer}>
