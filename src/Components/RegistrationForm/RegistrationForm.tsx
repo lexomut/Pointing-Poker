@@ -108,6 +108,9 @@ export const RegistrationForm: React.FC<IRegistrationForm> = ({ setOpen, isDeale
                                         type="text"
                                         name={name}
                                         variant="outlined"
+                                        inputProps={{
+                                            maxLength: 10,
+                                        }}
                                     />
                                 </InputLabel>
                             </Grid>
