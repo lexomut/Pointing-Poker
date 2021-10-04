@@ -101,7 +101,7 @@ export function UserCard(props: Props): JSX.Element {
     const { name, jobPosition, size, imgSrc, initials, currentUser, userID, roleInGame } = props;
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
 
-    const clickHandler = async () => {
+    const clickHandler = async (): Promise<void> => {
         if (globalState.currentUser.roleInGame === 'dealer') {
             await globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
                 ...globalState.game.kickedUsersID,
