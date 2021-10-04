@@ -25,7 +25,7 @@ export const IssueField: React.FC<IIssueField> = ({ classNames }) => {
                     />
                 );
             })}
-            {globalState.currentUser.role === 'dealer' && <IssueButton />}
+            {globalState.currentUser.roleInGame === 'dealer' && <IssueButton />}
         </div>
     );
 };

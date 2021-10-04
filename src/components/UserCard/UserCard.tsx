@@ -95,6 +95,7 @@ type Props = {
     initials: string;
     imgSrc?: string;
     userID: string;
+    roleInGame: 'observer' | 'player' | 'dealer';
     size: 'large' | 'small';
 };
 

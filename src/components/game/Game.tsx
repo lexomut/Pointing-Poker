@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Game: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
-    const isDealer = globalState.currentUser.role === 'dealer';
+    const isDealer = globalState.currentUser.roleInGame === 'dealer';
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
@@ -137,6 +137,7 @@ export const Game: React.FC = () => {
                                     currentUser={
                                         globalState.currentUser.userID === scrumMaster.userID
                                     }
+                                    roleInGame="dealer"
                                 />
                             ) : (
                                 <Typography variant="h6">Loading...</Typography>
@@ -356,6 +357,7 @@ export const Game: React.FC = () => {
                                                     item.user.lastName || ''
                                                 }`}
                                                 jobPosition={item.user.jobPosition || ''}
+                                                roleInGame={item.roleInGame}
                                             />
                                         </Grid>
                                     </Grid>
@@ -392,6 +394,7 @@ export const Game: React.FC = () => {
                                                 item.user.lastName || ''
                                             }`}
                                             jobPosition={item.user.jobPosition || ''}
+                                            roleInGame={item.roleInGame}
                                         />
                                     </Grid>
                                 </Grid>
@@ -431,6 +434,7 @@ export const Game: React.FC = () => {
                                                     item.user.lastName || ''
                                                 }`}
                                                 jobPosition={item.user.jobPosition || ''}
+                                                roleInGame={item.roleInGame}
                                             />
                                         </Grid>
                                     </Grid>

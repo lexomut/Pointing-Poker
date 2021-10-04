@@ -18,4 +18,5 @@ export interface UserWithScore {
     imgSrc?: string;
     userID: string;
     score: string;
+    roleInGame: 'observer' | 'dealer' | 'player';
 }
