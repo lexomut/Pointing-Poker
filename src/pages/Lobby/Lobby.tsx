@@ -11,7 +11,6 @@ import {
     CardField,
     GameInfo,
     CardFieldSelectCover,
-    Chat,
     ScramMaster,
     LinkToLobby,
     StartButton,
@@ -67,7 +66,6 @@ export const Lobby: () => JSX.Element = () => {
                     </>
                 )}
             </div>
-            {globalState.chatOpen && <Chat />}
 
             <Modal
                 open={globalState.popup === 'createIssue'}
