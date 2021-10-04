@@ -60,7 +60,7 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         case USER_CONNECTION: {
             const newUser = action.payLoad;
             if (
-                (globalState.game.status === 'pending' || globalState.game.status === 'new') &&
+                globalState.game.status === 'new' &&
                 globalState.game.users.every((user) => user.userID !== newUser.userID)
             ) {
                 return {

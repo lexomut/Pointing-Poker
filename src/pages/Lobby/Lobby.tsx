@@ -50,7 +50,7 @@ export const Lobby: () => JSX.Element = () => {
                 )
             )
                 return;
-            if (globalState.game.status === 'going') {
+            if (globalState.game.status !== 'new') {
                 if (
                     globalState.game.pendingUsers.some(
                         (user: User) => globalState.currentUser.userID === user.userID,
