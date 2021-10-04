@@ -34,11 +34,12 @@ export const GameSettings: () => JSX.Element = () => {
     const [settings, setSettings] = useState<GameSettingsInterface>({
         timer: 120,
         dealerIsPlaying: true,
-        scoreType: '',
-        shortScoreType: '',
+        scoreType: 'Story Point',
+        shortScoreType: 'SP',
         isTimerNeeded: false,
         changingCardInRoundEnd: false,
         cardsDeckType: 'fibonacci',
+        freeGameEnter: false,
     });
     const classes = useStyles();
 
@@ -68,6 +69,11 @@ export const GameSettings: () => JSX.Element = () => {
             label: 'Changing card in round end:',
             callback: (state: boolean) =>
                 setSettings({ ...settings, changingCardInRoundEnd: state }),
+        },
+        {
+            value: settings.freeGameEnter,
+            label: 'Allow new members to join:',
+            callback: (state: boolean) => setSettings({ ...settings, freeGameEnter: state }),
         },
     ];
 

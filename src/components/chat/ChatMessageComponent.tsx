@@ -23,6 +23,7 @@ export const ChatMessageComponent: FC<{ message: ChatMessage; currentUserID: str
                 imgSrc={SERVER_URL + user.imgSrc}
                 userID={user.userID}
                 currentUser={current}
+                roleInGame={user.roleInGame}
                 size="large"
             />
         </div>

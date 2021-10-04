@@ -8,7 +8,7 @@ type Props = {
     start: boolean;
     onComplete: () => void;
 };
-export const Timer = (props: Props): JSX.Element => {
+export const Timer: React.FC<Props> = (props: Props): JSX.Element => {
     const { seconds, start, onComplete } = props;
     const theme = useTheme();
     const renderTime = (dimension: string, time: number) => {

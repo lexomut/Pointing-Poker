@@ -1,7 +1,7 @@
 import React, { Dispatch, useEffect, useReducer } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { createTheme, MuiThemeProvider } from '@material-ui/core';
-import { Footer, Header, Invitation } from './components';
+import { Footer, Header, Invitation, Chat } from './components';
 import { GlobalContext } from './state/Context';
 import { initState } from './state/InitState';
 import { reducer } from './state/reducer';
@@ -48,6 +48,7 @@ export const App: React.FC = () => {
                                 <Invitation />
                             </Route>
                         </Switch>
+                        {globalState.chatOpen && <Chat />}
                     </main>
                     <Footer />
                 </MuiThemeProvider>

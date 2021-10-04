@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
                 height: 60,
                 boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
                 marginBottom: 10,
+                userSelect: 'none',
             };
         }
         return {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
             height: 45,
             boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
             marginBottom: 10,
+            userSelect: 'none',
         };
     },
     small: {
@@ -81,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
     icon: ({ size }: Props) => ({
         fontSize: size === 'large' ? '1.5rem' : '1rem',
     }),
+    current: {
+        backgroundColor: theme.palette.secondary.main,
+    },
 }));
 
 type Props = {
@@ -90,6 +95,7 @@ type Props = {
     initials: string;
     imgSrc?: string;
     userID: string;
+    roleInGame: 'observer' | 'player' | 'dealer';
     size: 'large' | 'small';
 };
 
@@ -101,7 +107,7 @@ export function UserCard(props: Props): JSX.Element {
     };
 
     return (
-        <Paper className={classes.paper}>
+        <Paper className={clsx(classes.paper, { [classes.current]: currentUser })}>
             <Grid container spacing={1} alignItems="center" wrap="nowrap">
                 <Grid item>
                     {imgSrc ? (

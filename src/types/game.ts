@@ -26,13 +26,14 @@ export interface Vote {
 }
 
 export interface GameSettingsInterface {
-    timer?: number;
+    timer: number;
     dealerIsPlaying: boolean;
     scoreType: string;
     shortScoreType: string;
     isTimerNeeded: boolean;
     changingCardInRoundEnd: boolean;
     cardsDeckType: string;
+    freeGameEnter: boolean;
 }
 
 export interface Issue {
@@ -42,6 +43,7 @@ export interface Issue {
     current?: boolean;
     dealer?: boolean;
     link?: string;
+    score: string;
 }
 export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 
