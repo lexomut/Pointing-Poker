@@ -84,7 +84,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
         setExpanded(!expanded);
     };
 
-    const handlerDelete = () => {
+    const handleDeleteIssue = () => {
         const newIssues = globalState.game.issues.filter((issue: Issue) => id !== issue.id);
         globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
     };
@@ -117,7 +117,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                 </Typography>
                 <CardActions className={classes.button} disableSpacing>
                     {dealer && !current && (
-                        <Button disabled={!globalState.ws.status} onClick={handlerDelete}>
+                        <Button disabled={!globalState.ws.status} onClick={handleDeleteIssue}>
                             <CloseIcon />
                         </Button>
                     )}

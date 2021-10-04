@@ -17,17 +17,18 @@ import { USER_CONNECTION } from '../api/Constants';
 import { Card, GameSettingsInterface } from '../types/game';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
+    const { status, users, chatMessages } = globalState.game;
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
-            const messages: Array<ChatMessage> = globalState.game.chatMessages;
+            const messages: Array<ChatMessage> = chatMessages;
             if (messages.filter((message) => message.id !== chatMessage.id).length < 0)
                 return globalState;
             return {
                 ...globalState,
                 game: {
                     ...globalState.game,
-                    chatMessages: [...globalState.game.chatMessages, chatMessage],
+                    chatMessages: [...chatMessages, chatMessage],
                 },
             };
         }
@@ -36,8 +37,8 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
             return { ...globalState, ws: { ...globalState.ws, socket } };
         }
         case SET_SOCKET_STATUS: {
-            const status = action.payLoad;
-            return { ...globalState, ws: { ...globalState.ws, status } };
+            const socketStatus = action.payLoad;
+            return { ...globalState, ws: { ...globalState.ws, status: socketStatus } };
         }
         case ADD_WS_PROVIDER_TO_GLOBAL_STATE: {
             const provider = action.payLoad;
@@ -60,12 +61,12 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
         case USER_CONNECTION: {
             const newUser = action.payLoad;
             if (
-                (globalState.game.status === 'pending' || globalState.game.status === 'new') &&
-                globalState.game.users.every((user) => user.userID !== newUser.userID)
+                (status === 'pending' || status === 'new') &&
+                users.every((user) => user.userID !== newUser.userID)
             ) {
                 return {
                     ...globalState,
-                    game: { ...globalState.game, users: [...globalState.game.users, newUser] },
+                    game: { ...globalState.game, users: [...users, newUser] },
                 };
             }
             return { ...globalState };
