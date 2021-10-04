@@ -34,8 +34,8 @@ export const GameSettings: () => JSX.Element = () => {
     const [settings, setSettings] = useState<GameSettingsInterface>({
         timer: 120,
         dealerIsPlaying: true,
-        scoreType: '',
-        shortScoreType: '',
+        scoreType: 'Story Point',
+        shortScoreType: 'SP',
         isTimerNeeded: false,
         changingCardInRoundEnd: false,
         cardsDeckType: 'fibonacci',

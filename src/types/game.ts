@@ -27,7 +27,7 @@ export interface Vote {
 }
 
 export interface GameSettingsInterface {
-    timer?: number;
+    timer: number;
     dealerIsPlaying: boolean;
     scoreType: string;
     shortScoreType: string;
@@ -43,6 +43,7 @@ export interface Issue {
     current?: boolean;
     dealer?: boolean;
     link?: string;
+    score: string;
 }
 export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 
