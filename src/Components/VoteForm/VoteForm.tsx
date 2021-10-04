@@ -8,7 +8,7 @@ export const VoteForm: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         globalState.ws.provider?.sendVote(true);
     };
