@@ -111,7 +111,7 @@ export function UserCard(props: Props): JSX.Element {
             await globalState.ws.provider?.changeValueOfGameProperty('users', users);
         } else {
             if (globalState.game.vote) return;
-            if (globalState.game.users.length >= 4) {
+            if (globalState.game.users.length < 4) {
                 alert('player less then 3');
                 return;
             }
