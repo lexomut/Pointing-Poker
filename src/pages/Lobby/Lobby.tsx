@@ -69,7 +69,7 @@ export const Lobby: () => JSX.Element = () => {
         passNext();
     }, [globalState, history]);
 
-    function checkVoted() {
+    function checkVoted(): boolean {
         if (!globalState.game.vote) return false;
         if (globalState.game.vote.kickID === globalState.currentUser.userID) return false;
         if (globalState.game.kickedUsersID.some((id) => id !== globalState.currentUser.userID))

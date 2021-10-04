@@ -29,7 +29,7 @@ export const Invitation: React.FC = (): JSX.Element => {
 
     return (
         <>
-            {' '}
+           
             <Switch>
                 <Route exact path={`${path}`}>
                     <MainPage />
@@ -55,7 +55,7 @@ export const Invitation: React.FC = (): JSX.Element => {
                 aria-describedby="parent-modal-description"
             >
                 <Card className={styles.modal}>
-                    <h4>YOU KICKED</h4>
+                    <h4>YOU WERE KICKED</h4>
                 </Card>
             </Modal>
         </>
