@@ -18,7 +18,7 @@ export * from './CancelButton';
 export * from './GameSettings';
 export * from './GameInfo';
 export * from './CardField';
-export * from './ScramMaster';
+export * from './ScrumMaster';
 export * from './LinkToLobby';
 export * from './StartButton';
 export * from './MembersField';

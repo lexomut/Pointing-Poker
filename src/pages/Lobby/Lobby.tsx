@@ -11,7 +11,7 @@ import {
     CardField,
     GameInfo,
     CardFieldSelectCover,
-    ScramMaster,
+    ScrumMaster,
     LinkToLobby,
     StartButton,
     MembersField,
@@ -32,7 +32,7 @@ export const Lobby: () => JSX.Element = () => {
             <div className={styles.container}>
                 <section className={styles.top}>
                     <GameInfo />
-                    <ScramMaster />
+                    <ScrumMaster />
                     <LinkToLobby />
                     {globalState.currentUser.roleInGame === 'dealer' && (
                         <div className={styles.top__buttons}>

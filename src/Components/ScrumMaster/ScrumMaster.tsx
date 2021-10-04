@@ -5,21 +5,21 @@ import { User } from '../../types/user';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { SERVER_URL } from '../../api/url';
-import styles from './ScramMaster.module.scss';
+import styles from './ScrumMaster.module.scss';
 
-export const ScramMaster: () => JSX.Element = () => {
+export const ScrumMaster: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const scramMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
-    if (!scramMaster)
+    const scrumMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
+    if (!scrumMaster)
         return (
-            <div className={styles.scramMaster}>
+            <div className={styles.scrumMaster}>
                 <Typography>Scrum master:</Typography>
                 Loading...
             </div>
         );
-    const { initials, firstName, lastName, jobPosition, userID, roleInGame, imgSrc } = scramMaster;
+    const { initials, firstName, lastName, jobPosition, userID, roleInGame, imgSrc } = scrumMaster;
     return (
-        <div className={styles.scramMaster}>
+        <div className={styles.scrumMaster}>
             <Typography>Scrum master:</Typography>
             <UserCard
                 initials={initials}
