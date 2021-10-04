@@ -450,7 +450,9 @@ export const Game: React.FC = () => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <IssueCreateForm />
+                <div>
+                    <IssueCreateForm />
+                </div>
             </Modal>
         </>
     );
