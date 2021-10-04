@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useMemo, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import InputLabel from '@material-ui/core/InputLabel/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem/MenuItem';
 import Select from '@material-ui/core/Select/Select';
@@ -15,12 +15,14 @@ export const Timer = ({ handler }: { handler: (arg: number) => void }): JSX.Elem
 
     const minutesHandler = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
         setTime({ ...time, minutes: e.target.value as number });
-        handler(time.minutes * 50 + time.seconds);
     };
     const secondsHandler = (e: ChangeEvent<{ name?: string; value: unknown }>) => {
         setTime({ ...time, seconds: e.target.value as number });
-        handler(time.minutes * 50 + time.seconds);
     };
+
+    useEffect(() => {
+        handler(time.minutes * 60 + time.seconds);
+    }, [time]);
 
     return (
         <div className={styles.timer}>
