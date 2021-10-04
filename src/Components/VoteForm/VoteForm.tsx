@@ -38,7 +38,7 @@ export const VoteForm: React.FC = () => {
                     variant="outlined"
                     onClick={() => globalState.ws.provider?.sendVote(false)}
                 >
-                    Don't kick
+                    Don &#39 t kick
                 </Button>
             </div>
         </form>

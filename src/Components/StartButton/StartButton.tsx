@@ -33,7 +33,7 @@ export const StartButton: () => JSX.Element = () => {
         await sendGameProperty('gameSettings', globalState.temporaryDialerSettings.gameSettings);
         await sendGameProperty('cards', visibleCards);
         await sendGameProperty('cartBackClass', globalState.temporaryDialerSettings.cartBackClass);
-        await sendGameProperty('status', 'going');
+        await sendGameProperty('status', 'pending');
         history.push(`/${globalState.game.gameID}/game`);
     };
 
