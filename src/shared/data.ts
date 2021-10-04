@@ -194,7 +194,7 @@ export const selectedCards: Array<{ card: Card; user: User }> = [
         user: {
             firstName: 'Lily',
             lastName: 'Atkins',
-            role: 'dealer',
+            roleInGame: 'dealer',
             jobPosition: 'Senior',
             initials: 'LA',
             userID: '1',
@@ -204,7 +204,7 @@ export const selectedCards: Array<{ card: Card; user: User }> = [
         card: { id: '2', value: '2' },
         user: {
             firstName: 'Barsik',
-            role: 'player',
+            roleInGame: 'player',
             jobPosition: 'Junior lion',
             initials: 'BB',
             userID: '2',
@@ -215,7 +215,7 @@ export const selectedCards: Array<{ card: Card; user: User }> = [
         card: { id: '3', value: '3' },
         user: {
             firstName: 'Alex',
-            role: 'observer',
+            roleInGame: 'observer',
             jobPosition: 'Junior',
             initials: 'AL',
             userID: '4',

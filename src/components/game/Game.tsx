@@ -66,7 +66,7 @@ export const Game: React.FC = () => {
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
     const [isLastIssue, setIsLastIssue] = useState(false);
-    const scrumMaster = globalState.game.users.find((user: User) => user.role === 'dealer');
+    const scrumMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
     const { issues } = globalState.game;
     const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
     const { isTimerNeeded, timer } = globalState.game.gameSettings;
@@ -330,7 +330,7 @@ export const Game: React.FC = () => {
                     )}
                     {dealerIsPlaying &&
                         globalState.game.selectedCards
-                            .filter((item) => item.user.role === 'dealer')
+                            .filter((item) => item.user.roleInGame === 'dealer')
                             .map((item) => {
                                 return (
                                     <Grid
@@ -357,7 +357,7 @@ export const Game: React.FC = () => {
                                                     item.user.lastName || ''
                                                 }`}
                                                 jobPosition={item.user.jobPosition || ''}
-                                                roleInGame={item.roleInGame}
+                                                roleInGame={item.user.roleInGame}
                                             />
                                         </Grid>
                                     </Grid>
@@ -367,7 +367,7 @@ export const Game: React.FC = () => {
                         <Typography variant="subtitle1">Players</Typography>
                     </Grid>
                     {globalState.game.selectedCards
-                        .filter((item) => item.user.role === 'player')
+                        .filter((item) => item.user.roleInGame === 'player')
                         .map((item) => {
                             return (
                                 <Grid
@@ -394,20 +394,20 @@ export const Game: React.FC = () => {
                                                 item.user.lastName || ''
                                             }`}
                                             jobPosition={item.user.jobPosition || ''}
-                                            roleInGame={item.roleInGame}
+                                            roleInGame={item.user.roleInGame}
                                         />
                                     </Grid>
                                 </Grid>
                             );
                         })}
-                    {globalState.game.users.find((item) => item.role === 'observer') && (
+                    {globalState.game.users.find((item) => item.roleInGame === 'observer') && (
                         <Grid item container justifyContent="center">
                             <Typography variant="subtitle1">Observers</Typography>
                         </Grid>
                     )}
-                    {globalState.game.users.some((item) => item.role === 'observer') &&
+                    {globalState.game.users.some((item) => item.roleInGame === 'observer') &&
                         globalState.game.selectedCards
-                            .filter((item) => item.user.role === 'observer')
+                            .filter((item) => item.user.roleInGame === 'observer')
                             .map((item) => {
                                 return (
                                     <Grid
@@ -434,7 +434,7 @@ export const Game: React.FC = () => {
                                                     item.user.lastName || ''
                                                 }`}
                                                 jobPosition={item.user.jobPosition || ''}
-                                                roleInGame={item.roleInGame}
+                                                roleInGame={item.user.roleInGame}
                                             />
                                         </Grid>
                                     </Grid>
