@@ -17,6 +17,12 @@ export interface Game {
     vote: Vote | undefined;
     kickedUsersID: string[];
     pendingUsers: User[];
+    round: Round;
+}
+export interface Round {
+    roundID: string;
+    issueID: string;
+    status: 'pending' | 'going' | 'over';
 }
 export interface Vote {
     author: User;

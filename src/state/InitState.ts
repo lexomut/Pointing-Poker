@@ -95,5 +95,10 @@ export const initState: GlobalState = {
             isTimerNeeded: false,
             changingCardInRoundEnd: false,
         } as GameSettingsInterface,
+        round: {
+            issueID: '',
+            roundID: '',
+            status: 'pending',
+        },
     },
 };
