@@ -29,7 +29,7 @@ export const Invitation: React.FC = (): JSX.Element => {
 
     return (
         <>
-            {' '}
+           
             <Switch>
                 <Route exact path={`${path}`}>
                     <MainPage />
