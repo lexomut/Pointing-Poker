@@ -50,7 +50,7 @@ export const Lobby: () => JSX.Element = () => {
                 globalState.game.users.every(
                     (user: User) => globalState.currentUser.userID !== user.userID,
                 ) &&
-                !globalState.game.pendingUsers.some(
+                !globalState.game.users.some(
                     (user: User) => globalState.currentUser.userID === user.userID,
                 )
             ) {
