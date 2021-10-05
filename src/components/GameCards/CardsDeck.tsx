@@ -39,6 +39,13 @@ export const CardsDeck: React.FC = () => {
         default:
             visibleCards = fibonacciDeck;
     }
+    const handler = async (card: Card) => {
+        setActiveCardID(card.id);
+        if (globalState.game.status === 'going')
+            await globalState.ws.provider?.sendChooseCard(card);
+        setActiveCardID(card.id);
+    };
+
     return (
         <div className={styles.demo}>
             {visibleCards.map((el: Card) => {
@@ -50,7 +57,7 @@ export const CardsDeck: React.FC = () => {
                         isEditable={false}
                         scoreType={shortScoreType}
                         onClick={() => {
-                            setActiveCardID(el.id);
+                            handler(el);
                         }}
                     />
                 );

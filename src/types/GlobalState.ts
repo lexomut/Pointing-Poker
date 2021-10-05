@@ -53,6 +53,7 @@ export interface WSProviderInterface {
     updateProviderState: (arg: GlobalState) => void;
     changeValueOfGameProperty: (property: string, value: any) => Promise<void>;
     sendVote: (vote: boolean) => Promise<void>;
+    sendChooseCard: (card: Card) => Promise<void>;
 }
 
 export type Action =

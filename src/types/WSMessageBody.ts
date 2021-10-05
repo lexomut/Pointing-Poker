@@ -1,5 +1,5 @@
 import { ChatMessage } from './ChatMessage';
-import { Game } from './game';
+import {Card, Game} from './game';
 import { User } from './user';
 
 export interface WSMessageBody {
@@ -12,6 +12,7 @@ export interface WSMessageBody {
     errorMessage?: string;
     game?: Game;
     vote?: boolean;
+    card?: Card;
 }
 export type WSMessageEvent =
     | 'userConnection'
@@ -19,4 +20,5 @@ export type WSMessageEvent =
     | 'setGameState'
     | 'initMessage'
     | 'vote'
-    | 'error';
+    | 'error'
+    | 'chooseCard';

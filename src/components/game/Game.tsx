@@ -71,11 +71,27 @@ export const Game: React.FC = () => {
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
+    const { round } = globalState.game;
+
+    useEffect(() => {
+        if (globalState.game.round.status === 'going' && !startTimer) setStartTimer(true);
+        if (globalState.game.round.status === 'over' && !roundOver) setRoundOver(true);
+    }, [globalState, setStartTimer, startTimer, roundOver, setRoundOver]);
+
     const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
     const { issues } = globalState.game;
     const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
     const { isTimerNeeded, timer } = globalState.game.gameSettings;
+    const runRoundHandler = () => {
+        globalState.ws.provider?.changeValueOfGameProperty('round', { ...round, status: 'going' });
+        globalState.ws.provider?.changeValueOfGameProperty('status', 'going');
+    };
+    const overRoundHandler = () => {
+        if (!scrumMaster) return;
+        globalState.ws.provider?.changeValueOfGameProperty('round', { ...round, status: 'over' });
+    };
+
     const handleNextIssue = () => {
         let currentItemFound = false;
         let newNextIssueFound = false;
@@ -242,7 +258,7 @@ export const Game: React.FC = () => {
                                                         key={key}
                                                         seconds={timer}
                                                         start={startTimer}
-                                                        onComplete={() => setRoundOver(true)}
+                                                        onComplete={overRoundHandler}
                                                     />
                                                 </Grid>
                                             )}
@@ -251,7 +267,7 @@ export const Game: React.FC = () => {
                                                     <Button
                                                         color="primary"
                                                         variant="contained"
-                                                        onClick={() => setStartTimer(!startTimer)}
+                                                        onClick={runRoundHandler}
                                                         disabled={issues.length === 0}
                                                     >
                                                         Run round
