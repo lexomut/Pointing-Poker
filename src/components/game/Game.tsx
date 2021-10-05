@@ -28,6 +28,9 @@ import { LetInUserToGameForm } from '../LetInUserToGameForm';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
 import { IssueCreateForm } from '../IssueCreateForm';
 import { Card } from '../../types/game';
+import { gameExit } from './exitGame';
+import { gameOver } from './stopGame';
+import { saveStatisticToIssue } from '../statistic/makeStatistic';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -86,12 +89,18 @@ export const Game: React.FC = () => {
     };
 
     useEffect(() => {
-        if (globalState.game.round.status === 'going') {
-            setStartTimer(true);
-            setRoundOver(false);
-            return;
-        }
-        if (globalState.game.round.status === 'over' && !roundOver) setRoundOver(true);
+        const asyncFunc = async () => {
+            if (globalState.game.round.status === 'going') {
+                setStartTimer(true);
+                setRoundOver(false);
+                return;
+            }
+            if (globalState.game.round.status === 'over' && !roundOver) {
+                await saveStatisticToIssue(globalState);
+                setRoundOver(true);
+            }
+        };
+        asyncFunc();
     }, [globalState, setStartTimer, startTimer, roundOver, setRoundOver]);
 
     const [isLastIssue, setIsLastIssue] = useState(false);
@@ -216,7 +225,9 @@ export const Game: React.FC = () => {
                             <Button
                                 color="primary"
                                 variant="outlined"
-                                onClick={() => alert('add logic')}
+                                onClick={() =>
+                                    isDealer ? gameOver(globalState) : gameExit(globalState)
+                                }
                             >
                                 {isDealer ? 'Stop game' : 'Exit game'}
                             </Button>

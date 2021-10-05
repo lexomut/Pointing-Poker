@@ -53,6 +53,12 @@ export const initState: GlobalState = {
                 dealer: false,
                 id: '111',
                 score: '-',
+                statistic: [
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                ],
             },
             {
                 name: 'InitState2',
@@ -61,6 +67,12 @@ export const initState: GlobalState = {
                 dealer: true,
                 id: '112',
                 score: '-',
+                statistic: [
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                ],
             },
             {
                 name: 'InitState3',
@@ -69,6 +81,12 @@ export const initState: GlobalState = {
                 dealer: false,
                 id: '113',
                 score: '-',
+                statistic: [
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                    { id: '234', value: '545', voteResult: '45%' },
+                ],
             },
         ],
         cards: [],

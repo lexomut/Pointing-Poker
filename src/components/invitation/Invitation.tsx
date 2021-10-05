@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useState } from 'react';
+import React, { Dispatch, useContext, useEffect, useState } from 'react';
 import { Redirect, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 import { Card } from '@material-ui/core';
@@ -10,6 +10,7 @@ import { MainPage } from '../../pages/MainPage';
 import { Lobby } from '../../pages/Lobby';
 
 import styles from './invitation.module.scss';
+import { Result } from '../Result/Result';
 
 export const Invitation: React.FC = (): JSX.Element => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
@@ -26,6 +27,10 @@ export const Invitation: React.FC = (): JSX.Element => {
         setIsTimeout(true);
         setTimeout(() => history.push(`/`), 6000);
     }
+    useEffect(() => {
+        if (globalState.game.status === 'over') history.push(`/${globalState.game.gameID}/result`);
+        if (globalState.game.status === 'canceled') history.push(`/`);
+    });
 
     return (
         <>
@@ -43,6 +48,9 @@ export const Invitation: React.FC = (): JSX.Element => {
 
                 <Route exact path={`${path}/game`}>
                     {isAuthorized ? <Game /> : <Redirect to="/" />}
+                </Route>
+                <Route exact path={`${path}/result`}>
+                    <Result />
                 </Route>
                 <Route exact path="*">
                     <NotFound />
