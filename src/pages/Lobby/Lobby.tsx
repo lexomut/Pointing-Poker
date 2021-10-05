@@ -121,14 +121,18 @@ export const Lobby: () => JSX.Element = () => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <IssueCreateForm />
+                <div>
+                    <IssueCreateForm />
+                </div>
             </Modal>
             <Modal
                 open={globalState.popup === 'createCard'}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <CardAddForm />
+                <div>
+                    <CardAddForm />
+                </div>
             </Modal>
             <Modal
                 open={checkVoted()}
