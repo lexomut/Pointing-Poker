@@ -34,10 +34,11 @@ export const ConnectForm: React.FC<IConnectForm> = ({
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
     const history = useHistory();
     const gameId = url.substring(url.lastIndexOf('/') + 1);
+
     const connect = useCallback(async () => {
-        if (!url) return;
+        if (!id) return;
         setIsConnecting(true);
-        const game: Game | undefined = await connectGame(url);
+        const game: Game | undefined = await connectGame(id);
         setIsConnecting(false);
         if (game) {
             dispatch({ type: INIT_GAME, payLoad: game });
@@ -49,7 +50,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({
                 setUrlError(false);
             }, 2000);
         }
-    }, [dispatch, setIsDealer, setOpen, url]);
+    }, [dispatch, setIsDealer, setOpen, id]);
 
     const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -57,9 +58,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({
     };
 
     useEffect(() => {
-        if (!id) return;
-        setUrl(id);
-        connect();
+        if (id) connect();
     }, [id, connect]);
 
     return (
