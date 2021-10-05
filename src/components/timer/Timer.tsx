@@ -1,5 +1,5 @@
 import { useTheme } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import styles from './timer.module.scss';
 
@@ -31,7 +31,10 @@ export const Timer: React.FC<Props> = (props: Props): JSX.Element => {
                 [theme.palette.primary.dark, 0.25],
             ]}
             duration={seconds}
-            onComplete={onComplete}
+            onComplete={() => {
+                onComplete();
+                return [false, 0];
+            }}
         >
             {({ remainingTime }) => renderTime('seconds', remainingTime ?? seconds)}
         </CountdownCircleTimer>

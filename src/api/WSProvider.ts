@@ -141,7 +141,7 @@ export class WSProvider implements WSProviderInterface {
 
     async sendChooseCard(card: Card) {
         if (!this.game?.gameID || !this.currentUser) return;
-
+        if (this.game.round.status !== 'going') return;
         try {
             const message: WSMessageBody = {
                 gameID: this.game.gameID,

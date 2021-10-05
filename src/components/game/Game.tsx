@@ -27,7 +27,7 @@ import { User } from '../../types/user';
 import { LetInUserToGameForm } from '../LetInUserToGameForm';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
 import { IssueCreateForm } from '../IssueCreateForm';
-import {Card} from "../../types/game";
+import { Card } from '../../types/game';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -63,6 +63,7 @@ export const Game: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const isDealer = globalState.currentUser.roleInGame === 'dealer';
+    const isObserver = globalState.currentUser.roleInGame === 'observer';
     const classes = useStyles();
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
@@ -107,7 +108,10 @@ export const Game: React.FC = () => {
     };
     const overRoundHandler = async () => {
         if (!isDealer) return;
-        globalState.ws.provider?.changeValueOfGameProperty('round', { ...round, status: 'over' });
+        await globalState.ws.provider?.changeValueOfGameProperty('round', {
+            ...round,
+            status: 'over',
+        });
     };
 
     const handleNextIssue = async () => {
@@ -155,7 +159,7 @@ export const Game: React.FC = () => {
             setIsLastIssue(true);
         }
     };
-    const fillScore = (item:{ card: Card | undefined; user: User }) => {
+    const fillScore = (item: { card: Card | undefined; user: User }) => {
         if (isDealer) {
             return item.card
                 ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
@@ -365,7 +369,7 @@ export const Game: React.FC = () => {
                                 </Grid>
                             </Grid>
                         )}
-                        {(!isDealer || dealerIsPlaying) && (
+                        {(!isDealer || dealerIsPlaying) && !isObserver && (
                             <Grid item container justifyContent="center">
                                 <CardsDeck />
                             </Grid>
