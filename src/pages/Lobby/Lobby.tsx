@@ -1,5 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import Modal from '@material-ui/core/Modal';
+import React, { useContext, useEffect, useState } from 'react';
+import { Modal, IconButton, Collapse } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import {
@@ -20,16 +23,37 @@ import styles from './Lobby.module.scss';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-
     useEffect(() => {
         const { provider } = globalState.ws;
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
-
+    const [open, setOpen] = useState(true);
     return (
         <div className={styles.lobby}>
             <div className={styles.container}>
+                {globalState.currentUser.roleInGame !== 'dealer' && (
+                    <Collapse in={open}>
+                        <Alert
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                            icon={<CheckIcon fontSize="inherit" />}
+                            severity="success"
+                        >
+                            Welcome to Poker Planning lobby! You are waiting for game to start.
+                        </Alert>
+                    </Collapse>
+                )}
                 <section className={styles.top}>
                     <GameInfo />
                     <ScrumMaster />
