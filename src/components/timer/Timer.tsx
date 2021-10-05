@@ -1,5 +1,5 @@
 import { useTheme } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import styles from './timer.module.scss';
 
