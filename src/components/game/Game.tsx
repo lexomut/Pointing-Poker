@@ -93,7 +93,7 @@ export const Game: React.FC = () => {
         globalState.ws.provider?.changeValueOfGameProperty('round', { ...round, status: 'over' });
     };
 
-    const handleNextIssue = () => {
+    const handleNextIssue = async () => {
         let currentItemFound = false;
         let newNextIssueFound = false;
         let newIssues = issues.map((item) => {
@@ -120,7 +120,15 @@ export const Game: React.FC = () => {
             });
         }
         if (newNextIssueFound) {
-            if (isDealer) globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
+            if (isDealer) {
+                await globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
+                await globalState.ws.provider?.changeValueOfGameProperty(
+                    'selectedCards',
+                    globalState.game.users.map((user: User) => {
+                        return { card: undefined, user };
+                    }),
+                );
+            }
             setIsLastIssue(false);
             setRoundOver(false);
             setKey((prevKey) => prevKey + 1);

@@ -49,6 +49,9 @@ export const Lobby: () => JSX.Element = () => {
             if (
                 globalState.game.users.every(
                     (user: User) => globalState.currentUser.userID !== user.userID,
+                ) &&
+                !globalState.game.pendingUsers.some(
+                    (user: User) => globalState.currentUser.userID === user.userID,
                 )
             ) {
                 globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [

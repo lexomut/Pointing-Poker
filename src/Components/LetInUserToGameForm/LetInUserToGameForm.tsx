@@ -13,25 +13,27 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const { user } = props;
-
     const getOutPendingUsers = async () => {
         await globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
             ...globalState.game.pendingUsers.filter(
                 (pendingUser) => pendingUser.userID !== user.userID,
             ),
         ]);
-    };
+};
+    if (globalState.game.users.some((_user) => _user.userID === user.userID))
+        getOutPendingUsers();
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await globalState.ws.provider?.changeValueOfGameProperty('users', [
             ...globalState.game.users,
             user,
         ]);
+        await getOutPendingUsers();
         await globalState.ws.provider?.changeValueOfGameProperty('selectedCards', [
             ...globalState.game.selectedCards,
             { card: undefined, user },
         ]);
-        await getOutPendingUsers();
     };
     const cancelHandler = () => {
         globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
