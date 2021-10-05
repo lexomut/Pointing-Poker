@@ -11,7 +11,7 @@ export interface Game {
     dealer: User;
     issues: Array<Issue>;
     cards: Array<Card>;
-    selectedCards: Array<{ card: Card; user: User }>;
+    selectedCards: Array<{ card: Card | undefined; user: User }>;
     gameSettings: GameSettingsInterface;
     cartBackClass: string;
     vote: Vote | undefined;

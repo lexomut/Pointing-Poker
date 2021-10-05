@@ -11,15 +11,14 @@ import { Card } from '../../types/game';
 
 export const Statistic: React.FC = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const { selectedCards }: { selectedCards: Array<{ card: Card; user: User }> } =
+    const { selectedCards }: { selectedCards: Array<{ card: Card | undefined; user: User }> } =
         globalState.game;
 
     function makeStatisticCards(): StatisticCard[] {
-        const noSelect = globalState.game.users.length - selectedCards.length;
-        const empty = new Array(noSelect).fill('Coffee');
-        const values = selectedCards.map((obj) => obj.card.value);
-        const length = values.length + noSelect;
-        const obj = [...values, ...empty].reduce((previousValue, currentValue) => {
+        const values = selectedCards.map((obj) =>
+            !obj.card ? ('undefined' as any) : obj.card.value,
+        );
+        const obj = values.reduce((previousValue, currentValue) => {
             const prev = previousValue;
             const curr = currentValue;
             const res = ((prev[curr] = prev[curr] + prev[curr] || 1), prev);
@@ -31,7 +30,7 @@ export const Statistic: React.FC = () => {
             return {
                 id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
                 value: key,
-                voteResult: `${Math.ceil((value / length) * 100)}%`,
+                voteResult: `${Math.ceil((value / values.length) * 100)}%`,
             };
         });
         return cards;

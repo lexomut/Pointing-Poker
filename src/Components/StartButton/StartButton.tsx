@@ -5,6 +5,7 @@ import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { fibonacciDeck, powersOfTwoDeck } from '../../shared/data';
 import { Card } from '../../types/game';
+import { User } from '../../types/user';
 
 export const StartButton: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
@@ -33,6 +34,12 @@ export const StartButton: () => JSX.Element = () => {
         await sendGameProperty('gameSettings', globalState.temporaryDialerSettings.gameSettings);
         await sendGameProperty('cards', visibleCards);
         await sendGameProperty('cartBackClass', globalState.temporaryDialerSettings.cartBackClass);
+        await sendGameProperty(
+            'selectedCards',
+            globalState.game.users.map((user: User) => {
+                return { card: undefined, user };
+            }),
+        );
         await sendGameProperty('status', 'pending');
         history.push(`/${globalState.game.gameID}/game`);
     };

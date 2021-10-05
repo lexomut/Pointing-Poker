@@ -369,7 +369,9 @@ export const Game: React.FC = () => {
                                                 variant="outlined"
                                                 className={classes.minWidth}
                                             >
-                                                {`${item.card.value} ${globalState.game.gameSettings.shortScoreType}`}
+                                                {item.card
+                                                    ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                                                    : 'undefined'}
                                             </Button>
                                         </Grid>
                                         <Grid item>
@@ -406,7 +408,9 @@ export const Game: React.FC = () => {
                                             variant="outlined"
                                             className={classes.minWidth}
                                         >
-                                            {`${item.card.value} ${globalState.game.gameSettings.shortScoreType}`}
+                                            {item.card
+                                                ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                                                : 'undefined'}
                                         </Button>
                                     </Grid>
                                     <Grid item>
@@ -446,7 +450,9 @@ export const Game: React.FC = () => {
                                                 variant="outlined"
                                                 className={classes.minWidth}
                                             >
-                                                {`${item.card.value} ${globalState.game.gameSettings.shortScoreType}`}
+                                                {item.card
+                                                    ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                                                    : 'undefined'}
                                             </Button>
                                         </Grid>
                                         <Grid item>
