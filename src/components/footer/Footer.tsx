@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
                 })}
                 <a
                     className={styles.rss}
-                    href="https://rs.school/"
+                    href="https://rs.school/react/"
                     target="_blank"
                     rel="noreferrer"
                 >
