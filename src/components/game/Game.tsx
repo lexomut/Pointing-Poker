@@ -13,7 +13,6 @@ import {
     IconButton,
     Collapse,
 } from '@material-ui/core';
-
 import CloseIcon from '@material-ui/icons/Close';
 import { Alert } from '@material-ui/lab';
 import { IssueButton } from '../buttons';
@@ -25,8 +24,9 @@ import { UserCard } from '../UserCard';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
-import { IssueCreateForm, LetInUserToGameForm } from '..';
+import { LetInUserToGameForm } from '../LetInUserToGameForm';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
+import { IssueCreateForm } from '../IssueCreateForm';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -71,6 +71,7 @@ export const Game: React.FC = () => {
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
+
     const { round } = globalState.game;
 
     useEffect(() => {
@@ -128,6 +129,7 @@ export const Game: React.FC = () => {
             setIsLastIssue(true);
         }
     };
+
     return (
         <>
             <Grid container className={classes.mainContainer}>
@@ -159,7 +161,7 @@ export const Game: React.FC = () => {
                                     currentUser={
                                         globalState.currentUser.userID === scrumMaster.userID
                                     }
-                                    roleInGame={scrumMaster.roleInGame}
+                                    roleInGame="dealer"
                                 />
                             ) : (
                                 <Typography variant="h6">Loading...</Typography>

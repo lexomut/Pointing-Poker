@@ -105,22 +105,23 @@ export function UserCard(props: Props): JSX.Element {
     const classes = useStyles(props);
     const { name, jobPosition, size, imgSrc, initials, currentUser, userID, roleInGame } = props;
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const { ws, game } = globalState;
 
     const clickHandler = async (): Promise<void> => {
         if (globalState.currentUser.roleInGame === 'dealer') {
-            await globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
-                ...globalState.game.kickedUsersID,
+            await ws.provider?.changeValueOfGameProperty('kickedUsersID', [
+                ...game.kickedUsersID,
                 userID,
             ]);
-            const users = globalState.game.users.filter((user) => user.userID !== userID);
-            await globalState.ws.provider?.changeValueOfGameProperty('users', users);
+            const users = game.users.filter((user) => user.userID !== userID);
+            await ws.provider?.changeValueOfGameProperty('users', users);
         } else {
-            if (globalState.game.vote) return;
-            if (globalState.game.users.length < 4) {
+            if (game.vote) return;
+            if (game.users.length < 4) {
                 alert('player less then 3');
                 return;
             }
-            globalState.ws.provider?.changeValueOfGameProperty('vote', {
+            ws.provider?.changeValueOfGameProperty('vote', {
                 author: globalState.currentUser,
                 yes: 1,
                 no: 0,

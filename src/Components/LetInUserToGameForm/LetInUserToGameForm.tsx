@@ -13,18 +13,28 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const { user } = props;
+
+    const getOutPendingUsers = () => {
+        globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
+            ...globalState.game.pendingUsers.filter(
+                (pendingUser) => pendingUser.userID !== user.userID,
+            ),
+        ]);
+    };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         globalState.ws.provider?.changeValueOfGameProperty('users', [
             ...globalState.game.users,
             user,
         ]);
-
-        globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
-            ...globalState.game.pendingUsers.filter(
-                (pendingUser) => pendingUser.userID !== user.userID,
-            ),
+        getOutPendingUsers();
+    };
+    const cancelHandler = () => {
+        globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
+            ...globalState.game.kickedUsersID,
+            user.userID,
         ]);
+        getOutPendingUsers();
     };
 
     return (
@@ -43,20 +53,9 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
                     color="primary"
                     className={styles.btn}
                     variant="outlined"
-                    onClick={() => {
-                        globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
-                            ...globalState.game.kickedUsersID,
-                            user.userID,
-                        ]);
-
-                        globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
-                            ...globalState.game.pendingUsers.filter(
-                                (pendingUser) => pendingUser.userID !== user.userID,
-                            ),
-                        ]);
-                    }}
+                    onClick={cancelHandler}
                 >
-                    Kick him
+                    Kick him/her
                 </Button>
             </div>
         </form>

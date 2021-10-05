@@ -40,6 +40,7 @@ export interface GameSettingsInterface {
     isTimerNeeded: boolean;
     changingCardInRoundEnd: boolean;
     cardsDeckType: string;
+    freeGameEnter: boolean;
 }
 
 export interface Issue {
