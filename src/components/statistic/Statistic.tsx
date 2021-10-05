@@ -43,19 +43,23 @@ export const Statistic: React.FC = () => {
                 return (
                     <div className={styles.container} key={el.id}>
                         {el.id ? (
-                            <GameCard
-                                isActiveCard={false}
-                                value={el.value}
-                                isEditable={false}
-                                scoreType={globalState.game.gameSettings.shortScoreType}
-                            />
+                            <>
+                                {' '}
+                                <GameCard
+                                    isActiveCard={false}
+                                    value={el.value}
+                                    isEditable={false}
+                                    scoreType={globalState.game.gameSettings.shortScoreType}
+                                />
+                                <Typography variant="subtitle1">{el.voteResult}</Typography>
+                            </>
                         ) : (
-                            <div>
+                            <>
                                 <Paper elevation={3} className={styles.card}>
                                     <FreeBreakfastOutlinedIcon className={styles.coffee} />
                                 </Paper>
                                 <Typography variant="subtitle1">{el.voteResult}</Typography>
-                            </div>
+                            </>
                         )}
                     </div>
                 );
