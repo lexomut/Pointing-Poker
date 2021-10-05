@@ -61,6 +61,16 @@
             height: 47px;
         }
     }
+
+    .exitField {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    .exitBtn {
+        width: 189px;
+    }
 }
 
 .members,
@@ -82,4 +92,8 @@
 .settings {
     height: 400px;
     width: 100%;
+}
+
+.exitBtn {
+    max-width: 189px;
 }

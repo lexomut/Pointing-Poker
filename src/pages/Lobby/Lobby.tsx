@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Modal, IconButton, Collapse } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { Modal, IconButton, Collapse, Button } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
@@ -29,6 +30,7 @@ export const Lobby: () => JSX.Element = () => {
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
     const [open, setOpen] = useState(true);
+    const history = useHistory();
     return (
         <div className={styles.lobby}>
             <div className={styles.container}>
@@ -62,6 +64,18 @@ export const Lobby: () => JSX.Element = () => {
                         <div className={styles.top__buttons}>
                             <StartButton />
                             <CancelButton />
+                        </div>
+                    )}
+                    {globalState.currentUser.roleInGame !== 'dealer' && (
+                        <div className={styles.exitField}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => history.push('/')}
+                                className={styles.exitBtn}
+                            >
+                                Exit
+                            </Button>
                         </div>
                     )}
                 </section>
