@@ -19,9 +19,8 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
                 (pendingUser) => pendingUser.userID !== user.userID,
             ),
         ]);
-};
-    if (globalState.game.users.some((_user) => _user.userID === user.userID))
-        getOutPendingUsers();
+    };
+    if (globalState.game.users.some((_user) => _user.userID === user.userID)) getOutPendingUsers();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
