@@ -139,16 +139,20 @@ export const Lobby: () => JSX.Element = () => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <VoteForm />
+                <div>
+                    <VoteForm />
+                </div>
             </Modal>
             <Modal
                 open={isPaddingUser}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
-                <Card className={styles.modal}>
-                    <h4>please wait until they let you in</h4>
-                </Card>
+                <div>
+                    <Card className={styles.modal}>
+                        <h4>please wait until they let you in</h4>
+                    </Card>
+                </div>
             </Modal>
         </div>
     );
