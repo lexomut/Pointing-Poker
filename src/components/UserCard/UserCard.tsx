@@ -101,7 +101,7 @@ type Props = {
 
 export function UserCard(props: Props): JSX.Element {
     const classes = useStyles(props);
-    const { name, jobPosition, size, imgSrc, initials, currentUser, userID } = props;
+    const { name, jobPosition, size, imgSrc, initials, currentUser, userID, roleInGame } = props;
     const clickHandler = (id: string) => {
         return alert(`kick off ${id}`);
     };
@@ -148,7 +148,7 @@ export function UserCard(props: Props): JSX.Element {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        {!currentUser && (
+                        {!currentUser && roleInGame !== 'dealer' && (
                             <Button
                                 className={classes.button}
                                 aria-label="kick"
