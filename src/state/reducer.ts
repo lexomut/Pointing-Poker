@@ -17,7 +17,7 @@ import { USER_CONNECTION } from '../api/Constants';
 import { Card, GameSettingsInterface } from '../types/game';
 
 export function reducer(globalState: GlobalState, action: Action): GlobalState {
-    const { status, users, chatMessages } = globalState.game;
+    const { users, chatMessages } = globalState.game;
     switch (action.type) {
         case ADD_CHAT_MESSAGE: {
             const chatMessage = action.payLoad;
@@ -63,7 +63,6 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
             if (
                 globalState.game.status === 'new' &&
                 globalState.game.users.every((user) => user.userID !== newUser.userID)
-
             ) {
                 return {
                     ...globalState,

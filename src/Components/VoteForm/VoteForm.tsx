@@ -22,7 +22,7 @@ export const VoteForm: React.FC = () => {
             </div>
             <h4>
                 {`user ${globalState.game.vote?.author.firstName}
-             enters kick user ${
+             prompts to kick out  ${
                  globalState.game.users.find(
                      (user) => user.userID === globalState.game.vote?.kickID,
                  )?.firstName

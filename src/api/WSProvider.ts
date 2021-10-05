@@ -121,7 +121,7 @@ export class WSProvider implements WSProviderInterface {
         }
     }
 
-    async sendVote(vote: boolean) {
+    async sendVote(vote: boolean): Promise<void> {
         if (!this.game?.gameID || !this.currentUser) return;
 
         try {

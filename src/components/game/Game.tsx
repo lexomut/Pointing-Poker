@@ -13,7 +13,6 @@ import {
     IconButton,
     Collapse,
 } from '@material-ui/core';
-
 import CloseIcon from '@material-ui/icons/Close';
 import { Alert } from '@material-ui/lab';
 import { IssueButton } from '../buttons';
@@ -26,8 +25,8 @@ import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
 import { LetInUserToGameForm } from '../LetInUserToGameForm';
-import { IssueCreateForm } from '..';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
+import { IssueCreateForm } from '../IssueCreateForm';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

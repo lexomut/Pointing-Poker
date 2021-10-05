@@ -30,7 +30,7 @@ export const Invitation: React.FC = (): JSX.Element => {
     return (
         <>
             <Switch>
-                <Route exact path={`${path}`}>
+                <Route exact path={path}>
                     <MainPage />
                 </Route>
                 <Route exact path={`${path}/lobby`}>

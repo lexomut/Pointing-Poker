@@ -36,42 +36,37 @@ export const Lobby: () => JSX.Element = () => {
     }, [globalState]);
 
     useEffect(() => {
-        function sendRequestEnterToGame() {
-            globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
-                ...globalState.game.pendingUsers,
-                globalState.currentUser,
-            ]);
-        }
-        function passNext() {
-            if (
-                globalState.game.kickedUsersID.some(
-                    (item: string) => item === globalState.currentUser.userID,
-                )
+        if (
+            globalState.game.kickedUsersID.some(
+                (item: string) => item === globalState.currentUser.userID,
+            ) ||
+            globalState.game.pendingUsers.some(
+                (user: User) => globalState.currentUser.userID === user.userID,
             )
-                return;
-            if (globalState.game.status !== 'new') {
-                if (
-                    globalState.game.pendingUsers.some(
-                        (user: User) => globalState.currentUser.userID === user.userID,
-                    )
+        )
+            return;
+        if (globalState.game.status !== 'new') {
+            if (
+                globalState.game.users.every(
+                    (user: User) => globalState.currentUser.userID !== user.userID,
                 )
-                    return;
-                if (
-                    globalState.game.users.every(
-                        (user: User) => globalState.currentUser.userID !== user.userID,
-                    )
-                ) {
-                    sendRequestEnterToGame();
-                } else history.push(`/${globalState.game.gameID}/game`);
+            ) {
+                globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
+                    ...globalState.game.pendingUsers,
+                    globalState.currentUser,
+                ]);
+                return;
             }
+            history.push(`/${globalState.game.gameID}/game`);
         }
-        passNext();
     }, [globalState, history]);
 
     function checkVoted(): boolean {
-        if (!globalState.game.vote) return false;
-        if (globalState.game.vote.kickID === globalState.currentUser.userID) return false;
-        if (!globalState.game.kickedUsersID.every((id) => id !== globalState.currentUser.userID))
+        if (
+            !globalState.game.vote ||
+            globalState.game.vote.kickID === globalState.currentUser.userID ||
+            !globalState.game.kickedUsersID.every((id) => id !== globalState.currentUser.userID)
+        )
             return false;
         return globalState.game.vote.votedUsersID.every(
             (votedUserID: string) => votedUserID !== globalState.currentUser.userID,
