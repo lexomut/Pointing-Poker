@@ -15,4 +15,5 @@ export interface UserWithScore extends User {
     currentUser?: boolean;
     name: string;
     score: string;
+    roleInGame: 'observer' | 'dealer' | 'player';
 }

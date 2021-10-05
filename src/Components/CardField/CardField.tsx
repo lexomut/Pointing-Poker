@@ -34,7 +34,7 @@ export const CardField = (): JSX.Element => {
                     <GameCard
                         value={value}
                         scoreType={shortScoreType || ''}
-                        isEditable={false}
+                        isEditable={cardsDeckType === 'custom'}
                         key={id}
                         isActiveCard={false}
                     />

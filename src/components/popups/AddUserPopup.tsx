@@ -12,9 +12,7 @@ export const AddUserPopup: React.FC<Props> = (props: Props) => {
     const { name } = props;
     const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // Need to show dealer a message to setOpen(true);
 
     const handleClose = () => {
         setOpen(false);
@@ -22,9 +20,6 @@ export const AddUserPopup: React.FC<Props> = (props: Props) => {
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                Open alert dialog
-            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}

@@ -46,9 +46,30 @@ export const initState: GlobalState = {
             initials: '',
         } as User,
         issues: [
-            { name: 'InitState', priority: 'Low', current: true, dealer: false, id: '111' },
-            { name: 'InitState2', priority: 'Critical', current: false, dealer: true, id: '112' },
-            { name: 'InitState3', priority: 'High', current: false, dealer: false, id: '113' },
+            {
+                name: 'InitState',
+                priority: 'Low',
+                current: true,
+                dealer: false,
+                id: '111',
+                score: '-',
+            },
+            {
+                name: 'InitState2',
+                priority: 'Critical',
+                current: false,
+                dealer: true,
+                id: '112',
+                score: '-',
+            },
+            {
+                name: 'InitState3',
+                priority: 'High',
+                current: false,
+                dealer: false,
+                id: '113',
+                score: '-',
+            },
         ],
         cards: [],
         selectedCards: [
