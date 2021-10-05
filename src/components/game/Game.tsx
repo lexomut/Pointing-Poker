@@ -27,6 +27,7 @@ import { User } from '../../types/user';
 import { LetInUserToGameForm } from '../LetInUserToGameForm';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
 import { IssueCreateForm } from '../IssueCreateForm';
+import {Card} from "../../types/game";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -73,9 +74,22 @@ export const Game: React.FC = () => {
     }, [globalState]);
 
     const { round } = globalState.game;
+    const resetSelectedCards = async () => {
+        if (!isDealer) return;
+        await globalState.ws.provider?.changeValueOfGameProperty(
+            'selectedCards',
+            globalState.game.users.map((user: User) => {
+                return { card: undefined, user };
+            }),
+        );
+    };
 
     useEffect(() => {
-        if (globalState.game.round.status === 'going' && !startTimer) setStartTimer(true);
+        if (globalState.game.round.status === 'going') {
+            setStartTimer(true);
+            setRoundOver(false);
+            return;
+        }
         if (globalState.game.round.status === 'over' && !roundOver) setRoundOver(true);
     }, [globalState, setStartTimer, startTimer, roundOver, setRoundOver]);
 
@@ -84,12 +98,15 @@ export const Game: React.FC = () => {
     const { issues } = globalState.game;
     const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
     const { isTimerNeeded, timer } = globalState.game.gameSettings;
-    const runRoundHandler = () => {
-        globalState.ws.provider?.changeValueOfGameProperty('round', { ...round, status: 'going' });
-        globalState.ws.provider?.changeValueOfGameProperty('status', 'going');
+    const runRoundHandler = async () => {
+        await globalState.ws.provider?.changeValueOfGameProperty('round', {
+            ...round,
+            status: 'going',
+        });
+        await globalState.ws.provider?.changeValueOfGameProperty('status', 'going');
     };
-    const overRoundHandler = () => {
-        if (!scrumMaster) return;
+    const overRoundHandler = async () => {
+        if (!isDealer) return;
         globalState.ws.provider?.changeValueOfGameProperty('round', { ...round, status: 'over' });
     };
 
@@ -122,13 +139,14 @@ export const Game: React.FC = () => {
         if (newNextIssueFound) {
             if (isDealer) {
                 await globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
-                await globalState.ws.provider?.changeValueOfGameProperty(
-                    'selectedCards',
-                    globalState.game.users.map((user: User) => {
-                        return { card: undefined, user };
-                    }),
-                );
+                await globalState.ws.provider?.changeValueOfGameProperty('round', {
+                    ...round,
+                    status: 'going',
+                });
             }
+
+            resetSelectedCards();
+
             setIsLastIssue(false);
             setRoundOver(false);
             setKey((prevKey) => prevKey + 1);
@@ -137,7 +155,22 @@ export const Game: React.FC = () => {
             setIsLastIssue(true);
         }
     };
+    const fillScore = (item:{ card: Card | undefined; user: User }) => {
+        if (isDealer) {
+            return item.card
+                ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                : 'undefined';
+        }
+        if (item.user.userID === globalState.currentUser.userID)
+            return item.card
+                ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                : 'undefined';
 
+        if (!roundOver) return 'in pogress';
+        return item.card
+            ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+            : 'undefined';
+    };
     return (
         <>
             <Grid container className={classes.mainContainer}>
@@ -292,6 +325,8 @@ export const Game: React.FC = () => {
                                                         onClick={() => {
                                                             setRoundOver(false);
                                                             setKey((prevKey) => prevKey + 1);
+                                                            resetSelectedCards();
+                                                            runRoundHandler();
                                                         }}
                                                     >
                                                         Restart round
@@ -377,9 +412,7 @@ export const Game: React.FC = () => {
                                                 variant="outlined"
                                                 className={classes.minWidth}
                                             >
-                                                {item.card
-                                                    ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
-                                                    : 'undefined'}
+                                                {fillScore(item)}
                                             </Button>
                                         </Grid>
                                         <Grid item>
@@ -416,9 +449,7 @@ export const Game: React.FC = () => {
                                             variant="outlined"
                                             className={classes.minWidth}
                                         >
-                                            {item.card
-                                                ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
-                                                : 'undefined'}
+                                            {fillScore(item)}
                                         </Button>
                                     </Grid>
                                     <Grid item>
@@ -458,9 +489,7 @@ export const Game: React.FC = () => {
                                                 variant="outlined"
                                                 className={classes.minWidth}
                                             >
-                                                {item.card
-                                                    ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
-                                                    : 'undefined'}
+                                                {fillScore(item)}
                                             </Button>
                                         </Grid>
                                         <Grid item>

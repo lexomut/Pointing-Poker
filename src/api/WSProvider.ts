@@ -3,7 +3,7 @@ import { WSMessageBody } from '../types/WSMessageBody';
 import { SERVER_URL } from './url';
 import { WSMessageHandler } from './WSMessageHandler';
 import { Action, CurrentUser, GlobalState, WSProviderInterface } from '../types/GlobalState';
-import {Card, Game } from '../types/game';
+import { Card, Game } from '../types/game';
 import { CHAT_MESSAGE, CHOOSE_CARD, SET_GAME_STATE, USER_CONNECTION, VOTE } from './Constants';
 import { SET_SOCKET, SET_SOCKET_STATUS } from '../state/ActionTypesConstants';
 import { ChatMessage } from '../types/ChatMessage';
@@ -138,6 +138,7 @@ export class WSProvider implements WSProviderInterface {
             console.log('Ошибка отправки', e);
         }
     }
+
     async sendChooseCard(card: Card) {
         if (!this.game?.gameID || !this.currentUser) return;
 

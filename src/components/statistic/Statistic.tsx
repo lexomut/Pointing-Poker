@@ -15,9 +15,7 @@ export const Statistic: React.FC = () => {
         globalState.game;
 
     function makeStatisticCards(): StatisticCard[] {
-        const values = selectedCards.map((obj) =>
-            !obj.card ? ('undefined' as any) : obj.card.value,
-        );
+        const values = selectedCards.map((obj) => (!obj.card ? ('?' as any) : obj.card.value));
         const obj = values.reduce((previousValue, currentValue) => {
             const prev = previousValue;
             const curr = currentValue;
@@ -28,7 +26,10 @@ export const Statistic: React.FC = () => {
             const key: string = item[0] as string;
             const value: number = item[1] as number;
             return {
-                id: new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
+                id:
+                    key === 'cup'
+                        ? ''
+                        : new Date().getTime().toString(36) + Math.random().toString(36).slice(2),
                 value: key,
                 voteResult: `${Math.ceil((value / values.length) * 100)}%`,
             };
@@ -41,22 +42,24 @@ export const Statistic: React.FC = () => {
             {makeStatisticCards().map((el: StatisticCard) => {
                 return (
                     <div className={styles.container} key={el.id}>
-                        <GameCard
-                            isActiveCard={false}
-                            value={el.value}
-                            isEditable={false}
-                            scoreType={globalState.game.gameSettings.shortScoreType}
-                        />
-                        <Typography variant="subtitle1">{el.voteResult}</Typography>
+                        {el.id ? (
+                            <GameCard
+                                isActiveCard={false}
+                                value={el.value}
+                                isEditable={false}
+                                scoreType={globalState.game.gameSettings.shortScoreType}
+                            />
+                        ) : (
+                            <div>
+                                <Paper elevation={3} className={styles.card}>
+                                    <FreeBreakfastOutlinedIcon className={styles.coffee} />
+                                </Paper>
+                                <Typography variant="subtitle1">{el.voteResult}</Typography>
+                            </div>
+                        )}
                     </div>
                 );
             })}
-            <div className={styles.container}>
-                <Paper elevation={3} className={styles.card}>
-                    <FreeBreakfastOutlinedIcon className={styles.coffee} />
-                </Paper>
-                <Typography variant="subtitle1">5%</Typography>
-            </div>
         </div>
     );
 };

@@ -68,6 +68,7 @@ export const CardsDeck: React.FC = () => {
                 classes={{ root: classes.activeCard }}
                 onClick={() => {
                     setActiveCardID('');
+                    handler({ id: '', value: 'cup' });
                 }}
             >
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />
