@@ -71,7 +71,18 @@ export const Lobby: () => JSX.Element = () => {
                             <Button
                                 variant="outlined"
                                 color="primary"
-                                onClick={() => history.push('/')}
+                                onClick={async () => {
+                                    history.push('/');
+                                    await globalState.ws.provider?.changeValueOfGameProperty(
+                                        'users',
+                                        [
+                                            ...globalState.game.users.filter(
+                                                (user) =>
+                                                    user.userID !== globalState.currentUser.userID,
+                                            ),
+                                        ],
+                                    );
+                                }}
                                 className={styles.exitBtn}
                             >
                                 Exit
