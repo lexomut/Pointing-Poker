@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
 import React, { Dispatch, useCallback, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connectGame } from '../../api/server';
 import { Game } from '../../types/game';
 import { RegistrationForm } from '../RegistrationForm';
@@ -31,7 +32,8 @@ export const ConnectForm: React.FC<IConnectForm> = ({
     const [urlError, setUrlError] = useState(false);
     const [isConnecting, setIsConnecting] = useState(false);
     const { dispatch }: { dispatch: Dispatch<Action> } = useContext(GlobalContext);
-
+    const history = useHistory();
+    const gameId = url.substring(url.lastIndexOf('/') + 1);
     const connect = useCallback(async () => {
         if (!url) return;
         setIsConnecting(true);
@@ -51,7 +53,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({
 
     const handleConnect = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        connect();
+        history.push(gameId);
     };
 
     useEffect(() => {
