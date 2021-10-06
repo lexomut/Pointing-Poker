@@ -149,7 +149,7 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                         }}
                         InputProps={{
                             readOnly: !dealer,
-                            endAdornment: (
+                            endAdornment: !dealer ? undefined : (
                                 <Button
                                     color="primary"
                                     variant="outlined"
@@ -161,16 +161,18 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                             ),
                         }}
                     />
-                    <Button
-                        className={classes.mt}
-                        color="primary"
-                        variant="outlined"
-                        onClick={handleCurrentIssue}
-                        endIcon={<ForumIcon />}
-                        disabled={isRoundGoing}
-                    >
-                        Set as current issue
-                    </Button>
+                    {dealer && (
+                        <Button
+                            className={classes.mt}
+                            color="primary"
+                            variant="outlined"
+                            onClick={handleCurrentIssue}
+                            endIcon={<ForumIcon />}
+                            disabled={isRoundGoing}
+                        >
+                            Set as current issue
+                        </Button>
+                    )}
                 </CardContent>
             </Collapse>
         </Card>

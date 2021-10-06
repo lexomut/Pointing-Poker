@@ -73,7 +73,7 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
                 <Typography color="textSecondary" variant="caption" className={classes.caption}>
                     {priority} priority
                 </Typography>
-                {dealer && !current && (
+                {dealer && !current && globalState.currentUser.roleInGame === 'dealer' && (
                     <CardActions className={classes.button}>
                         <Button disabled={!globalState.ws.status} onClick={handlerClick}>
                             <CloseIcon />
