@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Modal, IconButton, Collapse, Button } from '@material-ui/core';
+import { Modal, IconButton, Collapse, Button, Card } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { Card } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
@@ -31,7 +30,6 @@ export const Lobby: () => JSX.Element = () => {
     const isPaddingUser = globalState.game.pendingUsers.some(
         (user: User) => globalState.currentUser.userID === user.userID,
     );
-
     useEffect(() => {
         const { provider } = globalState.ws;
         provider?.updateProviderState(globalState);
@@ -80,7 +78,6 @@ export const Lobby: () => JSX.Element = () => {
     }
 
     const [open, setOpen] = useState(true);
-    const history = useHistory();
     return (
         <div className={styles.lobby}>
             <div className={styles.container}>
