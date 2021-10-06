@@ -61,9 +61,11 @@ export const Invitation: React.FC = (): JSX.Element => {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
-                <Card className={styles.modal}>
-                    <h4>YOU WERE KICKED</h4>
-                </Card>
+                <div>
+                    <Card className={styles.modal}>
+                        <h4>YOU WERE KICKED</h4>
+                    </Card>
+                </div>
             </Modal>
         </>
     );

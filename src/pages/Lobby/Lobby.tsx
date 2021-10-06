@@ -1,7 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import Modal from '@material-ui/core/Modal';
+import React, { useContext, useEffect, useState } from 'react';
+import { Modal, IconButton, Collapse, Button, Card } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { Card } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import {
@@ -25,10 +27,9 @@ import { User } from '../../types/user';
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const history = useHistory();
-    const isPaddingUser = globalState.game.pendingUsers.some(
+    const isPendingUser = globalState.game.pendingUsers.some(
         (user: User) => globalState.currentUser.userID === user.userID,
     );
-
     useEffect(() => {
         const { provider } = globalState.ws;
         provider?.updateProviderState(globalState);
@@ -60,9 +61,20 @@ export const Lobby: () => JSX.Element = () => {
                 ]);
                 return;
             }
-            history.push(`/${globalState.game.gameID}/game`);
+            if (globalState.game.status !== 'canceled') {
+                history.push(`/${globalState.game.gameID}/game`);
+            }
         }
-    }, [globalState, history]);
+    }, [
+        globalState.game.users,
+        globalState.currentUser,
+        globalState.game.gameID,
+        globalState.game.kickedUsersID,
+        globalState.game.pendingUsers,
+        globalState.game.status,
+        globalState.ws.provider,
+        history,
+    ]);
 
     function checkVoted(): boolean {
         if (
@@ -76,9 +88,32 @@ export const Lobby: () => JSX.Element = () => {
         );
     }
 
+    const [open, setOpen] = useState(true);
     return (
         <div className={styles.lobby}>
             <div className={styles.container}>
+                {globalState.currentUser.roleInGame !== 'dealer' && (
+                    <Collapse in={open}>
+                        <Alert
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                            icon={<CheckIcon fontSize="inherit" />}
+                            severity="success"
+                        >
+                            Welcome to Poker Planning lobby! You are waiting for game to start.
+                        </Alert>
+                    </Collapse>
+                )}
                 <section className={styles.top}>
                     <GameInfo />
                     <ScrumMaster />
@@ -87,6 +122,29 @@ export const Lobby: () => JSX.Element = () => {
                         <div className={styles.top__buttons}>
                             <StartButton />
                             <CancelButton />
+                        </div>
+                    )}
+                    {globalState.currentUser.roleInGame !== 'dealer' && (
+                        <div className={styles.exitField}>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={async () => {
+                                    history.push('/');
+                                    await globalState.ws.provider?.changeValueOfGameProperty(
+                                        'users',
+                                        [
+                                            ...globalState.game.users.filter(
+                                                (user) =>
+                                                    user.userID !== globalState.currentUser.userID,
+                                            ),
+                                        ],
+                                    );
+                                }}
+                                className={styles.exitBtn}
+                            >
+                                Exit
+                            </Button>
                         </div>
                     )}
                 </section>
@@ -121,14 +179,18 @@ export const Lobby: () => JSX.Element = () => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <IssueCreateForm />
+                <div>
+                    <IssueCreateForm />
+                </div>
             </Modal>
             <Modal
                 open={globalState.popup === 'createCard'}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <CardAddForm />
+                <div>
+                    <CardAddForm />
+                </div>
             </Modal>
 
             <Modal
@@ -136,16 +198,20 @@ export const Lobby: () => JSX.Element = () => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <VoteForm />
+                <div>
+                    <VoteForm />
+                </div>
             </Modal>
             <Modal
-                open={isPaddingUser}
+                open={isPendingUser}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
-                <Card className={styles.modal}>
-                    <h4>please wait until they let you in</h4>
-                </Card>
+                <div>
+                    <Card className={styles.modal}>
+                        <h4>please wait until they let you in</h4>
+                    </Card>
+                </div>
             </Modal>
         </div>
     );

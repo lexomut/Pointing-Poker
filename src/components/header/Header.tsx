@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         fab: {
             position: 'relative',
-            right: '40%',
+            right: '50%',
             top: 30,
-            background: theme.palette.secondary.main,
+            background: theme.palette.secondary.light,
         },
         header: {
             marginBottom: 30,
@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme: Theme) =>
         header_bar: {
             display: 'flex',
             justifyContent: 'flex-end',
+        },
+        chatIcon: {
+            marginLeft: '-5%',
         },
     }),
 );
@@ -51,6 +54,7 @@ export const Header: React.FC = () => {
                 </Fab>
                 {location.pathname !== '/' && (
                     <IconButton
+                        className={classes.chatIcon}
                         color="secondary"
                         onClick={() => {
                             dispatch({ type: SHOW_CHAT, payLoad: undefined });
