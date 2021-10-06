@@ -8,7 +8,7 @@ export function makeStatisticCards(
     const obj = values.reduce((previousValue, currentValue) => {
         const prev = previousValue;
         const curr = currentValue;
-        const res = ((prev[curr] = prev[curr] + prev[curr] || 1), prev);
+        const res = ((prev[curr] = prev[curr] + 1 || 1), prev);
         return res;
     }, {});
     return Object.entries(obj).map((item) => {

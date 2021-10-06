@@ -13,6 +13,7 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const { user } = props;
+
     const getOutPendingUsers = async () => {
         await globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
             ...globalState.game.pendingUsers.filter(
@@ -22,8 +23,7 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
     };
     if (globalState.game.users.some((_user) => _user.userID === user.userID)) getOutPendingUsers();
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const letIn = async () => {
         await globalState.ws.provider?.changeValueOfGameProperty('users', [
             ...globalState.game.users,
             user,
@@ -34,6 +34,10 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
             { card: undefined, user },
         ]);
     };
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await letIn();
+    };
     const cancelHandler = () => {
         globalState.ws.provider?.changeValueOfGameProperty('kickedUsersID', [
             ...globalState.game.kickedUsersID,
@@ -42,6 +46,7 @@ export const LetInUserToGameForm = (props: Props): JSX.Element => {
         getOutPendingUsers();
     };
 
+    if (globalState.game.gameSettings.freeGameEnter) letIn();
     return (
         <form onSubmit={handleSubmit} className={styles.modal}>
             <div className={styles.registration}>
