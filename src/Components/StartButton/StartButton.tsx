@@ -38,7 +38,7 @@ export const StartButton: () => JSX.Element = () => {
             'selectedCards',
             globalState.game.users.map((user: User) => {
                 return { card: undefined, user };
-            })
+            }),
         );
         await sendGameProperty('status', 'pending');
         history.push(`/${globalState.game.gameID}/game`);

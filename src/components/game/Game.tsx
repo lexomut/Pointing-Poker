@@ -30,7 +30,7 @@ import { IssueCreateForm } from '../IssueCreateForm';
 import { Card } from '../../types/game';
 import { gameExit } from './exitGame';
 import { gameOver } from './stopGame';
-import { saveStatisticToIssue } from '../statistic/makeStatistic';
+import { saveStatisticToIssue } from '../Result/saveStatisticToIssue';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Game: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
+    const { game } = globalState;
     const isDealer = globalState.currentUser.roleInGame === 'dealer';
     const isObserver = globalState.currentUser.roleInGame === 'observer';
     const classes = useStyles();
@@ -77,12 +78,12 @@ export const Game: React.FC = () => {
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
 
-    const { round } = globalState.game;
+    const { round } = game;
     const resetSelectedCards = async () => {
         if (!isDealer) return;
         await globalState.ws.provider?.changeValueOfGameProperty(
             'selectedCards',
-            globalState.game.users.map((user: User) => {
+            game.users.map((user: User) => {
                 return { card: undefined, user };
             }),
         );
@@ -90,24 +91,24 @@ export const Game: React.FC = () => {
 
     useEffect(() => {
         const asyncFunc = async () => {
-            if (globalState.game.round.status === 'going') {
+            if (game.round.status === 'going') {
                 setStartTimer(true);
                 setRoundOver(false);
                 return;
             }
-            if (globalState.game.round.status === 'over' && !roundOver) {
+            if (game.round.status === 'over' && !roundOver) {
                 await saveStatisticToIssue(globalState);
                 setRoundOver(true);
             }
         };
         asyncFunc();
-    }, [globalState, setStartTimer, startTimer, roundOver, setRoundOver]);
+    }, [globalState, game, setStartTimer, startTimer, roundOver, setRoundOver]);
 
     const [isLastIssue, setIsLastIssue] = useState(false);
-    const scrumMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
-    const { issues } = globalState.game;
+    const scrumMaster = game.users.find((user: User) => user.roleInGame === 'dealer');
+    const { issues } = game;
     const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
-    const { isTimerNeeded, timer } = globalState.game.gameSettings;
+    const { isTimerNeeded, timer } = game.gameSettings;
     const runRoundHandler = async () => {
         await globalState.ws.provider?.changeValueOfGameProperty('round', {
             ...round,
@@ -154,7 +155,7 @@ export const Game: React.FC = () => {
                 await globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
                 await globalState.ws.provider?.changeValueOfGameProperty('round', {
                     ...round,
-                    status: 'going',
+                    status: 'pending',
                 });
             }
 
@@ -168,21 +169,20 @@ export const Game: React.FC = () => {
             setIsLastIssue(true);
         }
     };
+
     const fillScore = (item: { card: Card | undefined; user: User }) => {
         if (isDealer) {
             return item.card
-                ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                ? `${item.card.value} ${game.gameSettings.shortScoreType}`
                 : 'undefined';
         }
         if (item.user.userID === globalState.currentUser.userID)
             return item.card
-                ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
+                ? `${item.card.value} ${game.gameSettings.shortScoreType}`
                 : 'undefined';
 
         if (!roundOver) return 'in pogress';
-        return item.card
-            ? `${item.card.value} ${globalState.game.gameSettings.shortScoreType}`
-            : 'undefined';
+        return item.card ? `${item.card.value} ${game.gameSettings.shortScoreType}` : 'undefined';
     };
     return (
         <>
@@ -200,7 +200,7 @@ export const Game: React.FC = () => {
                     className={clsx(classes.rightBorder, classes.column)}
                 >
                     <Grid item>
-                        <Typography variant="h4">{globalState.game.title}</Typography>
+                        <Typography variant="h4">{game.title}</Typography>
                     </Grid>
                     <Grid item container alignItems="center" spacing={10} justifyContent="center">
                         <Grid item>
@@ -255,7 +255,7 @@ export const Game: React.FC = () => {
                                         dealer={isDealer}
                                         score={item.score}
                                         link={item.link}
-                                        isRoundGoing={startTimer}
+                                        isRoundGoing={game.round.status === 'going'}
                                     />
                                 </Grid>
                             ))}
@@ -264,7 +264,7 @@ export const Game: React.FC = () => {
                                     <IssueButton />
                                 </Grid>
                             )}
-                            {roundOver && isDealer && (
+                            {game.round.status === 'over' && isDealer && (
                                 <>
                                     <Grid item>
                                         <Typography variant="h6">Statistics:</Typography>
@@ -365,7 +365,7 @@ export const Game: React.FC = () => {
                             </Grid>
                         )}
 
-                        {!isDealer && roundOver && (
+                        {!isDealer && game.round.status === 'over' && (
                             <Grid item container justifyContent="center">
                                 <Grid item>
                                     <Typography variant="h6">Statistics:</Typography>
@@ -411,7 +411,7 @@ export const Game: React.FC = () => {
                         </Grid>
                     )}
                     {dealerIsPlaying &&
-                        globalState.game.selectedCards
+                        game.selectedCards
                             .filter((item) => item.user.roleInGame === 'dealer')
                             .map((item) => {
                                 return (
@@ -448,7 +448,7 @@ export const Game: React.FC = () => {
                     <Grid item container justifyContent="center">
                         <Typography variant="subtitle1">Players</Typography>
                     </Grid>
-                    {globalState.game.selectedCards
+                    {game.selectedCards
                         .filter((item) => item.user.roleInGame === 'player')
                         .map((item) => {
                             return (
@@ -482,13 +482,13 @@ export const Game: React.FC = () => {
                                 </Grid>
                             );
                         })}
-                    {globalState.game.users.find((item) => item.roleInGame === 'observer') && (
+                    {game.users.find((item) => item.roleInGame === 'observer') && (
                         <Grid item container justifyContent="center">
                             <Typography variant="subtitle1">Observers</Typography>
                         </Grid>
                     )}
-                    {globalState.game.users.some((item) => item.roleInGame === 'observer') &&
-                        globalState.game.selectedCards
+                    {game.users.some((item) => item.roleInGame === 'observer') &&
+                        game.selectedCards
                             .filter((item) => item.user.roleInGame === 'observer')
                             .map((item) => {
                                 return (
@@ -527,12 +527,12 @@ export const Game: React.FC = () => {
 
             {isDealer && <AddUserPopup name="Mike" />}
             <Modal
-                open={globalState.game.pendingUsers.length > 0 && isDealer}
+                open={game.pendingUsers.length > 0 && isDealer}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
                 <div>
-                    {globalState.game.pendingUsers.map((user: User) => {
+                    {game.pendingUsers.map((user: User) => {
                         return <LetInUserToGameForm key={user.userID} user={user} />;
                     })}
                 </div>

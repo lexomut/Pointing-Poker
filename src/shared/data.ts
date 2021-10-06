@@ -1,5 +1,5 @@
-import { Author, StatisticCard, UserWithScore } from './types';
-import { Card, Issue } from '../types/game';
+import { Author, UserWithScore } from './types';
+import { Card, Issue, StatisticCard } from '../types/game';
 import { User } from '../types/user';
 
 export const authors: Author[] = [

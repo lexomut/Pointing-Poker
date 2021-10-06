@@ -5,9 +5,8 @@ import { GameCard } from '../GameCards';
 import styles from './statistic.module.scss';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
-import { StatisticCard } from '../../shared/types';
 import { User } from '../../types/user';
-import { Card } from '../../types/game';
+import { Card, StatisticCard } from '../../types/game';
 import { makeStatisticCards } from './makeStatistic';
 
 export const Statistic: React.FC = () => {

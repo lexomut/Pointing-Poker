@@ -1,4 +1,3 @@
-import { StatisticCard } from '../shared/types';
 import { ChatMessage } from './ChatMessage';
 import { User } from './user';
 
@@ -59,4 +58,7 @@ export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 export interface Card {
     id: string;
     value: string;
+}
+export interface StatisticCard extends Card {
+    voteResult: string;
 }

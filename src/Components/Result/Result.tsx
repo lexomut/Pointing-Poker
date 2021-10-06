@@ -3,10 +3,9 @@ import { Paper, Typography } from '@material-ui/core';
 import FreeBreakfastOutlinedIcon from '@material-ui/icons/FreeBreakfastOutlined';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
-import { Issue } from '../../types/game';
+import { Issue, StatisticCard } from '../../types/game';
 import { IssueCard } from '../IssueCard';
 import styles from '../statistic/statistic.module.scss';
-import { StatisticCard } from '../../shared/types';
 import { GameCard } from '../GameCards';
 
 export const Result: React.FC = () => {
@@ -18,14 +17,14 @@ export const Result: React.FC = () => {
                 ({ name, priority, current, dealer, id, statistic }: Issue) => {
                     return (
                         <div key={id}>
-                             <IssueCard
+                            <IssueCard
                                 key={id}
                                 name={name}
                                 priority={priority}
                                 current={current}
                                 dealer={dealer}
                                 id={id}
-                             />
+                            />
                             <div className={styles.demo}>
                                 {statistic &&
                                     statistic.map((el: StatisticCard) => {

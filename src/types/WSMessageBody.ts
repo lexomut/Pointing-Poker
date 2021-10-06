@@ -1,5 +1,5 @@
 import { ChatMessage } from './ChatMessage';
-import {Card, Game} from './game';
+import { Card, Game } from './game';
 import { User } from './user';
 
 export interface WSMessageBody {
