@@ -1,0 +1,129 @@
+.modal {
+    position: absolute;
+    width: 876px;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: 950px) {
+        width: 700px;
+    }
+    @media screen and (max-width: 750px) {
+        width: 450px;
+    }
+    h2 {
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 75px;
+        letter-spacing: 0em;
+        text-align: left;
+        @media screen and (max-width: 750px) {
+            font-size: 48px;
+            line-height: 50px;
+            margin-right: 10px;
+        }
+    }
+    form {
+        width: 100%;
+    }
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 16px;
+}
+
+.top {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    p {
+        font-family: Ruda;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30px;
+        @media screen and (max-width: 750px) {
+            font-size: 20px;
+            line-height: 22px;
+        }
+    }
+}
+
+.registration {
+    width: 100%;
+    flex-grow: 1;
+    padding: 30px 83px 0 46px;
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: 750px) {
+        padding: 60px 20px 0 20px;
+    }
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    width: 467px;
+    @media screen and (max-width: 750px) {
+        width: 410px;
+    }
+    input {
+        height: 10px;
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 80px;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+}
+
+.btn {
+    width: 189px;
+    height: 47px;
+}
+
+.upload {
+    display: flex;
+    justify-content: space-between;
+    height: 125px;
+
+    &__buttons {
+        display: flex;
+    }
+
+    p {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 28px;
+        letter-spacing: 0em;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}
+
+input {
+    width: 276px;
+    height: 10px;
+}
+
+.SwitchContainer {
+    font-size: 24px;
+    width: 190px;
+}

@@ -1,0 +1,36 @@
+.chat {
+    position: fixed;
+    z-index: 10;
+    top: 80px;
+    right: 0;
+    height: 80vh;
+    max-height: 800px;
+    background: gainsboro;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    max-width: 505px;
+    justify-content: flex-end;
+    &__messages_container {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    &__messages_container::-webkit-scrollbar {
+        width: 0;
+    }
+
+    &__message {
+        display: flex;
+    }
+
+    &__text {
+        height: auto;
+    }
+}
+
+.chat__input {
+    display: flex;
+    margin: 20px 0;
+    padding: 0 5px;
+}

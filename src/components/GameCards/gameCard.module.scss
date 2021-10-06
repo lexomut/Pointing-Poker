@@ -1,0 +1,72 @@
+@import './../../variables/variables.scss';
+.card {
+    width: 100px;
+    height: 160px;
+    margin: 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px;
+
+            .menuBtn {
+                padding: 0;
+            }
+        }
+
+        .right {
+            margin: 5px;
+            display: flex;
+            transform: rotate(-180deg);
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+
+.bgMountains {
+    background: url('assets/mountains.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.bgLeaf {
+    background: url('assets/leaf.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.bgMoon {
+    background: url('assets/moon.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.bgEagle {
+    background: url('assets/eagle.jpg') no-repeat center;
+    background-size: cover;
+}
+
+.coffee {
+    transform: scale(3);
+}
+
+.demo {
+    display: flex;
+    flex-wrap: wrap;
+}
+.current {
+    background: $secondaryDarkColor;
+}

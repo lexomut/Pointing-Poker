@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.lobby {
+    flex-grow: 1;
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 23px;
+    @media screen and (max-width: 1500px) {
+        flex-direction: column;
+        width: 1100px;
+    }
+    @media screen and (max-width: 1150px) {
+        width: 800px;
+    }
+    @media screen and (max-width: 850px) {
+        width: 470px;
+    }
+    h4 {
+        font-family: 'Ruda', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+}
+
+.container {
+    width: 1000px;
+    padding: 35px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    @media screen and (max-width: 1500px) {
+        margin: 0 auto;
+    }
+    @media screen and (max-width: 1150px) {
+        width: 700px;
+    }
+    @media screen and (max-width: 850px) {
+        width: 450px;
+    }
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+
+    &__buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        button {
+            width: 189px;
+            height: 47px;
+        }
+    }
+
+    .exitField {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+    }
+
+    .exitBtn {
+        width: 189px;
+    }
+}
+
+.members,
+.issues,
+.cards {
+    margin-bottom: 10px;
+    width: 100%;
+    &__cardField {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        @media screen and (max-width: 850px) {
+            width: 380px;
+            justify-content: center;
+        }
+    }
+}
+
+.settings {
+    height: 400px;
+    width: 100%;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 876px;
+    height: 500px;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: 950px) {
+        width: 700px;
+    }
+    @media screen and (max-width: 750px) {
+        width: 450px;
+    }
+    h4{
+        font-family: 'Ruda', sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+}

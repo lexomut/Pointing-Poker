@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.main_page {
+    width: 100%;
+    flex-grow: 1;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container {
+    width: 1000px;
+    height: 770px;
+    margin: 0 auto;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 91px 14px 0;
+    @media screen and (max-width: 1050px) {
+        width: 700px;
+    }
+    @media screen and (max-width: 750px) {
+        width: 470px;
+        padding: 20px 10px 0;
+    }
+}
+
+.poker_planning {
+    display: block;
+    margin: 0 auto;
+    width: 551px;
+    height: auto;
+    @media screen and (max-width: 750px) {
+        width: 300px;
+    }
+}
+.content {
+    width: 515px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 424px;
+    @media screen and (max-width: 750px) {
+        width: 450px;
+    }
+    h3 {
+        font-weight: bold;
+        font-size: 48px;
+        color: #66999b;
+    }
+    p {
+        font-weight: 300;
+        font-size: 24px;
+    }
+    input {
+        width: 276px;
+        height: 10px;
+    }
+}
+
+.center {
+    text-align: center;
+}

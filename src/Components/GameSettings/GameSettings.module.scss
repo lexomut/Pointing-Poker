@@ -1,0 +1,27 @@
+.settings__wrap {
+    width: 100%;
+    height: 358px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .label {
+        white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Ruda;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0em;
+        text-align: left;
+
+    }
+}
+.timer{
+    display: flex;
+    width: 269px;
+    justify-content: space-between;
+}

@@ -1,0 +1,28 @@
+.connect {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 170px;
+    &__control {
+        display: flex;
+        width: 545px;
+        height: 97px;
+        @media screen and (max-width: 750px) {
+            width: 450px;
+        }
+    }
+}
+
+.highlight {
+    font-weight: 700;
+    color: #66999b;
+}
+
+h3 {
+    margin: 0;
+}
+
+.btn {
+    width: 241px;
+    height: 47px;
+}
