@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { Alert } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
 import { IssueButton } from '../buttons';
 import { CardsDeck } from '../GameCards';
 import { AddUserPopup } from '../popups';
@@ -77,7 +78,10 @@ export const Game: React.FC = () => {
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
-
+    const history = useHistory();
+    const goToMain = () => {
+        history.push(`/`);
+    };
     const { round } = game;
     const resetSelectedCards = async () => {
         if (!isDealer) return;
@@ -226,7 +230,9 @@ export const Game: React.FC = () => {
                                 color="primary"
                                 variant="outlined"
                                 onClick={() =>
-                                    isDealer ? gameOver(globalState) : gameExit(globalState)
+                                    isDealer
+                                        ? gameOver(globalState)
+                                        : gameExit(globalState, goToMain)
                                 }
                             >
                                 {isDealer ? 'Stop game' : 'Exit game'}
