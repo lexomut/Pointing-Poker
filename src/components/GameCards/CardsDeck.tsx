@@ -23,8 +23,8 @@ export const CardsDeck: React.FC = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const [activeCardID, setActiveCardID] = useState<string>('');
     const classes = useStyles({ isActiveCard: activeCardID === '' });
-    const { cards } = globalState.temporaryDialerSettings;
-    const { shortScoreType, cardsDeckType } = globalState.temporaryDialerSettings.gameSettings;
+    const { cards } = globalState.game;
+    const { shortScoreType, cardsDeckType } = globalState.game.gameSettings;
     let visibleCards;
     switch (cardsDeckType) {
         case 'fibonacci':

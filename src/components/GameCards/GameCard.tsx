@@ -37,7 +37,7 @@ export const GameCard: React.FC<Props> = (props: Props) => {
                     <Typography className={styles.left} variant="subtitle1">
                         {scoreType}
                     </Typography>
-                    {isEditable && <CardMenu />}
+                    {isEditable && <CardMenu  />}
                 </div>
                 <Typography className={styles.center} variant="h2">
                     {value}

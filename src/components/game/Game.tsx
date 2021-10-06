@@ -28,7 +28,7 @@ import { User } from '../../types/user';
 import { LetInUserToGameForm } from '../LetInUserToGameForm';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
 import { IssueCreateForm } from '../IssueCreateForm';
-import { Card } from '../../types/game';
+import { Card, Issue, StatisticCard } from '../../types/game';
 import { gameExit } from './exitGame';
 import { gameOver } from './stopGame';
 import { saveStatistic } from '../Result/saveStatistic';
@@ -73,6 +73,9 @@ export const Game: React.FC = () => {
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
+    const [statistic, setStatistic] = useState<{ issue: Issue; statisticCards: StatisticCard[] }[]>(
+        [],
+    );
     useEffect(() => {
         const { provider } = globalState.ws;
         provider?.updateProviderState(globalState);
@@ -82,8 +85,9 @@ export const Game: React.FC = () => {
     const goToMain = () => {
         history.push(`/`);
     };
-    const goToResult = () => {
-        history.push(`/${globalState.game.gameID}/result`);
+    const goToResult = async () => {
+        await globalState.ws.provider?.changeValueOfGameProperty('statistic', statistic);
+        setTimeout(() => history.push(`/${globalState.game.gameID}/result`), 1000);
     };
     const { round } = game;
     const resetSelectedCards = async () => {
@@ -104,13 +108,11 @@ export const Game: React.FC = () => {
                 return;
             }
             if (game.round.status === 'over' && !roundOver) {
-                await saveStatistic(globalState);
                 setRoundOver(true);
                 setStartTimer(false);
                 return;
             }
             if (game.round.status === 'pending') {
-                await saveStatistic(globalState);
                 setRoundOver(false);
                 setStartTimer(false);
             }
@@ -118,10 +120,14 @@ export const Game: React.FC = () => {
         asyncFunc();
     }, [globalState, game, setStartTimer, startTimer, roundOver, setRoundOver]);
 
+    useEffect(() => {
+        setStatistic(saveStatistic(game.issues, game.statistic, game.selectedCards));
+    }, [game.issues, game.statistic, game.selectedCards, setStatistic]);
+
     const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = game.users.find((user: User) => user.roleInGame === 'dealer');
     const { issues } = game;
-    const { dealerIsPlaying } = globalState.temporaryDialerSettings.gameSettings;
+    const { dealerIsPlaying } = globalState.game.gameSettings;
     const { isTimerNeeded, timer } = game.gameSettings;
     const runRoundHandler = async () => {
         await globalState.ws.provider?.changeValueOfGameProperty('round', {
