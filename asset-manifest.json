@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.fd387699.chunk.css",
-    "main.js": "/static/js/main.1cbe1a45.chunk.js",
-    "main.js.map": "/static/js/main.1cbe1a45.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c2e8e232.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c2e8e232.js.map",
-    "static/js/2.7d6cbb90.chunk.js": "/static/js/2.7d6cbb90.chunk.js",
-    "static/js/2.7d6cbb90.chunk.js.map": "/static/js/2.7d6cbb90.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.fd387699.chunk.css.map": "/static/css/main.fd387699.chunk.css.map",
-    "static/js/2.7d6cbb90.chunk.js.LICENSE.txt": "/static/js/2.7d6cbb90.chunk.js.LICENSE.txt",
-    "static/media/gameCard.module.scss": "/static/media/mountains.b99b68e3.jpg",
-    "static/media/poker-planning.14acbaf0.svg": "/static/media/poker-planning.14acbaf0.svg",
-    "static/media/footer.module.scss": "/static/media/rss.71f1e240.svg"
+    "main.css": "/lexomut/Pointing-Poker/static/css/main.4e9e37b5.chunk.css",
+    "main.js": "/lexomut/Pointing-Poker/static/js/main.1cbe1a45.chunk.js",
+    "main.js.map": "/lexomut/Pointing-Poker/static/js/main.1cbe1a45.chunk.js.map",
+    "runtime-main.js": "/lexomut/Pointing-Poker/static/js/runtime-main.a9e9627b.js",
+    "runtime-main.js.map": "/lexomut/Pointing-Poker/static/js/runtime-main.a9e9627b.js.map",
+    "static/js/2.7d6cbb90.chunk.js": "/lexomut/Pointing-Poker/static/js/2.7d6cbb90.chunk.js",
+    "static/js/2.7d6cbb90.chunk.js.map": "/lexomut/Pointing-Poker/static/js/2.7d6cbb90.chunk.js.map",
+    "index.html": "/lexomut/Pointing-Poker/index.html",
+    "static/css/main.4e9e37b5.chunk.css.map": "/lexomut/Pointing-Poker/static/css/main.4e9e37b5.chunk.css.map",
+    "static/js/2.7d6cbb90.chunk.js.LICENSE.txt": "/lexomut/Pointing-Poker/static/js/2.7d6cbb90.chunk.js.LICENSE.txt",
+    "static/media/gameCard.module.scss": "/lexomut/Pointing-Poker/static/media/mountains.b99b68e3.jpg",
+    "static/media/poker-planning.14acbaf0.svg": "/lexomut/Pointing-Poker/static/media/poker-planning.14acbaf0.svg",
+    "static/media/footer.module.scss": "/lexomut/Pointing-Poker/static/media/rss.71f1e240.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c2e8e232.js",
+    "static/js/runtime-main.a9e9627b.js",
     "static/js/2.7d6cbb90.chunk.js",
-    "static/css/main.fd387699.chunk.css",
+    "static/css/main.4e9e37b5.chunk.css",
     "static/js/main.1cbe1a45.chunk.js"
   ]
 }
