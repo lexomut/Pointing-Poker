@@ -30,16 +30,10 @@ export const Result: React.FC = () => {
                 </Button>
             </Box>
             {globalState.game.statistic.map(({ issue, statisticCards }) => {
-                const { name, priority, current, dealer, id } = issue;
+                const { name, priority, id } = issue;
                 return (
                     <div key={id}>
-                        <IssueCard
-                            name={name}
-                            priority={priority}
-                            current={current}
-                            dealer={dealer}
-                            id={id}
-                        />
+                        <IssueCard name={name} priority={priority} id={id} />
                         <div className={styles.demo}>
                             {statisticCards &&
                                 statisticCards.map((el: StatisticCard) => {
