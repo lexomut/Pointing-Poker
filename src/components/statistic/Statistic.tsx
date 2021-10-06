@@ -21,7 +21,6 @@ export const Statistic: React.FC = () => {
                     <div className={styles.container} key={el.id}>
                         {el.id ? (
                             <>
-                                {' '}
                                 <GameCard
                                     isActiveCard={false}
                                     value={el.value}

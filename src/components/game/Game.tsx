@@ -121,8 +121,8 @@ export const Game: React.FC = () => {
     }, [globalState, game, setStartTimer, startTimer, roundOver, setRoundOver]);
 
     useEffect(() => {
-        setStatistic(saveStatistic(game.issues, game.statistic, game.selectedCards));
-    }, [game.issues, game.statistic, game.selectedCards, setStatistic]);
+        setStatistic((prevStat) => saveStatistic(game.issues, prevStat, game.selectedCards));
+    }, [game.issues, game.selectedCards, setStatistic]);
 
     const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = game.users.find((user: User) => user.roleInGame === 'dealer');
@@ -172,19 +172,31 @@ export const Game: React.FC = () => {
         }
         if (newNextIssueFound) {
             if (isDealer) {
-                await globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
-                await globalState.ws.provider?.changeValueOfGameProperty('round', {
-                    ...round,
-                    status: 'pending',
+                await Promise.all([
+                    globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues),
+                    globalState.ws.provider?.changeValueOfGameProperty('round', {
+                        ...round,
+                        status: 'pending',
+                    }),
+                ]).then(() => {
+                    resetSelectedCards();
+                    setIsLastIssue(false);
+                    setRoundOver(false);
+                    setKey((prevKey) => prevKey + 1);
+                    setStartTimer(false);
                 });
+                // await globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
+                // await globalState.ws.provider?.changeValueOfGameProperty('round', {
+                //     ...round,
+                //     status: 'pending',
+                // });
+                // resetSelectedCards();
+
+                // setIsLastIssue(false);
+                // setRoundOver(false);
+                // setKey((prevKey) => prevKey + 1);
+                // setStartTimer(false);
             }
-
-            resetSelectedCards();
-
-            setIsLastIssue(false);
-            setRoundOver(false);
-            setKey((prevKey) => prevKey + 1);
-            setStartTimer(false);
         } else {
             setIsLastIssue(true);
         }

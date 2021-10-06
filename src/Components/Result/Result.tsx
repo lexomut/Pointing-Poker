@@ -14,7 +14,6 @@ export const Result: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const history = useHistory();
-
     return (
         <>
             <Button
@@ -32,7 +31,6 @@ export const Result: React.FC = () => {
                 return (
                     <div key={id}>
                         <IssueCard
-                            key={id}
                             name={name}
                             priority={priority}
                             current={current}
@@ -46,7 +44,6 @@ export const Result: React.FC = () => {
                                         <div className={styles.container} key={el.id}>
                                             {el.id ? (
                                                 <>
-                                                    {' '}
                                                     <GameCard
                                                         isActiveCard={false}
                                                         value={el.value}
@@ -77,7 +74,6 @@ export const Result: React.FC = () => {
                                     );
                                 })}
                         </div>
-                        )
                     </div>
                 );
             })}
