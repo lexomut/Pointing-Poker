@@ -27,7 +27,7 @@ import { User } from '../../types/user';
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
     const history = useHistory();
-    const isPaddingUser = globalState.game.pendingUsers.some(
+    const isPendingUser = globalState.game.pendingUsers.some(
         (user: User) => globalState.currentUser.userID === user.userID,
     );
     useEffect(() => {
@@ -61,9 +61,20 @@ export const Lobby: () => JSX.Element = () => {
                 ]);
                 return;
             }
-            history.push(`/${globalState.game.gameID}/game`);
+            if (globalState.game.status !== 'canceled') {
+                history.push(`/${globalState.game.gameID}/game`);
+            }
         }
-    }, [globalState, history]);
+    }, [
+        globalState.game.users,
+        globalState.currentUser,
+        globalState.game.gameID,
+        globalState.game.kickedUsersID,
+        globalState.game.pendingUsers,
+        globalState.game.status,
+        globalState.ws.provider,
+        history,
+    ]);
 
     function checkVoted(): boolean {
         if (
@@ -191,7 +202,7 @@ export const Lobby: () => JSX.Element = () => {
                 </div>
             </Modal>
             <Modal
-                open={isPaddingUser}
+                open={isPendingUser}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
