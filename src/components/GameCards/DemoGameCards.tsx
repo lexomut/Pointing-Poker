@@ -18,7 +18,7 @@ export const DemoGameCards: React.FC = () => {
                         isEditable
                         scoreType="SP"
                         isActiveCard={false}
-                        id='245345'
+                        id="245345"
                     />
                 );
             })}
@@ -36,7 +36,7 @@ export const DemoGameCards: React.FC = () => {
                         isEditable
                         scoreType="SP"
                         isActiveCard={false}
-                        id='24534g5'
+                        id="24534g5"
                     />
                 );
             })}
@@ -54,7 +54,7 @@ export const DemoGameCards: React.FC = () => {
                         isEditable
                         scoreType="SP"
                         isActiveCard={false}
-                        id='24534e5'
+                        id="24534e5"
                     />
                 );
             })}

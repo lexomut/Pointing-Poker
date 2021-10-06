@@ -23,7 +23,7 @@ export const CardMenu: React.FC<Props> = (props: Props): JSX.Element => {
     const open = Boolean(anchorEl);
     const handleEdit = () => {
         dispatch({ type: SET_POPUP, payLoad: 'editCard' as PopupType });
-        setAnchorEl(null)
+        setAnchorEl(null);
     };
     const handleDelete = () => {
         const newCards = globalState.temporaryDialerSettings.cards.filter((card) => card.id !== id);
