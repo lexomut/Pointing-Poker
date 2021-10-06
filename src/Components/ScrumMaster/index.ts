@@ -1,1 +1,0 @@
-export { ScrumMaster } from './ScrumMaster';

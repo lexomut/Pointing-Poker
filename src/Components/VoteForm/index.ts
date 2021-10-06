@@ -1,1 +1,0 @@
-export { VoteForm } from './VoteForm';

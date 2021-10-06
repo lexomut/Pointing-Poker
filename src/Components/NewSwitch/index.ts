@@ -1,1 +1,0 @@
-export { NewSwitch } from './NewSwitch';

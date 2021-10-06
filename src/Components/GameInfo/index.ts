@@ -1,1 +1,0 @@
-export { GameInfo } from './GameInfo';
