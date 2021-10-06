@@ -1,31 +1,34 @@
 import React, { Dispatch, useContext } from 'react';
-import { Button, Paper, Typography } from '@material-ui/core';
+import { Button, Paper, Typography, Box } from '@material-ui/core';
 import FreeBreakfastOutlinedIcon from '@material-ui/icons/FreeBreakfastOutlined';
 import { useHistory } from 'react-router-dom';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { StatisticCard } from '../../types/game';
 import { IssueCard } from '../IssueCard';
-import styles from '../statistic/statistic.module.scss';
 import { GameCard } from '../GameCards';
 import { IssueIssueToCSV } from '../../utils/save';
+import styles from '../statistic/statistic.module.scss';
+import classes from './Result.module.scss';
 
 export const Result: React.FC = () => {
     const { globalState }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
     const history = useHistory();
     return (
-        <>
-            <Button
-                color="primary"
-                variant="outlined"
-                onClick={() => IssueIssueToCSV(globalState.game.issues)}
-            >
-                Save
-            </Button>
-            <Button color="primary" variant="outlined" onClick={() => history.push(`/`)}>
-                Go to main
-            </Button>
+        <div className={classes.container}>
+            <Box className={classes.resultButtons}>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={() => IssueIssueToCSV(globalState.game.issues)}
+                >
+                    Save
+                </Button>
+                <Button color="primary" variant="outlined" onClick={() => history.push(`/`)}>
+                    Go to main
+                </Button>
+            </Box>
             {globalState.game.statistic.map(({ issue, statisticCards }) => {
                 const { name, priority, current, dealer, id } = issue;
                 return (
@@ -77,6 +80,6 @@ export const Result: React.FC = () => {
                     </div>
                 );
             })}
-        </>
+        </div>
     );
 };
