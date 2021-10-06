@@ -18,6 +18,7 @@ export interface Game {
     kickedUsersID: string[];
     pendingUsers: User[];
     round: Round;
+    statistic: { issue: Issue; statisticCards: StatisticCard[] }[];
 }
 export interface Round {
     roundID: string;
@@ -51,7 +52,6 @@ export interface Issue {
     dealer?: boolean;
     link?: string;
     score: string;
-    statistic?: StatisticCard[];
 }
 export type Priority = 'Critical' | 'High' | 'Medium' | 'Low';
 

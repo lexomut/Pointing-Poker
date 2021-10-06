@@ -37,6 +37,7 @@ export const initState: GlobalState = {
         kickedUsersID: [],
         vote: undefined,
         pendingUsers: [],
+        statistic: [],
         dealer: {
             userID: '',
             firstName: '',
@@ -45,50 +46,7 @@ export const initState: GlobalState = {
             jobPosition: '',
             initials: '',
         } as User,
-        issues: [
-            {
-                name: 'InitState',
-                priority: 'Low',
-                current: true,
-                dealer: false,
-                id: '111',
-                score: '-',
-                statistic: [
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                ],
-            },
-            {
-                name: 'InitState2',
-                priority: 'Critical',
-                current: false,
-                dealer: true,
-                id: '112',
-                score: '-',
-                statistic: [
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                ],
-            },
-            {
-                name: 'InitState3',
-                priority: 'High',
-                current: false,
-                dealer: false,
-                id: '113',
-                score: '-',
-                statistic: [
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                    { id: '234', value: '545', voteResult: '45%' },
-                ],
-            },
-        ],
+        issues: [],
         cards: [],
         selectedCards: [
             {

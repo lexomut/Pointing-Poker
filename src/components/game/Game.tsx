@@ -31,7 +31,7 @@ import { IssueCreateForm } from '../IssueCreateForm';
 import { Card } from '../../types/game';
 import { gameExit } from './exitGame';
 import { gameOver } from './stopGame';
-import { saveStatisticToIssue } from '../Result/saveStatisticToIssue';
+import { saveStatistic } from '../Result/saveStatistic';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -82,6 +82,9 @@ export const Game: React.FC = () => {
     const goToMain = () => {
         history.push(`/`);
     };
+    const goToResult = () => {
+        history.push(`/${globalState.game.gameID}/result`);
+    };
     const { round } = game;
     const resetSelectedCards = async () => {
         if (!isDealer) return;
@@ -101,8 +104,15 @@ export const Game: React.FC = () => {
                 return;
             }
             if (game.round.status === 'over' && !roundOver) {
-                await saveStatisticToIssue(globalState);
+                await saveStatistic(globalState);
                 setRoundOver(true);
+                setStartTimer(false);
+                return;
+            }
+            if (game.round.status === 'pending') {
+                await saveStatistic(globalState);
+                setRoundOver(false);
+                setStartTimer(false);
             }
         };
         asyncFunc();
@@ -231,7 +241,7 @@ export const Game: React.FC = () => {
                                 variant="outlined"
                                 onClick={() =>
                                     isDealer
-                                        ? gameOver(globalState)
+                                        ? gameOver(globalState, goToResult)
                                         : gameExit(globalState, goToMain)
                                 }
                             >
