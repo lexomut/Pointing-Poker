@@ -130,6 +130,7 @@ export const Lobby: () => JSX.Element = () => {
             >
                 <CardAddForm />
             </Modal>
+
             <Modal
                 open={checkVoted()}
                 aria-labelledby="simple-modal-title"

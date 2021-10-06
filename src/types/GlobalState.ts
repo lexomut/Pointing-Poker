@@ -26,7 +26,7 @@ export interface GlobalState {
     chatOpen: boolean;
     temporaryDialerSettings: TemporaryDialerSettings;
 }
-export type PopupType = 'createIssue' | 'kickUser' | '' | 'createCard';
+export type PopupType = 'createIssue' | 'kickUser' | '' | 'createCard' | 'editCard';
 export interface CurrentUser extends User {
     anything?: string;
 }

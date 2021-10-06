@@ -27,6 +27,7 @@ export const Statistic: React.FC = () => {
                                     value={el.value}
                                     isEditable={false}
                                     scoreType={globalState.game.gameSettings.shortScoreType}
+                                    id={el.id}
                                 />
                                 <Typography variant="subtitle1">{el.voteResult}</Typography>
                             </>

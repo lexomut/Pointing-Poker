@@ -37,6 +37,7 @@ export const CardField = (): JSX.Element => {
                         isEditable={cardsDeckType === 'custom'}
                         key={id}
                         isActiveCard={false}
+                        id={id}
                     />
                 );
             })}

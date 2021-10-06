@@ -59,6 +59,7 @@ export const CardsDeck: React.FC = () => {
                         onClick={() => {
                             handler(el);
                         }}
+                        id={el.id}
                     />
                 );
             })}

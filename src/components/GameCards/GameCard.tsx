@@ -10,6 +10,7 @@ type Props = {
     isEditable: boolean;
     isActiveCard: boolean;
     onClick?: () => void;
+    id: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 export const GameCard: React.FC<Props> = (props: Props) => {
     const { isActiveCard } = props;
     const classes = useStyles(props);
-    const { value, scoreType, isEditable, onClick } = props;
+    const { value, scoreType, isEditable, onClick, id } = props;
     return (
         <Paper
             elevation={isActiveCard ? 9 : 3}
@@ -37,7 +38,7 @@ export const GameCard: React.FC<Props> = (props: Props) => {
                     <Typography className={styles.left} variant="subtitle1">
                         {scoreType}
                     </Typography>
-                    {isEditable && <CardMenu  />}
+                    {isEditable && <CardMenu id={id} />}
                 </div>
                 <Typography className={styles.center} variant="h2">
                     {value}

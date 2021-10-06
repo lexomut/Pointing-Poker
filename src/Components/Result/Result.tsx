@@ -55,6 +55,7 @@ export const Result: React.FC = () => {
                                                             globalState.game.gameSettings
                                                                 .shortScoreType
                                                         }
+                                                        id={el.id}
                                                     />
                                                     <Typography variant="subtitle1">
                                                         {el.voteResult}
