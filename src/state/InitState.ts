@@ -19,7 +19,7 @@ export const initState: GlobalState = {
     },
 
     currentUser: {
-        userID: '3434',
+        userID: '',
         firstName: 'Alex',
         lastName: 'Pirozerskiy',
         roleInGame: 'player',
@@ -34,6 +34,9 @@ export const initState: GlobalState = {
         status: 'new',
         startTimer: undefined,
         cartBackClass: 'bgMountains',
+        kickedUsersID: [],
+        vote: undefined,
+        pendingUsers: [],
         dealer: {
             userID: '',
             firstName: '',

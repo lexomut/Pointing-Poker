@@ -93,7 +93,9 @@ export const ConnectForm: React.FC<IConnectForm> = ({
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
-                    <RegistrationForm isDealer={isDealer} setOpen={setOpen} />
+                    <div>
+                        <RegistrationForm isDealer={isDealer} setOpen={setOpen} />
+                    </div>
                 </Modal>
             </div>
         </form>

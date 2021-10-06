@@ -19,9 +19,11 @@ export const createGame = async (): Promise<undefined | Game> => {
         if (response.status === 200) {
             return response.data;
         }
+        // eslint-disable-next-line no-console
         console.log('ошибка сoздания игры на сервере ');
         return undefined;
     } catch (e) {
+        // eslint-disable-next-line no-console
         console.log('ошибка соединения с сервером , ');
         return undefined;
     }

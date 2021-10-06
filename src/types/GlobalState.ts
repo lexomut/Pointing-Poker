@@ -52,6 +52,7 @@ export interface WSProviderInterface {
     sendChatMessage(text: string): Promise<void>;
     updateProviderState: (arg: GlobalState) => void;
     changeValueOfGameProperty: (property: string, value: any) => Promise<void>;
+    sendVote: (vote: boolean) => Promise<void>;
 }
 
 export type Action =

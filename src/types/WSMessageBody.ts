@@ -11,10 +11,12 @@ export interface WSMessageBody {
     value?: string;
     errorMessage?: string;
     game?: Game;
+    vote?: boolean;
 }
 export type WSMessageEvent =
     | 'userConnection'
     | 'chatMessage'
     | 'setGameState'
     | 'initMessage'
+    | 'vote'
     | 'error';

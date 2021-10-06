@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Modal, IconButton, Collapse, Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { Card } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import {
+    VoteForm,
     CardAddForm,
     IssueCreateForm,
     IssueField,
@@ -21,14 +23,62 @@ import {
     MembersField,
 } from '../../components';
 import styles from './Lobby.module.scss';
+import { User } from '../../types/user';
 
 export const Lobby: () => JSX.Element = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
+    const history = useHistory();
+    const isPaddingUser = globalState.game.pendingUsers.some(
+        (user: User) => globalState.currentUser.userID === user.userID,
+    );
+
     useEffect(() => {
         const { provider } = globalState.ws;
         provider?.updateProviderState(globalState);
         if (!globalState.ws.socket) provider?.connects();
     }, [globalState]);
+
+    useEffect(() => {
+        if (
+            globalState.game.kickedUsersID.some(
+                (item: string) => item === globalState.currentUser.userID,
+            ) ||
+            globalState.game.pendingUsers.some(
+                (user: User) => globalState.currentUser.userID === user.userID,
+            )
+        )
+            return;
+        if (globalState.game.status !== 'new') {
+            if (
+                globalState.game.users.every(
+                    (user: User) => globalState.currentUser.userID !== user.userID,
+                ) &&
+                !globalState.game.users.some(
+                    (user: User) => globalState.currentUser.userID === user.userID,
+                )
+            ) {
+                globalState.ws.provider?.changeValueOfGameProperty('pendingUsers', [
+                    ...globalState.game.pendingUsers,
+                    globalState.currentUser,
+                ]);
+                return;
+            }
+            history.push(`/${globalState.game.gameID}/game`);
+        }
+    }, [globalState, history]);
+
+    function checkVoted(): boolean {
+        if (
+            !globalState.game.vote ||
+            globalState.game.vote.kickID === globalState.currentUser.userID ||
+            !globalState.game.kickedUsersID.every((id) => id !== globalState.currentUser.userID)
+        )
+            return false;
+        return globalState.game.vote.votedUsersID.every(
+            (votedUserID: string) => votedUserID !== globalState.currentUser.userID,
+        );
+    }
+
     const [open, setOpen] = useState(true);
     const history = useHistory();
     return (
@@ -121,14 +171,38 @@ export const Lobby: () => JSX.Element = () => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <IssueCreateForm />
+                <div>
+                    <IssueCreateForm />
+                </div>
             </Modal>
             <Modal
                 open={globalState.popup === 'createCard'}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <CardAddForm />
+                <div>
+                    <CardAddForm />
+                </div>
+            </Modal>
+            <Modal
+                open={checkVoted()}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div>
+                    <VoteForm />
+                </div>
+            </Modal>
+            <Modal
+                open={isPaddingUser}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+            >
+                <div>
+                    <Card className={styles.modal}>
+                        <h4>please wait until they let you in</h4>
+                    </Card>
+                </div>
             </Modal>
         </div>
     );

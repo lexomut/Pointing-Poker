@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { Dispatch, useContext, useState } from 'react';
+import React, { Dispatch, useContext, useEffect, useState } from 'react';
 import {
     Typography,
     Grid,
@@ -24,8 +24,9 @@ import { UserCard } from '../UserCard';
 import { Action, GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
 import { User } from '../../types/user';
-import { IssueCreateForm } from '..';
+import { LetInUserToGameForm } from '../LetInUserToGameForm';
 import { IssueCardExpandable } from '../IssueCard/IssueCardExpandable';
+import { IssueCreateForm } from '../IssueCreateForm';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -65,6 +66,13 @@ export const Game: React.FC = () => {
     const [key, setKey] = useState(0);
     const [startTimer, setStartTimer] = useState(false);
     const [roundOver, setRoundOver] = useState(false);
+
+    useEffect(() => {
+        const { provider } = globalState.ws;
+        provider?.updateProviderState(globalState);
+        if (!globalState.ws.socket) provider?.connects();
+    }, [globalState]);
+
     const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = globalState.game.users.find((user: User) => user.roleInGame === 'dealer');
     const { issues } = globalState.game;
@@ -446,11 +454,24 @@ export const Game: React.FC = () => {
 
             {isDealer && <AddUserPopup name="Mike" />}
             <Modal
+                open={globalState.game.pendingUsers.length > 0 && isDealer}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div>
+                    {globalState.game.pendingUsers.map((user: User) => {
+                        return <LetInUserToGameForm key={user.userID} user={user} />;
+                    })}
+                </div>
+            </Modal>
+            <Modal
                 open={globalState.popup === 'createIssue'}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <IssueCreateForm />
+                <div>
+                    <IssueCreateForm />
+                </div>
             </Modal>
         </>
     );

@@ -146,6 +146,7 @@ export const cardsBackground = [
 
 export const usersWithScore: UserWithScore[] = [
     {
+        firstName: 'Lily',
         name: 'Lily Atkins',
         jobPosition: 'Senior',
         initials: 'LA',
@@ -154,6 +155,7 @@ export const usersWithScore: UserWithScore[] = [
         roleInGame: 'player',
     },
     {
+        firstName: 'Barsik',
         name: 'Barsik',
         jobPosition: 'Junior lion',
         initials: 'BB',
@@ -163,6 +165,7 @@ export const usersWithScore: UserWithScore[] = [
         roleInGame: 'player',
     },
     {
+        firstName: 'Mark',
         name: 'Mark Zuckerberg',
         jobPosition: 'Facebook founder',
         initials: 'MZ',
@@ -171,6 +174,7 @@ export const usersWithScore: UserWithScore[] = [
         roleInGame: 'player',
     },
     {
+        firstName: 'Alex',
         name: 'Alex',
         jobPosition: 'Junior',
         initials: 'AL',
@@ -179,6 +183,7 @@ export const usersWithScore: UserWithScore[] = [
         roleInGame: 'player',
     },
     {
+        firstName: 'Mike',
         name: 'Mike Smith',
         jobPosition: 'Middle',
         initials: 'MS',
