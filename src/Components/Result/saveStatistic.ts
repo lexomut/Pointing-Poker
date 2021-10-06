@@ -9,6 +9,8 @@ export async function saveStatistic(globalState: GlobalState): Promise<void> {
     const index = statistic.findIndex((item) => item.issue.id === currentIssue.id);
     if (index >= 0) {
         statistic[index] = { issue: currentIssue, statisticCards };
-    } else statistic.push({ issue: currentIssue, statisticCards });
+    } else {
+        statistic.push({ issue: currentIssue, statisticCards });
+    }
     await globalState.ws.provider?.changeValueOfGameProperty('statistic', statistic);
 }
