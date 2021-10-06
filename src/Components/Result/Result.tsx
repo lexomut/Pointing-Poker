@@ -23,7 +23,7 @@ export const Result: React.FC = () => {
                     variant="contained"
                     onClick={() => IssueIssueToCSV(globalState.game.issues)}
                 >
-                    Save
+                    Export to csv
                 </Button>
                 <Button color="primary" variant="outlined" onClick={() => history.push(`/`)}>
                     Go to main
