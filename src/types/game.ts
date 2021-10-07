@@ -13,7 +13,6 @@ export interface Game {
     cards: Array<Card>;
     selectedCards: Array<{ card: Card | undefined; user: User }>;
     gameSettings: GameSettingsInterface;
-    cartBackClass: string;
     vote: Vote | undefined;
     kickedUsersID: string[];
     pendingUsers: User[];
@@ -42,6 +41,7 @@ export interface GameSettingsInterface {
     changingCardInRoundEnd: boolean;
     cardsDeckType: string;
     freeGameEnter: boolean;
+    cardsBackClass: string;
 }
 
 export interface Issue {

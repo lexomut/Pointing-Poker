@@ -1,6 +1,4 @@
-import { CurrentUser, GlobalState } from '../types/GlobalState';
-import { User } from '../types/user';
-import { Card, GameSettingsInterface } from '../types/game';
+import { GlobalState } from '../types/GlobalState';
 
 export const initState: GlobalState = {
     ws: { status: false, provider: undefined },
@@ -13,9 +11,12 @@ export const initState: GlobalState = {
             shortScoreType: '',
             isTimerNeeded: false,
             changingCardInRoundEnd: false,
-        } as GameSettingsInterface,
+            cardsBackClass: 'bgMountains',
+            cardsDeckType: 'fibonacci',
+            freeGameEnter: false,
+            timer: 120,
+        },
         cards: [],
-        cartBackClass: 'bgMountains',
     },
 
     currentUser: {
@@ -25,7 +26,8 @@ export const initState: GlobalState = {
         roleInGame: 'player',
         jobPosition: 'junior',
         initials: 'AP',
-    } as CurrentUser,
+    },
+
     game: {
         title: '',
         chatMessages: [],
@@ -33,7 +35,6 @@ export const initState: GlobalState = {
         users: [],
         status: 'new',
         startTimer: undefined,
-        cartBackClass: 'bgMountains',
         kickedUsersID: [],
         vote: undefined,
         pendingUsers: [],
@@ -45,7 +46,7 @@ export const initState: GlobalState = {
             roleInGame: 'player',
             jobPosition: '',
             initials: '',
-        } as User,
+        },
         issues: [],
         cards: [],
         selectedCards: [
@@ -53,7 +54,7 @@ export const initState: GlobalState = {
                 card: {
                     id: '123',
                     value: '1',
-                } as Card,
+                },
                 user: {
                     userID: '3434',
                     firstName: 'Alex',
@@ -61,7 +62,7 @@ export const initState: GlobalState = {
                     roleInGame: 'player',
                     jobPosition: 'junior',
                     initials: 'AP',
-                } as User,
+                },
             },
         ],
         gameSettings: {
@@ -70,7 +71,12 @@ export const initState: GlobalState = {
             shortScoreType: '',
             isTimerNeeded: false,
             changingCardInRoundEnd: false,
-        } as GameSettingsInterface,
+            cardsBackClass: 'bgMountains',
+            cardsDeckType: 'fibonacci',
+            freeGameEnter: false,
+            timer: 120,
+        },
+
         round: {
             issueID: '',
             roundID: '',

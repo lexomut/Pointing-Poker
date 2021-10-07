@@ -17,8 +17,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { Alert } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 import { IssueButton } from '../buttons';
-import { CardsDeck } from '../GameCards';
-import { AddUserPopup } from '../popups';
+import { CardBack, CardsDeck, GameCard } from '../GameCards';
 import { Statistic } from '../statistic';
 import { Timer } from '../timer';
 import { UserCard } from '../UserCard';
@@ -32,6 +31,7 @@ import { Card, Issue, StatisticCard } from '../../types/game';
 import { gameExit } from './exitGame';
 import { gameOver } from './stopGame';
 import { saveStatistic } from '../Result/saveStatistic';
+import styles from './Game.module.scss';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -119,7 +119,6 @@ export const Game: React.FC = () => {
         };
         asyncFunc();
     }, [globalState, game, setStartTimer, startTimer, roundOver, setRoundOver]);
-
     useEffect(() => {
         setStatistic((prevStat) => saveStatistic(game.issues, prevStat, game.selectedCards));
     }, [game.issues, game.selectedCards, setStatistic]);
@@ -185,36 +184,34 @@ export const Game: React.FC = () => {
                     setKey((prevKey) => prevKey + 1);
                     setStartTimer(false);
                 });
-                // await globalState.ws.provider?.changeValueOfGameProperty('issues', newIssues);
-                // await globalState.ws.provider?.changeValueOfGameProperty('round', {
-                //     ...round,
-                //     status: 'pending',
-                // });
-                // resetSelectedCards();
-
-                // setIsLastIssue(false);
-                // setRoundOver(false);
-                // setKey((prevKey) => prevKey + 1);
-                // setStartTimer(false);
             }
         } else {
             setIsLastIssue(true);
         }
     };
-
     const fillScore = (item: { card: Card | undefined; user: User }) => {
-        if (isDealer) {
-            return item.card
-                ? `${item.card.value} ${game.gameSettings.shortScoreType}`
-                : 'undefined';
+        if (isDealer || item.user.userID === globalState.currentUser.userID) {
+            <GameCard
+                isActiveCard={false}
+                value={item.card?.value || '?'}
+                isEditable={false}
+                scoreType={globalState.temporaryDialerSettings.gameSettings.shortScoreType}
+                id={item.card?.id || '?'}
+            />;
         }
-        if (item.user.userID === globalState.currentUser.userID)
-            return item.card
-                ? `${item.card.value} ${game.gameSettings.shortScoreType}`
-                : 'undefined';
-
-        if (!roundOver) return 'in pogress';
-        return item.card ? `${item.card.value} ${game.gameSettings.shortScoreType}` : 'undefined';
+        if (!roundOver)
+            return (
+                <CardBack activeCard={false} back={globalState.game.gameSettings.cardsBackClass} />
+            );
+        return (
+            <GameCard
+                isActiveCard={false}
+                value={item.card?.value || '?'}
+                isEditable={false}
+                scoreType={globalState.temporaryDialerSettings.gameSettings.shortScoreType}
+                id={item.card?.id || '?'}
+            />
+        );
     };
     return (
         <>
@@ -455,16 +452,8 @@ export const Game: React.FC = () => {
                                         container
                                         justifyContent="space-around"
                                     >
-                                        <Grid item>
-                                            <Button
-                                                color="primary"
-                                                variant="outlined"
-                                                className={classes.minWidth}
-                                            >
-                                                {fillScore(item)}
-                                            </Button>
-                                        </Grid>
-                                        <Grid item>
+                                        <Grid item>{fillScore(item)}</Grid>
+                                        <Grid item className={styles.alignCenter}>
                                             <UserCard
                                                 size="small"
                                                 initials={item.user.initials}
@@ -492,16 +481,8 @@ export const Game: React.FC = () => {
                                     container
                                     justifyContent="space-around"
                                 >
-                                    <Grid item>
-                                        <Button
-                                            color="primary"
-                                            variant="outlined"
-                                            className={classes.minWidth}
-                                        >
-                                            {fillScore(item)}
-                                        </Button>
-                                    </Grid>
-                                    <Grid item>
+                                    <Grid item>{fillScore(item)}</Grid>
+                                    <Grid item className={styles.alignCenter}>
                                         <UserCard
                                             size="small"
                                             initials={item.user.initials}
@@ -532,16 +513,7 @@ export const Game: React.FC = () => {
                                         container
                                         justifyContent="space-around"
                                     >
-                                        <Grid item>
-                                            <Button
-                                                color="primary"
-                                                variant="outlined"
-                                                className={classes.minWidth}
-                                            >
-                                                {fillScore(item)}
-                                            </Button>
-                                        </Grid>
-                                        <Grid item>
+                                        <Grid item className={styles.alignCenter}>
                                             <UserCard
                                                 size="small"
                                                 initials={item.user.initials}
@@ -558,8 +530,6 @@ export const Game: React.FC = () => {
                             })}
                 </Grid>
             </Grid>
-
-            {isDealer && <AddUserPopup name="Mike" />}
             <Modal
                 open={game.pendingUsers.length > 0 && isDealer}
                 aria-labelledby="simple-modal-title"

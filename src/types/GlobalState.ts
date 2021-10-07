@@ -33,7 +33,6 @@ export interface CurrentUser extends User {
 export interface TemporaryDialerSettings {
     gameSettings: GameSettingsInterface;
     cards: Array<Card>;
-    cartBackClass: string;
 }
 
 export interface WS {

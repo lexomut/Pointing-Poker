@@ -107,16 +107,6 @@ export function reducer(globalState: GlobalState, action: Action): GlobalState {
                         },
                     };
                 }
-                case 'cartBackClass': {
-                    const cartBackClass: string = action.payLoad.value as string;
-                    return {
-                        ...globalState,
-                        temporaryDialerSettings: {
-                            ...globalState.temporaryDialerSettings,
-                            cartBackClass,
-                        },
-                    };
-                }
                 default:
                     return { ...globalState };
             }

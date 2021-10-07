@@ -33,7 +33,6 @@ export const StartButton: () => JSX.Element = () => {
         if (!sendGameProperty) return;
         await sendGameProperty('gameSettings', globalState.temporaryDialerSettings.gameSettings);
         await sendGameProperty('cards', visibleCards);
-        await sendGameProperty('cartBackClass', globalState.temporaryDialerSettings.cartBackClass);
         await sendGameProperty(
             'selectedCards',
             globalState.game.users.map((user: User) => {
