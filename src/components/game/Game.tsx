@@ -200,7 +200,7 @@ export const Game: React.FC = () => {
                 isActiveCard={false}
                 value={item.card?.value || '?'}
                 isEditable={false}
-                scoreType={globalState.temporaryDialerSettings.gameSettings.shortScoreType}
+                scoreType={globalState.game.gameSettings.shortScoreType}
                 id={item.card?.id || '?'}
             />;
         }
@@ -213,7 +213,7 @@ export const Game: React.FC = () => {
                 isActiveCard={false}
                 value={item.card?.value || '?'}
                 isEditable={false}
-                scoreType={globalState.temporaryDialerSettings.gameSettings.shortScoreType}
+                scoreType={globalState.game.gameSettings.shortScoreType}
                 id={item.card?.id || '?'}
             />
         );
