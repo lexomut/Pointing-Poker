@@ -122,7 +122,6 @@ export const Game: React.FC = () => {
     useEffect(() => {
         setStatistic((prevStat) => saveStatistic(game.issues, prevStat, game.selectedCards));
     }, [game.issues, game.selectedCards, setStatistic]);
-
     const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = game.users.find((user: User) => user.roleInGame === 'dealer');
     const { issues } = game;
