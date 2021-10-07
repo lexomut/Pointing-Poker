@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Pointing-Poker/static/css/main.5b9b0e85.chunk.css",
-    "main.js": "/Pointing-Poker/static/js/main.379354ac.chunk.js",
-    "main.js.map": "/Pointing-Poker/static/js/main.379354ac.chunk.js.map",
+    "main.js": "/Pointing-Poker/static/js/main.0d69cd49.chunk.js",
+    "main.js.map": "/Pointing-Poker/static/js/main.0d69cd49.chunk.js.map",
     "runtime-main.js": "/Pointing-Poker/static/js/runtime-main.3c828ae6.js",
     "runtime-main.js.map": "/Pointing-Poker/static/js/runtime-main.3c828ae6.js.map",
     "static/js/2.7d6cbb90.chunk.js": "/Pointing-Poker/static/js/2.7d6cbb90.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.3c828ae6.js",
     "static/js/2.7d6cbb90.chunk.js",
     "static/css/main.5b9b0e85.chunk.css",
-    "static/js/main.379354ac.chunk.js"
+    "static/js/main.0d69cd49.chunk.js"
   ]
 }
