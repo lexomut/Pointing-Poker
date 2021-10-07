@@ -76,7 +76,9 @@ export const CardMenu: React.FC<Props> = (props: Props): JSX.Element => {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <CardEditForm id={id as string} />
+                <div>
+                    <CardEditForm id={id as string} />
+                </div>
             </Modal>
         </>
     );
