@@ -3,8 +3,15 @@ import { User } from '../../types/user';
 
 export function makeStatisticCards(
     selectedCards: Array<{ card: Card | undefined; user: User }>,
+    dealerIsPlaying: boolean,
 ): StatisticCard[] {
-    const values = selectedCards.map((obj) => (!obj.card ? '?' : obj.card.value));
+    const values = selectedCards
+        .filter(
+            (item) =>
+                item.user.roleInGame === 'player' ||
+                (item.user.roleInGame === 'dealer' && dealerIsPlaying),
+        )
+        .map((obj) => (!obj.card ? '?' : obj.card.value));
     const obj: { [key: string]: number } = values.reduce(
         (prev: { [key: string]: number }, curr: string) => {
             const res = { ...prev };

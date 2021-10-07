@@ -119,9 +119,12 @@ export const Game: React.FC = () => {
         };
         asyncFunc();
     }, [globalState, game, setStartTimer, startTimer, roundOver, setRoundOver]);
+    const { dealerIsPlaying } = globalState.game.gameSettings;
     useEffect(() => {
-        setStatistic((prevStat) => saveStatistic(game.issues, prevStat, game.selectedCards));
-    }, [game.issues, game.selectedCards, setStatistic]);
+        setStatistic((prevStat) =>
+            saveStatistic(game.issues, prevStat, game.selectedCards, dealerIsPlaying),
+        );
+    }, [game.issues, game.selectedCards, setStatistic, dealerIsPlaying]);
 
     useEffect(() => {
         if (globalState.game.status === 'over') {
@@ -131,7 +134,6 @@ export const Game: React.FC = () => {
     const [isLastIssue, setIsLastIssue] = useState(false);
     const scrumMaster = game.users.find((user: User) => user.roleInGame === 'dealer');
     const { issues } = game;
-    const { dealerIsPlaying } = globalState.game.gameSettings;
     const { isTimerNeeded, timer } = game.gameSettings;
     const runRoundHandler = async () => {
         await globalState.ws.provider?.changeValueOfGameProperty('round', {

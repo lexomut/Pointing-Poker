@@ -6,11 +6,12 @@ export function saveStatistic(
     issues: Issue[],
     oldStatistic: { issue: Issue; statisticCards: StatisticCard[] }[],
     selectedCards: Array<{ card: Card | undefined; user: User }>,
-): { issue: Issue; statisticCards: StatisticCard[] }[] | [] {
+    dealerIsPlaying: boolean,
+): { issue: Issue; statisticCards: StatisticCard[] }[] {
     const currentIssue = issues.find((issue) => issue.current);
     if (currentIssue) {
         const statistic = [...oldStatistic];
-        const statisticCards = makeStatisticCards(selectedCards);
+        const statisticCards = makeStatisticCards(selectedCards, dealerIsPlaying);
         const index = statistic.findIndex((item) => item.issue.id === currentIssue.id);
         if (index >= 0) {
             statistic[index] = { issue: currentIssue, statisticCards };
