@@ -83,6 +83,7 @@ export const ConnectForm: React.FC<IConnectForm> = ({
                     variant="contained"
                     type="submit"
                     disabled={isConnecting}
+                    data-testid="show-registration-form-btn"
                 >
                     {isConnecting ? <CircularProgress /> : 'Connect'}
                 </Button>
