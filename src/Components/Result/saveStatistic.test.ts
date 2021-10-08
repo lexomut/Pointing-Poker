@@ -192,9 +192,7 @@ test('check statistic when there is an observer, issue 1', () => {
     expect(result).toMatchObject(correctResult);
 });
 
-// test skip because there are fixes in other branch 'last-minutes-fixes'
-
-test.skip('check statistic when there is an observer, new issue', () => {
+test('check statistic when there is an observer, new issue', () => {
     const issues: Issue[] = [
         {
             id: '0',

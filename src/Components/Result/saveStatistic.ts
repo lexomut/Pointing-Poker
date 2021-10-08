@@ -15,7 +15,7 @@ export function saveStatistic(
         if (index >= 0) {
             statistic[index] = { issue: currentIssue, statisticCards };
         } else {
-            oldStatistic.push({ issue: currentIssue, statisticCards });
+            statistic.push({ issue: currentIssue, statisticCards });
         }
         return statistic;
     }
