@@ -190,6 +190,9 @@ test('check statistic when there is an observer, issue 1', () => {
 
     const result = saveStatistic(issues, oldStatistic, selectedCards);
     expect(result).toMatchObject(correctResult);
+    expect(result).toBeTruthy();
+    expect(result).toBeDefined();
+    expect(result[0]).toHaveProperty('issue');
 });
 
 test('check statistic when there is an observer, new issue', () => {
