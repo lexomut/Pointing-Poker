@@ -76,7 +76,6 @@ type Props = {
 export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
     const { name, current, priority, dealer, id, link, score, isRoundGoing } = props;
     const classes = useStyles();
-
     const [expanded, setExpanded] = useState(false);
     const [newScore, setNewScore] = useState(score);
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
@@ -143,13 +142,13 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                         className={classes.mt}
                         id="outlined-read-only-input"
                         label="Score:"
-                        value={newScore}
+                        value={dealer ? newScore : score}
                         onChange={(event) => {
                             return setNewScore(event.target.value || '');
                         }}
                         InputProps={{
                             readOnly: !dealer,
-                            endAdornment: (
+                            endAdornment: !dealer ? undefined : (
                                 <Button
                                     color="primary"
                                     variant="outlined"
@@ -161,16 +160,18 @@ export const IssueCardExpandable: React.FC<Props> = (props: Props) => {
                             ),
                         }}
                     />
-                    <Button
-                        className={classes.mt}
-                        color="primary"
-                        variant="outlined"
-                        onClick={handleCurrentIssue}
-                        endIcon={<ForumIcon />}
-                        disabled={isRoundGoing}
-                    >
-                        Set as current issue
-                    </Button>
+                    {dealer && (
+                        <Button
+                            className={classes.mt}
+                            color="primary"
+                            variant="outlined"
+                            onClick={handleCurrentIssue}
+                            endIcon={<ForumIcon />}
+                            disabled={isRoundGoing}
+                        >
+                            Set as current issue
+                        </Button>
+                    )}
                 </CardContent>
             </Collapse>
         </Card>

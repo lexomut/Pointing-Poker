@@ -1,13 +1,12 @@
 @import-normalize;
 @import './variables/variables.scss';
 body {
-  margin: 0 auto;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  color: $primaryDarkColor;
+    margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: $primaryDarkColor;
 }
 
 .content {
-  flex-grow: 3;
+    flex-grow: 3;
 }
-

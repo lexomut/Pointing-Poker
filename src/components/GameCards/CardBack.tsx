@@ -8,27 +8,27 @@ import { Action, GlobalState } from '../../types/GlobalState';
 
 type Props = {
     back: string;
+    activeCard: boolean;
 };
 export const CardBack = (props: Props): JSX.Element => {
     const { globalState, dispatch }: { globalState: GlobalState; dispatch: Dispatch<Action> } =
         useContext(GlobalContext);
 
-    const { back } = props;
+    const { back, activeCard } = props;
     const handler = () => {
         dispatch({
             type: SET_GAME_TEMP_SETTINGS,
             payLoad: {
-                property: 'cartBackClass',
-                value: back,
+                property: 'gameSettings',
+                value: {
+                    ...globalState.temporaryDialerSettings.gameSettings,
+                    cardsBackClass: back,
+                },
             },
         });
     };
     return (
-        <div
-            className={
-                globalState.temporaryDialerSettings.cartBackClass === back ? styles.current : ''
-            }
-        >
+        <div className={activeCard ? styles.current : ''}>
             <Paper
                 onClick={() => handler()}
                 elevation={3}

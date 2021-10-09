@@ -13,14 +13,13 @@ export const IssueField: React.FC<IIssueField> = ({ classNames }) => {
     const { issues } = globalState.game;
     return (
         <div className={classNames}>
-            {issues.map(({ name, priority, current, dealer, id }) => {
+            {issues.map(({ name, priority, id }) => {
                 return (
                     <IssueCard
                         key={id}
                         name={name}
                         priority={priority}
-                        current={current}
-                        dealer={dealer}
+                        showDeleteButton={globalState.currentUser.roleInGame === 'dealer'}
                         id={id}
                     />
                 );

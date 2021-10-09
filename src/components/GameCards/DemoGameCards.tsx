@@ -26,7 +26,7 @@ export const DemoGameCards: React.FC = () => {
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />
             </Paper>
             {cardsBackground.map((el) => {
-                return <CardBack key={el.id} back={el.class} />;
+                return <CardBack activeCard={false} key={el.id} back={el.class} />;
             })}
             {powersOfTwoDeck.map((el) => {
                 return (
@@ -44,7 +44,7 @@ export const DemoGameCards: React.FC = () => {
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />
             </Paper>
             {cardsBackground.map((el) => {
-                return <CardBack key={el.id} back={el.class} />;
+                return <CardBack activeCard={false} key={el.id} back={el.class} />;
             })}
             {fibonacciDeck.map((el) => {
                 return (
@@ -62,7 +62,7 @@ export const DemoGameCards: React.FC = () => {
                 <FreeBreakfastOutlinedIcon className={styles.coffee} />
             </Paper>
             {cardsBackground.map((el) => {
-                return <CardBack key={el.id} back={el.class} />;
+                return <CardBack activeCard={false} key={el.id} back={el.class} />;
             })}
         </div>
     );

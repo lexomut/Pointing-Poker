@@ -40,6 +40,7 @@ export const GameSettings: () => JSX.Element = () => {
         changingCardInRoundEnd: false,
         cardsDeckType: 'fibonacci',
         freeGameEnter: false,
+        cardsBackClass: 'bgMountains',
     });
     const classes = useStyles();
 
@@ -50,7 +51,7 @@ export const GameSettings: () => JSX.Element = () => {
     useEffect(() => {
         dispatch({
             type: SET_GAME_TEMP_SETTINGS,
-            payLoad: { property: 'gameSettings', value: settings as GameSettingsInterface },
+            payLoad: { property: 'gameSettings', value: settings },
         });
     }, [settings, dispatch]);
     const switchers = [

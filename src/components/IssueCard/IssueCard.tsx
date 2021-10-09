@@ -47,13 +47,13 @@ type Props = {
     current?: boolean;
     name: string;
     priority: 'Critical' | 'High' | 'Medium' | 'Low';
-    dealer?: boolean;
+    showDeleteButton?: boolean;
     id: string;
 };
 
 export const IssueCard: React.FC<Props> = (props: Props) => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const { name, current, priority, dealer, id } = props;
+    const { name, current, priority, showDeleteButton, id } = props;
     const classes = useStyles();
     const handlerClick = () => {
         const newIssues = globalState.game.issues.filter((issue: Issue) => id !== issue.id);
@@ -73,7 +73,7 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
                 <Typography color="textSecondary" variant="caption" className={classes.caption}>
                     {priority} priority
                 </Typography>
-                {dealer && !current && (
+                {showDeleteButton && !current && (
                     <CardActions className={classes.button}>
                         <Button disabled={!globalState.ws.status} onClick={handlerClick}>
                             <CloseIcon />
@@ -87,5 +87,5 @@ export const IssueCard: React.FC<Props> = (props: Props) => {
 
 IssueCard.defaultProps = {
     current: false,
-    dealer: false,
+    showDeleteButton: false,
 };

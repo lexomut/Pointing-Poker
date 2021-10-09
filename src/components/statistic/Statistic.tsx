@@ -5,23 +5,23 @@ import { GameCard } from '../GameCards';
 import styles from './statistic.module.scss';
 import { GlobalState } from '../../types/GlobalState';
 import { GlobalContext } from '../../state/Context';
-import { User } from '../../types/user';
-import { Card, StatisticCard } from '../../types/game';
+import { StatisticCard } from '../../types/game';
 import { makeStatisticCards } from './makeStatistic';
 
 export const Statistic: React.FC = () => {
     const { globalState }: { globalState: GlobalState } = useContext(GlobalContext);
-    const { selectedCards }: { selectedCards: Array<{ card: Card | undefined; user: User }> } =
-        globalState.game;
+    const {
+        selectedCards,
+        gameSettings: { dealerIsPlaying },
+    } = globalState.game;
 
     return (
         <div className={styles.demo}>
-            {makeStatisticCards(selectedCards).map((el: StatisticCard) => {
+            {makeStatisticCards(selectedCards, dealerIsPlaying).map((el: StatisticCard) => {
                 return (
                     <div className={styles.container} key={el.id}>
                         {el.id ? (
                             <>
-                                {' '}
                                 <GameCard
                                     isActiveCard={false}
                                     value={el.value}

@@ -28,7 +28,6 @@ export const Invitation: React.FC = (): JSX.Element => {
         setTimeout(() => history.push(`/`), 6000);
     }
     useEffect(() => {
-        // if (globalState.game.status === 'over') history.push(`/${globalState.game.gameID}/result`);
         if (globalState.game.status === 'canceled') history.push(`/`);
     });
 
