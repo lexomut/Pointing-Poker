@@ -19,7 +19,7 @@ This application was created by [LenarFF](https://github.com/LenarFF), [lexomut]
  * create react app
  * React: dom, router-dom, scripts.
  * Typescript
- * Code was analized by ESlint and prettier.
+ * Code was analyzed by ESlint and prettier.
 
 ### Design:
  * SASS
